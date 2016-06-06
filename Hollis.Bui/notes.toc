@@ -1,0 +1,26 @@
+\contentsline {chapter}{\nonumberline General}{5}{chapter*.2}
+\contentsline {experiment}{\numberline {1}R Notes}{5}{experiment.1.1}
+\contentsline {experiment}{\numberline {2}TODOs}{5}{experiment.1.2}
+\contentsline {chapter}{\nonumberline May 13, 2016 Notes}{7}{chapter*.3}
+\contentsline {experiment}{\numberline {1}PANSE Concepts}{7}{experiment.2.1}
+\contentsline {experiment}{\numberline {2}TODOs}{7}{experiment.2.2}
+\contentsline {chapter}{\nonumberline May 19, 2016 Notes}{9}{chapter*.4}
+\contentsline {experiment}{\numberline {1}PANSE Concepts}{9}{experiment.3.1}
+\contentsline {chapter}{\nonumberline May 25, 2016 Notes}{11}{chapter*.5}
+\contentsline {experiment}{\numberline {1}PANSE Concepts}{11}{experiment.4.1}
+\contentsline {experiment}{\numberline {2}Parallelization}{11}{experiment.4.2}
+\contentsline {chapter}{\nonumberline May 26, 2016 Notes}{13}{chapter*.6}
+\contentsline {experiment}{\numberline {1}Parallelization}{13}{experiment.5.1}
+\contentsline {chapter}{\nonumberline May 31, 2016 Notes}{15}{chapter*.7}
+\contentsline {experiment}{\numberline {1}Parallelization}{15}{experiment.6.1}
+\contentsline {chapter}{\nonumberline June 1, 2016 Notes}{17}{chapter*.8}
+\contentsline {experiment}{\numberline {1}Parallelization}{17}{experiment.7.1}
+\contentsline {experiment}{\numberline {2}PANSE Implementation}{18}{experiment.7.2}
+\contentsline {chapter}{\nonumberline June 2, 2016 Notes}{19}{chapter*.9}
+\contentsline {experiment}{\numberline {1}PANSE Implementation}{19}{experiment.8.1}
+\contentsline {experiment}{\numberline {2}Lareau Data}{19}{experiment.8.2}
+\contentsline {chapter}{\nonumberline June 3, 2016 Notes}{21}{chapter*.10}
+\contentsline {experiment}{\numberline {1}Lareau Data}{21}{experiment.9.1}
+\contentsline {chapter}{\nonumberline June 6, 2016 Notes}{23}{chapter*.11}
+\contentsline {experiment}{\numberline {1}TODOs}{23}{experiment.10.1}
+\contentsline {experiment}{\numberline {2}Lareau Data}{23}{experiment.10.2}
