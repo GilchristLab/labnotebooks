@@ -1,0 +1,103 @@
+%%
+%% This is file `examplde.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% labbook.dtx  (with options: `examplde')
+%% 
+%% Copyright (C) 2002 Frank Küster.
+%% 
+%% All rights reserved.
+\ProvidesFile{examplde.tex}%
+            [2003/05/20 v1.1 LaTeX2e labbook document class]
+\documentclass[idxtotoc,hyperref]{labbook}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english,german]{babel}
+
+\usepackage[%
+  backref=page,%
+  pdfpagelabels=true,%
+  plainpages=false,%
+  colorlinks=true,%
+  bookmarks=true,%
+  pdfview=FitB]{hyperref}
+
+\input{boilerplates}
+
+
+\newexperiment{prep_S-peptide}{Präparation von RNase-A-S-Peptid}
+\newsubexperiment{subtilisin}[Subtilisin-Verdau]{Behandlung mit
+  Subtilisin}
+
+\newexperiment{prep?irge1nd&^was}{Herstellung von gereinigtem
+  Irgendwas}
+
+\newexperiment{lyoph-A}{Lyophilisieren von A}
+\newexperiment{lyoph-B}{Lyophilisieren von B}
+
+\begin{document}
+
+\frontmatter
+\title{Laborjournal vom  2003-04-22 bis \dots}
+\author{Erika Ehrgeizig}
+\maketitle
+
+\printindex
+\tableofcontents
+
+\mainmatter
+
+\labday{Dienstag, 22. April 2003}
+
+\experiment{prep_S-peptide}
+\subexperiment{subtilisin}
+
+\Xsometext\par
+\Xsometext\par
+\Xsometext\par
+\Xsometext\par
+\begin{figure}[htbp]
+  \centering
+  \sdsgel
+  \caption{Ein sehr interessantes SDS-Gel}
+  \label{fig:digest-sds}
+\end{figure}
+
+\experiment{Expression von Hagridin in \textit{E. coli}}
+
+\subexperiment[Transformation mit HagIV-Plasmid]{Transformation von
+  hogwarts-auxotrophen \textit{E. coli} mit dem Plasmid HagIV}
+
+\Xothertext\Xothertext
+
+\labday{Mittwoch, 23. April 2003}
+
+\experiment{prep_S-peptide}
+
+\subexperiment[subtilisin]{Verdau mit der neuen Charge Subtilisin}
+
+\experiment{prep?irge1nd&^was}
+
+\experiment{Herstellung von A}
+
+A wurde nach der Vorschrift in Müller \textit{et al.} hergestellt und
+vorläufig im Eisschrank gelagert.
+
+\labday{Donnerstag, 24. April 2003}
+
+\experiment{Herstellung von B}
+
+B wurde nach der Vorschrift von Meier und Schulze hergestellt.
+
+
+\experiment[Lyophilisieren von A und B,lyoph-A, lyoph-B ]{Lyophilisieren
+  von A und B}
+
+\end{document}
+\endinput
+%%
+%% End of file `examplde.tex'.
