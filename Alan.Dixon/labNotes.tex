@@ -1,0 +1,66 @@
+\documentclass[12pt]{labbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{times}
+\usepackage{amssymb, amsmath}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[]{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{courier}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\textwidth=16.5cm
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Notes for Undergraduate Research Work}
+\author{Alan Dixon}
+
+\begin{document}
+
+\section{June 6, 2016 Notes}
+
+\begin{itemize}
+    \item Discovered and fixed two bugs involving an uninitialized selection vector and Mphi values
+    \item Said bug fixes resolved the issue of the program crashing around iteration 2500
+    \item Despite the fixed bugs resolving that issue, log likelihood values still plummet to values eventually reaching 10e-23 which causes the not a number error, causing the MCMC algorithm to halt.
+    \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
+    \end{itemize}
+\end{itemize}
+
+TODO:\\
+    Work on psuedocode\\
+    Remove redundancies\\
+    Determine if Sphi prior is being used\\
+    Improve varialbe names and documentation\\
+    Document the R scripts\\
+\end{document}
