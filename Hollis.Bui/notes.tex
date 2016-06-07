@@ -442,4 +442,108 @@ Interestingly small size -- seems like old data set had that many genes of small
 
 Spent an hour afterward reading over labbook documentation and reformatting notes where needed.
 
+\labday{June 7, 2016 Notes}
+In the course of running an RFP Model, the following functions are called (and have yet to be
+unit tested).
+
+\begin{itemize}
+    \item initParameterSet (actually already done... mostly) -- general parameter
+    \begin{itemize}
+        \item test std\_csp changes -- Done
+        \item test numAcceptForCodonSpecificParameters changes -- Done
+        \item Possibly setNumMutationSelectionValues -- Ignore for now
+        \item Possibly initCategoryDefinitions --Ignore for now
+        \item For the two above -- Find how to check delM and delEta of category (a vector of Mixture Definitions) -- Done
+        \item Check many final changes at the end of this function -- Three remaining
+    \end{itemize}
+    \item initRFPParameterSet -- RFP exclusive
+    \item getSelectionCategory -- general parameter
+    \item InitializeSynthesisRate -- general parameter
+    \begin{itemize}
+        \item calculateSCUO
+        \item quickSortPair
+        \item quickSort
+        \item Parameter::randLogNorm
+    \end{itemize}
+    \item setParameter -- RFP model exclusive
+    \item mcmc.run -- MCMC function on RFP(TODO later?)
+\end{itemize}
+
+Going to take it one step at a time, finish up initParameterSet testing...
+
+Finished most of initParameterSet completely. Need to ask Cedric about a duplicate function before
+finishing the final two functions.
+
+May need to write a function to unit test with the categories variable itself, but
+all that happens otherwise is it pushes unto the vector of vector of vectors.
+
+Encountering a strange printing bug right before the end. While if statement works correctly,
+the final confirmation of initParameterSet isn't being printed.
+
+Example output:
+
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Parameter getMixtureAssignment --- Pass
+Parameter setMixtureAssignment --- Pass
+Parameter getMutationSelectionState --- Pass
+Parameter getNumParam --- Pass
+Parameter getNumMixtureElements --- Pass
+Parameter getStdDevSynthesisRate --- Pass
+Parameter setStdDevSynthesisRate --- Pass
+Parameter getCurrentStdDevSynthesisRateProposalWidth --- Pass
+Parameter getNumAcceptForStdDevSynthesisRate --- Pass
+Parameter getStdCspForIndex --- Pass
+Parameter getNumAcceptForCspForIndex --- Pass
+Parameter getNumMutationCategories --- Pass
+Parameter getNumSelectionCategories --- Pass
+Parameter getMutationCategory --- Pass
+Parameter getSelectionCategory --- Pass
+Parameter getMixtureElementsOfMutationCategory --- Pass
+Parameter getMixtureElementsOfSelectionCategory --- Pass
+Parameter getCategoryProbability --- Pass
+Parameter setCategoryProbability --- Pass
+Parameter getSynthesisRate --- Pass
+Parameter setSynthesisRate --- Pass
+Parameter getSynthesisRateProposalWidth --- Pass
+0
+Parameter initParameterSet --- Pass
+
+Process finished with exit code 0
+\end{lstlisting}
+\end{minipage}
+
+vs
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Parameter getMixtureAssignment --- Pass
+Parameter setMixtureAssignment --- Pass
+Parameter getMutationSelectionState --- Pass
+Parameter getNumParam --- Pass
+Parameter getNumMixtureElements --- Pass
+Parameter getStdDevSynthesisRate --- Pass
+Parameter setStdDevSynthesisRate --- Pass
+Parameter getCurrentStdDevSynthesisRateProposalWidth --- Pass
+Parameter getNumAcceptForStdDevSynthesisRate --- Pass
+Parameter getStdCspForIndex --- Pass
+Parameter getNumAcceptForCspForIndex --- Pass
+Parameter getNumMutationCategories --- Pass
+Parameter getNumSelectionCategories --- Pass
+Parameter getMutationCategory --- Pass
+Parameter getSelectionCategory --- Pass
+Parameter getMixtureElementsOfMutationCategory --- Pass
+Parameter getMixtureElementsOfSelectionCategory --- Pass
+Parameter getCategoryProbability --- Pass
+Parameter setCategoryProbability --- Pass
+Parameter getSynthesisRate --- Pass
+Parameter setSynthesisRate --- Pass
+Parameter getSynthesisRateProposalWidth --- Pass
+
+
+Process finished with exit code 0
+\end{lstlisting}
+\end{minipage}
+
 \end{document}
