@@ -12,6 +12,7 @@ Repository for researchers to keep their lab notebooks.
 
 # Contents:
 
-Folders
-  1) Hollis.Bui
- hollisNotes.pdf: Roughly-written pdf generated from .tex file.
+Folders:
+1. Hollis.Bui: pdf of notes, all relevant files to recompile pdf (.tex, etc.)
+2. Alan.Dixon: .tex file to produce lab notes
+
