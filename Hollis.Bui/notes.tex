@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage[]{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{csquotes}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -19,7 +20,7 @@
 \textwidth=16.5cm
 
 \lstset{frame=tb,
-  language=Java,
+  language=C++,
   aboveskip=3mm,
   belowskip=3mm,
   showstringspaces=false,
@@ -351,7 +352,7 @@ one of them as sample data.
 
 The Lareau material may have undergone more processing that the new Weinberg GSE published Feb 10 2016. 
 
-"Start with Lareau paper data" -- Gilchrist, 5:33
+\enquote{Start with Lareau paper data} -- Gilchrist, 5:33
 
 \labday{June 3, 2016 Notes}
 
@@ -434,7 +435,7 @@ For now let's just base it on Long.
 
 After about thirty minutes following the talk with Gilchrist -- new 
 subset of data produced via modifying old Perl scripts. Now have the specified data set
-in the final "finalData.txt" -- 516 KB.
+in the final \enquote{finalData.txt} -- 516 KB.
 
 Interestingly small size -- seems like old data set had that many genes of smaller AA length.
 
@@ -445,6 +446,8 @@ Spent an hour afterward reading over labbook documentation and reformatting note
 \labday{June 7, 2016 Notes}
 In the course of running an RFP Model, the following functions are called (and have yet to be
 unit tested).
+
+\experiment{TODOs}
 
 \begin{itemize}
     \item initParameterSet (actually already done... mostly) -- general parameter
@@ -457,7 +460,7 @@ unit tested).
         \item Check many final changes at the end of this function -- Three remaining
     \end{itemize}
     \item initRFPParameterSet -- RFP exclusive
-    \item getSelectionCategory -- general parameter
+    \item getSelectionCategory -- general parameter -- Done
     \item InitializeSynthesisRate -- general parameter
     \begin{itemize}
         \item calculateSCUO
@@ -468,6 +471,8 @@ unit tested).
     \item setParameter -- RFP model exclusive
     \item mcmc.run -- MCMC function on RFP(TODO later?)
 \end{itemize}
+
+\experiment{Unit Testing}
 
 Going to take it one step at a time, finish up initParameterSet testing...
 
@@ -481,7 +486,6 @@ Encountering a strange printing bug right before the end. While if statement wor
 the final confirmation of initParameterSet isn't being printed.
 
 Example output:
-
 
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
@@ -545,5 +549,55 @@ Parameter getSynthesisRateProposalWidth --- Pass
 Process finished with exit code 0
 \end{lstlisting}
 \end{minipage}
+
+\labday{June 8, 2016 Notes}
+
+\experiment{Unit Testing}
+
+Started by writing and testing a function for numAcceptForSynthesisRate.
+
+Printing this statement seems to have fixed the odd print bug mentioned yesterday.
+
+After doing that, I decided to write up on the documentation of Unit Testing I have done so far.
+
+Asked Cedric about getSelectionCategory and getSynthesisRateCategory (paraphrased):
+
+\begin{displayquote}
+It's related to how we may have delta and Phi values...
+
+We are trying to find out how efficient your codons have to be to reach a production rate
+assuming cost is constant.
+
+Cost = Benefit * production rate (Phi)
+
+Switching to a different selection environment:
+Different cost, different benefit, and therefore different Phi.
+
+If you have 2 selection categories, you have to have two synthesis categories. 
+They are the same even if we don't know them, but it saves renaming it to something more general.
+\end{displayquote}
+
+Finally finished initParameterSet besides checking categories matrix itself (minor, to do later).
+
+Continued TODO:
+
+\experiment{TODOs}
+
+\begin{itemize}
+    \item initRFPParameterSet -- RFP exclusive
+    \item InitializeSynthesisRate -- general parameter
+    \begin{itemize}
+        \item calculateSCUO
+        \item quickSortPair
+        \item quickSort
+        \item Parameter::randLogNorm
+    \end{itemize}
+    \item setParameter -- RFP model exclusive
+    \item mcmc.run -- MCMC function on RFP(TODO later?)
+\end{itemize}
+
+Next goals: Do the internal functions for InitializeSynthesisRate related to quickSort.
+
+Finish up InitializeSynthesisRate.
 
 \end{document}
