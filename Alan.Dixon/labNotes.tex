@@ -73,4 +73,15 @@ TODO:\\
     \item Said issue may be a cause of R not working correctly on Gauley as compared to my laptop. Multiple errors and missing packages were encountered. These errors made it impossible to check any plots.
     \item Two new Items for the TODO list: Continue troubleshooting R on Gauley and alter Jeremy's .sge scripts so that they no longer email him when I run a job on Newton
 \end{itemize}
+
+\section{June 8, 2016}
+
+\begin{itemize}
+    \item Changed the .sge scripts for Newton so that Jeremy no longer receives an email upon the completion of a job
+    \item Changed a function in FONSEModel.cpp to match it's corresponding function in ROCModel.cpp. In particular, I changed a long series of divisions to on division and a series of multiplications because multiplication is a faster operation.
+    \item Fixed a typo in the documentation of ROCModel.cpp
+    \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked.
+    \item Formulated the hypothesis that the reason we are experiencing a drop in log likelihood comes from a bug involving either deltaM, deltaOmega, or phi after observing the trace plots.
+    \
+\end{itemize}
 \end{document}
