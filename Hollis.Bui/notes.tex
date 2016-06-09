@@ -600,4 +600,101 @@ Next goals: Do the internal functions for InitializeSynthesisRate related to qui
 
 Finish up InitializeSynthesisRate.
 
+\labday {June 9, 2016 Notes}
+
+Began by checking github; fixed semicolon error and confirmed package worked correctly.
+
+To truly finish testing InitializeSynthesisRate, we would need:
+
+\experiment{TODOs}
+
+\begin{itemize}
+    \item calculateSCUO
+    \item Parameter::randLogNorm
+    \item quickSortPair
+    \begin{itemize}
+        \item pivotPair
+        \begin{itemize}
+            \item swap (doubles)
+        \end{itemize}
+    \end{itemize}
+    \item quickSort
+    \begin{itemize}
+        \item pivot
+        \begin{itemize}
+            \item swap (ints)
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+Ask Cedric if it'd be a good idea to just use std::sort instead of quickSort.
+
+This is very math-intensive, so Unit Testing it may be lower priority.
+
+For now, I am switching to unit testing RFP-exclusive functions.
+
+\begin{itemize}
+    \item initRFPParameterSet (in RFPParameter.cpp)
+    \begin{itemize}
+        \item check currentCodonSpecificParameter
+        \item check proposedCodonSpecificParameter
+        \item check lambdaValues (optional -- currently unused variable)
+        \item check numParam -- Done
+        \item check bias\_csp -- always set to 0, can ignore for now
+        \item check std\_csp -- Done
+        \item check groupList -- Done
+    \end{itemize}
+    \item setParameter (in RFPModel.cpp) -- may be untestable, ignore for now
+\end{itemize}
+
+In the course of working on checking RFPParameter, wrote up Unit Testing for all
+Group List functions in Parameter.cpp
+
+May need a wrapper function for currentCodonSpecificParameter and proposedCodonSpecificParameter
+extraction. Talk to Cedric.
+
+Refocusing overall goals:
+\begin{enumerate}
+    \item Unit Test up-to-date with Parameter
+    \begin{itemize}
+        \item{initRFPParameterSet}
+        \begin{itemize}
+            \item check currentCodonSpecificParameter -- stalled, ask Cedric
+            \item check proposedCodonSpecificParameter -- stalled, ask Cedric
+        \end{itemize}
+        \item{InitializeSynthesisRate}
+        \begin{itemize}
+            \item calculateSCUO
+            \item Parameter::randLogNorm
+            \item quickSortPair
+            \begin{itemize}
+                \item pivotPair
+                \begin{itemize}
+                    \item swap (doubles)
+                \end{itemize}
+            \end{itemize}
+            \item quickSort
+            \begin{itemize}
+                \item pivot
+                \begin{itemize}
+                    \item swap (ints)
+                \end{itemize}
+            \end{itemize}
+        \end{itemize}
+        \item mcmc.run -- MCMC function on RFP
+    \end{itemize}
+    \item Write up pseudo-code with PANSE itself to prepare for it
+    \item Create and test a function for reading in Lareau material (low priority)
+    \item Parallelization is after the initial PANSE stuff is implemented, very low priority
+\end{enumerate}
+
+TODO tomorrow:
+
+Ask about current/proposed CSP Parameter, quicksort vs std::sort, and how (if) to unit test
+the more computation-intensive functions.
+
+Finally replace cout statements in my own section of main.
+
+Begin testing with MCMC run while waiting for others to arrive.
+
 \end{document}
