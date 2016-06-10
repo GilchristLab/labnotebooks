@@ -604,9 +604,9 @@ Finish up InitializeSynthesisRate.
 
 Began by checking github; fixed semicolon error and confirmed package worked correctly.
 
-To truly finish testing InitializeSynthesisRate, we would need:
-
 \experiment{TODOs}
+
+To truly finish testing InitializeSynthesisRate, we would need:
 
 \begin{itemize}
     \item calculateSCUO
@@ -629,7 +629,7 @@ To truly finish testing InitializeSynthesisRate, we would need:
 
 Ask Cedric if it'd be a good idea to just use std::sort instead of quickSort.
 
-This is very math-intensive, so Unit Testing it may be lower priority.
+The quick sort algorithms are very math-intensive, so Unit Testing them  may be lower priority.
 
 For now, I am switching to unit testing RFP-exclusive functions.
 
@@ -681,7 +681,7 @@ Refocusing overall goals:
                 \end{itemize}
             \end{itemize}
         \end{itemize}
-        \item mcmc.run -- MCMC function on RFP
+        \item mcmc::run -- MCMC function on RFP
     \end{itemize}
     \item Write up pseudo-code with PANSE itself to prepare for it
     \item Create and test a function for reading in Lareau material (low priority)
@@ -697,4 +697,143 @@ Finally replace cout statements in my own section of main.
 
 Begin testing with MCMC run while waiting for others to arrive.
 
+\labday {June 10, 2016 Notes}
+
+There exists a heirarchy of functions to test before finally testing mcmc.run. Test the
+subitems first: (NOTE: Testing with RFPModel)
+\begin{itemize}
+    \item mcmc::run
+    \begin{itemize}
+        \item mcmc::varyInitialConditions
+        \begin{itemize}
+            \item model::proposeCodonSpecificParameter -- wrapper to RFPparameter
+            \item model::proposeHyperParameters -- parameter::proposeStdDevSynthesisRate
+            \item model::proposeSynthesisRateValues -- wrapper to parameter
+            \item model::getGroupListSize -- wrapper to parameter (done?)
+            \item model::getGrouping -- wrapper to parameter (done?)
+            \item model::updateCodonSpecificParameter -- wrapper to RFPparameter
+            \item model::updateAllHyperParameter -- just calls updateStdDevSynthesisRate -- Ask
+            \begin{itemize}
+                \item updateStdDevSynthesisRate -- wrapper to parameter
+            \end{itemize}
+            \item model::getNumSynthesisRateCategories -- wrapper to parameter (done?)
+            \item model::getSynthesisRateCategory -- wrapper to parameter (done?)
+            \item model::getSynthesisRate -- wrapper to parameter (done?)
+            \item model::getMixtureAssignment -- wrapper to parameter (done?)
+            \item model::getStdDevSynthesisRate -- wrapper to parameter (done?)
+            \item parameter::densityLogNorm
+            \item paramter::randExp
+            \item model::updateSynthesisRate -- wrapper to parameter
+            \item model::updateGibbsSampledHyperParameters -- does not do anything
+        \end{itemize}
+        \item model::setNumPhiGroupings -- wrapper to parameter::setNumObservedPhiSets (done?)
+        \item model::initTraces -- wrapper to RFPparameter initAllTraces
+        \item model::updateTracesWithInitialValues
+        \begin{itemize}
+            \item parameter::updateSynthesisRateTrace
+            \item parameter::updateMixtureAssignmentTrace
+            \item RFPparameter::updateCodonSpecificParameterTrace
+        \end{itemize}
+        \item model::setLastInteration -- wrapper to parameter (done?)
+        \item model::writeRestartFile -- wrapper to RFPparameter writeEntireRestartFile
+        \item model::printHyperParameters -- uneeded to test, just prints
+        \item model::getNumMixtureElements -- wrapper to parameter (done?)
+        \item mcmc::acceptRejectCodonSpecificParameter
+        \begin{itemize}
+            \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
+            \item model::updateCodonSpecificParameterTrace
+        \end{itemize}
+        \item model::adaptCodonSpecificParameterProposalWidth -- wrapper to RFPparameter
+        \item mcmc::acceptRejectHyperParameter
+        \begin{itemize}
+            \item model::calculateLogLikelihodRatioForHyperParameters
+            \item model::updateHyperParameter -- parameter::updateStdDevSynthesisRate
+            \item model::updateHyperParameterTraces
+        \end{itemize}
+        \item model::adaptHyperParameterProposalWidths -- calls adaptStdDevSynthesisProposalWidth,
+        a wrapper to parameter. Uses traces.
+        \item mcmc::acceptRejectSynthesisRateLevelForAllGenes
+        \begin{itemize}
+            \item model::getMixtureElementsOfSelectionCategory -- wraps parameter (done?)
+            \item model::calculateLogLikelihoodRatioPerGene
+            \item model::getCategoryProbability -- wrapper to parameter (done?)
+            \item parameter::randMultinom
+            \item model::setMixtureAssignment -- wrapper to parameter (done?)
+            \item model::updateSynthesisRateTrace
+            \item model::updateMixtureAssignmentTrace
+            \item model::calculateAllPriors -- currently does nothing
+            \item parameter::randDirichlet
+            \item model::setCategoryProbability -- wrapper to parameter (done?)
+            \item model::updateMixtureProbabilitiesTrace
+        \end{itemize}
+        \item model::adaptSynthesisRateProposalWidth -- wrapper to parameter
+        \item mcmc::calculateGewekeScore
+    \end{itemize}
+\end{itemize}
+
+TODO:
+
+Ask about why it is that Hyper Parameters == StdDevSynthesisRate, always
+
+Don't know if we need to test wrapper functions i.e. those in Model that simply perform
+a function in its associated Parameter object.
+
+Ask about why dynamic arrays were in code in the first place, i.e. in randMultinom.
+
+New modified list stripping out some things that are more-or-less done
+(Or those that depend on unimplemented functions or those with random variables):
+\begin{itemize}
+    \item mcmc::run
+    \begin{itemize}
+        \item mcmc::varyInitialConditions
+        \item model::initTraces -- wrapper to RFPparameter initAllTraces
+        \item model::updateTracesWithInitialValues
+        \begin{itemize}
+            \item parameter::updateMixtureAssignmentTrace
+            \item RFPparameter::updateCodonSpecificParameterTrace
+        \end{itemize}
+        \item model::writeRestartFile -- wrapper to RFPparameter writeEntireRestartFile
+        \begin{itemize}
+            \item parameter::writeBasicRestartFile
+            \item writeRFPRestartFile
+        \end{itemize}
+        \item mcmc::acceptRejectCodonSpecificParameter
+        \begin{itemize}
+            \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
+            \item model::updateCodonSpecificParameterTrace
+        \end{itemize}
+        \item model::adaptCodonSpecificParameterProposalWidth --
+        wrapper to RFPparameter. Uses traces.
+        \item mcmc::acceptRejectHyperParameter
+        \begin{itemize}
+            \item model::calculateLogLikelihodRatioForHyperParameters
+            \item model::updateHyperParameter -- parameter::updateStdDevSynthesisRate
+            \item model::updateHyperParameterTraces
+        \end{itemize}
+        \item model::adaptHyperParameterProposalWidths -- calls adaptStdDevSynthesisProposalWidth,
+        a wrapper to parameter. Uses traces.
+        \item mcmc::acceptRejectSynthesisRateLevelForAllGenes
+        \begin{itemize}
+            \item model::calculateLogLikelihoodRatioPerGene
+            \item model::updateSynthesisRateTrace
+            \item model::updateMixtureAssignmentTrace
+            \item model::updateMixtureProbabilitiesTrace
+        \end{itemize}
+        \item model::adaptSynthesisRateProposalWidth -- wrapper to parameter. Uses traces.
+        \item mcmc::calculateGewekeScore
+    \end{itemize}
+\end{itemize}
+
+After writing the setNumObservedPhiGroupings and lastIteration unit testing functions and
+updating these notes, worked on restart file writing.
+
+TODO: Discuss with Cedric how to proceed to unit testing with restart files
+in the future, i.e. keep in same function or separate.
+
+Next step:
+
+Probably work with traces. Not sure how to proceed with unit testing
+the most complicated functions re: computation, nor with reading/writing files yet.
+
 \end{document}
+
