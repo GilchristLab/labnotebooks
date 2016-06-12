@@ -12,7 +12,6 @@
 \usepackage{times}
 \usepackage{amssymb, amsmath}
 \usepackage{fancyhdr}
-\usepackage{hyperref}
 \usepackage[]{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{courier}
@@ -55,7 +54,6 @@
     \item Despite the fixed bugs resolving that issue, log likelihood values still plummet to values eventually reaching 10e-23 which causes the not a number error, causing the MCMC algorithm to halt.
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
     \end{itemize}
-\end{itemize}
 
 TODO:\\
     Work on psuedocode\\
@@ -82,6 +80,5 @@ TODO:\\
     \item Fixed a typo in the documentation of ROCModel.cpp
     \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked.
     \item Formulated the hypothesis that the reason we are experiencing a drop in log likelihood comes from a bug involving either deltaM, deltaOmega, or phi after observing the trace plots.
-    \
 \end{itemize}
 \end{document}
