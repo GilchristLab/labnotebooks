@@ -50,6 +50,8 @@
 
 \experiment{R Notes}
 
+Remember: R is 1-indexed.
+
 Format of If/Else:
 
 \noindent\begin{minipage}{\linewidth}
@@ -61,6 +63,11 @@ if {
 }
 \end{lstlisting}
 \end{minipage}
+
+In R-Studio, you can multiline comment (and uncomment) by pressing
+CTR + SHIFT + C
+
+To check current directory in R, type in and execute \enquote{getwd()}.
 
 \experiment{TODOs}
 
@@ -629,7 +636,7 @@ To truly finish testing InitializeSynthesisRate, we would need:
 
 Ask Cedric if it'd be a good idea to just use std::sort instead of quickSort.
 
-The quick sort algorithms are very math-intensive, so Unit Testing them  may be lower priority.
+The quick sort algorithms are very math-intensive, so Unit Testing them may be lower priority.
 
 For now, I am switching to unit testing RFP-exclusive functions.
 
@@ -834,6 +841,44 @@ Next step:
 
 Probably work with traces. Not sure how to proceed with unit testing
 the most complicated functions re: computation, nor with reading/writing files yet.
+
+\labday {June 11, 2016 Notes}
+Mostly read documentation. Worked from home, so no benefit of discussing implementation topics.
+Worked less than planned.
+
+\labday {June 13, 2016 Notes}
+Discussing Unit Testing with Cedric:
+
+OK'd changing quicksort (simple implementation) to std::sort.
+
+Instead of running the higher-level functions that are directly used, 
+probably better to stick to the simple functions and then test mcmc algorithm runs with
+100 samples; compare the likelihoods of each model, which should be similar, to detect errors.
+
+For the intense calculations, for now ignore. The calculation unit tests will be summed up (in a
+general sense) by just doing mcmc algorithm runs.
+
+First, going to change std::sort.
+
+After that was done, decided to clean up some R-side unit testing in preparation of testing
+mcmc algorithm runs -- since in R you can set seed for entire C-side implementation.
+
+\experiment{TODOs}
+\begin{itemize}
+    \item Fix the TODO note in Parameter.cpp under initParameterSet
+    \item Ask Cedric about:
+    \begin{itemize}
+        \item Testing restart files: keep in same function or separate unit tests.
+        \item May need a wrapper function for currentCodonSpecificParameter and proposedCodonSpecificParameter extraction. 
+        \item How to actually run R-side scripts; weird error messages.
+        \item What is the inst folder? Can we remove it, since it seems to be old Unit Testing Data stuff?
+    \end{itemize}
+\end{itemize}
+
+Still need to look at Trace stuff as next major step without help from Cedric.
+
+Spend at most two more days on Unit Testing at this rate; after, will start thinking solely
+on PANSE.
 
 \end{document}
 
