@@ -81,4 +81,14 @@ TODO:\\
     \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked.
     \item Formulated the hypothesis that the reason we are experiencing a drop in log likelihood comes from a bug involving either deltaM, deltaOmega, or phi after observing the trace plots.
 \end{itemize}
+
+\section{June 13, 2016}
+
+\begin{itemize}
+    \item Fixed an error in FONSEModel.cpp involving a couple of missing semicolons
+    \item Fixed an error in the .tex file for the notes where using the hyperref package kept the notes from compiling
+    \item After running FONSE again, with simulated data and b = 0.001, it seems the errors in log likelihood are no longer deterministic. Values still plummet, and the traces suggest that both mutation and selection values may be the cause. Further testing and observation is required.
+    \item Foud a difference between FONSEModel and ROCModel where ROC would take mutation prior into account and FONSE wouldn't. This might part of the issues causing log likelihood values to plummet, but testing is required.
+    \item Uploaded both the new .tex file and its corresponding pdf just incase there's another error that doesn't keep me from compiling on my machine but might keep another from compiling on a different machine.
+\end{itemize}
 \end{document}
