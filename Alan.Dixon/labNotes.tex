@@ -16,6 +16,8 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{courier}
 
+\usepackage{marginnote}%provides ability to put notes in the margin using \marginnote{} command
+
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -51,8 +53,13 @@
 \begin{itemize}
     \item Discovered and fixed two bugs involving an uninitialized selection vector and Mphi values
     \item Said bug fixes resolved the issue of the program crashing around iteration 2500
+      
     \item Despite the fixed bugs resolving that issue, log likelihood values still plummet to values eventually reaching 10e-23 which causes the not a number error, causing the MCMC algorithm to halt.
+\marginnote{mikeg: This is confusing given the previous statement. 
+  It sounds like you didn't really resolve the underlying issue.}  
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
+      \marginnote{why is newton failing to execute your job requests? 
+        How and when will you solve this issue?}
     \end{itemize}
 
 TODO:\\
@@ -67,18 +74,33 @@ TODO:\\
 \begin{itemize}
     \item Removed exit statements from FONSEParameter.cpp, PANSEParameter.cpp, and RFPParameter.cpp in order to eliminate warnings when running the check in R
     \item Downloaded all of the necessary files to my Gauley account.
-    \item Running FONSE with simulated data and b = 0.001 led to "nan" being reached much more quickly than on my laptop, around iteration 5500
-    \item Said issue may be a cause of R not working correctly on Gauley as compared to my laptop. Multiple errors and missing packages were encountered. These errors made it impossible to check any plots.
-    \item Two new Items for the TODO list: Continue troubleshooting R on Gauley and alter Jeremy's .sge scripts so that they no longer email him when I run a job on Newton
+    \item Running FONSE with simulated data and b = 0.001 led to "nan" being reached much more quickly than on my laptop, around iteration 5500.
+      \marginnote{mikeg: is this based on one run on each machine?
+        It's more useful to be more quantitative and descriptive} 
+    \item Said issue may be a cause of R not working correctly on Gauley as compared to my laptop. 
+      Multiple errors and missing packages were encountered. 
+      These errors made it impossible to check any plots.
+\item{mikeg: If it strange you're running into such errors since gauley is used to develop the code base.
+    Are they really errors or, since you execute code, warnings?
+    What are the error codes?  
+    When discussing errors, it is good to always include some output using the 'quote' or similar environment in \LaTeX.
+    Do other people run into these same errors?
+  }
+    \item Two new Items for the TODO list: Continue troubleshooting R on Gauley and alter Jeremy's .sge scripts so that they no longer email him when I run a job on Newton.
 \end{itemize}
 
 \section{June 8, 2016}
 
 \begin{itemize}
-    \item Changed the .sge scripts for Newton so that Jeremy no longer receives an email upon the completion of a job
+    \item Changed the .sge scripts for Newton so that Jeremy no longer receives an email upon the completion of a job.
     \item Changed a function in FONSEModel.cpp to match it's corresponding function in ROCModel.cpp. In particular, I changed a long series of divisions to on division and a series of multiplications because multiplication is a faster operation.
+      \marginnote{mikeg: include the function name. 
+        Any information on speed up?
+      }
     \item Fixed a typo in the documentation of ROCModel.cpp
-    \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked.
+    \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked. 
     \item Formulated the hypothesis that the reason we are experiencing a drop in log likelihood comes from a bug involving either deltaM, deltaOmega, or phi after observing the trace plots.
+\marginnote{Include plots in your notes, especially if you refer to them, and explain more clearly why you think its behavior indicates this.
+}
 \end{itemize}
 \end{document}
