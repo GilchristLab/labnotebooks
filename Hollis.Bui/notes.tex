@@ -880,5 +880,75 @@ Still need to look at Trace stuff as next major step without help from Cedric.
 Spend at most two more days on Unit Testing at this rate; after, will start thinking solely
 on PANSE.
 
+\labday {June 14, 2016 Notes}
+
+Yesterday ended by running memory leak checks in the background on a whim due to debugging
+some new calls without associated delete calls.
+
+Found a confirmed memory leak with my\_print. Started today by flushing output on
+both C and R side of code, as well as expanding unit testing for Utility.h.
+
+Spent an hour and a half on this.
+
+Came in late, could not ask Cedric questions.
+
+\experiment{Traces}
+Order of Trace functions to examine in a typical model run (via MCMC::run):
+\begin{itemize}
+    \item model::initTraces(samples + 1, genome.getGenomeSize());
+    \begin{itemize}
+        \item RFPparameter->initAllTraces
+        \begin{itemize}
+            \item traces.initializeRFPTrace (RFP-only)
+            \begin{itemize}
+                \item initializeSharedTraces
+                \item initCodonSpecificParameterTrace (for both alp and lmPri)
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item model::updateTracesWithInitialValues(genome) -- TO BE EXAMINED
+    \begin{itemize}
+        \item parameter::updateSynthesisRateTrace
+        \begin{itemize}
+            \item traces.updateSynthesisRateTrace
+        \end{itemize}
+        \item parameter::updateMixtureAssignmentTrace
+        \begin{itemize}
+            \item traces.updateMixtureAssignmentTrace
+        \end{itemize}
+        \item RFPparameter::updateCodonSpecificParameterTrace
+        \begin{itemize}
+            \item traces.updateCodonSpecificParameterTraceForCodon (for alp and lmPri)
+        \end{itemize}
+    \end{itemize}
+    \item mcmc::acceptRejectCodonSpecificParameter
+    \begin{itemize}
+        \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
+        \item model::updateCodonSpecificParameter(grouping)
+        \item model::updateCodonSpecificParameterTrace
+    \end{itemize}
+    \item model::adaptCodonSpecificProposalWidth -- wrapper to RFPparameter. Uses traces
+    \item mcmc::acceptRejectHyperParameter
+    \begin{itemize}
+        \item model::calculateLoglIkelihoodRatioForHyperParameters
+        \item model::updateHyperParameter - parameter::updateStdDevSynthesisRate
+        \item model::updateHyperParameterTraces
+    \end{itemize}
+    \item model::adaptHyperParameterProposalWidths - calls adaptStdDevSynthesisProposalWidth,
+    a wrapper to parameter. Uses traces.
+    \item mcmc:acceptRejectSynthesisRateLevelForAllGenes
+    \begin{itemize}
+        \item model::calculateLogLikelihoodRatioPerGene
+        \item model::updateSynthesisRateTrace
+        \item model::updateMixtureAssignmentTrace
+        \item model::updateMixtureProbabilitiesTrace
+    \end{itemize}
+    \item model::adaptSynthesisRateProposalWidth -- wrapper to parameter. Uses traces.
+\end{itemize}
+
+This list is still incomplete, but we shall start implementing now for convenience.
+
+Need to eep examining functions... Ended before checking model::updateTracesWithInitialValues
+
 \end{document}
 
