@@ -88,7 +88,28 @@ TODO:\\
     \item Fixed an error in FONSEModel.cpp involving a couple of missing semicolons
     \item Fixed an error in the .tex file for the notes where using the hyperref package kept the notes from compiling
     \item After running FONSE again, with simulated data and b = 0.001, it seems the errors in log likelihood are no longer deterministic. Values still plummet, and the traces suggest that both mutation and selection values may be the cause. Further testing and observation is required.
-    \item Foud a difference between FONSEModel and ROCModel where ROC would take mutation prior into account and FONSE wouldn't. This might part of the issues causing log likelihood values to plummet, but testing is required.
-    \item Uploaded both the new .tex file and its corresponding pdf just incase there's another error that doesn't keep me from compiling on my machine but might keep another from compiling on a different machine.
+    \item Found a difference between FONSEModel and ROCModel where ROC would take mutation prior into account and FONSE wouldn't. This might part of the issues causing log likelihood values to plummet, but testing is required.
+    \item Uploaded both the new .tex file and its corresponding pdf just in case there's another error that doesn't keep me from compiling on my machine but might keep another from compiling on a different machine.
+\end{itemize}
+
+\section{June 14, 2016}
+
+\begin{itemize}
+    \item The addition of the mutation prior into FONSE seems to have stopped the rapid descent of the Log Likelihood values. After running it once with 1000 samples and 1 thining, the log likelihood stayed somewhat stable after starting low and rising to about -20000. The vaules were also similar when running with 1000 samples and 10 thining. More extensive testing is required to ensure that the plummeting problem is finally resolved.
+    \item Although the log likelihood values are starting to come together, there is an issue observed in both the mutation and selection traces where certain codons are not being accepted. 
+    \item Conducted further comparisons on FONSE and ROC to remove redundancies and semantic oversight.
 \end{itemize}
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
