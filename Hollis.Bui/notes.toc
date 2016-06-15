@@ -38,3 +38,5 @@
 \contentsline {experiment}{\numberline {1}TODOs}{39}{experiment.16.1}
 \contentsline {chapter}{\nonumberline June 14, 2016 Notes}{41}{chapter*.18}
 \contentsline {experiment}{\numberline {1}Traces}{41}{experiment.17.1}
+\contentsline {chapter}{\nonumberline June 15, 2016 Notes}{43}{chapter*.19}
+\contentsline {experiment}{\numberline {1}TODOs}{43}{experiment.18.1}

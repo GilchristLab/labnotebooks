@@ -948,7 +948,60 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
 
 This list is still incomplete, but we shall start implementing now for convenience.
 
-Need to eep examining functions... Ended before checking model::updateTracesWithInitialValues
+Need to keep examining functions... Ended before checking model::updateTracesWithInitialValues
+
+\labday {June 15, 2016 Notes}
+
+Answers to Cedric questions:
+\begin{itemize}
+    \item In general, design of code is up to me. Seems good with whatever.
+    \item DevRScripts are super out-dated. Be careful of what to use, i.e. a lot of functions
+    are using old definitions and need additional arguments.
+    \item Again, for overall unit testing:
+    \begin{itemize}
+        \item Do a run, know what the output is.
+        \item 
+        Then repeat that run in the testThat function, compare the two runs. As long as outputs are the same, everything is fine.
+    \end{itemize}
+    \item Good scripts to base code off of: allUnique scripts.
+    Specifically allUnique\_kl\_reduced.R, allUnique\_simMod.R
+    \item Bad script: runROCModelFromGoodValues.R
+\end{itemize}
+
+Cedric commented that there was a lot of old and outdated files, so I spent some time
+trying to clean up the more obvious files.
+
+\begin{itemize}
+    \item Removed inst folder from RibModelFramework.
+    \item Removed cleanSeq() finally
+    \item Cut down on number of my\_print calls; hopefully increases efficiency slightly
+    in either compilation of running phase.
+\end{itemize}
+
+Afterward attempted to learn more about R in order to write scripts to test models with set\_seed.
+
+Testing Restart files:
+
+I think I will create a separate function for each type of file. Basic Parameter, RFP, ROC, etc.
+
+These will be tested by first checking if both read and write work at the same time.
+
+For basic parameter checking, for example, perhaps 1) use initParameter manually, like before.
+
+2) Then write the file
+
+3) Then read in the file and compare with established, manually set variables.
+
+\experiment{TODOs}
+
+For tomorrow:
+
+Unit Test with Restart files. This will help confirm any results.
+
+Continue working with R model unit testing
+
+Cedric will likely not be in for the rest of the week; will continue jumping around with
+work assignments until after my vacation period.
 
 \end{document}
 
