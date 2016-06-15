@@ -50,6 +50,8 @@
 
 \experiment{R Notes}
 
+Remember: R is 1-indexed.
+
 Format of If/Else:
 
 \noindent\begin{minipage}{\linewidth}
@@ -61,6 +63,11 @@ if {
 }
 \end{lstlisting}
 \end{minipage}
+
+In R-Studio, you can multiline comment (and uncomment) by pressing
+CTR + SHIFT + C
+
+To check current directory in R, type in and execute \enquote{getwd()}.
 
 \experiment{TODOs}
 
@@ -629,7 +636,7 @@ To truly finish testing InitializeSynthesisRate, we would need:
 
 Ask Cedric if it'd be a good idea to just use std::sort instead of quickSort.
 
-The quick sort algorithms are very math-intensive, so Unit Testing them  may be lower priority.
+The quick sort algorithms are very math-intensive, so Unit Testing them may be lower priority.
 
 For now, I am switching to unit testing RFP-exclusive functions.
 
@@ -834,6 +841,167 @@ Next step:
 
 Probably work with traces. Not sure how to proceed with unit testing
 the most complicated functions re: computation, nor with reading/writing files yet.
+
+\labday {June 11, 2016 Notes}
+Mostly read documentation. Worked from home, so no benefit of discussing implementation topics.
+Worked less than planned.
+
+\labday {June 13, 2016 Notes}
+Discussing Unit Testing with Cedric:
+
+OK'd changing quicksort (simple implementation) to std::sort.
+
+Instead of running the higher-level functions that are directly used, 
+probably better to stick to the simple functions and then test mcmc algorithm runs with
+100 samples; compare the likelihoods of each model, which should be similar, to detect errors.
+
+For the intense calculations, for now ignore. The calculation unit tests will be summed up (in a
+general sense) by just doing mcmc algorithm runs.
+
+First, going to change std::sort.
+
+After that was done, decided to clean up some R-side unit testing in preparation of testing
+mcmc algorithm runs -- since in R you can set seed for entire C-side implementation.
+
+\experiment{TODOs}
+\begin{itemize}
+    \item Fix the TODO note in Parameter.cpp under initParameterSet
+    \item Ask Cedric about:
+    \begin{itemize}
+        \item Testing restart files: keep in same function or separate unit tests.
+        \item May need a wrapper function for currentCodonSpecificParameter and proposedCodonSpecificParameter extraction. 
+        \item How to actually run R-side scripts; weird error messages.
+        \item What is the inst folder? Can we remove it, since it seems to be old Unit Testing Data stuff?
+    \end{itemize}
+\end{itemize}
+
+Still need to look at Trace stuff as next major step without help from Cedric.
+
+Spend at most two more days on Unit Testing at this rate; after, will start thinking solely
+on PANSE.
+
+\labday {June 14, 2016 Notes}
+
+Yesterday ended by running memory leak checks in the background on a whim due to debugging
+some new calls without associated delete calls.
+
+Found a confirmed memory leak with my\_print. Started today by flushing output on
+both C and R side of code, as well as expanding unit testing for Utility.h.
+
+Spent an hour and a half on this.
+
+Came in late, could not ask Cedric questions.
+
+\experiment{Traces}
+Order of Trace functions to examine in a typical model run (via MCMC::run):
+\begin{itemize}
+    \item model::initTraces(samples + 1, genome.getGenomeSize());
+    \begin{itemize}
+        \item RFPparameter->initAllTraces
+        \begin{itemize}
+            \item traces.initializeRFPTrace (RFP-only)
+            \begin{itemize}
+                \item initializeSharedTraces
+                \item initCodonSpecificParameterTrace (for both alp and lmPri)
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item model::updateTracesWithInitialValues(genome) -- TO BE EXAMINED
+    \begin{itemize}
+        \item parameter::updateSynthesisRateTrace
+        \begin{itemize}
+            \item traces.updateSynthesisRateTrace
+        \end{itemize}
+        \item parameter::updateMixtureAssignmentTrace
+        \begin{itemize}
+            \item traces.updateMixtureAssignmentTrace
+        \end{itemize}
+        \item RFPparameter::updateCodonSpecificParameterTrace
+        \begin{itemize}
+            \item traces.updateCodonSpecificParameterTraceForCodon (for alp and lmPri)
+        \end{itemize}
+    \end{itemize}
+    \item mcmc::acceptRejectCodonSpecificParameter
+    \begin{itemize}
+        \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
+        \item model::updateCodonSpecificParameter(grouping)
+        \item model::updateCodonSpecificParameterTrace
+    \end{itemize}
+    \item model::adaptCodonSpecificProposalWidth -- wrapper to RFPparameter. Uses traces
+    \item mcmc::acceptRejectHyperParameter
+    \begin{itemize}
+        \item model::calculateLoglIkelihoodRatioForHyperParameters
+        \item model::updateHyperParameter - parameter::updateStdDevSynthesisRate
+        \item model::updateHyperParameterTraces
+    \end{itemize}
+    \item model::adaptHyperParameterProposalWidths - calls adaptStdDevSynthesisProposalWidth,
+    a wrapper to parameter. Uses traces.
+    \item mcmc:acceptRejectSynthesisRateLevelForAllGenes
+    \begin{itemize}
+        \item model::calculateLogLikelihoodRatioPerGene
+        \item model::updateSynthesisRateTrace
+        \item model::updateMixtureAssignmentTrace
+        \item model::updateMixtureProbabilitiesTrace
+    \end{itemize}
+    \item model::adaptSynthesisRateProposalWidth -- wrapper to parameter. Uses traces.
+\end{itemize}
+
+This list is still incomplete, but we shall start implementing now for convenience.
+
+Need to keep examining functions... Ended before checking model::updateTracesWithInitialValues
+
+\labday {June 15, 2016 Notes}
+
+Answers to Cedric questions:
+\begin{itemize}
+    \item In general, design of code is up to me. Seems good with whatever.
+    \item DevRScripts are super out-dated. Be careful of what to use, i.e. a lot of functions
+    are using old definitions and need additional arguments.
+    \item Again, for overall unit testing:
+    \begin{itemize}
+        \item Do a run, know what the output is.
+        \item 
+        Then repeat that run in the testThat function, compare the two runs. As long as outputs are the same, everything is fine.
+    \end{itemize}
+    \item Good scripts to base code off of: allUnique scripts.
+    Specifically allUnique\_kl\_reduced.R, allUnique\_simMod.R
+    \item Bad script: runROCModelFromGoodValues.R
+\end{itemize}
+
+Cedric commented that there was a lot of old and outdated files, so I spent some time
+trying to clean up the more obvious files.
+
+\begin{itemize}
+    \item Removed inst folder from RibModelFramework.
+    \item Removed cleanSeq() finally
+    \item Cut down on number of my\_print calls; hopefully increases efficiency slightly
+    in either compilation of running phase.
+\end{itemize}
+
+Afterward attempted to learn more about R in order to write scripts to test models with set\_seed.
+
+Testing Restart files:
+
+I think I will create a separate function for each type of file. Basic Parameter, RFP, ROC, etc.
+
+These will be tested by first checking if both read and write work at the same time.
+
+For basic parameter checking, for example, perhaps 1) use initParameter manually, like before.
+
+2) Then write the file
+
+3) Then read in the file and compare with established, manually set variables.
+
+\experiment{TODOs}
+
+For tomorrow:
+
+Unit Test with Restart files. This will help confirm any results.
+
+Continue working with R model unit testing
+
+Cedric will likely not be in for the rest of the week; will continue jumping around with
+work assignments until after my vacation period.
 
 \end{document}
 
