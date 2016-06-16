@@ -4,11 +4,11 @@
 \usepackage{csquotes}
 \usepackage{float}
 \usepackage[margin=1.0in]{geometry}
-\usepackage{amsmath}
 \usepackage{setspace}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{array}
+\usepackage{xspace}
 \usepackage{times}
 \usepackage{amssymb, amsmath}
 \usepackage{fancyhdr}
@@ -43,6 +43,12 @@
   tabsize=3
 }
 
+
+%%%%%%%%%%%%%%%LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+
+
 \title{Notes for Undergraduate Research Work}
 \author{Alan Dixon}
 
@@ -55,6 +61,10 @@
     \item Said bug fixes resolved the issue of the program crashing around iteration 2500
       
     \item Despite the fixed bugs resolving that issue, log likelihood values still plummet to values eventually reaching 10e-23 which causes the not a number error, causing the MCMC algorithm to halt.
+\marginnote{mikeg: Is this a typo?  Usually it is $\exp{-300}$ that starts to push the limit of numerical precision.
+Further, it is unclear to me why this would cause a problem unless you are later converting this number back to a log scale.  
+Is it necessary to exponentiate and then take the log?
+}
 \marginnote{mikeg: This is confusing given the previous statement. 
   It sounds like you didn't really resolve the underlying issue.}  
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
@@ -104,20 +114,33 @@ TODO:\\
 }
 \end{itemize}
 
+
 \section{June 13, 2016}
 
 \begin{itemize}
     \item Fixed an error in FONSEModel.cpp involving a couple of missing semicolons
     \item Fixed an error in the .tex file for the notes where using the hyperref package kept the notes from compiling
     \item After running FONSE again, with simulated data and b = 0.001, it seems the errors in log likelihood are no longer deterministic. Values still plummet, and the traces suggest that both mutation and selection values may be the cause. Further testing and observation is required.
+      \marginnote{mikeg: June 16, 2016 - If you run the code in serial and set the random number seed, does the behavior become repeatable?}
     \item Found a difference between FONSEModel and ROCModel where ROC would take mutation prior into account and FONSE wouldn't. This might part of the issues causing log likelihood values to plummet, but testing is required.
     \item Uploaded both the new .tex file and its corresponding pdf just in case there's another error that doesn't keep me from compiling on my machine but might keep another from compiling on a different machine.
+      \marginnote{mikeg: June 16, 2016 - In general, you should refrain from making copies of files (e.g.~labNotes  $\rightarrow$ Lab\_Notes). 
+        Instead, rely on the fact that you are using version control and can always revert back or merge with an earlier version of a file.
+     }
 \end{itemize}
 
 \section{June 14, 2016}
 
 \begin{itemize}
     \item The addition of the mutation prior into FONSE seems to have stopped the rapid descent of the Log Likelihood values. After running it once with 1000 samples and 1 thining, the log likelihood stayed somewhat stable after starting low and rising to about -20000. The vaules were also similar when running with 1000 samples and 10 thining. More extensive testing is required to ensure that the plummeting problem is finally resolved.
+      \marginnote{mikeg: June 16, 2016 -
+        I am glad that the prior seems to have fixed this problem.  
+        I don't understand, however, why it did so.  
+        Were the \DeltaM values diverging from the true value substantially?
+        Note also that one can relax the effect of the prior by making its $\sigma_\DeltaM$ value large. 
+        In fact at the $\lim_{\sigma_\DeltaM \rightarrow \infty}$ the system essentially behaves as if it has a flat prior (which is proportional to 'no prior').
+}
+        
     \item Although the log likelihood values are starting to come together, there is an issue observed in both the mutation and selection traces where certain codons are not being accepted. 
     \item Conducted further comparisons on FONSE and ROC to remove redundancies and semantic oversight.
 \end{itemize}
@@ -126,6 +149,13 @@ TODO:\\
 
 \begin{itemize}
     \item After running FONSE overnight, I feel it's safe to conclude that the plummeting log likelihood problem is resolved although there have been issues with multiple, sometimes all but a few, codons with acceptance rates of 0 as backed up by both the output and the trace plots of both mutation and selection, although this is again non deterministic. Running it on Gauley produced far more codons with no impact than when I ran it on my laptop so the non determinism may come from memory or operating system differences.
+\marginnote{mikeg: June 16, 2016 -
+  This shouldn't happen since we are using an MCMC whose step sizes adapt based on the acceptance ratio of the previous samples. 
+  (Of course, it would be good to make sure this adaptive option is set.)
+  We saw similar 'non-acceptance' behavior with Gabe and/or Jeremy in the past month or two.
+  It had to deal with the parameters not being correctly referenced or defined.
+  Cedric will remember the details.
+}
     \item There was a problem with Gauley involving the machine randomly restarting without being prompted. It doesn't seem like a major problem and the effects seem to be confined to the processes being run on it at the time being prematurely terminated. I'll be keeping an eye for any unespected behavior from Gauley in case the problem ends up being reoccuring.
     \item Studied the model to try and deduce how the simple inclusion of the mutation priors resolved the plummeting problem. So far it still remains fairly unclear and more studying is necessary. 
 \end{itemize}
