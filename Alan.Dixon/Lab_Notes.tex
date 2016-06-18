@@ -160,6 +160,41 @@ TODO:\\
     \item There was a problem with Gauley involving the machine randomly restarting without being prompted. It doesn't seem like a major problem and the effects seem to be confined to the processes being run on it at the time being prematurely terminated. I'll be keeping an eye for any unespected behavior from Gauley in case the problem ends up being reoccuring.
     \item Studied the model to try and deduce how the simple inclusion of the mutation priors resolved the plummeting problem. So far it still remains fairly unclear and more studying is necessary. 
 \end{itemize}
+
+\section{June 16, 2016}
+    \begin{itemize}
+        \item Ran FONSE with b = 0.001, samples = 1000, and Thinning = 10 3 separate times.
+        \item Run 1
+        \begin{itemize}
+          \item Log likelihood settled around -9600
+          \item AA's L and R had acceptance rates of 0
+          \item stdDevSynthesisRate posterior estimate settled around 1.4, .05 for the proposal width
+          \item Trace of the expected values of phi goes to 0.
+          \item All codons for L in the mutation traces stop changing and fall out around sample 100
+          \item R falls out around sample 300
+          \item It's the same story for both L and R in the selection traces except it takes about half as many samples for both to fall out
+        \end{itemize}
+        \item Run 2
+        \begin{itemize}
+            \item Log likelihood settled around -14000
+            \item AA's L and R still had acceptance rates of 0
+            \item stdDevSynthesisRate posterior estimate settles around 1.9, .045 for the proposal width
+            \item Trace of the log likelihood didn't level off as much. It seemed to still be rising.
+            \item expected phi trace was the same as Run 1
+            \item L falls out around the same place in Mutation as Run 1; R falls out twice as fast.
+            \item Both fall out twice as fast in the selection traces compared to Run 1.
+        \end{itemize}
+        \item Run 3
+        \begin{itemize}
+            \item Log likelihood settled around -20000
+            \item AA's L and R still had acceptance rates of 0
+            \item stdDevSynthesisRate posterior estimate settled around 2.5, .04 for the proposal width
+            \item There was a more pronounced level-off in the log likelihood trace, much like Run 1
+            \item expected phi trace leveled off but slightly above 0
+            \item Both L and R had mutation and selection traces similar to Run 1
+        \end{itemize}
+        \item Also worked on documenting FONSE by taking documentation from similar parts in ROC and making the necessary alterations before putting it into FONSE
+    \end{itemize}
 \end{document}
 
 
