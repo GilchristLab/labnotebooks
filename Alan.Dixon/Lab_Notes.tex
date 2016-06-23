@@ -3,7 +3,7 @@
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{float}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{setspace}
 \usepackage{listings}
 \usepackage{color}
@@ -16,16 +16,14 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{courier}
 
-\usepackage{marginnote}%provides ability to put notes in the margin using \marginnote{} command
-
-\renewcommand*{\marginfont}{\scriptsize\sffamily}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-%\textwidth=16.5cm
+
+\textwidth=16.5cm %mikeg: June 18, 2016 - Why is this being set?  It should be set by geometry package
 
 \lstset{frame=tb,
   language=Java,
@@ -45,9 +43,21 @@
 }
 
 
-%%%%%%%%%%%%%%%LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
 \newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
 \newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% BEGIN LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother 
+
+%%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
 
 
 \title{Notes for Undergraduate Research Work}
@@ -55,7 +65,7 @@
 
 \begin{document}
 
-\section{June 6, 2016 Notes}
+\labday{June 6, 2016 Notes} \footnote{mikeg: 06/23/16 -- Please use labday instead of section command.}
 
 \begin{itemize}
     \item Discovered and fixed two bugs involving an uninitialized selection vector and Mphi values
@@ -163,23 +173,29 @@ TODO:\\
 
 \section{June 16, 2016}
     \begin{itemize}
-        \item Ran FONSE with b = 0.001, samples = 1000, and Thinning = 10 3 separate times.
-        \item Run 1
+        \item Ran FONSE with b = 0.001, samples = 1000, and Thinning = 10 3 separate times. \footnote{mikeg: June 18, 2016- Where all three of these runs carried out with the same set of genes?
+If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ between the runs.
+'}
+        \item Run 1 \footnote{mikeg: June 18, 2016 - Per my previous request, please include the relevant figures.
+        I recommend organizing figures by putting them in a separate folders such as ``Figures/2016/June/16''.
+        You should also name them in a consistent manner such as ``FONSE\_run\_1\_trace\_LLik.png''
+      }
         \begin{itemize}
           \item Log likelihood settled around -9600
           \item AA's L and R had acceptance rates of 0
           \item stdDevSynthesisRate posterior estimate settled around 1.4, .05 for the proposal width
           \item Trace of the expected values of phi goes to 0.
-          \item All codons for L in the mutation traces stop changing and fall out around sample 100
+          \item All codons for L in the mutation traces stop changing and fall out around sample 100 \footnote{mikeg: June 18, 2016 - what does 'fall out' mean?}
           \item R falls out around sample 300
           \item It's the same story for both L and R in the selection traces except it takes about half as many samples for both to fall out
         \end{itemize}
-        \item Run 2
+        \item Run 2 \footnote{mikeg: June 18, 2016 - again, figures should be included to help illustrate and document the behavior you describe.}
         \begin{itemize}
             \item Log likelihood settled around -14000
-            \item AA's L and R still had acceptance rates of 0
+            \item AA's L and R still had acceptance rates of 0 \footnote{mikeg: June 18, 2016 - Have you described this behavior to Cedric? 
+                We've seen similar behavior before.}
             \item stdDevSynthesisRate posterior estimate settles around 1.9, .045 for the proposal width
-            \item Trace of the log likelihood didn't level off as much. It seemed to still be rising.
+            \item Trace of the log likelihood didn't level off as much. It seemed to still be rising. 
             \item expected phi trace was the same as Run 1
             \item L falls out around the same place in Mutation as Run 1; R falls out twice as fast.
             \item Both fall out twice as fast in the selection traces compared to Run 1.
