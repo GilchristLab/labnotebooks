@@ -285,18 +285,24 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     However, you should also incorporate the year into your folder structure (e.g. Fig/2016/06/24).
   \item It appears that \DeltaEta also goes to unrealistic values, not just \DeltaM.
   \item Please add the $\sigma_\phi$ trace.
-  \item Where are the traces for the individual AA?
+  \item There may be information in the earlier steps of the traces that we can't observe because the final plots cover such large ranges. 
+    Please generate and add plots that focus in on the earlier steps.
+    We want to know if the code behaves normally at any point or if it is always climbing downwards.
+  \item Where are the traces for the individual AA per our discussion yesterday?
   \item As requested, please respond to my previous notes created using \textbackslash footnote\{\}.
     I'm particularly concerned with your inability to run things on newton.
   \end{itemize}
 }
         \item Run 1: b = 0.001, samples = 1000, thinning = 1.
         \begin{itemize}
-            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure 7.
+            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure 7.\footnote{mikeg: 06/24/16 -- You should use the \textforwardslash label\{\} and \textforwardslash ref\{\} commands rather than labeling and referring to figures using hard coded numbers.}
             \item Acceptance rates for most of the codons were highly suspect with most having acceptance rates of 1 and others having rates of 0.
             \item Both mutation and selection traces seem consistent with the behavior of the other plots and parameters. See Figures 8 and 9.
         \end{itemize}
-        \item Run 2: b = 0.001, samples = 1000, thinning = 10.
+        \item Run 2: b = 0.001, samples = 1000, thinning = 10. 
+          \footnote{mikeg: 06/24/16 -- instead of cutting and pasting the exact same text, you should clearly state what you want to reader to infer from this second set.
+          That is, ``the choice of thinning does not affect the model's behavior.''
+        I would not have expected it to and, instead, would have recommended you do a run with a different $b$ value.}
         \begin{itemize}
             \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -7.1e-41. See Figure 10.
             \item Acceptance rates for most of the codons were agian highly suspect with most having acceptance rates of 1 and others having rates of 0.
@@ -341,17 +347,3 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \label{fig:JUN24_SEL_R2}
     \end{figure}
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
