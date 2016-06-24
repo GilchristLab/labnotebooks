@@ -65,7 +65,7 @@
 
 \begin{document}
 
-\labday{June 6, 2016 Notes} \footnote{mikeg: 06/23/16 -- Please use labday instead of section command.}
+\labday{June 6, 2016 Notes}
 
 \begin{itemize}
     \item Discovered and fixed two bugs involving an uninitialized selection vector and Mphi values
@@ -90,7 +90,7 @@ TODO:\\
     Improve varialbe names and documentation\\
     Document the R scripts\\
     
-\section{June 7, 2016}
+\labday{June 7, 2016}
 
 \begin{itemize}
     \item Removed exit statements from FONSEParameter.cpp, PANSEParameter.cpp, and RFPParameter.cpp in order to eliminate warnings when running the check in R
@@ -110,7 +110,7 @@ TODO:\\
     \item Two new Items for the TODO list: Continue troubleshooting R on Gauley and alter Jeremy's .sge scripts so that they no longer email him when I run a job on Newton.
 \end{itemize}
 
-\section{June 8, 2016}
+\labday{}{June 8, 2016}
 
 \begin{itemize}
     \item Changed the .sge scripts for Newton so that Jeremy no longer receives an email upon the completion of a job.
@@ -126,7 +126,7 @@ TODO:\\
 \end{itemize}
 
 
-\section{June 13, 2016}
+\labday{June 13, 2016}
 
 \begin{itemize}
     \item Fixed an error in FONSEModel.cpp involving a couple of missing semicolons
@@ -140,7 +140,7 @@ TODO:\\
      }
 \end{itemize}
 
-\section{June 14, 2016}
+\labday{June 14, 2016}
 
 \begin{itemize}
     \item The addition of the mutation prior into FONSE seems to have stopped the rapid descent of the Log Likelihood values. After running it once with 1000 samples and 1 thining, the log likelihood stayed somewhat stable after starting low and rising to about -20000. The vaules were also similar when running with 1000 samples and 10 thining. More extensive testing is required to ensure that the plummeting problem is finally resolved.
@@ -156,7 +156,7 @@ TODO:\\
     \item Conducted further comparisons on FONSE and ROC to remove redundancies and semantic oversight.
 \end{itemize}
 
-\section{June 15, 2016}
+\labday{June 15, 2016}
 
 \begin{itemize}
     \item After running FONSE overnight, I feel it's safe to conclude that the plummeting log likelihood problem is resolved although there have been issues with multiple, sometimes all but a few, codons with acceptance rates of 0 as backed up by both the output and the trace plots of both mutation and selection, although this is again non deterministic. Running it on Gauley produced far more codons with no impact than when I ran it on my laptop so the non determinism may come from memory or operating system differences.
@@ -171,7 +171,7 @@ TODO:\\
     \item Studied the model to try and deduce how the simple inclusion of the mutation priors resolved the plummeting problem. So far it still remains fairly unclear and more studying is necessary. 
 \end{itemize}
 
-\section{June 16, 2016}
+\labday{June 16, 2016}
     \begin{itemize}
         \item Ran FONSE with b = 0.001, samples = 1000, and Thinning = 10 3 separate times. \footnote{mikeg: June 18, 2016- Where all three of these runs carried out with the same set of genes?
 If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ between the runs.
@@ -210,17 +210,123 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
             \item Both L and R had mutation and selection traces similar to Run 1
         \end{itemize}
         \item Also worked on documenting FONSE by taking documentation from similar parts in ROC and making the necessary alterations before putting it into FONSE
+         
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run1_MutationTrace}
+            \caption{Mutation Trace for Run 1}
+            \label{fig:JUN16_MUT_R1}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run1_SelectionTrace}
+            \caption{Selection Trace for Run 1}
+            \label{fig:JUN16_SEL_R1}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run2_MutationTrace}
+            \caption{Mutation Trace for Run 2}
+            \label{fig:JUN16_MUT_R2}
+        \end{figure}
+         \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run2_SelectionTrace}
+            \caption{Selection Trace for Run 2}
+            \label{fig:JUN16_SEL_R2}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run3_MutationTrace}
+            \caption{Mutation Trace for Run 3}
+            \label{fig:JUN16_MUT_R3}
+        \end{figure}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run3_SelectionTrace}
+            \caption{Selection Trace for Run 3}
+            \label{fig:JUN16_SEL_R3}
+        \end{figure}
     \end{itemize}
     
-\section{June 21, 2016}
+\labday{June 21, 2016}
     \begin{itemize}
         \item Most of today was spent resolving a problem with RStudio crashing. Both Cedric and I were experiencing this problem so we troubleshooted the issue and discovered that the issue was in a change that had been made in the R-only section of the code in Parameter.cpp. The issue was a "+1" had been added while referencing an element of an array, causing the program to attempt to reference out of the bounds of the array causing a segmentation fault. 
     \end{itemize}
-\section{June 22, 2016}
+\labday{June 22, 2016}
     \begin{itemize}
         \item Added documentation to the FONSE R-scripts from home due to illness.
     \end{itemize}
+    
+\labday{June 23, 2016}
+    \begin{itemize}
+        \item TODO: 
+        \begin{itemize}
+            \item Alter the code so that there is flexibility when someone invokes a prior i.e. specify whether or not a prior should be used.
+            \item run the program with a uniform prior since it is proportional to no prior.
+            \item Change from using a covariance matrix to the diagonal to see how that changes the issue where codons have acceptance rates of 0.
+            \item Alternatively update the covariance matrix instead.
+            \item Check to see if taking the mutation prior out of ROC causes the same phenomenon.
+            \item Dump out the values of the genome step of MCMC so we can observe the traces per amino acid.
+            \item Put in traces from when the code crashes into the lab notes.
+        \end{itemize}
+    \end{itemize}
+    
+\labday{June 24, 2016}
+    \begin{itemize}
+        \item As requested, I removed the prior from FONSE and ran the model twice in order to get more data and plots showing what's going wrong with the algorithm.
+        \item Run 1: b = 0.001, samples = 1000, thinning = 1.
+        \begin{itemize}
+            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure 7.
+            \item Acceptance rates for most of the codons were highly suspect with most having acceptance rates of 1 and others having rates of 0.
+            \item Both mutation and selection traces seem consistent with the behavior of the other plots and parameters. See Figures 8 and 9.
+        \end{itemize}
+        \item Run 2: b = 0.001, samples = 1000, thinning = 10.
+        \begin{itemize}
+            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -7.1e-41. See Figure 10.
+            \item Acceptance rates for most of the codons were agian highly suspect with most having acceptance rates of 1 and others having rates of 0.
+            \item Both mutation and selection traces again seem consistent with the behavior of the other plots and parameters. See Figures 11 and 12.
+        \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_LogLikeTrace}
+        \caption{LogLikelihood trace for Run 1}
+        \label{fig:JUN24_LOG_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_MutationTrace}
+        \caption{Mutation trace for Run 1}
+        \label{fig:JUN24_MUT_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_SelectionTrace}
+        \caption{Selection trace for Run 1}
+        \label{fig:JUN24_SEL_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_LogLikeTrace}
+        \caption{LogLikelihood trace for Run 2}
+        \label{fig:JUN24_LOG_R2}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_MutationTrace}
+        \caption{Mutation trace for Run 2}
+        \label{fig:JUN24_MUT_R2}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_SelectionTrace}
+        \caption{Selection trace for Run 2}
+        \label{fig:JUN24_SEL_R2}
+    \end{figure}
 \end{document}
+
 
 
 
