@@ -72,16 +72,16 @@
     \item Said bug fixes resolved the issue of the program crashing around iteration 2500
       
     \item Despite the fixed bugs resolving that issue, log likelihood values still plummet to values eventually reaching 10e-23 which causes the not a number error, causing the MCMC algorithm to halt.
-\footnote{mikeg: Is this a typo?  Usually it is $\exp{-300}$ that starts to push the limit of numerical precision.
+\footnote{mikeg: June 10 2016 --Is this a typo?  Usually it is $\exp{-300}$ that starts to push the limit of numerical precision.
 Further, it is unclear to me why this would cause a problem unless you are later converting this number back to a log scale.  
 Is it necessary to exponentiate and then take the log?
 ANSWER: 10E-23 was user defined.
 }
-\footnote{mikeg: This is confusing given the previous statement. 
+\footnote{mikeg: June 10 2016 --This is confusing given the previous statement. 
   It sounds like you didn't really resolve the underlying issue.
   ANSWER: Problem is now fixed in that the code run, but it seems likely that the bug is still there.}
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
-      \footnote{why is newton failing to execute your job requests? 
+      \footnote{mikeg: June 10 2016 -- why is newton failing to execute your job requests? 
         How and when will you solve this issue?}
     \end{itemize}
 
@@ -98,7 +98,7 @@ TODO:\\
     \item Removed exit statements from FONSEParameter.cpp, PANSEParameter.cpp, and RFPParameter.cpp in order to eliminate warnings when running the check in R
     \item Downloaded all of the necessary files to my Gauley account.
     \item Running FONSE with simulated data and b = 0.001 led to "nan" being reached much more quickly than on my laptop, around iteration 5500.
-      \footnote{mikeg: is this based on one run on each machine?
+      \footnote{mikeg: June 10 2016 --is this based on one run on each machine?
         It's more useful to be more quantitative and descriptive} 
     \item Said issue may be a cause of R not working correctly on Gauley as compared to my laptop. 
       Multiple errors and missing packages were encountered. 
@@ -117,13 +117,13 @@ TODO:\\
 \begin{itemize}
     \item Changed the .sge scripts for Newton so that Jeremy no longer receives an email upon the completion of a job.
     \item Changed a function in FONSEModel.cpp to match it's corresponding function in ROCModel.cpp. In particular, I changed a long series of divisions to on division and a series of multiplications because multiplication is a faster operation.
-      \footnote{mikeg: include the function name. 
+      \footnote{mikeg: June 10 2016 --include the function name. 
         Any information on speed up?
       }
     \item Fixed a typo in the documentation of ROCModel.cpp
     \item Worked out some kink experienced while running R scripts on Gauley. In particular, finally made it so that the plots actually showed up and worked. 
     \item Formulated the hypothesis that the reason we are experiencing a drop in log likelihood comes from a bug involving either deltaM, deltaOmega, or phi after observing the trace plots.
-\footnote{Include plots in your notes, especially if you refer to them, and explain more clearly why you think its behavior indicates this.
+\footnote{mikeg: June 10 2016 --Include plots in your notes, especially if you refer to them, and explain more clearly why you think its behavior indicates this.
 }
 \end{itemize}
 
@@ -277,6 +277,19 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
 \labday{June 24, 2016}
     \begin{itemize}
         \item As requested, I removed the prior from FONSE and ran the model twice in order to get more data and plots showing what's going wrong with the algorithm.
+\footnote{mikeg: 06/24/16 -- 
+  \begin{itemize}
+  \item Is this all you were able to get done today?  If not, your notes should reflect this and, in general, be more detailed.
+  \item What did the ROC runs show?  If you were unable to run it, why is this?
+  \item Your choice of file names for plots is good and organizing them by date is also good. 
+    However, you should also incorporate the year into your folder structure (e.g. Fig/2016/06/24).
+  \item It appears that \DeltaEta also goes to unrealistic values, not just \DeltaM.
+  \item Please add the $\sigma_\phi$ trace.
+  \item Where are the traces for the individual AA?
+  \item As requested, please respond to my previous notes created using \textbackslash footnote\{\}.
+    I'm particularly concerned with your inability to run things on newton.
+  \end{itemize}
+}
         \item Run 1: b = 0.001, samples = 1000, thinning = 1.
         \begin{itemize}
             \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure 7.
