@@ -75,9 +75,11 @@
 \footnote{mikeg: Is this a typo?  Usually it is $\exp{-300}$ that starts to push the limit of numerical precision.
 Further, it is unclear to me why this would cause a problem unless you are later converting this number back to a log scale.  
 Is it necessary to exponentiate and then take the log?
+ANSWER: 10E-23 was user defined.
 }
 \footnote{mikeg: This is confusing given the previous statement. 
-  It sounds like you didn't really resolve the underlying issue.}
+  It sounds like you didn't really resolve the underlying issue.
+  ANSWER: Problem is now fixed in that the code run, but it seems likely that the bug is still there.}
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
       \footnote{why is newton failing to execute your job requests? 
         How and when will you solve this issue?}
