@@ -10,6 +10,7 @@
 \usepackage[]{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{csquotes}
+\usepackage{xspace}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -17,7 +18,7 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\textwidth=16.5cm
+\textwidth=16.5cm  %mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
 
 \lstset{frame=tb,
   language=C++,
@@ -35,6 +36,23 @@
   breakatwhitespace=true,
   tabsize=3
 }
+
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% BEGIN LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother 
+
+%%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
+
 
 \title{Notes for Undergraduate Research Work}
 \author{Hollis Bui}
@@ -259,7 +277,9 @@ without regards to parallelization.
 
 \experiment{Parallelization}
 
-From yesterday:
+From yesterday:\footnote{mikeg: June 18, 2016 - Please label your columns!
+ Otherwise, it is impossible to know for certain what the data below represents.
+}
 
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
@@ -560,8 +580,9 @@ Process finished with exit code 0
 \labday{June 8, 2016 Notes}
 
 \experiment{Unit Testing}
-
-Started by writing and testing a function for numAcceptForSynthesisRate.
+Started by writing and testing a function for numAcceptForSynthesisRate.\footnote{mikeg: June 18, 2016 - Please use the `itemize' or `enumerate' environment for lists.
+  This helps keep things organized and easier to read.
+}
 
 Printing this statement seems to have fixed the odd print bug mentioned yesterday.
 
@@ -575,10 +596,16 @@ It's related to how we may have delta and Phi values...
 We are trying to find out how efficient your codons have to be to reach a production rate
 assuming cost is constant.
 
-Cost = Benefit * production rate (Phi)
+Cost = Benefit * production rate (Phi)\footnote{mikeg: June 18, 2016 - This is \emph{incorrect}. 
+  \begin{itemize} 
+  \item $\eta = $Cost\/Benefit 
+  \item Energy Flux to meet target production rate $\phi$ $= \eta * \phi$
+  \end{itemize}
+}
 
 Switching to a different selection environment:
-Different cost, different benefit, and therefore different Phi.
+Different cost, different benefit, and therefore different Phi. \footnote{mikeg: June 18, 2016 - Just to be clear, the likelihood of a given $\phi$ changes with changes in either \DeltaEta and\/or \DeltaM 
+}
 
 If you have 2 selection categories, you have to have two synthesis categories. 
 They are the same even if we don't know them, but it saves renaming it to something more general.
@@ -865,7 +892,9 @@ mcmc algorithm runs -- since in R you can set seed for entire C-side implementat
 
 \experiment{TODOs}
 \begin{itemize}
-    \item Fix the TODO note in Parameter.cpp under initParameterSet
+    \item Fix the TODO note in Parameter.cpp under initParameterSet \footnote{mikeg: June 18, 2006 - It is unclear what note you're referring to.
+        Recommend using \\label\{\} to label earlier note and \\ref\{\} command here to link to it.
+      }
     \item Ask Cedric about:
     \begin{itemize}
         \item Testing restart files: keep in same function or separate unit tests.
@@ -954,7 +983,8 @@ Need to keep examining functions... Ended before checking model::updateTracesWit
 
 Answers to Cedric questions:
 \begin{itemize}
-    \item In general, design of code is up to me. Seems good with whatever.
+    \item In general, design of code is up to me. Seems good with whatever. \footnote{mikeg: June 18, 2016 - This seems like a poor idea and more guidance for code design should be provided given the fact that many folks work on this code.
+}
     \item DevRScripts are super out-dated. Be careful of what to use, i.e. a lot of functions
     are using old definitions and need additional arguments.
     \item Again, for overall unit testing:
