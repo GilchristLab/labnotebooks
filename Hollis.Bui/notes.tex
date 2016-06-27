@@ -1,4 +1,4 @@
-\documentclass[12pt,hyperref]{labbook}
+\documentclass[12pt,hyperref,draft]{labbook}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
@@ -18,7 +18,10 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\textwidth=16.5cm  %mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
+%\textwidth=16.5cm
+%mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
+% Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
+% was used as a bandage on an abundance of overful hboxes. Will fix these case-by-case later.
 
 \lstset{frame=tb,
   language=C++,
@@ -102,7 +105,7 @@ To check current directory in R, type in and execute \enquote{getwd()}.
     \item Expand Unit Testing:
     \begin{enumerate}
         \item Test Cov Matrixes — STALLED: Still need final two
-        \item Test MCMC - STALLED: Need run, varyInitialConditions, calculateGewekeScore, getLogLikelihoodPosteriorMean, and setRestartFileSettings as well as two test that only functions.
+        \item Test MCMC - STALLED: Need run, vary\-Initial\-Conditions, calculate\-Geweke\-Score, get\-Log\-Likelihood\-Posterior\-Mean, and set\-Restart\-File\-Settings as well as two test that only functions.
         \begin{itemize}
             \item Implement other unit testing first
         \end{itemize}
@@ -277,29 +280,42 @@ without regards to parallelization.
 
 \experiment{Parallelization}
 
-From yesterday:\footnote{mikeg: June 18, 2016 - Please label your columns!
- Otherwise, it is impossible to know for certain what the data below represents.
-}
+From yesterday:
 
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-0.00621732 - 10
-0.00687881 - 100
-0.00947537 - 1000
-0.00713974 - 10000
-0.00785908 - 10000
-0.00750889 - 10
-\end{lstlisting}
-\end{minipage}
+%\footnote{mikeg: June 18, 2016 - Please label your columns!
+% Otherwise, it is impossible to know for certain what the data below represents.
+%}
+% Resolved June 27, 2016 (Hollis): Will do in the future, fixed it here as well
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Average Time with Dynamic Arrays} & \textbf{Number of Runs} \\
+        \hline
+        0.00621732 & 10 \\
+        0.00687881 & 100 \\
+        0.00947537 & 1000 \\
+        0.00713974 & 10000 \\
+        0.00785908 & 10000 \\
+        0.00750889 & 10 \\
+        \hline
+    \end{tabular}
+\end{table}
 
 For today:
 
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-0.0572747 - 10
-0.0698414 - 100
-\end{lstlisting}
-\end{minipage}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Average Time with Vectors} & \textbf{Number of Runs} \\
+        \hline
+        0.0572747 & 10 \\
+        0.0698414 & 100\\
+        \hline
+    \end{tabular}
+\end{table}
 
 …Odd, 10x as long on average
 
@@ -418,45 +434,37 @@ Immediate future goals:
 
 Talk with Gilchrist:
 
-Let's get a randomly distributed set of data rather straight up isolation.
-
-See below for how to randomly distribute; want only 100 genes.
-
-61 Parameters Pausing Time
-
-Lots of gene-specific parameters that scale with each gene.
-
-Let's say average of each gene is ~300 AAs.
-
-So ~7 observations per gene.
-
-Try to get 2 parameters for a fair amount of information. Calculating at sigma is going increase at
-gene length.
-
-And of course longer gene sequences take longer to parse.
-
-So probably want a data base for playing around with of 100 genes, between 200 and 400 AAs long
-
-Do we need to test with all 61 parameters?
-2-codon AA's are the quickest thing to work with. 
-
-So may want to start with 100 genes of 200-400 AAs
-Estimate these parameters with a small subset of the codons, starting with the 2-codon ones.
-If they are behaving properly, scale up to 3/4/etc.
+\begin{itemize}
+    \item Let's get a randomly distributed set of data rather straight up isolation.
+    \item See below for how to randomly distribute; want only 100 genes.
+    \item 61 Parameters Pausing Time
+    \item Lots of gene-specific parameters that scale with each gene.
+    \item Let's say average of each gene is ~300 AAs.
+    \item So ~7 observations per gene.
+    \item 
+    Try to get 2 parameters for a fair amount of information. 
+    Calculating at sigma is going increase at gene length.
+    \item And of course longer gene sequences take longer to parse.
+    \item So probably want a data base for playing around with of 100 genes, between 200 and 400 AAs long
+    \item Do we need to test with all 61 parameters?
+    \item 2-codon AA's are the quickest thing to work with. 
+    \item So may want to start with 100 genes of 200-400 AAs
+    \item Estimate these parameters with a small subset of the codons, starting with the 2-codon ones.
+    \item If they are behaving properly, scale up to 3/4/etc.
+\end{itemize}
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
-Long is de-facto standard
-Lareau argues that Short is also relevant despite usually being thrown out
-
-Long and short: tell how elongation is at each position.
-Our model is based on pausing. 
-
-So how do long and short factor in? Well, we don't know yet.
-
-We could base it on just one or the other or combine the two.
-
-For now let's just base it on Long.
+\begin{itemize}
+    \item (Re: Lareau's distinction between long and short in the data)
+    \item Long is de-facto standard
+    \item Lareau argues that Short is also relevant despite usually being thrown out
+    \item Long and short: tell how elongation is at each position.
+    \item Our model is based on pausing. 
+    \item So how do long and short factor in? Well, we don't know yet.
+    \item We could base it on just one or the other or combine the two.
+    \item For now let's just base it on Long.
+\end{itemize}
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 
@@ -580,15 +588,17 @@ Process finished with exit code 0
 \labday{June 8, 2016 Notes}
 
 \experiment{Unit Testing}
-Started by writing and testing a function for numAcceptForSynthesisRate.\footnote{mikeg: June 18, 2016 - Please use the `itemize' or `enumerate' environment for lists.
-  This helps keep things organized and easier to read.
-}
+%\footnote{mikeg: June 18, 2016 - Please use the `itemize' or `enumerate' environment for lists.
+%  This helps keep things organized and easier to read.
+%}
+% Resolved June 27, 2016 (Hollis): Fixed this section, will keep in mind for the future.
+\begin{itemize}
+    \item Started by writing and testing a function for numAcceptForSynthesisRate.
+    \item Printing this statement seems to have fixed the odd print bug mentioned yesterday.
+    \item After doing that, I decided to write up on the documentation of Unit Testing I have done so far.
+\end{itemize}
 
-Printing this statement seems to have fixed the odd print bug mentioned yesterday.
-
-After doing that, I decided to write up on the documentation of Unit Testing I have done so far.
-
-Asked Cedric about getSelectionCategory and getSynthesisRateCategory (paraphrased):
+Asked Cedric about get\-Selection\-Category and get\-Synthesis\-Rate\-Category (paraphrased):
 
 \begin{displayquote}
 It's related to how we may have delta and Phi values...
@@ -596,15 +606,21 @@ It's related to how we may have delta and Phi values...
 We are trying to find out how efficient your codons have to be to reach a production rate
 assuming cost is constant.
 
-Cost = Benefit * production rate (Phi)\footnote{mikeg: June 18, 2016 - This is \emph{incorrect}. 
-  \begin{itemize} 
-  \item $\eta = $Cost\/Benefit 
-  \item Energy Flux to meet target production rate $\phi$ $= \eta * \phi$
-  \end{itemize}
-}
+Cost = Benefit * production rate (Phi)
+
+%\footnote{mikeg: June 18, 2016 - This is \emph{incorrect}. 
+%  \begin{itemize} 
+%  \item $\eta = $Cost\/Benefit 
+%  \item Energy Flux to meet target production rate $\phi$ $= \eta * \phi$
+%  \end{itemize}
+%}
+% Resolved June 27, 2016 (Hollis): These were roughly written notes as noted before.
+% Commenting out to ensure that future readings don't mistake this as fact.
 
 Switching to a different selection environment:
-Different cost, different benefit, and therefore different Phi. \footnote{mikeg: June 18, 2016 - Just to be clear, the likelihood of a given $\phi$ changes with changes in either \DeltaEta and\/or \DeltaM 
+Different cost, different benefit, and therefore different Phi. \footnote{mikeg: June 18, 2016 
+- Just to be clear, the likelihood of a given $\phi$ changes with changes in either 
+\DeltaEta and\/or \DeltaM 
 }
 
 If you have 2 selection categories, you have to have two synthesis categories. 
@@ -741,7 +757,7 @@ subitems first: (NOTE: Testing with RFPModel)
         \item mcmc::varyInitialConditions
         \begin{itemize}
             \item model::proposeCodonSpecificParameter -- wrapper to RFPparameter
-            \item model::proposeHyperParameters -- parameter::proposeStdDevSynthesisRate
+            \item model::propose\-Hyper\-Parameters -- parameter::propose\-Std\-Dev\-Synthesis\-Rate
             \item model::proposeSynthesisRateValues -- wrapper to parameter
             \item model::getGroupListSize -- wrapper to parameter (done?)
             \item model::getGrouping -- wrapper to parameter (done?)
@@ -892,9 +908,26 @@ mcmc algorithm runs -- since in R you can set seed for entire C-side implementat
 
 \experiment{TODOs}
 \begin{itemize}
-    \item Fix the TODO note in Parameter.cpp under initParameterSet \footnote{mikeg: June 18, 2006 - It is unclear what note you're referring to.
-        Recommend using \\label\{\} to label earlier note and \\ref\{\} command here to link to it.
-      }
+    \item Fix the TODO note in Parameter.cpp under initParameterSet 
+    %\footnote{mikeg: June 18, 2006 - It is unclear what note you're referring to.
+    % Recommend using \\label\{\} to label earlier note and \\ref\{\} command here to link to it.
+    %  }
+    % Resolved June 27, 2016 (Hollis): Will keep in mind in the future. Code in question
+    % (current version, so changes already made):
+    %
+    %   for (unsigned i = 0u; i < numGenes; i++)
+    %   {
+    %       // Note: This section of code is because vectors in R are 1-indexed (i.e. for mixtureAssignment)
+    %       //TODO:need to check index are correct, consecutive, and don't exceed numMixtures
+    %       //possibly just use a set?
+    %   #ifndef STANDALONE
+    %       mixtureAssignment[i] = geneAssignment[i] - 1;
+    %       //mixtureAssignment[i + 1] = geneAssignment[i];
+    %%%%%%%%% Code is here, solved by Cedric ^ %%%%%%%%
+    %   #else
+    %       mixtureAssignment[i] = geneAssignment[i];
+    %   #endif
+    %   }
     \item Ask Cedric about:
     \begin{itemize}
         \item Testing restart files: keep in same function or separate unit tests.
@@ -977,14 +1010,20 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
 
 This list is still incomplete, but we shall start implementing now for convenience.
 
-Need to keep examining functions... Ended before checking model::updateTracesWithInitialValues
+Need to keep examining functions... 
+
+Ended before checking model::updateTracesWithInitialValues
 
 \labday {June 15, 2016 Notes}
 
 Answers to Cedric questions:
 \begin{itemize}
-    \item In general, design of code is up to me. Seems good with whatever. \footnote{mikeg: June 18, 2016 - This seems like a poor idea and more guidance for code design should be provided given the fact that many folks work on this code.
-}
+    \item In general, design of code is up to me. Seems good with whatever.
+    %\footnote{mikeg: June 18, 2016 - This seems like a poor idea and more guidance for code design should be provided given the fact that many folks work on this code.
+    %}
+    % Resolved June 27, 2016 (Hollis): Agree with mikeg. Since this comment Cedric has
+    % created a general formatting document, and I will merge my unofficial one that I
+    % had been working on with his once I discuss it.
     \item DevRScripts are super out-dated. Be careful of what to use, i.e. a lot of functions
     are using old definitions and need additional arguments.
     \item Again, for overall unit testing:
@@ -1042,10 +1081,10 @@ worry that any changes made today may mess up the project as a whole despite
 the Travis check declaring no errors. Will probably not push any changes made today
 unless I can debug this.
 
-Decided to clean up the mess of warnings spat out in order to find out how to debug.
-
-To do so, I changed the deprecated Rcpp::loadRcppModules() function to several
-Rcpp::loadModule() functions, leaving a comment to discuss this change in the future with Cedric
+Decided to clean up the mess of warnings spat out in order to find out how to debug:
+I changed the deprecated Rcpp::loadRcppModules() function
+to several Rcpp::loadModule() functions, 
+leaving a comment to discuss this change in the future with Cedric
 
 Then, I minorly edited the documentation files to clear up the more obvious errors.
 
@@ -1064,6 +1103,51 @@ Goals for next work days: Restart file testing, model testing, PANSE pseudocode.
 
 Will probably switch to PANSE pseudocode over the vacation period if I have any time to work,
 so I can discuss any ideas I may have with Dr. Gilchrist once he returns.
+
+\labday {June 27, 2016 Notes}
+
+Last night (June 26) spent about two hours fixing a bug with the overall project:
+there was an error with testhat due to changing (fixing) Parameter.cpp setup.
+
+Plan for today is to begin unit testing with R-side models while also rereading PANSE
+documentation and planning psuedocode.
+
+Found a bug in function to simplify code; fixed bug, started replacing this code
+in the existing R scripts for consistency. Took an hour and a half.
+
+Fixed another bug with traces on the R-side whenever plotting is done.
+
+Talk with Dr. Gilchrist:
+
+\begin{itemize}
+    \item Use our simulated results getting pausing time
+    (but with almost no or no nonsense error) and compare to published results.
+    \item Accuracy— within 80-90\% close estimates. Look at Laraeu data or Wineberg
+    \item Plot our estimates vs their estimates and hope to see a nice regression.
+    \item Also compare the deltaEta values from the 2015.
+    \item Pausing times are the inverse of the rates.
+    \item 3 places to find data:
+    \begin{itemize}
+        \item Lareau et al
+        \item 
+        Pop et al -- Main focus. Check Gauley: highest-level directory -\textgreater tmp -\textgreater Pop...
+        Also ghanas's documents are now open. Gabriel worked with some of this data before but it
+        is undocumented, so just restart from scratch.
+        \item Wineberg et al
+    \end{itemize}
+\end{itemize}
+
+Spent a bit of time cleaning up notes afterward. Will clean up further at home.
+
+Also, some Cedric answers:
+\begin{itemize}
+    \item 
+    I can go ahead and publish the unofficial style changes I had been working on on the side
+    Cedric can just review them later.
+    \item
+    To debug the current unknown error with Rstudio and allUnique\_simMod.R, I should
+    go line-by-line and execute. The problem seems to be with "plot(model, genome, parameter, samples = samples*0.1, mixture = mixture, main = "Codon Usage Plot")".
+\end{itemize}
 
 \end{document}
 
