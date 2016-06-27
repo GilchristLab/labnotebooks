@@ -15,6 +15,7 @@
 \usepackage[]{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{courier}
+\usepackage{subcaption}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -83,6 +84,7 @@ ANSWER: 10E-23 was user defined.
     \item Due to Newton failing to execute my job request, I had to run the R script on my laptop so I was only able to run it once so more testing is needed but for the meantime it appears it takes until around iteration 42000 for the program to crash.
       \footnote{mikeg: June 10 2016 -- why is newton failing to execute your job requests? 
         How and when will you solve this issue?}
+      \footnote{aland: June 27 2016 -- The problem comes from the .SGE scripts. Jeremy Rogers had them tailored to how his directories were set up and where he wanted files to go. Fixing this is pretty low on my priority list since Gauley handles pretty much everything I need to run.}
     \end{itemize}
 
 TODO:\\
@@ -215,37 +217,37 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
          
         \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run1_MutationTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run1_MutationTrace}
             \caption{Mutation Trace for Run 1}
             \label{fig:JUN16_MUT_R1}
         \end{figure}
         \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run1_SelectionTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run1_SelectionTrace}
             \caption{Selection Trace for Run 1}
             \label{fig:JUN16_SEL_R1}
         \end{figure}
         \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run2_MutationTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run2_MutationTrace}
             \caption{Mutation Trace for Run 2}
             \label{fig:JUN16_MUT_R2}
         \end{figure}
          \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run2_SelectionTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run2_SelectionTrace}
             \caption{Selection Trace for Run 2}
             \label{fig:JUN16_SEL_R2}
         \end{figure}
         \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run3_MutationTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run3_MutationTrace}
             \caption{Mutation Trace for Run 3}
             \label{fig:JUN16_MUT_R3}
         \end{figure}
         \begin{figure}
             \centering
-            \includegraphics[scale=.65]{FONSE_Plots/June_16/Run3_SelectionTrace}
+            \includegraphics[scale=.65]{FONSE_Plots/2016/June_16/Run3_SelectionTrace}
             \caption{Selection Trace for Run 3}
             \label{fig:JUN16_SEL_R3}
         \end{figure}
@@ -293,57 +295,132 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     I'm particularly concerned with your inability to run things on newton.
   \end{itemize}
 }
-        \item Run 1: b = 0.001, samples = 1000, thinning = 1.
+\footnote{aland: 06/27/16 --
+    \begin{itemize}
+        \item Documentation was done while FONSE was running
+        \item I hadn't been able to run ROC at this time. Cedric has since helped me and I'm now able to do so.
+        \item I'm still in the process of implementing the traces of individual AA's. Both that and including plots that focus on earlier steps are on my TODO list.
+    \end{itemize}
+}
+    \item Run 1: b = 0.001, samples = 1000, thinning = 1.
+        
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run1_LogLikeTrace}
+        \caption{LogLikelihood trace for Run 1}
+        \label{fig:JUN24_LOG_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run1_MutationTrace}
+        \caption{Mutation trace for Run 1}
+        \label{fig:JUN24_MUT_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run1_SelectionTrace}
+        \caption{Selection trace for Run 1}
+        \label{fig:JUN24_SEL_R1}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run2_LogLikeTrace}
+        \caption{LogLikelihood trace for Run 2}
+        \label{fig:JUN24_LOG_R2}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run2_MutationTrace}
+        \caption{Mutation trace for Run 2}
+        \label{fig:JUN24_MUT_R2}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_24/Run2_SelectionTrace}
+        \caption{Selection trace for Run 2}
+        \label{fig:JUN24_SEL_R2}
+    \end{figure}
+        
         \begin{itemize}
-            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure 7.\footnote{mikeg: 06/24/16 -- You should use the \textforwardslash label\{\} and \textforwardslash ref\{\} commands rather than labeling and referring to figures using hard coded numbers.}
+            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -1.8e-40. See Figure \ref{fig:JUN24_LOG_R1}.\footnote{mikeg: 06/24/16 -- You should use the \textbackslash label\{\} and \textbackslash ref\{\} commands rather than labeling and referring to figures using hard coded numbers.}
             \item Acceptance rates for most of the codons were highly suspect with most having acceptance rates of 1 and others having rates of 0.
-            \item Both mutation and selection traces seem consistent with the behavior of the other plots and parameters. See Figures 8 and 9.
+            \item Both mutation and selection traces seem consistent with the behavior of the other plots and parameters. See Figures \ref{fig:JUN24_MUT_R1} and \ref{fig:JUN24_SEL_R1}.
         \end{itemize}
         \item Run 2: b = 0.001, samples = 1000, thinning = 10. 
           \footnote{mikeg: 06/24/16 -- instead of cutting and pasting the exact same text, you should clearly state what you want to reader to infer from this second set.
           That is, ``the choice of thinning does not affect the model's behavior.''
         I would not have expected it to and, instead, would have recommended you do a run with a different $b$ value.}
         \begin{itemize}
-            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -7.1e-41. See Figure 10.
+            \item Log Likelihood values plummet once again. At the end of the MCMC loop the value had reached -7.1e-41. See Figure \ref{fig:JUN24_LOG_R2}.
             \item Acceptance rates for most of the codons were agian highly suspect with most having acceptance rates of 1 and others having rates of 0.
-            \item Both mutation and selection traces again seem consistent with the behavior of the other plots and parameters. See Figures 11 and 12.
+            \item Both mutation and selection traces again seem consistent with the behavior of the other plots and parameters. See Figures \ref{fig:JUN24_MUT_R2} and \ref{fig:JUN24_SEL_R2}.
+        \end{itemize}
+    \end{itemize}
+
+\labday{June 27, 2016}
+    \begin{itemize}
+        \item Worked on the implementation of adding plots of the earlier stages of the trace for the log likelihood.
+        \item Worked on altering the .SGE scripts so I can run them on Newton
+        \item Added further documentation to FONSE
+        \item Ran FONSE and ROC both without the prior, both with samples = 1000 and thinning = 10.
+        \item FONSE: b = 0.001
+        \begin{itemize}
+            \item Log likelihood values plummeted once again, this time ending at -3.31e+41.
+            \item High acceptance rates for most of the AA's with over half of them being 1. Those that weren't high or 1 were 0.
+        \end{itemize}
+        \item ROC with simulated data:
+        \begin{itemize}
+            \item Log likelihood values quickly rose and settled around -810000
+            \item Very low acceptance rates for almost all AA's (some being moderate at around .35) with almost half being 0.
         \end{itemize}
     \end{itemize}
     
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_LogLikeTrace}
-        \caption{LogLikelihood trace for Run 1}
-        \label{fig:JUN24_LOG_R1}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/Run1_LogLikeTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JUN27_FLOG}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_MutationTrace}
-        \caption{Mutation trace for Run 1}
-        \label{fig:JUN24_MUT_R1}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/ROC/Run1_LogLikeTrace}
+        \caption{LogLikelihood trace for ROC}
+        \label{fig:JUN27_RLOG}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run1_SelectionTrace}
-        \caption{Selection trace for Run 1}
-        \label{fig:JUN24_SEL_R1}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/Run1_SphiTrace}
+        \caption{Sphi trace for FONSE}
+        \label{fig:JUN27_FSPHI}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_LogLikeTrace}
-        \caption{LogLikelihood trace for Run 2}
-        \label{fig:JUN24_LOG_R2}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/ROC/Run1_SphiTrace}
+        \caption{Sphi trace for ROC}
+        \label{fig:JUN27_RSPHI}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_MutationTrace}
-        \caption{Mutation trace for Run 2}
-        \label{fig:JUN24_MUT_R2}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/Run1_MutationTrace}
+        \caption{Mutation trace for FONSE}
+        \label{fig:JUN27_FMUT}
     \end{figure}
     \begin{figure}
         \centering
-        \includegraphics[scale=.65]{FONSE_Plots/June_24/Run2_SelectionTrace}
-        \caption{Selection trace for Run 2}
-        \label{fig:JUN24_SEL_R2}
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/ROC/Run1_MutationTrace}
+        \caption{Mutation trace for ROC}
+        \label{fig:JUN27_RMUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/Run1_SelectionTrace}
+        \caption{Selection trace for FONSE}
+        \label{fig:JUN27_FSEL}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/June_27/ROC/Run1_SelectionTrace}
+        \caption{Selection trace for ROC}
+        \label{fig:JUN27_RSEL}
     \end{figure}
 \end{document}
