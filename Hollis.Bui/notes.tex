@@ -1,4 +1,4 @@
-\documentclass[12pt,hyperref,draft]{labbook}
+\documentclass[12pt,hyperref]{labbook}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
@@ -21,7 +21,8 @@
 %\textwidth=16.5cm
 %mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
 % Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
-% was used as a bandage on an abundance of overful hboxes. Will fix these case-by-case later.
+% was used as a bandage on an abundance of overfull hboxes. 
+% June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
 
 \lstset{frame=tb,
   language=C++,
@@ -43,6 +44,7 @@
 %%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
 \newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
 \newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+\newcommand{\sep}{\discretionary{}{}{}} % Used to help with text separation, hboxes.
 
 %%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
 
@@ -85,7 +87,7 @@ if {
 \end{lstlisting}
 \end{minipage}
 
-In R-Studio, you can multiline comment (and uncomment) by pressing
+In R-Studio, you can multi-line comment (and uncomment) by pressing
 CTR + SHIFT + C
 
 To check current directory in R, type in and execute \enquote{getwd()}.
@@ -93,7 +95,7 @@ To check current directory in R, type in and execute \enquote{getwd()}.
 \experiment{TODOs}
 
 \begin{enumerate}
-    \item PANSE model implentation:
+    \item PANSE model implementation:
     \begin{enumerate}
         \item PANSEParameter.cpp
         \item PANSEModel.cpp
@@ -104,8 +106,8 @@ To check current directory in R, type in and execute \enquote{getwd()}.
     \end{enumerate}
     \item Expand Unit Testing:
     \begin{enumerate}
-        \item Test Cov Matrixes — STALLED: Still need final two
-        \item Test MCMC - STALLED: Need run, vary\-Initial\-Conditions, calculate\-Geweke\-Score, get\-Log\-Likelihood\-Posterior\-Mean, and set\-Restart\-File\-Settings as well as two test that only functions.
+        \item Test Cov Matrices — STALLED: Still need final two
+        \item Test MCMC - STALLED: Need run, vary\sep Initial\sep Conditions, calculate\sep Geweke\sep Score, get\sep Log\sep Likelihood\sep Posterior\sep Mean, and set\sep Restart\sep File\sep Settings as well as two test that only functions.
         \begin{itemize}
             \item Implement other unit testing first
         \end{itemize}
@@ -264,7 +266,7 @@ Dynamic Arrays -\textgreater Vectors
 
 Go ahead and replace dynamic arrays with vectors, first
 
-And then do this barebones calculation of runs to see if it makes it faster,
+And then do this bare-bones calculation of runs to see if it makes it faster,
 without regards to parallelization.
 
 \labday{June 1, 2016 Notes}
@@ -598,7 +600,7 @@ Process finished with exit code 0
     \item After doing that, I decided to write up on the documentation of Unit Testing I have done so far.
 \end{itemize}
 
-Asked Cedric about get\-Selection\-Category and get\-Synthesis\-Rate\-Category (paraphrased):
+Asked Cedric re: get\sep Selection\sep Category and get\sep Synthesis\sep Rate\sep Category (paraphrased):
 
 \begin{displayquote}
 It's related to how we may have delta and Phi values...
@@ -700,7 +702,8 @@ For now, I am switching to unit testing RFP-exclusive functions.
 In the course of working on checking RFPParameter, wrote up Unit Testing for all
 Group List functions in Parameter.cpp
 
-May need a wrapper function for currentCodonSpecificParameter and proposedCodonSpecificParameter
+May need a wrapper function for current\sep Codon\sep Specific\sep Parameter and 
+proposed\sep Codon\sep Specific\sep Parameter
 extraction. Talk to Cedric.
 
 Refocusing overall goals:
@@ -749,7 +752,7 @@ Begin testing with MCMC run while waiting for others to arrive.
 
 \labday {June 10, 2016 Notes}
 
-There exists a heirarchy of functions to test before finally testing mcmc.run. Test the
+There exists a hierarchy of functions to test before finally testing mcmc.run. Test the
 subitems first: (NOTE: Testing with RFPModel)
 \begin{itemize}
     \item mcmc::run
@@ -757,12 +760,14 @@ subitems first: (NOTE: Testing with RFPModel)
         \item mcmc::varyInitialConditions
         \begin{itemize}
             \item model::proposeCodonSpecificParameter -- wrapper to RFPparameter
-            \item model::propose\-Hyper\-Parameters -- parameter::propose\-Std\-Dev\-Synthesis\-Rate
+            \item model::\sep propose\sep Hyper\sep Parameters -- wrapper to
+            parameter::\sep propose\sep Std\sep Dev\sep Synthesis\sep Rate
             \item model::proposeSynthesisRateValues -- wrapper to parameter
             \item model::getGroupListSize -- wrapper to parameter (done?)
             \item model::getGrouping -- wrapper to parameter (done?)
             \item model::updateCodonSpecificParameter -- wrapper to RFPparameter
-            \item model::updateAllHyperParameter -- just calls updateStdDevSynthesisRate -- Ask
+            \item model::\sep update\sep All\sep Hyper\sep Parameter -- 
+            calls update\sep Std\sep Dev\sep Synthesis\sep Rate -- Ask
             \begin{itemize}
                 \item updateStdDevSynthesisRate -- wrapper to parameter
             \end{itemize}
@@ -776,7 +781,8 @@ subitems first: (NOTE: Testing with RFPModel)
             \item model::updateSynthesisRate -- wrapper to parameter
             \item model::updateGibbsSampledHyperParameters -- does not do anything
         \end{itemize}
-        \item model::setNumPhiGroupings -- wrapper to parameter::setNumObservedPhiSets (done?)
+        \item model::\sep set\sep Num\sep Phi\sep Groupings -- 
+        a wrapper to parameter::\sep set\sep Num\sep Observed\sep Phi\sep Sets (done?)
         \item model::initTraces -- wrapper to RFPparameter initAllTraces
         \item model::updateTracesWithInitialValues
         \begin{itemize}
@@ -793,18 +799,21 @@ subitems first: (NOTE: Testing with RFPModel)
             \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
             \item model::updateCodonSpecificParameterTrace
         \end{itemize}
-        \item model::adaptCodonSpecificParameterProposalWidth -- wrapper to RFPparameter
+        \item model::\sep adapt\sep Codon\sep Specific\sep Parameter\sep Proposal\sep Width 
+        -- wraps RFP\sep parameter
         \item mcmc::acceptRejectHyperParameter
         \begin{itemize}
             \item model::calculateLogLikelihodRatioForHyperParameters
             \item model::updateHyperParameter -- parameter::updateStdDevSynthesisRate
             \item model::updateHyperParameterTraces
         \end{itemize}
-        \item model::adaptHyperParameterProposalWidths -- calls adaptStdDevSynthesisProposalWidth,
+        \item model::\sep adapt\sep Hyper\sep Parameter\sep Proposal\sep Widths -- 
+        will call the function adapt\sep Std\sep Dev\sep Synthesis\sep Proposal\sep Width, 
         a wrapper to parameter. Uses traces.
         \item mcmc::acceptRejectSynthesisRateLevelForAllGenes
         \begin{itemize}
-            \item model::getMixtureElementsOfSelectionCategory -- wraps parameter (done?)
+            \item model::\sep get\sep Mixture\sep Elements\sep Of\sep Selection\sep Category 
+            -- wrapper to parameter (done?)
             \item model::calculateLogLikelihoodRatioPerGene
             \item model::getCategoryProbability -- wrapper to parameter (done?)
             \item parameter::randMultinom
@@ -852,15 +861,16 @@ New modified list stripping out some things that are more-or-less done
             \item model::calculateLogLikelihoodRatioPerGroupingPerCategory
             \item model::updateCodonSpecificParameterTrace
         \end{itemize}
-        \item model::adaptCodonSpecificParameterProposalWidth --
-        wrapper to RFPparameter. Uses traces.
+        \item model::\sep adapt\sep Codon\sep Specific\sep Parameter\sep Proposal\sep Width --
+        wraps RFP\sep parameter. Uses traces.
         \item mcmc::acceptRejectHyperParameter
         \begin{itemize}
             \item model::calculateLogLikelihodRatioForHyperParameters
             \item model::updateHyperParameter -- parameter::updateStdDevSynthesisRate
             \item model::updateHyperParameterTraces
         \end{itemize}
-        \item model::adaptHyperParameterProposalWidths -- calls adaptStdDevSynthesisProposalWidth,
+        \item model::\sep adapt\sep Hyper\sep Parameter\sep Proposal\sep Widths -- 
+        will call the function adapt\sep Std\sep Dev\sep Synthesis\sep Proposal\sep Width,
         a wrapper to parameter. Uses traces.
         \item mcmc::acceptRejectSynthesisRateLevelForAllGenes
         \begin{itemize}
@@ -869,7 +879,8 @@ New modified list stripping out some things that are more-or-less done
             \item model::updateMixtureAssignmentTrace
             \item model::updateMixtureProbabilitiesTrace
         \end{itemize}
-        \item model::adaptSynthesisRateProposalWidth -- wrapper to parameter. Uses traces.
+        \item model::\sep adapt\sep Synthesis\sep Rate\sep Proposal\sep Width -- 
+        wraps parameter. Uses traces.
         \item mcmc::calculateGewekeScore
     \end{itemize}
 \end{itemize}
@@ -931,7 +942,8 @@ mcmc algorithm runs -- since in R you can set seed for entire C-side implementat
     \item Ask Cedric about:
     \begin{itemize}
         \item Testing restart files: keep in same function or separate unit tests.
-        \item May need a wrapper function for currentCodonSpecificParameter and proposedCodonSpecificParameter extraction. 
+        \item May need wrapper function for current\sep Codon\sep Specific\sep Parameter 
+        and proposed\sep Codon\sep Specific\sep Parameter extraction. 
         \item How to actually run R-side scripts; weird error messages.
         \item What is the inst folder? Can we remove it, since it seems to be old Unit Testing Data stuff?
     \end{itemize}
@@ -959,7 +971,7 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
 \begin{itemize}
     \item model::initTraces(samples + 1, genome.getGenomeSize());
     \begin{itemize}
-        \item RFPparameter->initAllTraces
+        \item RFPparameter-\textgreater initAllTraces
         \begin{itemize}
             \item traces.initializeRFPTrace (RFP-only)
             \begin{itemize}
@@ -989,14 +1001,16 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
         \item model::updateCodonSpecificParameter(grouping)
         \item model::updateCodonSpecificParameterTrace
     \end{itemize}
-    \item model::adaptCodonSpecificProposalWidth -- wrapper to RFPparameter. Uses traces
+    \item model::\sep adapt\sep Codon\sep Specific\sep Proposal\sep Width -- 
+    wrapper to RFP\sep parameter. Uses trace
     \item mcmc::acceptRejectHyperParameter
     \begin{itemize}
         \item model::calculateLoglIkelihoodRatioForHyperParameters
         \item model::updateHyperParameter - parameter::updateStdDevSynthesisRate
         \item model::updateHyperParameterTraces
     \end{itemize}
-    \item model::adaptHyperParameterProposalWidths - calls adaptStdDevSynthesisProposalWidth,
+    \item model::\sep adapt\sep Hyper\sep Parameter\sep Proposal\sep Widths -- 
+    will call the function adapt\sep Std\sep Dev\sep Synthesis\sep Proposal\sep Width,
     a wrapper to parameter. Uses traces.
     \item mcmc:acceptRejectSynthesisRateLevelForAllGenes
     \begin{itemize}
@@ -1032,8 +1046,8 @@ Answers to Cedric questions:
         \item 
         Then repeat that run in the testThat function, compare the two runs. As long as outputs are the same, everything is fine.
     \end{itemize}
-    \item Good scripts to base code off of: allUnique scripts.
-    Specifically allUnique\_kl\_reduced.R, allUnique\_simMod.R
+    \item Good scripts to base code off of: all\sep Unique scripts.
+    Mainly all\sep Unique\sep \_kl\sep \_reduced.R, all\sep Unique\sep \_sim\sep Mod.R
     \item Bad script: runROCModelFromGoodValues.R
 \end{itemize}
 
@@ -1082,8 +1096,8 @@ the Travis check declaring no errors. Will probably not push any changes made to
 unless I can debug this.
 
 Decided to clean up the mess of warnings spat out in order to find out how to debug:
-I changed the deprecated Rcpp::loadRcppModules() function
-to several Rcpp::loadModule() functions, 
+I changed the deprecated Rcpp::\sep load\sep Rcpp\sep Modules() function
+to several Rcpp::\sep load\sep Module() functions, 
 leaving a comment to discuss this change in the future with Cedric
 
 Then, I minorly edited the documentation files to clear up the more obvious errors.
@@ -1122,7 +1136,7 @@ Talk with Dr. Gilchrist:
 \begin{itemize}
     \item Use our simulated results getting pausing time
     (but with almost no or no nonsense error) and compare to published results.
-    \item Accuracy— within 80-90\% close estimates. Look at Laraeu data or Wineberg
+    \item Accuracy— within 80-90\% close estimates. Look at Laraeu data or Weinberg
     \item Plot our estimates vs their estimates and hope to see a nice regression.
     \item Also compare the deltaEta values from the 2015.
     \item Pausing times are the inverse of the rates.
@@ -1133,7 +1147,7 @@ Talk with Dr. Gilchrist:
         Pop et al -- Main focus. Check Gauley: highest-level directory -\textgreater tmp -\textgreater Pop...
         Also ghanas's documents are now open. Gabriel worked with some of this data before but it
         is undocumented, so just restart from scratch.
-        \item Wineberg et al
+        \item Weinberg et al
     \end{itemize}
 \end{itemize}
 
@@ -1146,8 +1160,86 @@ Also, some Cedric answers:
     Cedric can just review them later.
     \item
     To debug the current unknown error with Rstudio and allUnique\_simMod.R, I should
-    go line-by-line and execute. The problem seems to be with "plot(model, genome, parameter, samples = samples*0.1, mixture = mixture, main = "Codon Usage Plot")".
+    go line-by-line and execute. 
+    The problem seems to be with \enquote{plot(model, genome, parameter, samples = samples*0.1, mixture = mixture, main = Codon Usage Plot)}.
 \end{itemize}
+
+\labday {June 28, 2016 Notes}
+
+Did not end up having time to clean up at home, began cleaning up notes today instead.
+
+Finished after an hour of commenting, then decided to integrate my unofficial style guide
+into the one Cedric had created.
+
+Spend about 45 minutes on this before pushing changes. Going to now debug the R code error(s).
+
+Cedric helped me with finding a minor and easy-to-fix bug where a redefined function
+now has an extra argument, which is now properly accounted for on the R-side of the code.
+
+However, I have now encounted a much more difficult bug to trace back its origins:
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+for (aa in names.aa) 
+{ 
+    if (aa == "M" || aa == "W" || aa == "X") next 
+    codons <- AAToCodon(aa, T) 
+    for (i in 1:length(codons)) 
+    {
+        selection <- c(selection, parameter$getCodonSpecificPosteriorMean(mixture, samples*0.1, codons[i], 1, T)) 
+        selection.ci <- c(selection.ci, parameter$getCodonSpecificVariance(mixture, samples*0.1, codons[i], 1, TRUE, T)) 
+        mutation <- c(mutation, parameter$getCodonSpecificPosteriorMean(mixture, samples*0.1, codons[i], 0, T)) 
+        mutation.ci <- c(mutation.ci, parameter$getCodonSpecificVariance(mixture, samples*0.1, codons[i], 0, TRUE, T)) 
+    } 
+} 
+\end{lstlisting}
+\end{minipage}
+
+%It seems that the function call \enquote{parameter\sep \$get\sep Codon\sep Specific\sep Variance\sep (mixture, samples*0.1, codons[i], 1, TRUE, T)} is not working.
+
+This function returns the value NaN, which is then continually combined into an array of NaNs 
+which results in a later call of setting the standard deviation to have \enquote{incorrect number
+of dimensions}.
+
+From its exposure to RCPP, this function is tracked to a function defined in the R section of
+Parameter.cpp, and from there it uses a C-side function that involves a lot of calculations.
+
+I decided to check this by putting in many temporary print statements 
+to track the variables; it seems
+the normalizationTerm somehow becomes infinity if this function is used with
+10 samples (which becomes only 1) and it is unbiased: the normalizationTerm
+is calculated as \verb+(1 / (samples - 1.0))+ in this case.
+
+Asked Cedric for input; I believe this might be a case we have to account for.
+
+Added the case with a warning that forced it be to biased rather than unbiased.
+
+However, the dimension error still exists; it must have been a separate issue I fixed.
+
+Will have to ask Cedric again tomorrow.
+
+Possible next course of action: figure out why there is another invalid method
+in runSimulatedRFPData.R in RibModelDev:
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+> for (i in 1:61)
++ {
++ codon <- codonList[i]
++ alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
++ alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
++ alpha.ci[i,] <- quantile(alphaTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
++ lambdaPrimeList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 1, F)
++ lambdaPrimeTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 1)
++ lambdaPrime.ci[i,] <- quantile(lambdaPrimeTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
++ waitingTimes[i] <- alphaList[i] * lambdaPrimeList[i]
++ }
+Error: could not find valid method
+\end{lstlisting}
+\end{minipage}
+
+Until I can confidently run a script at all in R I don't feel confident testing on R --
+prone to errors before I can even run unit testing, currently.
 
 \end{document}
 
