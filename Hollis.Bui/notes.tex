@@ -1047,7 +1047,8 @@ Answers to Cedric questions:
         Then repeat that run in the testThat function, compare the two runs. As long as outputs are the same, everything is fine.
     \end{itemize}
     \item Good scripts to base code off of: all\sep Unique scripts.
-    Mainly all\sep Unique\sep \_kl\sep \_reduced.R, all\sep Unique\sep \_sim\sep Mod.R
+    Mainly all\sep Unique\sep \_\sep kl\sep \_\sep reduced.R, 
+    all\sep Unique\sep \_\sep sim\sep Mod.R
     \item Bad script: runROCModelFromGoodValues.R
 \end{itemize}
 
@@ -1088,6 +1089,7 @@ work assignments until after my vacation period.
 
 \labday {June 16, 2016 Notes}
 
+\experiment{R Debugging}
 Began the day immediately encountering completely unknown errors attempting to run any
 R scripts that had worked the day before. Problem seems to be with MCMC\_run. As Cedric
 is not here today, will be much more difficult to check R-side scripts. At the same time,
@@ -1104,6 +1106,7 @@ Then, I minorly edited the documentation files to clear up the more obvious erro
 
 \labday {June 17, 2016 Notes}
 
+\experiment{R Debugging}
 Continued working on fixing R documentation.
 
 Finishing at 6 after about 4 hours of work and research, I was able to reduce the warnings
@@ -1120,16 +1123,21 @@ so I can discuss any ideas I may have with Dr. Gilchrist once he returns.
 
 \labday {June 27, 2016 Notes}
 
+\experiment{R Debugging}
+
+\begin{itemize}
+\item 
 Last night (June 26) spent about two hours fixing a bug with the overall project:
 there was an error with testhat due to changing (fixing) Parameter.cpp setup.
-
+\item
 Plan for today is to begin unit testing with R-side models while also rereading PANSE
 documentation and planning psuedocode.
-
+\item
 Found a bug in function to simplify code; fixed bug, started replacing this code
 in the existing R scripts for consistency. Took an hour and a half.
-
+\item
 Fixed another bug with traces on the R-side whenever plotting is done.
+\end{itemize}
 
 Talk with Dr. Gilchrist:
 
@@ -1173,6 +1181,8 @@ into the one Cedric had created.
 
 Spend about 45 minutes on this before pushing changes. Going to now debug the R code error(s).
 
+\experiment {R Debugging}
+
 Cedric helped me with finding a minor and easy-to-fix bug where a redefined function
 now has an extra argument, which is now properly accounted for on the R-side of the code.
 
@@ -1195,7 +1205,8 @@ for (aa in names.aa)
 \end{lstlisting}
 \end{minipage}
 
-%It seems that the function call \enquote{parameter\sep \$get\sep Codon\sep Specific\sep Variance\sep (mixture, samples*0.1, codons[i], 1, TRUE, T)} is not working.
+It seems that the function call 
+\enquote{parameter\sep \$get\sep Codon\sep Specific\sep Variance\sep (mixture, samples*0.1, codons[i], 1, TRUE, T)} is not working.
 
 This function returns the value NaN, which is then continually combined into an array of NaNs 
 which results in a later call of setting the standard deviation to have \enquote{incorrect number
@@ -1240,6 +1251,57 @@ Error: could not find valid method
 
 Until I can confidently run a script at all in R I don't feel confident testing on R --
 prone to errors before I can even run unit testing, currently.
+
+\labday {June 29, 2016 Notes}
+
+Began by asking Cedric re: the script all\sep Unique\sep \_\sep sim.R, and fixed the dimension bug.
+
+Used a different function and rendered results as a matrix, can now produce correct .pdf files.
+
+Moved on to fix run\sep Simulated\sep RFP\sep Data.R: invalid method occurs when calling:
+\enquote{alpha\sep Trace \sep \textless-\sep trace\sep 
+\$\sep get\sep Codon\sep Specific\sep Parameter\sep 
+Trace\sep By\sep Mixture\sep Element\sep For\sep Codon(1, codon, 0)}
+
+Fixed the error occurring early, which was another missing argument due to the script being old.
+
+With this done, began setting up things on Gauley again:
+\begin{itemize}
+    \item Created and updated the RibModel repos.
+    \begin{itemize}
+        \item TODO: Set up SSH key and passphrase
+    \end{itemize}
+    \item Moved the pop et all data to my home directory on Gauley and locally.
+\end{itemize}
+
+I spent some time reorganizing materials so I know where everything is:
+
+\begin{itemize}
+    \item Weinberg Data
+    \begin{itemize}
+        \item Found in an email sent by Dr. Gilchrist April 15, 2016.
+        \item Paper link: \url{http://biorxiv.org/content/early/2015/07/06/021501}.
+        \item Materials and Locations:
+        \begin{itemize}
+            \item gilchrist-notes/Apr22-premal
+            \begin{itemize}
+                \item email.premal.07.21.2015.txt
+                \item GSE53313\_readMe.txt
+                \item WeinbergMain.pdf
+                \item WeinbergSupplemental.pdf
+                \item GSM1969533\_Unselected\_RPKMs.txt -- 
+                retrieved from paper's supplemental information link.
+            \end{itemize}
+            \item gilchrist-lfs/Apr22-premal: RPF\_read\_positions.GSE3313.txt.gz
+            (the extracted file is renamed data.txt)
+        \end{itemize}
+    \end{itemize}
+    \item Lareau Data
+    \begin{itemize}
+        \item Paper link: \url{https://elifesciences.org/content/3/e01257}.
+        \item PDF found as LareauMain.pdf in gilchrist-notes/lareau.
+    \end{itemize}
+\end{itemize}
 
 \end{document}
 
