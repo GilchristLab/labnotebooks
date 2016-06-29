@@ -423,4 +423,71 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \caption{Selection trace for ROC}
         \label{fig:JUN27_RSEL}
     \end{figure}
+    
+\labday{June 29, 2016}
+    \begin{itemize}
+        \item The main focus of today was on implementing the option to control what portion of the log likelihood trace is zoomed in. With this it will now be possible to observe the behavior of the log likelihood at the earlier stages instead of being able to observe just the drop.
+        \item Ran FONSE with b = 0.001, samples = 1000, and thinning = 10 in order to get the zoomed in traces for each tenth of the trace. Looking at these it appears that the dropping starts fairly early and continues to drop at slightly increasing rates until the MCMC loop ends as shown in figures .
+    \end{itemize}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_1-100}
+        \caption{Log Likelihood trace with the zoom at 1-100}
+        \label{fig:JUN29_1-100}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_100-200}
+        \caption{Log Likelihood trace with the zoom at 100-200}
+        \label{fig:JUN29_100-200}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_200-300}
+        \caption{Log Likelihood trace with the zoom at 200-300}
+        \label{fig:JUN29_200-300}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_300-400}
+        \caption{Log Likelihood trace with the zoom at 300-400}
+        \label{fig:JUN29_300-400}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_400-500}
+        \caption{Log Likelihood trace with the zoom at 400-500}
+        \label{fig:JUN29_400-500}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_500-600}
+        \caption{Log Likelihood trace with the zoom at 500-600}
+        \label{fig:JUN29_500-600}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_600-700}
+        \caption{Log Likelihood trace with the zoom at 600-700}
+        \label{fig:JUN29_600-700}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_700-800}
+        \caption{Log Likelihood trace with the zoom at 700-800}
+        \label{fig:JUN29_700-800}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_800-900}
+        \caption{Log Likelihood trace with the zoom at 800-900}
+        \label{fig:JUN29_800-900}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.75]{FONSE_Plots/2016/June_29/LogLikeTrace_900-1000}
+        \caption{Log Likelihood trace with the zoom at 900-1000}
+        \label{fig:JUN29_900-1000}
+    \end{figure}
+    
 \end{document}
