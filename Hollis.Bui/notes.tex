@@ -1,4 +1,4 @@
-\documentclass[12pt,hyperref]{labbook}
+\documentclass[12pt,hyperref,draft]{labbook}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
@@ -1261,7 +1261,7 @@ Used a different function and rendered results as a matrix, can now produce corr
 Moved on to fix run\sep Simulated\sep RFP\sep Data.R: invalid method occurs when calling:
 \enquote{alpha\sep Trace \sep \textless-\sep trace\sep 
 \$\sep get\sep Codon\sep Specific\sep Parameter\sep 
-Trace\sep By\sep Mixture\sep Element\sep For\sep Codon(1, codon, 0)}
+Trace\sep By\sep Mixture\sep Element\sep For\sep Codon\sep (1\sep,\sep codon\sep,\sep 0)}
 
 Fixed the error occurring early, which was another missing argument due to the script being old.
 
@@ -1300,6 +1300,85 @@ I spent some time reorganizing materials so I know where everything is:
     \begin{itemize}
         \item Paper link: \url{https://elifesciences.org/content/3/e01257}.
         \item PDF found as LareauMain.pdf in gilchrist-notes/lareau.
+        \item GSM1406463\_untreated\_1.percodon.txt --
+        retrieved from paper's supplemental information link. In gilchrist-lfs/lareau
+    \end{itemize}
+\end{itemize}
+
+\labday {June 30, 2016}
+
+Began to write scripts to running and testing models.
+
+Starting with the ROC model because the working script I had been debugging is based on that.
+
+Goals:
+
+\begin{itemize}
+    \item Modify existing script into a unit testing script.
+    \item Compare the simulated data with any results I can find in the papers organized yesterday.
+    \item Automate this check and incorporate it into the main package.
+\end{itemize}
+
+Started by noticing a operating system independent function for grabbing file locations.
+Will talk to Cedric (who is not in today) to add this into mainline code.
+
+
+Also need to ask him about running things remotely on Gauley. Alan has been using
+the computer directly to run R studio and get plots etc., and it'd be inconvenient
+if we have to share in the future.
+
+
+Since this is the case, I can probably shelf the github passphrase thing until a more
+appropriate time.
+
+
+Changed occurences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
+more efficient implementation without separators.
+
+
+Looks like the script I wrote works based on its modified file location. What remains
+is to have a concrete result to compare it to (currently don't know what to
+look for).
+
+
+Started by reading the Pop 2014 paper.
+
+
+Talked with Dr. Gilchrist further --
+
+\begin{itemize}
+    \item Again, we are working with RFP data rather than fasta data. Seems like all
+    the data I have available to me is for RFP rather than ROC-based.
+    \begin{itemize}
+        \item On that note, strongly consider talking to Cedric about renaming our models in
+        the code. The distinction between RFP ROC and "regular ROC" isn't very clear right now.
+    \end{itemize}
+    \item With this in mind, stopping work on the ROC model file I have been editing.
+    Nice as reference for future code but continuing to think of outputs in this form
+    detracts from my understanding of what we're doing in the big picture.
+    \item Instead, recall the supplemental material descriptions of what is in the Pop folder
+    I have extracted. It will describe better what they get: in particular, look at Codon
+    Translation Rates (codon.specific.translation.rates.table.xlsx) for rates.
+    \item Recall that in the Pausing Time Definition, we \textbf{do} get pausing times.
+    \item As mentioned before, these pausing times are the inverse of the translation rates.
+    \item The pausing time model (RFP) does get the Lambda and Alpha values.
+    \item The paper defines the estimated waiting time as alpha over lambda.
+    \item So we can plot these estimated waiting times to 1 over the translation rates
+    (or vice-versa) to determine if they all line up -- that the unknown factor times the
+    elongation-based translation rate in the Pop paper is equivalent.
+    \item TODO: Document this way better than currently, once this has been implemented.
+    \item TODO: Grab the data and feed it into our model for simulation: GSE63789\sep \_\sep counts\sep \_\sep wt\sep .\sep csv.
+    \item Copy a script from Dev and combined with what we know about a working script
+    (again, scripts from Dev are old and liable to bugs) make a working RFP script.
+    \item Note that we will not necessarily want to put this into testthat. Unit testing data
+    and an entire model are quite different. Having a hand-testable and well-documented 
+    script, however, will be beneficial.
+    \item Also for future-proofing and convenience, fix the symbolic links that were broken
+    upon copying with SCP the Pop folder.
+    \begin{itemize}
+        \item Immediate Google result yields that scp does not have a way to preserve symbolic
+        links. Must use rysnc.
+        \item DONE.
     \end{itemize}
 \end{itemize}
 
