@@ -490,4 +490,19 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \label{fig:JUN29_900-1000}
     \end{figure}
     
+\labday{June 30, 2016}
+    \begin{itemize}
+        \item While combing the code for the MCMC algorithm I noticed that for the large part, arrays were being used instead of vectors, and while iterating through both takes about the same amount of time and vectors have a slightly larger base overhead due to them keeping track of their own sizes, the arrays were being initialized inside of a loop by using calls to "new". Since this loop iterates "numGenes" times, every iteration caused six arrays to be declared with "new" and then deleted with "delete" at the end of the loop, leading to enormous overhead, so I ran FONSE on my laptop to get a control time and changed all of the arrays in the acceptRejectSynthesisRateLevelForAllGenes function in MCMCAlgorithm.cpp to vectors and reran FONSE twice.
+        \item Run 1: b = 0.001, samples = 1000, thinning = 10 with arrays.
+            \begin{itemize}
+                \item The MCMC loop for FONSE ran for 5708.03 seconds
+                \item I defined the rate as iterations/second and since the loop ran for 10000 iterations, the rate for the first was ~1.75 iterations/second.
+            \end{itemize}
+        \item Runs 2 \& 3: same as run 1 but with vectors instead of arrays
+            \begin{itemize}
+                \item The loop ran first for 3832.63 seconds then for 3859.51 seconds for an average of 3846.07
+                \item The rate consequently was 2.6 iterations per second
+            \end{itemize}
+        \item Although one run with arrays and two with vectors isn't quite enough to confirm how much faster the algorithm for FONSE now is, initial results suggest that the algorithm is now 50\% faster, but more testing is needed and will be done tomorrow.
+    \end{itemize}
 \end{document}
