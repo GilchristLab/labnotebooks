@@ -1382,5 +1382,47 @@ Talked with Dr. Gilchrist further --
     \end{itemize}
 \end{itemize}
 
+\labday {July 1, 2016}
+
+Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future
+changes to the mainline code doesn't result in bugs. Cedric wants me to write this since
+Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
+that was working the day before.
+
+Spent about an hour talking to him about it and then working independently trying to figure out
+any potential problems. Can't see anything wrong right now, scrapping ideas -- I had
+worked with dynamic array to vector conversion before with no results, after all.
+
+Note that while I encountered slowdown in an intialization step upon changing, Alan experienced
+outright NaN errors and program crashing on both C and R side code (and his tests the day
+before yielded 50\% better results in terms of speed).
+
+Cedric gave the OK for renaming the \enquote{RFP} model. Will probably think of a better name
+but not high priority.
+
+Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
+for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
+and on future testthat runs see if the output matches (specifically the Loglikelihood).
+
+My first iteration of this file is a fairly absurd but quick run:
+Use a seed to generate a file that contains the output of an MCMC loop.
+Then use that same seed on subsequent runs of the testthat file to literally compare
+the outputs of a newly-generated MCMC loop and the one that had been created today.
+Since it is the same seed being used, it should be an exact match. Runs in about
+3 seconds for ROC.
+
+After that I minor edited the R-side documentation files and thus had to run roxygen
+again to re-generate proper documentation files.
+
+Somehow, this led to bugs in existing packages -- devtools, digest, testthat, and roxygen2 --
+that led to me uninstalling and reinstalling packages for a frustating hour.
+
+During this mess I commented to Dr. Gilchrist on my progress on writing the RFP unit testing.
+Will have to spend some more time on that during the weekend.
+
+Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats
+which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep
+/\sep test\sep MCMC\sep ROC\sep .\sep R.
+
 \end{document}
 
