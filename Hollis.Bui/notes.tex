@@ -1134,9 +1134,13 @@ Plan for today is to begin unit testing with R-side models while also rereading 
 documentation and planning psuedocode.
 \item
 Found a bug in function to simplify code; fixed bug, started replacing this code
-in the existing R scripts for consistency. Took an hour and a half.
+in the existing R scripts for consistency. Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
+You spent 1.5 hours fixing this bug, why not spend a few more minutes documenting the problem and fix?}
+\footnote{mikeg: 06/30/16 -- Also, instead of commenting out the footnotes and then responding to them, instead add a new line to the footnote and put your reponse there.
+That way I can go through them and comment them out if I feel they are resolved.
+} 
 \item
-Fixed another bug with traces on the R-side whenever plotting is done.
+Fixed another bug with traces on the R-side whenever plotting is done.\footnote{mikeg: 06/30/16 -- Better than the above note, but could still use a little more detail.}
 \end{itemize}
 
 Talk with Dr. Gilchrist:
@@ -1174,7 +1178,8 @@ Also, some Cedric answers:
 
 \labday {June 28, 2016 Notes}
 
-Did not end up having time to clean up at home, began cleaning up notes today instead.
+Did not end up having time to clean up at home, began cleaning up notes today instead.\footnote{mikeg: 06/30/16 -- As previously requested, please use the itemize environment when listing stuff. 
+}
 
 Finished after an hour of commenting, then decided to integrate my unofficial style guide
 into the one Cedric had created.
@@ -1184,11 +1189,18 @@ Spend about 45 minutes on this before pushing changes. Going to now debug the R 
 \experiment {R Debugging}
 
 Cedric helped me with finding a minor and easy-to-fix bug where a redefined function
-now has an extra argument, which is now properly accounted for on the R-side of the code.
+now has an extra argument, which is now properly accounted for on the R-side of the code.\footnote{mikeg: 06/30/16 -- Ibid}
+\footnote{mikeg: 06/30/16 -- I would appreciate it if, when working with LaTeX, you did not have your editor break the lines at a fixed width.
+Instead, I recommend you put a each sentence on a separate line.
+}
 
-However, I have now encounted a much more difficult bug to trace back its origins:
+However, I have now encounted a much more difficult bug to trace back its origins:\footnote{mikeg: 06/30/16 -- Why are you using \emph{minipage} below?
+Also, the code failed to show up when I used pdflatex wether I used the minipage environment or not. 
+Please confirm it shows up when you latex it.
+\label{fn:lstError}
+}
 
-\noindent\begin{minipage}{\linewidth}
+%\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 for (aa in names.aa) 
 { 
@@ -1203,7 +1215,8 @@ for (aa in names.aa)
     } 
 } 
 \end{lstlisting}
-\end{minipage}
+%\end{minipage}
+
 
 It seems that the function call 
 \enquote{parameter\sep \$get\sep Codon\sep Specific\sep Variance\sep (mixture, samples*0.1, codons[i], 1, TRUE, T)} is not working.
@@ -1219,7 +1232,13 @@ I decided to check this by putting in many temporary print statements
 to track the variables; it seems
 the normalizationTerm somehow becomes infinity if this function is used with
 10 samples (which becomes only 1) and it is unbiased: the normalizationTerm
-is calculated as \verb+(1 / (samples - 1.0))+ in this case.
+is calculated as \verb+(1 / (samples - 1.0))+ in this case.\footnote{mikeg: 06/30/16 -- Do you mean 10 samples or 10 steps of the MCMC?  
+I expect it is the latter.
+Is this function related to calculating a variance? (this makes sense in the context and the fact you talk about biased and unbiased).
+In general, you want to have at least 3 samples when calculating a variance or variance.
+If you have only 1, then you're in trouble and this may explain why the error that persists.
+I would argue the code should test the sample size and if it's below the necessary number, such as 3 for calculating the variance, the code either exits telling the user to increase their sample size or, depending on what exactly being calcuated and what it's being used for, a Warning thrown and a default value used.
+}
 
 Asked Cedric for input; I believe this might be a case we have to account for.
 
@@ -1231,11 +1250,12 @@ Will have to ask Cedric again tomorrow.
 
 Possible next course of action: figure out why there is another invalid method
 in runSimulatedRFPData.R in RibModelDev:
-
+\footnote{mikeg: 06/30/16 -- same as footnote \ref{fn:lstError}}
+\footnote{mikeg: 06/30/16 -- Is the lstlisting for code or output or both?}
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 > for (i in 1:61)
-+ {
++ {mikeg: 06/30/16 --
 + codon <- codonList[i]
 + alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
 + alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
@@ -1250,13 +1270,17 @@ Error: could not find valid method
 \end{minipage}
 
 Until I can confidently run a script at all in R I don't feel confident testing on R --
-prone to errors before I can even run unit testing, currently.
+prone to errors before I can even run unit testing, currently.\footnote{mikeg: 06/30/16 -- This doesn't make any sense to me.  Please try to be clearer in your notes. }
 
 \labday {June 29, 2016 Notes}
 
-Began by asking Cedric re: the script all\sep Unique\sep \_\sep sim.R, and fixed the dimension bug.
+Began by asking Cedric re: the script all\sep Unique\sep \_\sep sim.R, and fixed the dimension bug.\footnote{mikeg: 06/30/16 -- Please document the nature of the bug and the fix!}
 
 Used a different function and rendered results as a matrix, can now produce correct .pdf files.
+\footnote{mikeg: 06/30/16 -- Which function? Why?  
+Don't expect to remember these details.  
+Document them!
+}
 
 Moved on to fix run\sep Simulated\sep RFP\sep Data.R: invalid method occurs when calling:
 \enquote{alpha\sep Trace \sep \textless-\sep trace\sep 

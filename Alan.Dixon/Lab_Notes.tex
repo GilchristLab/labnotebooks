@@ -361,7 +361,7 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     \begin{itemize}
         \item Worked on the implementation of adding plots of the earlier stages of the trace for the log likelihood.
         \item Worked on altering the .SGE scripts so I can run them on Newton
-        \item Added further documentation to FONSE
+        \item Added further documentation to FONSE.\footnote{Please be more informative on what aspects of the documentation you worked on.}
         \item Ran FONSE and ROC both without the prior, both with samples = 1000 and thinning = 10.
         \item FONSE: b = 0.001
         \begin{itemize}
@@ -427,7 +427,22 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
 \labday{June 29, 2016}
     \begin{itemize}
         \item The main focus of today was on implementing the option to control what portion of the log likelihood trace is zoomed in. With this it will now be possible to observe the behavior of the log likelihood at the earlier stages instead of being able to observe just the drop.
-        \item Ran FONSE with b = 0.001, samples = 1000, and thinning = 10 in order to get the zoomed in traces for each tenth of the trace. Looking at these it appears that the dropping starts fairly early and continues to drop at slightly increasing rates until the MCMC loop ends as shown in figures .
+\footnote{mikeg: 6/30/16 -- was all of this effort necessary?
+  Could you not have just simply plotted the traces on their own? 
+  Doing them as an inset means the 10 plots of interest are spread over 10 pages rather than simply plotting them all as a grid on one page.}
+\footnote{aland: Attempting to plot just certain portions of the trace led to plots that didn't show any information at all. I tried to research how to properly alter the plot function call to get what I wanted, but after being unsuccessful, I decided it would be easier to just alter the zoom and adding that option would be a benefit for further testing.}
+  
+        \item Ran FONSE with b = 0.001, samples = 1000, and thinning = 10 in order to get the zoomed in traces for each tenth of the trace. Looking at these it appears that the dropping starts fairly early and continues to drop at slightly increasing rates until the MCMC loop ends as shown in figures.
+\footnote{mikeg: 6/30/16 -- I would argue that these drops in the LLik are really fast! 
+  Each window has a huge increas in the order of magnitude of the drops.
+  The first is E-5 and by the end it's dropping to E40 all within a 100 steps.
+}
+\footnote{mikeg: 6/30/16 -- So this tells us that the algorithm is misbehaving from the get go.  
+  Why are the acceptance ratios either 1 or 0?
+  Why are they 1 when the LLik is worse than the current state?
+  We need to fix this bug.
+}
+\footnote{aland: After confering with Cedric, he feels that the most likely reason would be a problem with the covariance matrix, (something I need to familiarize myself with more. We mentioned only updating and using the diagonal, but I feel getting the individual AA traces in would be more effective in discovering the issue.}
     \end{itemize}
     \begin{figure}
         \centering
@@ -503,6 +518,15 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
                 \item The loop ran first for 3832.63 seconds then for 3859.51 seconds for an average of 3846.07
                 \item The rate consequently was 2.6 iterations per second
             \end{itemize}
-        \item Although one run with arrays and two with vectors isn't quite enough to confirm how much faster the algorithm for FONSE now is, initial results suggest that the algorithm is now 50\% faster, but more testing is needed and will be done tomorrow.
+        \item Although one run with arrays and two with vectors isn't quite enough to confirm how much faster the algorithm for FONSE now is, initial results suggest that the algorithm is now 50\% faster, but more testing is needed and will be done tomorrow.\footnote{mikeg: 6/30/16 -- I am going to argue that at this piont your priority should be figuring out why the LLik function is dropping, not improving code speed.}
+    \end{itemize}
+    
+\labday{July 1, 2016}
+    \begin{itemize}
+        \item Most of today was spent dealing with a strange error where using vectors now causes the NAN error, not the user defined one but a legitimate NAN, so for now I just moved all changed files into a temporary directory for a later date when the model is working and have moved back to implementing a trace of the likelihoods of the individual AA's.
+        \item Changed parts of main.cpp so that the program can actually find the files on my computer since Jeremy had tailored the paths to himself.
+        \item Still can't find how to generate plots with defined windows as opposed to altering the window of the subplot. I'll have to ask Cedric since looking it up on-line hasn't yielded anything helpful
+        \item Documented the .sge scripts for anyone running FONSE on Newton.
+        \item Documented the changes made to PlotMCMCObject.R that added the alter zoom functionality.
     \end{itemize}
 \end{document}
