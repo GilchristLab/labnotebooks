@@ -529,4 +529,17 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item Documented the .sge scripts for anyone running FONSE on Newton.
         \item Documented the changes made to PlotMCMCObject.R that added the alter zoom functionality.
     \end{itemize}
+    
+\labday{July 2, 2016}
+    \begin{itemize}
+        \item Spent today tracing through the MCMC algorithm in hopes of finding where the drop in log likelihood values is coming from, and while nothing obvious came to light I decided to observe the differences in FONSE and ROC since ROC is currently working while FONSE isn't.
+        \item Both end up making a call to updateGibbsSampledHyperParameters but FONSE's version of the function is empty and does nothing.
+        \item Most other differences were accounted for simply by the natural differences between the two models, but the way they calculate the codon probability vector still stands out as something that might be an issue.
+        \begin{itemize}
+            \item FONSE uses the maxValue of the selection array as opposed to ROC which uses the minValue.
+            \item The way they calculate the numerator is flipped (i.e. the numerator calculation in ROC was basically multiplied by -1 to get the one in FONSE) for FONSE from how it is in ROC which might be why FONSE uses the maxValue instead of the minValue, but I'd need confirmation.
+        \end{itemize}
+        \item It still remains unclear how the algorithm is accepting these bad values leading to plummeting log likelihood values as the functions that do the accepting seem to be isolated to MCMCAlgorithm.cpp which is independent of the model being run.
+        \item Did more debugging in an attempt to discover how using vectors instead of arrays is now leading to the log likelihood value to drop so quickly that it reaches NAN by the time it updates the trace for the first time i.e. iteration \%  thinning = 0. Cedric suggested that the parallelization in openMP might be the cause, but the problem remained when I took the parallelization out. Logically this problem doesn't make sense, but my theory is that somehow the vectors are speeding up the issue that's already in the code. For now then, running the debugger with the vectors in the code helps to reach the point of NAN quicker, so more debugging with this version of the code is the best course of action to hopefully resolve this issue.
+    \end{itemize}
 \end{document}
