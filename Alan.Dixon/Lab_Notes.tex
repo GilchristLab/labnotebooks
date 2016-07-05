@@ -529,7 +529,6 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item Documented the .sge scripts for anyone running FONSE on Newton.
         \item Documented the changes made to PlotMCMCObject.R that added the alter zoom functionality.
     \end{itemize}
-<<<<<<< HEAD
     
 \labday{July 2, 2016}
     \begin{itemize}
@@ -549,6 +548,4 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item Spent the day debugging and found the bug that was causing a nan error by the second iteration of the MCMC loop. It involved a function that initialized a vector, but the function passed the vector by value instead of reference which caused a copy to be made and then immediately be thrown away, leading to an actual vector initialized to 0, causing a 0/0 operation leading to the nan.
         \item Since the debugger takes a lot of time to run, I spent the waiting time further documenting the FONSE R scripts and working on my own script that will help speed up the process of deleting and re-adding the debugging statements that I put in the code.
     \end{itemize}
-=======
->>>>>>> parent of b9c1014... 7/2/16 Notes
 \end{document}
