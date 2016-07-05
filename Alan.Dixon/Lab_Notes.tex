@@ -542,4 +542,10 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item It still remains unclear how the algorithm is accepting these bad values leading to plummeting log likelihood values as the functions that do the accepting seem to be isolated to MCMCAlgorithm.cpp which is independent of the model being run.
         \item Did more debugging in an attempt to discover how using vectors instead of arrays is now leading to the log likelihood value to drop so quickly that it reaches NAN by the time it updates the trace for the first time i.e. iteration \%  thinning = 0. Cedric suggested that the parallelization in openMP might be the cause, but the problem remained when I took the parallelization out. Logically this problem doesn't make sense, but my theory is that somehow the vectors are speeding up the issue that's already in the code. For now then, running the debugger with the vectors in the code helps to reach the point of NAN quicker, so more debugging with this version of the code is the best course of action to hopefully resolve this issue.
     \end{itemize}
+    
+\labday{July 5, 2016}
+    \begin{itemize}
+        \item Spent the day debugging and found the bug that was causing a nan error by the second iteration of the MCMC loop. It involved a function that initialized a vector, but the function passed the vector by value instead of reference which caused a copy to be made and then immediately be thrown away, leading to an actual vector initialized to 0, causing a 0/0 operation leading to the nan.
+        \item Since the debugger takes a lot of time to run, I spent the waiting time further documenting the FONSE R scripts and working on my own script that will help speed up the process of deleting and re-adding the debugging statements that I put in the code.
+    \end{itemize}
 \end{document}
