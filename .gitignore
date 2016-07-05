@@ -1,1 +1,6 @@
-Lab_Notes.pdf
+*.pdf
+*.aux
+*.idx
+*.log
+*.out
+*.toc

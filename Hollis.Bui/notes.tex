@@ -1,4 +1,4 @@
-\documentclass[12pt,hyperref,draft]{labbook}
+\documentclass[12pt,hyperref]{labbook}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
@@ -1134,13 +1134,19 @@ Plan for today is to begin unit testing with R-side models while also rereading 
 documentation and planning psuedocode.
 \item
 Found a bug in function to simplify code; fixed bug, started replacing this code
-in the existing R scripts for consistency. Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
+in the existing R scripts for consistency. 
+Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
 You spent 1.5 hours fixing this bug, why not spend a few more minutes documenting the problem and fix?}
 \footnote{mikeg: 06/30/16 -- Also, instead of commenting out the footnotes and then responding to them, instead add a new line to the footnote and put your reponse there.
 That way I can go through them and comment them out if I feel they are resolved.
 } 
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+I don't know if you want me to un-comment-out the old footnotes, but I will not do this in the future.
+The bug mentioned was in R/parameterObject.R: two functions (getMixtureAssignmentEstimate and getExpressionEstimatesForMixture) did not apply the unlist function for a random of values, and it has been corrected now.}
 \item
 Fixed another bug with traces on the R-side whenever plotting is done.\footnote{mikeg: 06/30/16 -- Better than the above note, but could still use a little more detail.}
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+Bug was in R/plotParameterObject.R, where a function re-set the samples to 100 no matter what the actual argument was (now fixed).}
 \end{itemize}
 
 Talk with Dr. Gilchrist:
@@ -1180,6 +1186,7 @@ Also, some Cedric answers:
 
 Did not end up having time to clean up at home, began cleaning up notes today instead.\footnote{mikeg: 06/30/16 -- As previously requested, please use the itemize environment when listing stuff. 
 }
+\footnote{Hollis: 07/05/16 -- Acknowledged. This small section of text had slipped through the cracks, and the rest of the text has itemize used.}
 
 Finished after an hour of commenting, then decided to integrate my unofficial style guide
 into the one Cedric had created.
@@ -1193,14 +1200,18 @@ now has an extra argument, which is now properly accounted for on the R-side of 
 \footnote{mikeg: 06/30/16 -- I would appreciate it if, when working with LaTeX, you did not have your editor break the lines at a fixed width.
 Instead, I recommend you put a each sentence on a separate line.
 }
+\footnote{Hollis: 07/05/16 -- Acknowledged.
+I am not sure what you mean by Ibid.}
 
 However, I have now encounted a much more difficult bug to trace back its origins:\footnote{mikeg: 06/30/16 -- Why are you using \emph{minipage} below?
 Also, the code failed to show up when I used pdflatex wether I used the minipage environment or not. 
 Please confirm it shows up when you latex it.
 \label{fn:lstError}
 }
+\footnote{Hollis: 07/05/16 -- it seems like the latex version of my notes I had uploaded last was in draft mode, defined at the top, which I use to see errors more easily.
+I will try to keep it in release mode in the future (which does show minipages etc).}
 
-%\noindent\begin{minipage}{\linewidth}
+\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 for (aa in names.aa) 
 { 
@@ -1215,7 +1226,7 @@ for (aa in names.aa)
     } 
 } 
 \end{lstlisting}
-%\end{minipage}
+\end{minipage}
 
 
 It seems that the function call 
@@ -1239,6 +1250,13 @@ In general, you want to have at least 3 samples when calculating a variance or v
 If you have only 1, then you're in trouble and this may explain why the error that persists.
 I would argue the code should test the sample size and if it's below the necessary number, such as 3 for calculating the variance, the code either exits telling the user to increase their sample size or, depending on what exactly being calcuated and what it's being used for, a Warning thrown and a default value used.
 }
+\footnote{Hollis: 07/05/16 -- It happens with 10 samples. 
+And yes, it works with variance.
+I understand why the bug occurs, which is why we ended up implementing the solution we did.
+Is 3 an optimal number?
+I believe Cedric and I had decided to just account for this worst-case by making the sample size only 1 throw an error, but it is easily changed and very justifiable to have the minimum be higher.
+Currently, we do not exit -- we throw a Warning and instead of making it unbiased, we make it biased.
+This does mean we do not change the numbero f samples that are used.}
 
 Asked Cedric for input; I believe this might be a case we have to account for.
 
@@ -1249,9 +1267,13 @@ However, the dimension error still exists; it must have been a separate issue I 
 Will have to ask Cedric again tomorrow.
 
 Possible next course of action: figure out why there is another invalid method
-in runSimulatedRFPData.R in RibModelDev:
+in run\sep Simulated\sep RFP\sep Data\sep .\sep R in Rib\sep Model\sep Dev:
 \footnote{mikeg: 06/30/16 -- same as footnote \ref{fn:lstError}}
+\footnote{Hollis: 07/01/16 -- See answer on \ref{fn:lstError}}
 \footnote{mikeg: 06/30/16 -- Is the lstlisting for code or output or both?}
+\footnote{Hollis: 07/01/16 -- This is the part of the code in runSimulatedRFPData.R that causes an error.
+Technically, it is both code and output since it was run with Rstudio (which prints and runs the code and then any outputs/errors as well).}
+
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 > for (i in 1:61)
@@ -1271,18 +1293,24 @@ Error: could not find valid method
 
 Until I can confidently run a script at all in R I don't feel confident testing on R --
 prone to errors before I can even run unit testing, currently.\footnote{mikeg: 06/30/16 -- This doesn't make any sense to me.  Please try to be clearer in your notes. }
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+I was basically making a note to myself that I should work on making any given script run in R since I was encountering a hodgepodge of errors before I even try to run unit testing.}
 
 \labday {June 29, 2016 Notes}
 
 Began by asking Cedric re: the script all\sep Unique\sep \_\sep sim.R, and fixed the dimension bug.\footnote{mikeg: 06/30/16 -- Please document the nature of the bug and the fix!}
+\footnote{Hollis: 07/05/16 -- This bug was likely caused by the old developmental scripts not being updated in general.
+It seems that a function (upper.panel.plot) that used to accept a normal distribution's standard deviation, manually calculated, now accepts any standard deviation in the form of a matrix: this matrix will contain the upper and lower standard devation thresholds.
+To fix the bug, I copied code from getCSPEstimates.Rcpp\_ROCParameter in R/parameterObject.R which creates a standard deviation matrix in an almost identical way to what the script would want.\label{fn:dimensionFix}}
 
 Used a different function and rendered results as a matrix, can now produce correct .pdf files.
 \footnote{mikeg: 06/30/16 -- Which function? Why?  
 Don't expect to remember these details.  
 Document them!
 }
+\footnote{Hollis: 07/05/16 -- See other footnote, \ref{fn:dimensionFix}.}
 
-Moved on to fix run\sep Simulated\sep RFP\sep Data.R: invalid method occurs when calling:
+Then fixed run\sep Simulated\sep RFP\sep Data.R: invalid method occurs calling:
 \enquote{alpha\sep Trace \sep \textless-\sep trace\sep 
 \$\sep get\sep Codon\sep Specific\sep Parameter\sep 
 Trace\sep By\sep Mixture\sep Element\sep For\sep Codon\sep (1\sep,\sep codon\sep,\sep 0)}
@@ -1408,45 +1436,42 @@ Talked with Dr. Gilchrist further --
 
 \labday {July 1, 2016}
 
-Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future
-changes to the mainline code doesn't result in bugs. Cedric wants me to write this since
-Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
+\begin{itemize}
+    \item Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future changes to the mainline code doesn't result in bugs. 
+    \begin{itemize}
+        \item Cedric wants me to write this since Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
 that was working the day before.
-
-Spent about an hour talking to him about it and then working independently trying to figure out
-any potential problems. Can't see anything wrong right now, scrapping ideas -- I had
+        \item Spent about an hour talking to Alan about it and then working independently trying to figure out any potential problems.
+        \item Can't see anything wrong right now, scrapping ideas -- I had
 worked with dynamic array to vector conversion before with no results, after all.
-
-Note that while I encountered slowdown in an intialization step upon changing, Alan experienced
-outright NaN errors and program crashing on both C and R side code (and his tests the day
-before yielded 50\% better results in terms of speed).
-
-Cedric gave the OK for renaming the \enquote{RFP} model. Will probably think of a better name
-but not high priority.
-
-Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
+        \item Note that while I encountered slowdown in an intialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
+    \end{itemize}
+    \item Cedric gave the OK for renaming the \enquote{RFP} model.
+    Will probably think of a better name but not high priority.
+    \item Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
 for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
 and on future testthat runs see if the output matches (specifically the Loglikelihood).
-
-My first iteration of this file is a fairly absurd but quick run:
-Use a seed to generate a file that contains the output of an MCMC loop.
-Then use that same seed on subsequent runs of the testthat file to literally compare
+    \begin{itemize}
+        \item My first iteration of this file is a fairly absurd but quick run: Use a seed to generate a file that contains the output of an MCMC loop.
+        \item Then use that same seed on subsequent runs of the testthat file to literally compare
 the outputs of a newly-generated MCMC loop and the one that had been created today.
-Since it is the same seed being used, it should be an exact match. Runs in about
-3 seconds for ROC.
-
-After that I minor edited the R-side documentation files and thus had to run roxygen
+        \item Since it is the same seed being used, it should be an exact match.
+        \item Runs in about 3 seconds for ROC.
+    \end{itemize}
+    \item After that I minor edited the R-side documentation files and thus had to run roxygen
 again to re-generate proper documentation files.
+    \item Somehow, this led to unknown bugs in existing packages -- devtools, digest, testthat, and roxygen2 -- that led to me uninstalling and reinstalling packages for a frustating hour.
+    \item During this mess I commented to Dr. Gilchrist on my progress on writing the RFP unit testing.
+    \item Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep /\sep test\sep MCMC\sep ROC\sep .\sep R.
+\end{itemize}
 
-Somehow, this led to bugs in existing packages -- devtools, digest, testthat, and roxygen2 --
-that led to me uninstalling and reinstalling packages for a frustating hour.
+\labday {July 5, 2016}
 
-During this mess I commented to Dr. Gilchrist on my progress on writing the RFP unit testing.
-Will have to spend some more time on that during the weekend.
-
-Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats
-which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep
-/\sep test\sep MCMC\sep ROC\sep .\sep R.
+\begin{itemize}
+    \item Short work day today due to arriving late and driving from home.
+    \item Started writing a hotfix to Travis check failing when the newest bit of code is pushed to Cedric's main repository for RibModelFramework due to the new MCMCROC.R file testing MCMC functionality.
+    \item Also started replying to Dr. Gilchrist's footnotes written on June 30.
+\end{itemize}
 
 \end{document}
 
