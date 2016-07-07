@@ -1371,30 +1371,19 @@ Goals:
     \item Automate this check and incorporate it into the main package.
 \end{itemize}
 
-Started by noticing a operating system independent function for grabbing file locations.
-Will talk to Cedric (who is not in today) to add this into mainline code.
-
-
-Also need to ask him about running things remotely on Gauley. Alan has been using
-the computer directly to run R studio and get plots etc., and it'd be inconvenient
-if we have to share in the future.
-
-
-Since this is the case, I can probably shelf the github passphrase thing until a more
+\begin{itemize}
+    \item Started by noticing a operating system independent function for grabbing file locations.
+    Will talk to Cedric (who is not in today) to add this into mainline code.
+    \item Also need to ask him about running things remotely on Gauley.
+    Alan has been using the computer directly to run R studio and get plots etc., and it'd be inconvenient if we have to share in the future.
+    \item Since this is the case, I can probably shelf the github passphrase thing until a more
 appropriate time.
-
-
-Changed occurences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
+    \item Changed occurences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
 more efficient implementation without separators.
-
-
-Looks like the script I wrote works based on its modified file location. What remains
-is to have a concrete result to compare it to (currently don't know what to
-look for).
-
-
-Started by reading the Pop 2014 paper.
-
+    \item Looks like the script I wrote works based on its modified file location. 
+    What remains is to have a concrete result to compare it to (currently don't know what to look for).
+    \item Started by reading the Pop 2014 paper.
+\end{itemize}
 
 Talked with Dr. Gilchrist further --
 
@@ -1495,6 +1484,50 @@ again to re-generate proper documentation files.
         \item Will have to discuss a way to test this with Cedric further -- the last 13 lines of output that Travis produces for error checking does not change due to how testthat formats its output.
     \end{itemize}
     \item Also started replying to Dr. Gilchrist's footnotes written on June 30 -- Done.
+\end{itemize}
+
+\labday {July 6, 2016}
+
+\begin{itemize}
+    \item To reiterate and confirm the error in the Travis check failing, I have now uploaded the raw output files to this directory -- They are named July5Travis.txt and July5Local.txt.
+    \item To put it shortly, the local build passes while the Travis server build does not.
+    \item Presents a significant problem -- will have to either deal with non-exact comparisons between outputs in future unit testing.
+    \item Returning to this problem -- Cedric recommended I temporarily remove the other testthat functions and then ran solely testMCMCROC.R.
+    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log output is below.
+    \item Suspect this is one of the long-standing errors that the team as a whole has sporadically witnessed before. May be the biggest thing to prioritize.
+    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
+    \begin{itemize}
+        \item First, need to convert the format of Pop raw data to something that can be read by our program.
+        \item The formats are Name, Length, Sum-mRNA, Sum-FP, FP versus ORF, RFP\_Counts, Codon\_Counts, Codon -- ORF == Name, but rest are unknown.
+        \item The extended description of the Pop data is \enquote{gene name, gene length, total mRNA counts, total ribosome footprint counts, and ribosome footprint counts per position}.
+        \item I should count up the FP's and ensure that they add up to Sum-FP, first-off.
+        \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
+    \end{itemize}
+\end{itemize}
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+> library(testthat)
+> test_check("ribModel")
+Loading required package: ribModel
+Loading required package: Rcpp
+ERROR: Log likelihood is NaN, exiting at iteration 10
+[1] 0
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) --
+`knownLogLikelihood` not equal to `testLogLikelihood`.
+1/1 mismatches
+[1] -825482 - 0 == -825482
+testthat results ================================================================
+OK: 3 SKIPPED: 0 FAILED: 1
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) 
+Error: testthat unit tests failed
+\end{lstlisting}
+\end{minipage}
+
+\begin{itemize}
+    \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
+    \item Talk some more about the MCMC unit test problem, if needed.
+    I should try to get some results in terms of asking Cedric and checking Gauley's run first.
 \end{itemize}
 
 \end{document}
