@@ -1498,7 +1498,7 @@ again to re-generate proper documentation files.
     \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
     \begin{itemize}
         \item First, need to convert the format of Pop raw data to something that can be read by our program.
-        \item The formats are Name, Length, Sum-mRNA, Sum-FP, FP versus ORF, RFP\_Counts, Codon\_Counts, Codon -- ORF == Name, but rest are unknown.
+        \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
         \item The extended description of the Pop data is \enquote{gene name, gene length, total mRNA counts, total ribosome footprint counts, and ribosome footprint counts per position}.
         \item I should count up the FP's and ensure that they add up to Sum-FP, first-off.
         \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
@@ -1528,6 +1528,28 @@ Error: testthat unit tests failed
     \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
     \item Talk some more about the MCMC unit test problem, if needed.
     I should try to get some results in terms of asking Cedric and checking Gauley's run first.
+\end{itemize}
+
+\labday {July 6, 2016}
+
+\begin{itemize}
+    \item Came in late to the meeting, but got what I wanted to discuss out of the way.
+    \item Clarified that the genomes are the same as in previous data sets, and can be cross-referenced to get codon information.
+    \item Until lunch, I tried to set up ssh into git from gauley and automating the process. Still very finicky for some reason, will try again some other day.
+    \item Continued trying to debug the MCMC unit test:
+    \begin{itemize}
+        \item Running and checking the package on gauley reveals that the Travis check error also applied. Log saved to notes as July7Gauley.txt.
+        \item Re-checking the package locally also shows same error.
+        Began re-converting code to when I had originally not seen the error.
+        \item After a bit of cross-referencing and remembering that I fetched files today, I have concluded that \textbf{Alan had forgotten to fix his latest pull request to Cedric's repo}. 
+        \item The changes to MCMCAlgorithm.cpp and Parameter.cpp that I noticed this morning were from Alan's implementation.
+        \item Before I had fetched these changes, my local machine was working fine since it still had the older implementation.
+        \item Alan had tried to change dynamic arrays to vectors and had warned us that his then-implementation of vectors had created NaN bugs, but both Cedric and I thought we had his latest changes where he said he had fixed these bugs.
+        \item Temporarily removed the MCMC unit test to allow Cedric a slightly cleaner merge of the two pull requests between me and Alan, who should be pushing vector fixes now.
+    \end{itemize}
+    \item Formally counted the sum of the FPs; confirmed that they equalled the amount recorded.
+    \item Now that Cedric has remerged all the branches and everything works on Travis, readded testMCMCROC, which should also work on everything (and, in the future, avoid bad pull requests and prevent this from happening ever again).
+    \item Began looking over folders to cross-reference genome positions; will continue tomorrow.
 \end{itemize}
 
 \end{document}
