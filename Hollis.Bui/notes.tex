@@ -24,6 +24,17 @@
 % was used as a bandage on an abundance of overfull hboxes. 
 % June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
 
+% For verbatim quotes
+\lstnewenvironment{verbquote}[1][]
+  {\lstset{columns=fullflexible,
+           basicstyle=\ttfamily,
+           xleftmargin=2em,
+           xrightmargin=2em,
+           breaklines,
+           breakindent=0pt,
+           #1}}% \begin{verbquote}[..]
+  {}% \end{verbquote}
+
 \lstset{frame=tb,
   language=C++,
   aboveskip=3mm,
@@ -1353,7 +1364,15 @@ I spent some time reorganizing materials so I know where everything is:
         \item Paper link: \url{https://elifesciences.org/content/3/e01257}.
         \item PDF found as LareauMain.pdf in gilchrist-notes/lareau.
         \item GSM1406463\_untreated\_1.percodon.txt --
-        retrieved from paper's supplemental information link. In gilchrist-lfs/lareau
+        retrieved from paper's supplemental information link. In gilchrist-lfs/lareau.
+    \end{itemize}
+    \item Pop Data
+    \begin{itemize}
+        \item Paper link: \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4300493/}.
+        \item Huge directory containing most of the content of the article, including supplementary notes, figures, and some data is found in gilchrist-lfs/Pop.
+        \item Some work had been done on Pop already when Gabriel was on the team (April 26) -- see the rfpSort directory, now under gilchrist-notes/Pop.
+        \item Further work on redoing and documenting analysis is being done in gilchrist-notes/Pop/rfpProcessJuly6
+        \item rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv -- Unknown source; located in gilchrist-notes/Pop/rfpSort.
     \end{itemize}
 \end{itemize}
 
@@ -1493,17 +1512,7 @@ again to re-generate proper documentation files.
     \item To put it shortly, the local build passes while the Travis server build does not.
     \item Presents a significant problem -- will have to either deal with non-exact comparisons between outputs in future unit testing.
     \item Returning to this problem -- Cedric recommended I temporarily remove the other testthat functions and then ran solely testMCMCROC.R.
-    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log output is below.
-    \item Suspect this is one of the long-standing errors that the team as a whole has sporadically witnessed before. May be the biggest thing to prioritize.
-    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
-    \begin{itemize}
-        \item First, need to convert the format of Pop raw data to something that can be read by our program.
-        \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
-        \item The extended description of the Pop data is \enquote{gene name, gene length, total mRNA counts, total ribosome footprint counts, and ribosome footprint counts per position}.
-        \item I should count up the FP's and ensure that they add up to Sum-FP, first-off.
-        \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
-    \end{itemize}
-\end{itemize}
+    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log:
 
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
@@ -1523,14 +1532,21 @@ OK: 3 SKIPPED: 0 FAILED: 1
 Error: testthat unit tests failed
 \end{lstlisting}
 \end{minipage}
-
-\begin{itemize}
+    
+    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
+    \begin{itemize}
+        \item First, need to convert the format of Pop raw data to something that can be read by our program.
+        \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
+        \item The extended description of the Pop data is \enquote{gene name, gene length, total mRNA counts, total ribosome footprint counts, and ribosome footprint counts per position}.
+        \item I should count up the FP's and ensure that they add up to Sum-FP, first-off.
+        \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
+    \end{itemize}
     \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
     \item Talk some more about the MCMC unit test problem, if needed.
     I should try to get some results in terms of asking Cedric and checking Gauley's run first.
 \end{itemize}
 
-\labday {July 6, 2016}
+\labday {July 7, 2016}
 
 \begin{itemize}
     \item Came in late to the meeting, but got what I wanted to discuss out of the way.
@@ -1551,6 +1567,84 @@ Error: testthat unit tests failed
     \item Now that Cedric has remerged all the branches and everything works on Travis, readded testMCMCROC, which should also work on everything (and, in the future, avoid bad pull requests and prevent this from happening ever again).
     \item Began looking over folders to cross-reference genome positions; will continue tomorrow.
 \end{itemize}
+
+\labday {July 8, 2016}
+
+\begin{itemize}
+    \item Latest attempt to readd testMCMCROC still fails. Relevant log snippet is posted below.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
+ERROR: Cannot set steps - value must be smaller than samples times thining (maxIterations)
+MCMCAlgorithm get/setStepsToAdapt --- Pass
+MCMCAlgorithm getLogLikelihoodTrace --- Pass
+File opened
+EOF reached
+Error in file(file, if (append) "a" else "w") : 
+cannot open the connection
+Calls: test_check ... force -> source_file -> eval -> eval -> sink -> file
+In addition: There were 16 warnings (use warnings() to see them)
+testthat results ================================================================
+OK: 72 SKIPPED: 0 FAILED: 0
+\end{lstlisting}
+\end{minipage}
+
+    \item The error that is explicitly listed is intentionally caused as part of unit testing, so it is not a problem.
+    \item Once again running on Mac succeeds.
+    \item Suspect that it may be an issue to writing (sinking) to a file that does not exist.
+    \item Running on Gauley replicated the \enquote{Last 13 lines of output}.
+    \item Upon removing the output redirection, the package ran locally and on Travis successfully.
+    \item Oddly, it did \textbf{not} run on Gauley, resulting in the second log snippet below.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+  
+Utility my_print --- Pass
+Testing my_printError, no argument.
+Testing my_printError, one argument: 0.
+Testing my_printError, multiple arguments: String, 0, 0.5.
+Utility my_printError --- Pass
+testthat results ================================================================
+OK: 121 SKIPPED: 0 FAILED: 1
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#84) 
+
+Error: testthat unit tests failed
+In addition: There were 14 warnings (use warnings() to see them)
+Execution halted
+\end{lstlisting}
+\end{minipage}
+    
+    \item It also created a new NOTE; on my local machine, the installed package size is OK.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+* checking installed package size ... NOTE
+installed size is 20.1Mb
+sub-directories of 1Mb or more:
+libs  20.0Mb
+\end{lstlisting}
+\end{minipage}
+    
+    \item Travis also produces a package size total of 16.9Mb, with a subdirectory \enquote{libs} that is 16.7Mb by itself.
+    \item While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:
+
+\begin{verbquote}
+The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\"), \"\n\")"" exited with 0.
+\end{verbquote}
+    
+    \item Not sure why this occurs; will try to work on the RFP data testing first.
+    \item Continued scripting a way to cross-reference existing data with Pop data.
+    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
+    \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
+    \item Notably, because I don't know where it's from, I can't access the documentation on why the positions start arbitrarily and end arbitrarily; there are less positions with footprints recorded than the length of the gene listed in the main, documented Pop directory.
+    \item Will have to ask Dr. Gilchrist on how to proceed; in meantime taking a break and then going to contribute to work hours by doing documentation.
+\end{itemize}
+
 
 \end{document}
 
