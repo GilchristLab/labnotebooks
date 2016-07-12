@@ -11,6 +11,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{csquotes}
 \usepackage{xspace}
+\usepackage[normalem]{ulem} % For strikeout text
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -1631,13 +1632,13 @@ libs  20.0Mb
 \end{minipage}
     
     \item Travis also produces a package size total of 16.9Mb, with a subdirectory \enquote{libs} that is 16.7Mb by itself.
-    \item While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:
+    \item \sout{While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:}
 
 \begin{verbquote}
 The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\"), \"\n\")"" exited with 0.
 \end{verbquote}
     
-    \item Not sure why this occurs; will try to work on the RFP data testing first.
+    \item \sout{Not sure why this occurs; will try to work on the RFP data testing first.}\footnote{Hollis: July 12, 2016 -- In retrospect, this seems to be normal behavior. The R CMD check fail log only displays if it fails, and otherwise this message is displayed by default.\label{fn:TravisError}}
     \item Continued scripting a way to cross-reference existing data with Pop data.
     \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
     \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
@@ -1652,7 +1653,7 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
     \item Mostly worked on minor updates to my work environment (updated packages, wrote out my hours, etc) while waiting to speak to Dr. Gilchrist today for more information on the RFP data.
     \item One major thing I worked on was setting up R Studio's server version to work properly.
     \item Cedric's version is able to work, mine is not.
-    \item Seems to be related to the bug with Travis mentioned the previous day.
+    \item \sout{Seems to be related to the bug with Travis mentioned the previous day.}\footnote{July 12, 2016 (Hollis): See previous footnote \ref{fn:TravisError}.}
     \item Asked Dr. Gilchrist about the RFP data: It was data he had processed before.
     \item It is now recorded in process\sep .\sep rfp\sep .\sep counts\sep .\sep nb\sep \_\sep 07\sep .\sep 11\sep .\sep 16\sep .\sep pdf, under gilchrist\sep -\sep notes\sep /\sep Pop\sep /\sep rfpSort.
     \item The source code itself, which requires Mathmatica (now downloading) is similarly found there.
@@ -1661,6 +1662,26 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
 \end{itemize}
 
 % P_{i} | W_{i} proportional to (alphaesque) k_{g} little sigma _{i-1} omega{i} = k_{g}
+
+\labday {July 12, 2016}
+
+\begin{itemize}
+    \item Unfortunately, as of this morning Wolfram has not snet me my activation key for Mathematica yet, so I have not begun actually downloading the software.
+    \item Thankfully, I can still view the source code in a human-readable format to understand what is being done to the data described yesterday.
+    \item Moving on, I am continuing to debug the testMCMCROC.R test.
+    \item I fixed the Rstudio issue wherein I could not have it load our libary; I need to set the working directory each time I use Rstudio on the server, since normally it would do this automatically by clicking on a file (but on the server, it just loads from my home directory).
+    \item It seems like on Gauley the loglikelihood returns a different value compared to my local machine. Setting the seed for both machines does return the same rnorm values, however.
+    \item The parallelization did not affect the loglikelihood returned.
+    \item Asked Cedric to run it on his computer -- it also works on his computer correctly, like on my local machine.
+    \item Still does not work on Gauley with Cedric's admin privileges either.
+    \item Talk with Dr. Gilchrist: Unit Testing should be architecture and mostly version-independent. 
+    So, maybe rework the code so that the script works.
+    \item Going to reexamine the data set that is put in and perhaps change it.
+    \item Trying to run the script again without Phi values set, and then without Phi values set and with only half as many entries, still does not change the difference in results between Gauley and locally.
+    \item In retrospect, the Travis message output seems to be the default message for a successful build. Ended up keeping the testMCMCROC.R files, with minor changes.
+    \item Another additional TODO: The R code is currently outdated in that it asks for Parameter as an argument when this is unneeded (Model holds Parameter); change code, minor change.
+    \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readRFP function demanded.
+\end{itemize}
 
 \end{document}
 
