@@ -1666,7 +1666,7 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
 \labday {July 12, 2016}
 
 \begin{itemize}
-    \item Unfortunately, as of this morning Wolfram has not snet me my activation key for Mathematica yet, so I have not begun actually downloading the software.
+    \item Unfortunately, as of this morning Wolfram has not sent me my activation key for Mathematica yet, so I have not begun actually downloading the software.
     \item Thankfully, I can still view the source code in a human-readable format to understand what is being done to the data described yesterday.
     \item Moving on, I am continuing to debug the testMCMCROC.R test.
     \item I fixed the Rstudio issue wherein I could not have it load our libary; I need to set the working directory each time I use Rstudio on the server, since normally it would do this automatically by clicking on a file (but on the server, it just loads from my home directory).
@@ -1681,6 +1681,25 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
     \item In retrospect, the Travis message output seems to be the default message for a successful build. Ended up keeping the testMCMCROC.R files, with minor changes.
     \item Another additional TODO: The R code is currently outdated in that it asks for Parameter as an argument when this is unneeded (Model holds Parameter); change code, minor change.
     \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readRFP function demanded.
+\end{itemize}
+
+\labday {July 13, 2016}
+
+Spent an hour and thirty minutes finishing the script to format the data into the proper format.
+
+Afterwards, moved an old working R script to use this data for testing.
+
+\labday {July 14, 2016}
+
+\begin{itemize}
+    \item Examining the R script I am now modifying more closely, it may be Gabriel's old script that he had written to test the RFP model.
+    \item While testMCMCROC.R is working, I'd still like to have it redirect its stdout to a file for error checking purposes in the future.
+    I will try to reimplement this once the newest addition is confirmed to not ruin Travis.
+    \item Using a function to skip automated testing and moving these files to RibModelFramework, was able to find a satisfactory result based on the testing data.
+    \item The format of the old code, however, reveals a lot more than strictly necessary.
+    Will have to ask Dr. Gilchrist if any of this information would be useful to keep.
+    \item In the process of writing and documenting R code, also looked at testMCMCROC.R and as a TODO, need to run the MCMC without Phi (currently only runs with Phi).
+    \item When I start working on the mainline testthat functions, I can work in parallel by starting to correct the .R files and removing the parameter argument in many functions.
 \end{itemize}
 
 \end{document}
