@@ -1702,5 +1702,27 @@ Afterwards, moved an old working R script to use this data for testing.
     \item When I start working on the mainline testthat functions, I can work in parallel by starting to correct the .R files and removing the parameter argument in many functions.
 \end{itemize}
 
+\labday {July 18, 2016}
+
+\begin{itemize}
+    \item Added to testMCMCROC.R a run of MCMC without Phi.
+    \item Also added output redirection to create log files of the MCMCM results
+    \item To facilitate the removal of parameter as an argument in many .R functions, added a C-side function to extract the parameter from each model.
+    \item TODO: Discuss with Cedric the pros and cons of doing this: I am returning an entire parameter object in order to avoid using a parameter object as an argument.
+    \item An alternative could be making more wrapper functions so that the model will perform a function that uses the parameter completely on the C-side (i.e. instead of parameter\$function we use model\$wrapperFunction).
+    Would be more work, however.
+    \item Talk with Dr. Gilchrist:
+    \begin{itemize}
+        \item Run more iterations and keep timing benchmarks -- i.e. 1000, 10,000, etc.
+        \item Use only 10\%, 20\% of the trace, etc; the last few.
+        \item This is because the initial bits have a starting point that greatly bias the graphs.
+        \item The important graphs to "prove" that it is run correctly are the RFP\_CSP\_Values and the correlation between Pop and RFP Model Pausing Time Rates.
+        \item First, the CSP values should stabilize and oscillate only slightly once only the last bit of the trace is used.
+        \item Then, the correlation should be high.
+    \end{itemize}
+    \item While I've removed parameter as an argument for the generic plot function, it remains a part of the FONSE plot function; need to tell Alan about this change so he can modify his scripts without seeing errors before I can do this.
+    \item TODO: Update documentation for the changes to the parameter argument that I have done.
+\end{itemize}
+
 \end{document}
 
