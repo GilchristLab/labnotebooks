@@ -1,5 +1,8 @@
+# PDF files
 Lab_Notes.pdf
 notes.pdf
+
+# LaTeX stuff
 *.aux
 *.idx
 *.log

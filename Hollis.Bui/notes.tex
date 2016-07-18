@@ -1716,12 +1716,14 @@ Afterwards, moved an old working R script to use this data for testing.
         \item Run more iterations and keep timing benchmarks -- i.e. 1000, 10,000, etc.
         \item Use only 10\%, 20\% of the trace, etc; the last few.
         \item This is because the initial bits have a starting point that greatly bias the graphs.
-        \item The important graphs to "prove" that it is run correctly are the RFP\_CSP\_Values and the correlation between Pop and RFP Model Pausing Time Rates.
+        \item The important graphs to "prove" that it is run correctly are the RFP\sep \_\sep CSP\sep \_\sep Values and the correlation between Pop and RFP Model Pausing Time Rates.
         \item First, the CSP values should stabilize and oscillate only slightly once only the last bit of the trace is used.
         \item Then, the correlation should be high.
     \end{itemize}
     \item While I've removed parameter as an argument for the generic plot function, it remains a part of the FONSE plot function; need to tell Alan about this change so he can modify his scripts without seeing errors before I can do this.
-    \item TODO: Update documentation for the changes to the parameter argument that I have done.
+    \item Updated documentation for the changes to the parameter argument that I have done.
+    \item Fixed Cedric's bug with getGenomeForGeneIndices -- seems to have been written with completely wrong code!
+    Simply adapted the C-side code for the R implementation.
 \end{itemize}
 
 \end{document}
