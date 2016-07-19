@@ -1,4 +1,4 @@
-\documentclass[12pt,hyperref,draft]{labbook}
+\documentclass[12pt,hyperref]{labbook}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
@@ -11,6 +11,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{csquotes}
 \usepackage{xspace}
+\usepackage[normalem]{ulem} % For strikeout text
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -23,6 +24,17 @@
 % Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
 % was used as a bandage on an abundance of overfull hboxes. 
 % June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
+
+% For verbatim quotes
+\lstnewenvironment{verbquote}[1][]
+  {\lstset{columns=fullflexible,
+           basicstyle=\ttfamily,
+           xleftmargin=2em,
+           xrightmargin=2em,
+           breaklines,
+           breakindent=0pt,
+           #1}}% \begin{verbquote}[..]
+  {}% \end{verbquote}
 
 \lstset{frame=tb,
   language=C++,
@@ -1134,13 +1146,19 @@ Plan for today is to begin unit testing with R-side models while also rereading 
 documentation and planning psuedocode.
 \item
 Found a bug in function to simplify code; fixed bug, started replacing this code
-in the existing R scripts for consistency. Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
+in the existing R scripts for consistency. 
+Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
 You spent 1.5 hours fixing this bug, why not spend a few more minutes documenting the problem and fix?}
 \footnote{mikeg: 06/30/16 -- Also, instead of commenting out the footnotes and then responding to them, instead add a new line to the footnote and put your reponse there.
 That way I can go through them and comment them out if I feel they are resolved.
 } 
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+I don't know if you want me to un-comment-out the old footnotes, but I will not do this in the future.
+The bug mentioned was in R/parameterObject.R: two functions (getMixtureAssignmentEstimate and getExpressionEstimatesForMixture) did not apply the unlist function for a random of values, and it has been corrected now.}
 \item
 Fixed another bug with traces on the R-side whenever plotting is done.\footnote{mikeg: 06/30/16 -- Better than the above note, but could still use a little more detail.}
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+Bug was in R/plotParameterObject.R, where a function re-set the samples to 100 no matter what the actual argument was (now fixed).}
 \end{itemize}
 
 Talk with Dr. Gilchrist:
@@ -1180,6 +1198,7 @@ Also, some Cedric answers:
 
 Did not end up having time to clean up at home, began cleaning up notes today instead.\footnote{mikeg: 06/30/16 -- As previously requested, please use the itemize environment when listing stuff. 
 }
+\footnote{Hollis: 07/05/16 -- Acknowledged. This small section of text had slipped through the cracks, and the rest of the text has itemize used.}
 
 Finished after an hour of commenting, then decided to integrate my unofficial style guide
 into the one Cedric had created.
@@ -1193,14 +1212,18 @@ now has an extra argument, which is now properly accounted for on the R-side of 
 \footnote{mikeg: 06/30/16 -- I would appreciate it if, when working with LaTeX, you did not have your editor break the lines at a fixed width.
 Instead, I recommend you put a each sentence on a separate line.
 }
+\footnote{Hollis: 07/05/16 -- Acknowledged.
+I am not sure what you mean by Ibid.}
 
 However, I have now encounted a much more difficult bug to trace back its origins:\footnote{mikeg: 06/30/16 -- Why are you using \emph{minipage} below?
 Also, the code failed to show up when I used pdflatex wether I used the minipage environment or not. 
 Please confirm it shows up when you latex it.
 \label{fn:lstError}
 }
+\footnote{Hollis: 07/05/16 -- it seems like the latex version of my notes I had uploaded last was in draft mode, defined at the top, which I use to see errors more easily.
+I will try to keep it in release mode in the future (which does show minipages etc).}
 
-%\noindent\begin{minipage}{\linewidth}
+\noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 for (aa in names.aa) 
 { 
@@ -1215,7 +1238,7 @@ for (aa in names.aa)
     } 
 } 
 \end{lstlisting}
-%\end{minipage}
+\end{minipage}
 
 
 It seems that the function call 
@@ -1239,6 +1262,13 @@ In general, you want to have at least 3 samples when calculating a variance or v
 If you have only 1, then you're in trouble and this may explain why the error that persists.
 I would argue the code should test the sample size and if it's below the necessary number, such as 3 for calculating the variance, the code either exits telling the user to increase their sample size or, depending on what exactly being calcuated and what it's being used for, a Warning thrown and a default value used.
 }
+\footnote{Hollis: 07/05/16 -- It happens with 10 samples. 
+And yes, it works with variance.
+I understand why the bug occurs, which is why we ended up implementing the solution we did.
+Is 3 an optimal number?
+I believe Cedric and I had decided to just account for this worst-case by making the sample size only 1 throw an error, but it is easily changed and very justifiable to have the minimum be higher.
+Currently, we do not exit -- we throw a Warning and instead of making it unbiased, we make it biased.
+This does mean we do not change the numbero f samples that are used.}
 
 Asked Cedric for input; I believe this might be a case we have to account for.
 
@@ -1249,9 +1279,13 @@ However, the dimension error still exists; it must have been a separate issue I 
 Will have to ask Cedric again tomorrow.
 
 Possible next course of action: figure out why there is another invalid method
-in runSimulatedRFPData.R in RibModelDev:
+in run\sep Simulated\sep RFP\sep Data\sep .\sep R in Rib\sep Model\sep Dev:
 \footnote{mikeg: 06/30/16 -- same as footnote \ref{fn:lstError}}
+\footnote{Hollis: 07/01/16 -- See answer on \ref{fn:lstError}}
 \footnote{mikeg: 06/30/16 -- Is the lstlisting for code or output or both?}
+\footnote{Hollis: 07/01/16 -- This is the part of the code in runSimulatedRFPData.R that causes an error.
+Technically, it is both code and output since it was run with Rstudio (which prints and runs the code and then any outputs/errors as well).}
+
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
 > for (i in 1:61)
@@ -1271,18 +1305,24 @@ Error: could not find valid method
 
 Until I can confidently run a script at all in R I don't feel confident testing on R --
 prone to errors before I can even run unit testing, currently.\footnote{mikeg: 06/30/16 -- This doesn't make any sense to me.  Please try to be clearer in your notes. }
+\footnote{Hollis: 07/05/16 -- Acknowledged. 
+I was basically making a note to myself that I should work on making any given script run in R since I was encountering a hodgepodge of errors before I even try to run unit testing.}
 
 \labday {June 29, 2016 Notes}
 
 Began by asking Cedric re: the script all\sep Unique\sep \_\sep sim.R, and fixed the dimension bug.\footnote{mikeg: 06/30/16 -- Please document the nature of the bug and the fix!}
+\footnote{Hollis: 07/05/16 -- This bug was likely caused by the old developmental scripts not being updated in general.
+It seems that a function (upper.panel.plot) that used to accept a normal distribution's standard deviation, manually calculated, now accepts any standard deviation in the form of a matrix: this matrix will contain the upper and lower standard devation thresholds.
+To fix the bug, I copied code from getCSPEstimates.Rcpp\_ROCParameter in R/parameterObject.R which creates a standard deviation matrix in an almost identical way to what the script would want.\label{fn:dimensionFix}}
 
 Used a different function and rendered results as a matrix, can now produce correct .pdf files.
 \footnote{mikeg: 06/30/16 -- Which function? Why?  
 Don't expect to remember these details.  
 Document them!
 }
+\footnote{Hollis: 07/05/16 -- See other footnote, \ref{fn:dimensionFix}.}
 
-Moved on to fix run\sep Simulated\sep RFP\sep Data.R: invalid method occurs when calling:
+Then fixed run\sep Simulated\sep RFP\sep Data.R: invalid method occurs calling:
 \enquote{alpha\sep Trace \sep \textless-\sep trace\sep 
 \$\sep get\sep Codon\sep Specific\sep Parameter\sep 
 Trace\sep By\sep Mixture\sep Element\sep For\sep Codon\sep (1\sep,\sep codon\sep,\sep 0)}
@@ -1325,7 +1365,15 @@ I spent some time reorganizing materials so I know where everything is:
         \item Paper link: \url{https://elifesciences.org/content/3/e01257}.
         \item PDF found as LareauMain.pdf in gilchrist-notes/lareau.
         \item GSM1406463\_untreated\_1.percodon.txt --
-        retrieved from paper's supplemental information link. In gilchrist-lfs/lareau
+        retrieved from paper's supplemental information link. In gilchrist-lfs/lareau.
+    \end{itemize}
+    \item Pop Data
+    \begin{itemize}
+        \item Paper link: \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4300493/}.
+        \item Huge directory containing most of the content of the article, including supplementary notes, figures, and some data is found in gilchrist-lfs/Pop.
+        \item Some work had been done on Pop already when Gabriel was on the team (April 26) -- see the rfpSort directory, now under gilchrist-notes/Pop.
+        \item Further work on redoing and documenting analysis is being done in gilchrist-notes/Pop/rfpProcessJuly6
+        \item rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv -- Unknown source; located in gilchrist-notes/Pop/rfpSort.
     \end{itemize}
 \end{itemize}
 
@@ -1343,30 +1391,19 @@ Goals:
     \item Automate this check and incorporate it into the main package.
 \end{itemize}
 
-Started by noticing a operating system independent function for grabbing file locations.
-Will talk to Cedric (who is not in today) to add this into mainline code.
-
-
-Also need to ask him about running things remotely on Gauley. Alan has been using
-the computer directly to run R studio and get plots etc., and it'd be inconvenient
-if we have to share in the future.
-
-
-Since this is the case, I can probably shelf the github passphrase thing until a more
+\begin{itemize}
+    \item Started by noticing a operating system independent function for grabbing file locations.
+    Will talk to Cedric (who is not in today) to add this into mainline code.
+    \item Also need to ask him about running things remotely on Gauley.
+    Alan has been using the computer directly to run R studio and get plots etc., and it'd be inconvenient if we have to share in the future.
+    \item Since this is the case, I can probably shelf the github passphrase thing until a more
 appropriate time.
-
-
-Changed occurences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
+    \item Changed occurences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
 more efficient implementation without separators.
-
-
-Looks like the script I wrote works based on its modified file location. What remains
-is to have a concrete result to compare it to (currently don't know what to
-look for).
-
-
-Started by reading the Pop 2014 paper.
-
+    \item Looks like the script I wrote works based on its modified file location. 
+    What remains is to have a concrete result to compare it to (currently don't know what to look for).
+    \item Started by reading the Pop 2014 paper.
+\end{itemize}
 
 Talked with Dr. Gilchrist further --
 
@@ -1404,6 +1441,289 @@ Talked with Dr. Gilchrist further --
         links. Must use rysnc.
         \item DONE.
     \end{itemize}
+\end{itemize}
+
+\labday {July 1, 2016}
+
+\begin{itemize}
+    \item Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future changes to the mainline code doesn't result in bugs. 
+    \begin{itemize}
+        \item Cedric wants me to write this since Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
+that was working the day before.
+        \item Spent about an hour talking to Alan about it and then working independently trying to figure out any potential problems.
+        \item Can't see anything wrong right now, scrapping ideas -- I had
+worked with dynamic array to vector conversion before with no results, after all.
+        \item Note that while I encountered slowdown in an intialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
+    \end{itemize}
+    \item Cedric gave the OK for renaming the \enquote{RFP} model.
+    Will probably think of a better name but not high priority.
+    \item Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
+for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
+and on future testthat runs see if the output matches (specifically the Loglikelihood).
+    \begin{itemize}
+        \item My first iteration of this file is a fairly absurd but quick run: Use a seed to generate a file that contains the output of an MCMC loop.
+        \item Then use that same seed on subsequent runs of the testthat file to literally compare
+the outputs of a newly-generated MCMC loop and the one that had been created today.
+        \item Since it is the same seed being used, it should be an exact match.
+        \item Runs in about 3 seconds for ROC.
+    \end{itemize}
+    \item After that I minor edited the R-side documentation files and thus had to run roxygen
+again to re-generate proper documentation files.
+    \item Somehow, this led to unknown bugs in existing packages -- devtools, digest, testthat, and roxygen2 -- that led to me uninstalling and reinstalling packages for a frustating hour.
+    \item During this mess I commented to Dr. Gilchrist on my progress on writing the RFP unit testing.
+    \item Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep /\sep test\sep MCMC\sep ROC\sep .\sep R. See below as well.
+\end{itemize}
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+# TODO: This file unit checks an entire outputting format, checking not only logLikelihood but also
+# other variables (good, if errors occur there) 
+# in a set formatted corpus (bad, this means future edits to the printing will result in testthat errors!)
+#
+# If no tampering is done to the correct variables,
+# a correct loglikelihood with the same seed should be equal, disregarding other variables.
+#
+# Thus, in the future, simply take the logLikelihood value and hard code it here, and compare via
+# mcmc$getLogLikelihoodTrace(), which returns a vector. Get the average of these values
+# and compare it with the hard-coded average of logLikelihoodTrace.
+# This is currently not implemented due to laziness and mild helpfulness, and it is currently working.
+# Once it breaks, it should be converted.
+\end{lstlisting}
+\end{minipage}
+
+\labday {July 5, 2016}
+
+\begin{itemize}
+    \item Short work day today due to arriving late and driving from home.
+    \item Started writing a hotfix to Travis check failing when the newest bit of code is pushed to Cedric's main repository for RibModelFramework due to the new MCMCROC.R file testing MCMC functionality.
+    \begin{itemize}
+        \item Increasingly unsure of where this error is: directory and file traversal had worked before with unit testing (via testGenome.R).
+        \item Changing the format of the test to only check the log likelihoods does not seem to help either, so it may not be a file issue at all.
+        \item Fully confirmed it was a file issue by adding test\_that checks on if the files existed (they do).
+        \item Now thinking the Travis server may produce different seeds.
+        \item Will have to discuss a way to test this with Cedric further -- the last 13 lines of output that Travis produces for error checking does not change due to how testthat formats its output.
+    \end{itemize}
+    \item Also started replying to Dr. Gilchrist's footnotes written on June 30 -- Done.
+\end{itemize}
+
+\labday {July 6, 2016}
+
+\begin{itemize}
+    \item To reiterate and confirm the error in the Travis check failing, I have now uploaded the raw output files to this directory -- They are named July5Travis.txt and July5Local.txt.
+    \item To put it shortly, the local build passes while the Travis server build does not.
+    \item Presents a significant problem -- will have to either deal with non-exact comparisons between outputs in future unit testing.
+    \item Returning to this problem -- Cedric recommended I temporarily remove the other testthat functions and then ran solely testMCMCROC.R.
+    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log:
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+> library(testthat)
+> test_check("ribModel")
+Loading required package: ribModel
+Loading required package: Rcpp
+ERROR: Log likelihood is NaN, exiting at iteration 10
+[1] 0
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) --
+`knownLogLikelihood` not equal to `testLogLikelihood`.
+1/1 mismatches
+[1] -825482 - 0 == -825482
+testthat results ================================================================
+OK: 3 SKIPPED: 0 FAILED: 1
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) 
+Error: testthat unit tests failed
+\end{lstlisting}
+\end{minipage}
+    
+    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
+    \begin{itemize}
+        \item First, need to convert the format of Pop raw data to something that can be read by our program.
+        \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
+        \item The extended description of the Pop data is \enquote{gene name, gene length, total mRNA counts, total ribosome footprint counts, and ribosome footprint counts per position}.
+        \item I should count up the FP's and ensure that they add up to Sum-FP, first-off.
+        \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
+    \end{itemize}
+    \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
+    \item Talk some more about the MCMC unit test problem, if needed.
+    I should try to get some results in terms of asking Cedric and checking Gauley's run first.
+\end{itemize}
+
+\labday {July 7, 2016}
+
+\begin{itemize}
+    \item Came in late to the meeting, but got what I wanted to discuss out of the way.
+    \item Clarified that the genomes are the same as in previous data sets, and can be cross-referenced to get codon information.
+    \item Until lunch, I tried to set up ssh into git from gauley and automating the process. Still very finicky for some reason, will try again some other day.
+    \item Continued trying to debug the MCMC unit test:
+    \begin{itemize}
+        \item Running and checking the package on gauley reveals that the Travis check error also applied. Log saved to notes as July7Gauley.txt.
+        \item Re-checking the package locally also shows same error.
+        Began re-converting code to when I had originally not seen the error.
+        \item After a bit of cross-referencing and remembering that I fetched files today, I have concluded that \textbf{Alan had forgotten to fix his latest pull request to Cedric's repo}. 
+        \item The changes to MCMCAlgorithm.cpp and Parameter.cpp that I noticed this morning were from Alan's implementation.
+        \item Before I had fetched these changes, my local machine was working fine since it still had the older implementation.
+        \item Alan had tried to change dynamic arrays to vectors and had warned us that his then-implementation of vectors had created NaN bugs, but both Cedric and I thought we had his latest changes where he said he had fixed these bugs.
+        \item Temporarily removed the MCMC unit test to allow Cedric a slightly cleaner merge of the two pull requests between me and Alan, who should be pushing vector fixes now.
+    \end{itemize}
+    \item Formally counted the sum of the FPs; confirmed that they equalled the amount recorded.
+    \item Now that Cedric has remerged all the branches and everything works on Travis, readded testMCMCROC, which should also work on everything (and, in the future, avoid bad pull requests and prevent this from happening ever again).
+    \item Began looking over folders to cross-reference genome positions; will continue tomorrow.
+\end{itemize}
+
+\labday {July 8, 2016}
+
+\begin{itemize}
+    \item Latest attempt to readd testMCMCROC still fails. Relevant log snippet is posted below.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
+ERROR: Cannot set steps - value must be smaller than samples times thining (maxIterations)
+MCMCAlgorithm get/setStepsToAdapt --- Pass
+MCMCAlgorithm getLogLikelihoodTrace --- Pass
+File opened
+EOF reached
+Error in file(file, if (append) "a" else "w") : 
+cannot open the connection
+Calls: test_check ... force -> source_file -> eval -> eval -> sink -> file
+In addition: There were 16 warnings (use warnings() to see them)
+testthat results ================================================================
+OK: 72 SKIPPED: 0 FAILED: 0
+\end{lstlisting}
+\end{minipage}
+
+    \item The error that is explicitly listed is intentionally caused as part of unit testing, so it is not a problem.
+    \item Once again running on Mac succeeds.
+    \item Suspect that it may be an issue to writing (sinking) to a file that does not exist.
+    \item Running on Gauley replicated the \enquote{Last 13 lines of output}.
+    \item Upon removing the output redirection, the package ran locally and on Travis successfully.
+    \item Oddly, it did \textbf{not} run on Gauley, resulting in the second log snippet below.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+  
+Utility my_print --- Pass
+Testing my_printError, no argument.
+Testing my_printError, one argument: 0.
+Testing my_printError, multiple arguments: String, 0, 0.5.
+Utility my_printError --- Pass
+testthat results ================================================================
+OK: 121 SKIPPED: 0 FAILED: 1
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#84) 
+
+Error: testthat unit tests failed
+In addition: There were 14 warnings (use warnings() to see them)
+Execution halted
+\end{lstlisting}
+\end{minipage}
+    
+    \item It also created a new NOTE; on my local machine, the installed package size is OK.
+    
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+* checking installed package size ... NOTE
+installed size is 20.1Mb
+sub-directories of 1Mb or more:
+libs  20.0Mb
+\end{lstlisting}
+\end{minipage}
+    
+    \item Travis also produces a package size total of 16.9Mb, with a subdirectory \enquote{libs} that is 16.7Mb by itself.
+    \item \sout{While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:}
+
+\begin{verbquote}
+The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\"), \"\n\")"" exited with 0.
+\end{verbquote}
+    
+    \item \sout{Not sure why this occurs; will try to work on the RFP data testing first.}\footnote{Hollis: July 12, 2016 -- In retrospect, this seems to be normal behavior. The R CMD check fail log only displays if it fails, and otherwise this message is displayed by default.\label{fn:TravisError}}
+    \item Continued scripting a way to cross-reference existing data with Pop data.
+    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
+    \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
+    \item Notably, because I don't know where it's from, I can't access the documentation on why the positions start arbitrarily and end arbitrarily; there are less positions with footprints recorded than the length of the gene listed in the main, documented Pop directory.
+    \item Will have to ask Dr. Gilchrist on how to proceed; in meantime taking a break and then going to contribute to work hours by doing documentation.
+\end{itemize}
+
+
+\labday {July 11, 2016}
+
+\begin {itemize}
+    \item Mostly worked on minor updates to my work environment (updated packages, wrote out my hours, etc) while waiting to speak to Dr. Gilchrist today for more information on the RFP data.
+    \item One major thing I worked on was setting up R Studio's server version to work properly.
+    \item Cedric's version is able to work, mine is not.
+    \item \sout{Seems to be related to the bug with Travis mentioned the previous day.}\footnote{July 12, 2016 (Hollis): See previous footnote \ref{fn:TravisError}.}
+    \item Asked Dr. Gilchrist about the RFP data: It was data he had processed before.
+    \item It is now recorded in process\sep .\sep rfp\sep .\sep counts\sep .\sep nb\sep \_\sep 07\sep .\sep 11\sep .\sep 16\sep .\sep pdf, under gilchrist\sep -\sep notes\sep /\sep Pop\sep /\sep rfpSort.
+    \item The source code itself, which requires Mathmatica (now downloading) is similarly found there.
+    \item Basically, may use that data file without worrying about the Pausing Time being thrown off compared to what is in the paper, which does not discard the last 100 positions.
+    \item Near the end, Cedric mentioned a bug I can fix while him and Dr. Gilchrist are out of the office Wednesday, Thursday, and Friday: under plotModelObject.R, line 57, the genome function getGenomeForGeneIndices does not work.
+\end{itemize}
+
+% P_{i} | W_{i} proportional to (alphaesque) k_{g} little sigma _{i-1} omega{i} = k_{g}
+
+\labday {July 12, 2016}
+
+\begin{itemize}
+    \item Unfortunately, as of this morning Wolfram has not sent me my activation key for Mathematica yet, so I have not begun actually downloading the software.
+    \item Thankfully, I can still view the source code in a human-readable format to understand what is being done to the data described yesterday.
+    \item Moving on, I am continuing to debug the testMCMCROC.R test.
+    \item I fixed the Rstudio issue wherein I could not have it load our libary; I need to set the working directory each time I use Rstudio on the server, since normally it would do this automatically by clicking on a file (but on the server, it just loads from my home directory).
+    \item It seems like on Gauley the loglikelihood returns a different value compared to my local machine. Setting the seed for both machines does return the same rnorm values, however.
+    \item The parallelization did not affect the loglikelihood returned.
+    \item Asked Cedric to run it on his computer -- it also works on his computer correctly, like on my local machine.
+    \item Still does not work on Gauley with Cedric's admin privileges either.
+    \item Talk with Dr. Gilchrist: Unit Testing should be architecture and mostly version-independent. 
+    So, maybe rework the code so that the script works.
+    \item Going to reexamine the data set that is put in and perhaps change it.
+    \item Trying to run the script again without Phi values set, and then without Phi values set and with only half as many entries, still does not change the difference in results between Gauley and locally.
+    \item In retrospect, the Travis message output seems to be the default message for a successful build. Ended up keeping the testMCMCROC.R files, with minor changes.
+    \item Another additional TODO: The R code is currently outdated in that it asks for Parameter as an argument when this is unneeded (Model holds Parameter); change code, minor change.
+    \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readRFP function demanded.
+\end{itemize}
+
+\labday {July 13, 2016}
+
+Spent an hour and thirty minutes finishing the script to format the data into the proper format.
+
+Afterwards, moved an old working R script to use this data for testing.
+
+\labday {July 14, 2016}
+
+\begin{itemize}
+    \item Examining the R script I am now modifying more closely, it may be Gabriel's old script that he had written to test the RFP model.
+    \item While testMCMCROC.R is working, I'd still like to have it redirect its stdout to a file for error checking purposes in the future.
+    I will try to reimplement this once the newest addition is confirmed to not ruin Travis.
+    \item Using a function to skip automated testing and moving these files to RibModelFramework, was able to find a satisfactory result based on the testing data.
+    \item The format of the old code, however, reveals a lot more than strictly necessary.
+    Will have to ask Dr. Gilchrist if any of this information would be useful to keep.
+    \item In the process of writing and documenting R code, also looked at testMCMCROC.R and as a TODO, need to run the MCMC without Phi (currently only runs with Phi).
+    \item When I start working on the mainline testthat functions, I can work in parallel by starting to correct the .R files and removing the parameter argument in many functions.
+\end{itemize}
+
+\labday {July 18, 2016}
+
+\begin{itemize}
+    \item Added to testMCMCROC.R a run of MCMC without Phi.
+    \item Also added output redirection to create log files of the MCMCM results
+    \item To facilitate the removal of parameter as an argument in many .R functions, added a C-side function to extract the parameter from each model.
+    \item TODO: Discuss with Cedric the pros and cons of doing this: I am returning an entire parameter object in order to avoid using a parameter object as an argument.
+    \item An alternative could be making more wrapper functions so that the model will perform a function that uses the parameter completely on the C-side (i.e. instead of parameter\$function we use model\$wrapperFunction).
+    Would be more work, however.
+    \item Talk with Dr. Gilchrist:
+    \begin{itemize}
+        \item Run more iterations and keep timing benchmarks -- i.e. 1000, 10,000, etc.
+        \item Use only 10\%, 20\% of the trace, etc; the last few.
+        \item This is because the initial bits have a starting point that greatly bias the graphs.
+        \item The important graphs to "prove" that it is run correctly are the RFP\sep \_\sep CSP\sep \_\sep Values and the correlation between Pop and RFP Model Pausing Time Rates.
+        \item First, the CSP values should stabilize and oscillate only slightly once only the last bit of the trace is used.
+        \item Then, the correlation should be high.
+    \end{itemize}
+    \item While I've removed parameter as an argument for the generic plot function, it remains a part of the FONSE plot function; need to tell Alan about this change so he can modify his scripts without seeing errors before I can do this.
+    \item Updated documentation for the changes to the parameter argument that I have done.
+    \item Fixed Cedric's bug with getGenomeForGeneIndices -- seems to have been written with completely wrong code!
+    Simply adapted the C-side code for the R implementation.
 \end{itemize}
 
 \end{document}
