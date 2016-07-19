@@ -567,4 +567,39 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item I did some further debugging to see what's causing the acceptance ratios to be 0. I quickly confirmed that it's because the likelihood and likelihood\_proposed values are equal most of the time. 
         \item Trying to figure out why the values are equal is proving to be a bit more of a challenge. So far, I've tested a few hypotheses on why it is with no luck; however, I do now know that it isn't because the likelihoods are 0 when they're subtracted to get the ratio. Also since the calculateLogLikelihoodRatioPerGroupingPerCategory function makes two calls to calculateLogLikelihoodRatioPerAA, once with the current mutation and selection values and once with the proposed ones, I checked to see if somehow the current was the same as the proposed, leading to the same return values from calculateLogLikelihoodRatioPerAA, but they were in fact different. At the very least, I'm fairly certain that I've narrowed down the functions causing the problem to one of or both calculateLogLikelihoodRatioPerAA and calculateCodonProbabilityVector since the former only makes a call to the latter and the latter makes no further function calls.
     \end{itemize}
+    
+\labday{July 16, 2016}
+    \begin{itemize}
+        \item I was mistaken when I said the issue didn't involve the likelihoods being 0. More debugging today revealed that the reason the likelihoods are equal is that they're both 0. Why the calls to calculateLogLikelihoodRatioPerAA are leading to likelihoods of 0 is still unclear. On a hunch I decided to check the mutation and selection vectors, both the current and proposed. Upon inspection the proposed mutation and selection vectors seemed reasonable, but the values of the current mutation and selection vectors were both all 0 when I ran FONSE with VS's debugger which leads me to believe that somehow the mutation and selection files are either not being read correctly, because the mutation and selection files I'm using aren't filled with 0's, or the values aren't even being initialized in the first place. Again though, I'm not sure how exactly this problem with the codon specific parameters is causing the current and proposed likelihoods to be the same after exiting the main loop in calculateLogLikelihoodRatioPerGroupingPerCategory.
+    \end{itemize}
+    
+\labday{July 18, 2016}
+    \begin{itemize}
+        \item The first thing I did today was test my theory that the mutation and selection values were not being initialized from the .csv files. While the R side of the code has always done the proper initialization, it was absent from the c++ side, meaning while this isn't the direct cause of the current and proposed likelihoods being equal, it did cause the current mutation and selection values to be initialized to 0 when running the c++ side of the code. Since this still hasn't answered the 0 acceptance rate question, I ran the debugger to see what I could find.
+        \begin{itemize}
+            \item First I set a breakpoint to see the new state of the program when the likelihoods were subtracted to get the acceptance ratio since before when I ran the model through the debugger, it had the current mutation and selection vectors filled with 0's.
+            \item The two most glaring oddities I found was that the likelihoods were still both 0 when they're subtracted, leading to the acceptance rate of 0, and that the values of both the current and proposed mutation and selection vectors were all the same number, -9.255963e+61. Since this is way off from what we expect the values to be, my first instinct is to say it's an issue with the memory being stepped on.
+        \end{itemize}
+        \item After discovering this, I ran the debugger again.
+            \begin{itemize}
+                \item I set a new breakpoint in order to catch where exactly the vectors changing to all -9e+61.
+                \item The breakpoint never triggered but when the old one triggered, the vectors were still filled with the same garbage value, which tells me this issue is more deterministic that a memory-trampling issue would be. 
+            \end{itemize}
+        \item Ran the debugger yet again with a slightly modified condition for the previously instated breakpoint.
+            \begin{itemize}
+                \item This time the breakpoint triggered like I intended. It hit the breakpoint on the first iteration of the loop inside calculateLogLikelihoodRatioPerGroupingPerCategory that calls calculateLogLikelihoodRatioPerAA and iterates numGenes times.
+                \item The current and proposed likelihoods were both already 0 at this point.
+                \item While the current and proposed mutation and selection vectors weren't completely filled with the garbage value, -9e+61, the last two elements in each vector were the garbage value, with the first three being reasonable.
+                \item These values didn't change for this AA which was A, but when it went through again with the AA C, only the first element of each vector had a reasonable value while the rest were the garbage value.
+                \item After going through a few more AA's I noticed a pattern with the AA's and the amount of elements in the vectors that are the garbage value. Each vector has a max size of 5, and the highest number of synonymous codons in an amino acid appears to be six when I look at the codon table. The number of realistic values in the vectors is always one less than the number of synonymous codons in the AA, which looks like it could be intentional but I'm not convinced since this would lead one codon for every AA not having a mutation or selection value.
+                \item I now know that the garbage value is just the default value when there's not a codon there and the reason that there's always one less non garbage value than there are codons in an AA is that the reference codon is not included in the mutation and selection vectors. 
+            \end{itemize}
+        \item TODO list from today's meeting:
+            \begin{itemize}
+                \item We talked about how the model continually accepts because the acceptance ratio is 1 and how we've found a bug leading to a codon probability vector where one of the elements is 1 and the rest are 0, which I hypothesize is leading to the current and proposed likelihoods inside calculateLogLikelihoodRatioPerGroupingPerCategory being 0 and equal. 
+                \item I will unit test the calculateCodonProbabliltyVector function in order to find out why it's making these strange vectors. 
+                \item I'll look into ways that I can implement a way to avoid taking the log of 0 when I add the log of a specific codon's probability to the logLikelihood, which causes an error, without doing what we're currently doing which is just ignore it.
+                \item Work more on generating posterior probability plots of each AA.
+            \end{itemize}
+    \end{itemize}
 \end{document}
