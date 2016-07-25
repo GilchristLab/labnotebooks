@@ -143,7 +143,7 @@ To check current directory in R, type in and execute \enquote{getwd()}.
 
 \begin{figure}[h!]
     \center
-    \includegraphics[width=\textwidth,keepaspectratio]{5-13-16img.jpg}
+    \includegraphics[width=\textwidth,keepaspectratio]{../Figures/5-13-16img.jpg}
     \label{figure}
 \end{figure}
 
@@ -1881,6 +1881,33 @@ Afterwards, moved an old working R script to use this data for testing.
     Some titles were already hard-coded, so I kept hardcoding them.
     \item Added a main title for plotTraceObject.R before finishing the day up.
     Program is still running on Gauley.
+\end{itemize}
+
+\labday{July 25 Notes}
+
+\begin{itemize}
+    \item Asked Cedric about some things:
+    \begin{itemize}
+        \item A function is RCPP exposed or not if it's defined in the RCPP module -- 
+        for Parameter, what had confused me was that getGroupList was written in a separate file
+        unlike the smaller objects which have their RCPP module written at the bottom.
+        This also means that it was incorrectly documented as not exposed.
+        Exposure code example:
+        \begin{lstlisting}
+        .method("getGroupList", &Parameter::getGroupList)
+        \end{lstlisting}
+        \item For gauley and remotely accessing pdf files, try "evince pdf [filename]".
+        \item For main argument for titles, let's have the default be empty instead but let a user          fill in the argument.
+    \end{itemize}
+    \item Still getting odd consistency with using commands to remotely open .pdf files correctly.
+    Cedric and I agree that we can ignore the spewing of warnings as long as it works, but for me it still occasionally doesn't work -- in fact, evince works worse than xdg-open.
+    Going to ignore and bear with this for the moment, and will run to gauley to guaranteedly open files as needed.
+    \item Checked gauley results now that I can open the pdf files remotely:
+    \begin{itemize}
+        \item Unfortunately the code I ran this experiment with did not print titles (expected, as this was put in later) not the overall correlation of Pop data to results (unexpected -- bug commenting out code).
+        \item More distressingly, the codon-specific parameters do not stabilize at 20,000. Will have to ask Dr. Gilchrist how to proceed (probably run with more than 20,000 samples).
+    \end{itemize}
+    \item Before talking to Dr. Gilchrist, spent a significant amount of time (1.5 hours) talking to Cedric about the package and helping Walker with LaTeX and git.
 \end{itemize}
 
 \end{document}
