@@ -1373,7 +1373,8 @@ I spent some time reorganizing materials so I know where everything is:
         \item Huge directory containing most of the content of the article, including supplementary notes, figures, and some data is found in gilchrist-lfs/Pop.
         \item Some work had been done on Pop already when Gabriel was on the team (April 26) -- see the rfpSort directory, now under gilchrist-notes/Pop.
         \item Further work on redoing and documenting analysis is being done in gilchrist-notes/Pop/rfpProcessJuly6
-        \item rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv -- Unknown source; located in gilchrist-notes/Pop/rfpSort.
+        \item rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv
+        \item This file is from an unknown source; located in gilchrist-notes/Pop/rfpSort.
     \end{itemize}
 \end{itemize}
 
@@ -1734,6 +1735,152 @@ Afterwards, moved an old working R script to use this data for testing.
     As I am recording the time to make benchmarks for each number of samples, and I am also going to use only 1 core for consistency, I fully expect this to take up the rest of the day.
     \item I am going to use the last 30\% of the trace throughout all runs.
     \item Also started writing documentation.
+    \item Got Matlab installed after contacting customer service.
+\end{itemize}
+
+\labday {July 20, 2016}
+
+\begin{itemize}
+    \item The tests with higher number of samples are still going.
+    \item I had run a test with 10,000 samples overnight, but the results still look weird or bad.
+    \item Possibility: I need to use even less of the trace. Or maybe I should return it to Gabriel's default value, which was exactly half of the trace.
+    \item The R-code has simply been the following, so it should work. 
+    \begin{lstlisting}
+        loglik.trace <- mcmc$getLogLikelihoodTrace()
+        start <- length(loglik.trace) * 0.7 
+      
+        logL <- logL <- mean(loglik.trace[start:length(loglik.trace)]) #get the mean for the subset
+        plot(loglik.trace[start:length(loglik.trace)], type="l", main=paste("logL:", logL), xlab="Sample", ylab="log(Likelihood)")
+    \end{lstlisting}
+    \item Also spent some time debugging why Travis was failing again when I added the output directory to .gitignore.
+    \item Source of the problem was that files cannot be written to a directory that does not exist, and git does not recognize empty directories (removing the output files did the same thing).
+    \item Fixed this bug by adding another .gitignore file in this output directory.
+    \item Bug still occurred. It seems Travis cannot create .csv files at all (but can create .pdf and .txt files). Readded .csv files to finally fix the bug.
+    \item Talk with Dr. Gilchrist (and later with Cedric):
+    \begin{itemize}
+        \item 
+        \item Run on Newton or Gauley this time -- preferably Gauley first; learn how to use Newton.
+        \item Newton has a short queue of about 2 hours and a medium queue of about 12 hours.
+        \item Try multiple (at least two) runs -- if the traces start at different locations, do they end at the same place?
+        \begin{itemize}
+            \item Cedric says that each trace begins at 0 and then builds on the next iterations. 
+            We have the option of changing its initial value, but it has not been really used in our program.
+        \end{itemize}
+        \item Grab the genes randomly -- only 1500 genes.
+        \begin{itemize}
+            \item Cedric recommends making sure that these 1500 genes selected are not changed between runs.
+            \item Will have to write a script to get these random 1500 genes.
+        \end{itemize}
+        \item Only use two-codon amino acids to start with.
+        \begin{itemize}
+            \item That is, TTT, TTC; TGT, TGC; TAT, TAC; CAA, CAG; AAT, AAC; CAT, CAC; GAA, GAG; GAT, GAC; AAA, AAG.
+            \item According to Cedric, we can use a function to do this: use setGroupList with only these codons.
+            \item Will have to Unit Test this function a bit; Cedric says that last he heard from Gabriel and Jeremy it was not working.
+        \end{itemize}
+        \item With these new limits, should be able to run like 50,000 samples in about 30 minutes.
+        \item For my own testing -- try 20,000 and 40,000 samples, twice each.
+        \item Do two plots:
+        \begin{itemize}
+            \item One of our translation rate ($1 / w_i$) vs the Pop translation rates.
+            \item Another of our waiting time ($w_i$) vs Pop translation rates just in case results are weird.
+        \end{itemize}
+        \item Also, should try to fix plot axes/titles. We only need the last 30\% (so it'd show up at 0-3000 rather than 0-10000 for example).
+        \item This would require changing plot\sep Codon\sep Specific\sep Parameter in the R-side of the program to include a range argument, which would be set to the entire trace as a default.
+        \item Code example:
+        \begin{lstlisting}
+        X = c(100, 200)
+        X element x[1]:x[2]
+        \end{lstlisting}
+    \end{itemize}
+    \item First, expanded existing unit testing for set\sep Group\sep List.
+    \item TODO: Ask Cedric about how to tell if RCPP exposed or not. That is, if a function written in C is usable in R.
+    \item The getGroupList() function is able to be used in R despite current documentation saying it shouldn't be able to.
+\end{itemize}
+
+\labday{July 21 Notes}
+
+\begin{itemize}
+    \item Still reorganizing notes and github repo management.
+    \item The repo commit history looks absolutely butchered, but a working version should be re-pulled soon.
+    \item Dr. Gilchrist says it is more important to get runs going at all than it is to modify code, so we're going to do 20,000 runs with all AAs with the 1500 genes.
+    \item The fixes and modifications to the script can be done concurrently with the runs rather than before.
+    \item Unfortunately, that means the plots will still grab the full CSP trace range rather than a subset, since I have not programmed that functionality yet.
+    \item Still need to get only 1500 random genes:
+    \begin{itemize}
+        \item Made a script to get just the names of the genes.
+        \item Made another script to just randomly get 1500 names.
+        \item Made a script to cross-reference these names with the full data to be printed at once.
+        \item I have moved these results (rand1500.csv) to Gauley to begin testing (after confirming with the first script that there are only 1500 genes).
+    \end{itemize}
+    \item Scripting took about 30 minutes.
+    \item Gauley: Had to install several packages (stringr, munsell, RColorBrewer) to run Rstudio on the R script that runs the RFP model.
+    \item To open pdf files remotely via X-11 forwarding, need to call xdg-open. 
+    While it works correctly eventually, spews out a ton of error messages in the process:
+    \begin{lstlisting}
+    X11 connection rejected because of wrong authentication.
+
+    ** (evince:17996): WARNING **: Could not open X display
+    X11 connection rejected because of wrong authentication.
+    X11 connection rejected because of wrong authentication.
+    Cannot parse arguments: Cannot open display: 
+    X11 connection rejected because of wrong authentication.
+
+    ** (evince:18002): WARNING **: Could not open X display
+    X11 connection rejected because of wrong authentication.
+    X11 connection rejected because of wrong authentication.
+    Cannot parse arguments: Cannot open display: 
+    Warning: program returned non-zero exit code #1
+    Opening "RFP_CSP_Values_Mixture1.pdf" with Document Viewer  (application/pdf)
+    X11 connection rejected because of wrong authentication.
+
+    ** (evince:18005): WARNING **: Could not open X display
+    X11 connection rejected because of wrong authentication.
+    X11 connection rejected because of wrong authentication.
+    Cannot parse arguments: Cannot open display: 
+    \end{lstlisting}
+    \item TODO: Ask Cedric about this.
+    \item After it working fine but spewing error messages before every successful pdf open, it now returns this:
+    \begin{lstlisting}
+    hbui2@gauley:~/RibModelFramework/tests/testthat/UnitTestingOut$ xdg-open RFP_Genome_allUnique_startCSP_startPhi_adaptSphi_true.pdf 
+
+    ** (evince:19629): WARNING **: Could not open X display
+    Cannot parse arguments: Cannot open display: 
+
+    ** (evince:19635): WARNING **: Could not open X display
+    Cannot parse arguments: Cannot open display: 
+    Warning: program returned non-zero exit code #1
+    Opening "RFP_Genome_allUnique_startCSP_startPhi_adaptSphi_true.pdf" with Document Viewer  (application/pdf)
+
+    ** (evince:19638): WARNING **: Could not open X display
+    Cannot parse arguments: Cannot open display: 
+    Error: cannot open display: localhost:10.0
+    Error: cannot open display: localhost:10.0
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: mozilla: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: epiphany: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: konqueror: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: chromium-browser: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: google-chrome: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: links2: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: links: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: lynx: not found
+    /usr/bin/xdg-open: 461: /usr/bin/xdg-open: w3m: not found
+    xdg-open: no method available for opening 'RFP_Genome_allUnique_startCSP_startPhi_adaptSphi_true.pdf'
+    \end{lstlisting}
+    \item Meanwhile, for the script itself I tried to relabeled the plots and readded restart files.
+    \item Turns out that another missing functionality of our code is the ability to title most of our plots. 
+    Another TODO after I finally get this running.
+    \item Calling xdg-open creates a plethora of other error messages when typing into the terminal of Gauley itself rather than remotely! 
+    Need to ask Cedric about this as well.
+    \item Finally ran the script on Gauley with 20,000 samples.
+    Once again, the plots are partially unlabeled, all AAs are run rather than just the two-codon ones, and the plotted range is the full range rather than the limited-trace range.
+    This is due to their lack of implementation as of yet in the overall code.
+    \item The restart files can be found in my home directory under Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep.
+    \item The data files (.pdfs, .csvs, output log) can be found in a subdirectory of that: Unit\sep Testing\sep Out.
+    \item Afterward, started editing main code to allow for titles.
+    TODO: Ask Cedric preferred style: let users write their own titles?
+    Some titles were already hard-coded, so I kept hardcoding them.
+    \item Added a main title for plotTraceObject.R before finishing the day up.
+    Program is still running on Gauley.
 \end{itemize}
 
 \end{document}
