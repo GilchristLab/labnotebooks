@@ -143,7 +143,7 @@ To check current directory in R, type in and execute \enquote{getwd()}.
 
 \begin{figure}[h!]
     \center
-    \includegraphics[width=\textwidth,keepaspectratio]{../Figures/5-13-16img.jpg}
+    \includegraphics[width=\textwidth,keepaspectratio]{5-13-16img.jpg}
     \label{figure}
 \end{figure}
 
@@ -1908,6 +1908,62 @@ Afterwards, moved an old working R script to use this data for testing.
         \item More distressingly, the codon-specific parameters do not stabilize at 20,000. Will have to ask Dr. Gilchrist how to proceed (probably run with more than 20,000 samples).
     \end{itemize}
     \item Before talking to Dr. Gilchrist, spent a significant amount of time (1.5 hours) talking to Cedric about the package and helping Walker with LaTeX and git.
+    \item Gilchrist talk:
+    \item Do a fitting of Phi values to those gotten from ROC
+    \item Or just starting a search with values starting from ROC.
+    \item Try to do a run with Phi values that are known and fixed.
+    \item Or assume that they are some fixed value, but they may or may not be common knowledge.
+    \item Or fix Sphi.
+    \item Ultimate, let's fix Sphi to a reasonable value. 
+    What is a reasonable value? 
+    Whatever we have gotten from ROC. 
+    Should be in 2015 paper.
+    \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulateGenome to creat a file that writes this simulated data to a .csv file or whatever.
+    \item Really should rename RFP model by now to RFPROC -- rename RFPModel::simulateGenome() to RFPROCModel::simulateRFPROCModel() etc.
+    \item Fit RFPROCmodel and compare (c.f) estimated phi to true phi.
+    \item Compare under two cases:
+    \begin{itemize}
+        \item A, initial conditions equal true values
+        \item B, initial conditions = naive (i.e. default, everything starts at 1 or whatever)
+        \begin{itemize}
+            \item Also could try fixing Sphi instead of estimating it.
+            \item Or start with SCUO estimates of Phi (initial conditions)
+        \end{itemize}
+    \end{itemize}
+    \item Reminder: Bad initial conditions may result in a suboptimal peak.
+    \item Hope is that both will converge to the right values. 
+    \item Hollis's Truthing vs Jeremy's Truthing.
+    \item Take his SimulatedGenome and do the same thing (so same process but ignore creatng a simulated genome) -- SimulatedRFPData.csv in RibModelDev.
+    \item Fit it with RFPROC, and see if the initial thousand or so are comparable.
+    \item Sphi can be gotten by taking the Phi values (from ROC or otherwise) and taking the standard deviation of their log.
+    \item Would give a slightly inflated but otherwise good estimation.
+    \item So let's run these fits with 20,000; let's also run with a subset of the genome, say 1500 genes again.
+    \item Consider revisiting the Pop data, and fixing the SCUO for Phi initial, or fix Sphi, or setting a prior of Sphi (conceivably attained from a ROC run).
+    \item Overall TODO:
+    \begin{itemize}
+        \item Run and fit RFPROC SimulatedRFPData.csv (Jeremy's) naive.
+        \item Simulate own genome, then run RFPROC model naive.
+        \item Figure out how to modify/set the initial conditions, possibly implementing this.
+        Passing values -- i.e. the true values in the directory.
+        If you want to start your seach at those values -- how do you do that?
+        Calculate the SCUO for every value.
+        If we know we have an initial Sphi value, then we can pull a bunch of log normal random numbers that have the right corresponding Sphi and M values, sort them, and then line em up etc.
+        These become our initial values.
+        (This is the default behavior)
+        OR we could pass explicit values for initial values (should already be implemented in ROC) such that we don't need to use estimate SCUO values.
+        \item Allow explicit prior for Sphi.
+        \item Allow subsets of parameters to be fixed.
+    \end{itemize}
+    \item Considering time and motivation (it is nearing the end of the day) I will for the present only try to run and fit Jeremy's data.
+    \item Some confusion on how to get to Phi:
+    \begin{itemize}
+        \item Notes written on board refer to theta rather than phi, a minor mistake that took some time to adjust to.
+        \item It seems that we normally only attain the ExpectedPhi as a plot.
+        \item We \textbf{do} have (probably) the true Phi values: under the rfp folder, we can acces RFPPhiValues.csv.
+    \end{itemize}
+    \item TODO: See if we can remove the Rcpp version of getNumGenesWithPhiForIndex, assuming this isn't the best way to get Phi anyway.
+    Currently unused function that is for Unit Testing only.
+    \item Unfortunately ended the night without being able to figure out how to write a plot in R. Need either more time to practice or guidance before I can test Jeremy's data.
 \end{itemize}
 
 \end{document}
