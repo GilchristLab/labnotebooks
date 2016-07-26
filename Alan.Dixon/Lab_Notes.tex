@@ -617,4 +617,14 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item Using VS's debugger to manually alter the proposed selection values so that they were of the same order as the initial ones, I tested this hypothesis, and while it made a slight difference initially by making the numerator large enough so that the exponential function evaluates it as a number on the magnitude of 10^-20 instead of 0; however, as the position increased, the numerator decreased leading to the same issue where the numerator is too small for the exponential function to evaluate it as anything but 0.
         \item After more combing it seems the problem lies mainly in the phi values. For a while now I've been using simulated genomes and data to run FONSE and the particular ones I was directed by Jeremy to focus on had scaled phi values. At the time I didn't notice the significance of it though it's probably meant to simulate genes with high expression levels so that selection plays a larger role. These phi values however, are scaled so high that they seem to be the main factor in the numerator being so high. I tested this by running the model with different files and without the sclaed phi values, the log likelihoods stayed fairly steady at around -900,000.
     \end{itemize}
+    
+\labday{July 26, 2016}
+    \begin{itemize}
+        \item Fixed the bug in the simulate gene function in ROC and FONSE where when it would randomly choose a stop codon it would only do it from indexes 61-62 instead of 61-63 like it's supposed to.
+        \item Added a warning in ROC and FONSE's simulate genome function that's triggered when the code encounters an internal stop codon. Before, when an internal stop codon was encountered, the code would simply ignore and skip over it. Now, it throws a warning before it does that indicates in which gene and at which position the internal stop codon occurs.
+        \item As directed I started work on changing the calculateCodonProbabilityVector function to have the vector elements be the log of the probabilities. To do this, I created a new function called calculateLogCodonProbabilityVector and made the few necessary changes I had to. I made theses changes in both FONSE and ROC, and I tested the changes on ROC first. 
+        \item The first time through, the log likelihood hovered around -1.6e-6 until it experienced a NAN error around iteration 2000. To test whether or not the change to the function is what caused this, I reverted the changes and reran it.
+        \item I got similar results after reverting the changes so the errors I experienced were most likely due to my own errors and not an error in the code. Since Cedric wasn't available to assist me in running ROC, I'll instead run both versions, with the change and without, of FONSE. Since all of this took up the day I'll just run both overnight tonight.
+    \end{itemize}
+
 \end{document}
