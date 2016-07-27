@@ -1918,8 +1918,8 @@ Afterwards, moved an old working R script to use this data for testing.
     What is a reasonable value? 
     Whatever we have gotten from ROC. 
     Should be in 2015 paper.
-    \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulateGenome to creat a file that writes this simulated data to a .csv file or whatever.
-    \item Really should rename RFP model by now to RFPROC -- rename RFPModel::simulateGenome() to RFPROCModel::simulateRFPROCModel() etc.
+    \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulate\sep Genome to creat a file that writes this simulated data to a .csv file or whatever.
+    \item Really should rename RFP model by now to RFPROC -- rename RFP\sep Model\sep ::\sep simulate\sep Genome() to RFPROC\sep Model\sep ::\sep simulate\sep RFPROC\sep Model() etc.
     \item Fit RFPROCmodel and compare (c.f) estimated phi to true phi.
     \item Compare under two cases:
     \begin{itemize}
@@ -1964,6 +1964,20 @@ Afterwards, moved an old working R script to use this data for testing.
     \item TODO: See if we can remove the Rcpp version of getNumGenesWithPhiForIndex, assuming this isn't the best way to get Phi anyway.
     Currently unused function that is for Unit Testing only.
     \item Unfortunately ended the night without being able to figure out how to write a plot in R. Need either more time to practice or guidance before I can test Jeremy's data.
+\end{itemize}
+
+\labday {July 26, 2016}
+
+\begin{itemize}
+    \item I am continuing to try to write a script to plot points (true Phi values) vs estimated values.
+    \item The function I think gets me what I want is Trace\sep ::\sep get\sep Synthesis\sep Rate\sep Trace\sep For\sep Gene\sep ().
+    This function returns a vector, the last element of which is the last recorded phi value for the gene.
+    \item Thus, I should try to extract this number as well as the the true Phi value and as points (x,y) and hope that a line will be drawn where x=y.
+    \item After an additional hour and fifteen minutes of work, I got something roughly like I wanted (plotting points, seeing a clear x = Cy correlation where C is an unknown factor).
+    \item Unfortunately, I don't quite know how to draw a line that is essentially from the bottom left to the top right of the plot.
+    \item Since I need to run it ASAP anyway and it's essentially a rough proof, I am keeping what I have and starting a run now; hopefully I can improve it later.
+    \item Talked to Alan about the new implementation of likelihood / loglikelihood.
+    \item Naive run of Jeremy's data was finally started at 4pm.
 \end{itemize}
 
 \end{document}
