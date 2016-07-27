@@ -1758,7 +1758,6 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Bug still occurred. It seems Travis cannot create .csv files at all (but can create .pdf and .txt files). Readded .csv files to finally fix the bug.
     \item Talk with Dr. Gilchrist (and later with Cedric):
     \begin{itemize}
-        \item 
         \item Run on Newton or Gauley this time -- preferably Gauley first; learn how to use Newton.
         \item Newton has a short queue of about 2 hours and a medium queue of about 12 hours.
         \item Try multiple (at least two) runs -- if the traces start at different locations, do they end at the same place?
@@ -1918,7 +1917,7 @@ Afterwards, moved an old working R script to use this data for testing.
     What is a reasonable value? 
     Whatever we have gotten from ROC. 
     Should be in 2015 paper.
-    \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulate\sep Genome to creat a file that writes this simulated data to a .csv file or whatever.
+    \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulate\sep Genome to create a file that writes this simulated data to a .csv file or whatever.
     \item Really should rename RFP model by now to RFPROC -- rename RFP\sep Model\sep ::\sep simulate\sep Genome() to RFPROC\sep Model\sep ::\sep simulate\sep RFPROC\sep Model() etc.
     \item Fit RFPROCmodel and compare (c.f) estimated phi to true phi.
     \item Compare under two cases:
@@ -1978,6 +1977,26 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Since I need to run it ASAP anyway and it's essentially a rough proof, I am keeping what I have and starting a run now; hopefully I can improve it later.
     \item Talked to Alan about the new implementation of likelihood / loglikelihood.
     \item Naive run of Jeremy's data was finally started at 4pm.
+\end{itemize}
+
+\labday {July 27, 2016}
+
+\begin{itemize}
+    \item Checked on Jeremy's data correlation. For convenience, image inserted here:
+    \begin{figure}[h!]
+        \center
+        \includegraphics[width=\textwidth,keepaspectratio]{7-27-16-JeremyCorrelation.png}
+        \label{Jeremy Correlation}
+    \end{figure}
+    \item The bottom axis, not shown (see the newly created folder \enquote{7-27-16-JeremyCorrelation}) is True Values.
+    \item I am not sure how to interpret this data. 
+    While with 10 samples it had plotted a very nice x = Cy correlation as mentioned before, this data implies that the estimated values have a log relationship to the true values.
+    \item May have to ask someone how to extract the Phi values -- perhaps the Trace chosen was wrong?
+    \item In the meantime, simulating a genome to get data run another 20,000 samples on.
+    \item I am basing my R script off of simulate\sep FONSE\sep .\sep R found in Rib\sep Model\sep Dev.
+    \item The .fasta file we will use is \enquote{s288c.genome.fasta}, currently found in Rib\sep Model\sep Dev\sep /\sep data\sep /\sep /
+    \item The LambdaPrime, Alpha, and Phi values can be recycled from Jeremy's folder, however.
+    \item I am going to use the data extracted from the 20,000 sample run 
 \end{itemize}
 
 \end{document}
