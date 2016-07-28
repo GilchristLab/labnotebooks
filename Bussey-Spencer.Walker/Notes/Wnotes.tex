@@ -247,7 +247,7 @@
 %How to push to git repository
 %git pull
 %git add .
-%git -m "July 24 note update"
+%git commit -m "July 24 note update"
 %git push
 
 %Always run pdf latex from folder containing Wnotes.tex
@@ -325,6 +325,8 @@
 \item Does it matter that the data comes from various strains?
 \item There is a slight variation in the different type of cells that each run looked at.
 \item Although most give the cell type as organism, there is also some data taken from specifically somatic cells and neuronal motor cells.
+\begin{itemize}
+\item These different cell types have very different 
 \item The study also includes varying ages for some of their life stages.
 \begin{itemize}
 \item 3-fold Embryo has 12 runs that have ages ranging from 500-710 minutes old, but each run consists of a 150 minute span.
@@ -351,7 +353,7 @@
 \item Quantification: htseq2 version: 0.6.1p1
 \item Normalized Counts Per Gene: 
 \begin{itemize}
-\item \(FPKMs\) are calculated from the raw counts by iRAP. 
+\item (FPKMs) are calculated from the raw counts by iRAP. 
 \item These are averaged for each set of technical replicates, and then quantile normalized within each set of biological replicates using limma. 
 \item Finally, they are averaged for all biological replicates (if any)
 \end{itemize}
@@ -362,5 +364,46 @@
 \item Continue to research about the empirical data.
 \item Start writing code to compare the results.
 \end{itemize}
+\end{itemize}
 
+\labday{27 July 2016}
+\experiment{C. Elegans}
+\begin{itemize}
+\item I ran the model for the higher hierarchy with dauer included last night and recorded the results in the file \enquote{Model\_Results\_Higher\_With\_Dauer}.
+\item The results from yesterday's run of the lower hierarchy with dauer are in the file \enquote{Model\_Results\_Lowest\_With\_Dauer}.
+\item The mean log likelihood for the higher hierarchy with dauer was -57252.98 while the mean log likelihood for the lower hierarchy with dauer was -49394.46.
+\item In these two files I have the mean value for each weighting coefficients--called beta in the file--and the values of the 2.5\% and 97.5\% quantiles.
+\item *** Would overlapping gene use in different life stages affect the weighting and artificially increase or decrease the values in life stages that show similar transcription activity?... e.g. proliferating.. 
+\item I would assume that all the cell activity is similar throughout the replication processes in each of the proliferating stages. 
+\item Getting an expected time equal to the full time of proliferation for the 4-cell stage is a hypothesis in the lower hierarchy.
+\item I further catalogued all of the ages given by the experiment into the same excel file that has the original life stage and order numbers.
+\item That file name is \enquote{Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
+\item Below I will attach two PDFs that have the graphic results from each trial run.
+\end{itemize}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.45]{../Higher_Hierarchy_with_Dauer_1/Plots/Higher_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
+\end{center}
+\caption{July 27th Graphs From Higher Hierarchy With Dauer Model Run}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.45]{../Lower_Hierarchy_With_Dauer_1/Plots/lower_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
+\end{center}
+\caption{July 27th Graphs From Lower Hierarchy With Dauer Model Run}
+\end{figure}
+
+\begin{itemize}
+\item **** Need to figure out how to display all 5 of the graphs that are on each pdf by splitting them onto multiple pages so they are not too small to read.
+\item The first graph for each set of Figures charts the log of the Roc Estimated Expression on the y-axis and the log of the Weighted Mean of the Observed data. *** Need to look at this
+\item The second graph displays the log Empirical Expression--the observed data-- versus the log Estimated True Expression.
+\item The third graph displays the Time in Lifestage plotted with the Expression Coefficients
+\item The fourth graph displays the ordering of the life stages.
+\item I put these expected life stage durations and orderings in the file
+\item  \enquote{Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
+\item The fifth graph displays the original log Roc expression data plotted against the log Mean Empirical Expression.
+\item TO DO: While I am gone, Cedric has asked me to read a paper and compare it to our method of estimating codon optimality.
+\end{itemize}
 \end{document}

@@ -605,8 +605,12 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     
 \labday{July 19, 2016}
     \begin{itemize}
-        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate e^-1000 it just evaluates it as 0.
-        \item I changed the way the code calculates the codon probability vector so that it does -(deltaM) + (phi * deltaOmega) but it led to a different issue where it'd be raising e to the power of +1000 instead of -1000. This lead to the value of both the numerator and denominator being infinity, so when the code tried to evaluate inf/inf, it lead to the NAN error, so I reverted the change.
+        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate $e^-1000$ it just evaluates it as 0.\footnote{mikeg: July 27, 2016 -- Please ensure your .tex file compiles before commiting.
+I also encourage you to define commands such as the one I define below in the .tex file.}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+
+        \item I changed the way the code calculates the codon probability vector so that it does -(deltaM) + (phi * deltaOmega) but it led to a different issue where it'd be raising e to the power of +1000 instead of -1000.\footnote{mikeg: July 27, 2016 -- Please put each sentence on its own line w/in the .tex file.}
+ This lead to the value of both the numerator and denominator being infinity, so when the code tried to evaluate inf/inf, it lead to the NAN error, so I reverted the change.
         \item As directed, I implemented a way for the code to recognize when the value is 0 and instead of just ignoring it, it throws a warning and adjusts all non-zero codons to where the probability is still negligible yet still has a value to add so that we don't end up with logLikelihoods of 0. I chose to make the adjusting constant .0001. The issue is that even though the values are no longer 0, they'd still be 0 when it calculates the codon probability vector so the vectors for both the current and proposed are still identical which still leads to their logLikelihoods being equal, so this didn't avoid the problem of acceptance ratios of 0. Because of this I reverted the changes but kept in the warning that triggers when a codon's probability is 0.
     \end{itemize}
     
@@ -627,4 +631,46 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item I got similar results after reverting the changes so the errors I experienced were most likely due to my own errors and not an error in the code. Since Cedric wasn't available to assist me in running ROC, I'll instead run both versions, with the change and without, of FONSE. Since all of this took up the day I'll just run both overnight tonight.
     \end{itemize}
 
+\labday{July 27, 2016}
+    \begin{itemize}
+        \item While both runs of FONSE produced results similar to both each other and recent past runs of FONSE, indicating the calculateLogCodonProbabilityVector function is working, I neglected to change FONSE's calculateCodonPropbability function so that the signs match those found in ROC, so I made those changes and ran FONSE with the simulated data from the unscaled phi values, b = 0.001, samples = 1000, and thinning = 1 to compare it to recent FONSE runs under the same conditions.
+            \begin{itemize}
+                \item Log Likelihood: The values started off low at around -1.6 million, slowly climbed for the first couple hundred iterations then rose to about -950000 and leveled off at around -905000 as shown by the plot of the trace in figure \ref{fig:JULY27_LIKE}
+                \item The acceptance rates of the amino acids also seemed fairly reasonable, with most being between 0.20 and 0.50 although amino acids L, R and T, had acceptance rates of 0, but this could be due to the fact that I didn't let the model run long enough.
+                \item Again, I observed some strange behavior in the trace of the expected phi values where it jumps up to an unreasonably high number and then jumps right back down almost immediately as shown by figure \ref{fig:JULY27_EPHI}
+                \item I'm not quite sure how to interpret the plot of the true synthesis rate values against the estimated ones, but it doesn't look quite right to me so I've included it as figure \ref{fig:JULY27_SYNTH}
+                \item Both the mutation and selection traces, shown in figure \ref{fig:JULY27_MUT} and figure \ref{fig:JULY27_SEL} respectively, seem fairly reasonable bar the strange behavior of the aforementioned 0 acceptance rate amino acids. 
+            \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/LogLikeTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY27_LIKE}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/ExpectedPhiTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY27_EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/SynthesisRateComp}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY27_SYNTH}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/MutationTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY27_MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/SelectionTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY27_SEL}
+    \end{figure}
 \end{document}
