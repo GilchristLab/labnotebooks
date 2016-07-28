@@ -143,8 +143,8 @@ To check current directory in R, type in and execute \enquote{getwd()}.
 
 \begin{figure}[h!]
     \center
-    \includegraphics[width=\textwidth,keepaspectratio]{5-13-16img.jpg}
-    \label{figure}
+    \includegraphics[width=\textwidth,keepaspectratio]{figures/5-13-16img.jpg}
+    \label{PANSE Concept 5-13-16}
 \end{figure}
 
 \begin{equation}
@@ -1983,21 +1983,49 @@ Afterwards, moved an old working R script to use this data for testing.
 
 \begin{itemize}
     \item Checked on Jeremy's data correlation. For convenience, image inserted here:
-    \begin{figure}[h!]
+    \begin{figure}[ht!]
         \center
-        \includegraphics[width=\textwidth,keepaspectratio]{7-27-16-JeremyCorrelation.png}
-        \label{Jeremy Correlation}
+        \includegraphics[width=\textwidth,keepaspectratio]{figures/7-27-16-JeremyCorrelation.png}
+        \label{Jeremy Correlation 7-27-16}
     \end{figure}
-    \item The bottom axis, not shown (see the newly created folder \enquote{7-27-16-JeremyCorrelation}) is True Values.
+    \item The bottom axis, not shown (see the folder 7\sep -\sep 27\sep -\sep 16\sep -\sep Jeremy\sep Correlation) is True Values.
     \item I am not sure how to interpret this data. 
     While with 10 samples it had plotted a very nice x = Cy correlation as mentioned before, this data implies that the estimated values have a log relationship to the true values.
     \item May have to ask someone how to extract the Phi values -- perhaps the Trace chosen was wrong?
     \item In the meantime, simulating a genome to get data run another 20,000 samples on.
     \item I am basing my R script off of simulate\sep FONSE\sep .\sep R found in Rib\sep Model\sep Dev.
-    \item The .fasta file we will use is \enquote{s288c.genome.fasta}, currently found in Rib\sep Model\sep Dev\sep /\sep data\sep /\sep /
+    \item The .fasta file we will use is \enquote{s288c.genome.fasta}, currently found in Rib\sep Model\sep Dev\sep /\sep data\sep /\sep real\sep Genomes.
     \item The LambdaPrime, Alpha, and Phi values can be recycled from Jeremy's folder, however.
-    \item I am going to use the data extracted from the 20,000 sample run 
+    \item Talk with Dr. Gilchrist:
+    \begin{itemize}
+        \item Considering using code to inlude literal code text without needing to copy and paste the whole plaintext:
+        \begin{lstlisting}
+        Scripts/script_name.R
+
+        \listinputlisting[language=R]{Scripts/script_name.R}
+        \end{lstlisting}
+        \item This would allow me to include and describe scripts to be put into this notes repo.
+        \item Can also limit the number of lines printed: \enquote{language=R, firstline=2, lastline=12} (default is beginning and end of file).
+        \item Can add captions (\enquote{caption=This is a caption}) to the same square bracket part.
+        \item This caption would be displayed in a list of listings (\verb+lstlistoflistings+).
+        \item The data looks weird and logarithmic because it's meant to be... use an option to make it log-log-based plotting, since the errors are log-distributed.
+        \item Try adding in mean and variance waiting time ($\frac{\alpha}{\lambda\prime}$ and $\frac{\alpha}{\lambda\prime^2}$) to plot\sep .\sep Rcpp\sep \_\sep Trace (so under plot\sep Trace\sep Object\sep .\sep R).
+        \item Ideally we'd plot confidence intervals on top of these plots, but the code for how to do this is unknown.
+        See upper\sep .\sep panel\sep .\sep plot with its sd.x and sd.y arguments.
+        The information should be there with how to calculate mean, but it isn't, so ignore this for now.
+    \end{itemize}
+    \item Rebased my local labnotebooks to clean up excess output files being included (and commit history).
+    \item Next step: Plot with log-log in mind Phi, Alpha, Lambda, and Mean and Variance Waiting Time the data I already have from the Jeremy Simulated Genome run.
+    \item Therefore, first let's implement mean and variance waiting time in the overall package.
+    \item Looking at the code, we do calculate the posterior mean for Alpha and Lambda.
+    Perhaps use this in place of taking the final element of the trace.
+\end{itemize}
+
+\labday {July 28, 2016}
+
+\begin{itemize}
+    \item Because of the difficulty and confusion from graphing these parameters and the fact that we don't want to re-invent the wheel, I took a pause from actually scripting to document some of these functions.
+    \item TODO: Ask Cedric if it's better to implement waiting time functions in R (like I've done already) or in C.
 \end{itemize}
 
 \end{document}
-

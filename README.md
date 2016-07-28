@@ -13,6 +13,8 @@ Repository for researchers to keep their lab notebooks.
 # Contents:
 
 Folders:
-1. Hollis.Bui: pdf of notes, all relevant files to recompile pdf (.tex, etc.)
-2. Alan.Dixon: .tex file to produce lab notes
+
+1. Hollis.Bui: .tex file to produce lab notes, figures directory, logged test runs
+2. Alan.Dixon: .tex file to produce lab notes, FONSE plots directory
+3. Bussey-Spencer.Walker: .tex file to produce lab notes
 
