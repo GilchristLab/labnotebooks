@@ -605,8 +605,12 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     
 \labday{July 19, 2016}
     \begin{itemize}
-        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate e^-1000 it just evaluates it as 0.
-        \item I changed the way the code calculates the codon probability vector so that it does -(deltaM) + (phi * deltaOmega) but it led to a different issue where it'd be raising e to the power of +1000 instead of -1000. This lead to the value of both the numerator and denominator being infinity, so when the code tried to evaluate inf/inf, it lead to the NAN error, so I reverted the change.
+        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate $e^-1000$ it just evaluates it as 0.\footnote{mikeg: July 27, 2016 -- Please ensure your .tex file compiles before commiting.
+I also encourage you to define commands such as the one I define below in the .tex file.}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+
+        \item I changed the way the code calculates the codon probability vector so that it does -(deltaM) + (phi * deltaOmega) but it led to a different issue where it'd be raising e to the power of +1000 instead of -1000.\footnote{mikeg: July 27, 2016 -- Please put each sentence on its own line w/in the .tex file.}
+ This lead to the value of both the numerator and denominator being infinity, so when the code tried to evaluate inf/inf, it lead to the NAN error, so I reverted the change.
         \item As directed, I implemented a way for the code to recognize when the value is 0 and instead of just ignoring it, it throws a warning and adjusts all non-zero codons to where the probability is still negligible yet still has a value to add so that we don't end up with logLikelihoods of 0. I chose to make the adjusting constant .0001. The issue is that even though the values are no longer 0, they'd still be 0 when it calculates the codon probability vector so the vectors for both the current and proposed are still identical which still leads to their logLikelihoods being equal, so this didn't avoid the problem of acceptance ratios of 0. Because of this I reverted the changes but kept in the warning that triggers when a codon's probability is 0.
     \end{itemize}
     
