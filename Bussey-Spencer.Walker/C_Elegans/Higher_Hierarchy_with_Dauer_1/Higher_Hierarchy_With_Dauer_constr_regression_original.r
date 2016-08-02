@@ -1,5 +1,6 @@
+#On Git
 #Model with noise, with intercept
-#Only lower Hierarchy datapoints
+#Only Higher Hierarchy datapoints
 #With Dauer
 rm(list=ls())
 #load libraries
@@ -10,7 +11,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 #the explanatory variables
-emp.expr <- read.table(file="Data/Nonoverlapping_Lowest_In_Hierarchy_With_Dauer_Celegans_hermaphrodite_expression.csv", sep=",", as.is=T, header=T)
+emp.expr <-read.table(file="Data/Nonoverlapping_Highest_In_Hierarchy_With_Dauer_Celegans_hermaphrodite_expression.csv", sep=",", as.is=T, header=T)
 # data
 estm.phi <- read.table(file = "Data/PHI_without_xobs_singlechain.csv", header=T, sep=",")
 
@@ -69,7 +70,7 @@ for(i in 1:nrow(X)){
 }
 
 
-pdf("lower_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf", height=20)
+pdf("Higher_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf", height=20)
 par(mfrow=c(4,1))
 plot(res, y, type="n", xlab = "log(Weighted Mean Emperical Expression)", ylab = "log(ROC Estimated Expression)")
 ribModel:::upper.panel.plot(res, y)
@@ -77,49 +78,66 @@ ribModel:::upper.panel.plot(res, y)
 plot(meds, Y, type="n", xlab = "log(Estimated 'True' Expression)", ylab = "log(Emperical Expression)")
 ribModel:::upper.panel.plot(meds, Y)
 #linear regression
-t.spent <- c(20,190,60,100,180,690,420,450,570,NA,NA,NA,NA)
+t.spent <- c(350,270,180,690,420,450,570,1440,NA,NA,NA,NA)
 rm.idx <- c(13,14,15,16,17)
 names(t.spent) <- colnames(dat)
-plot(t.spent, meanBeta[-1], type='n', xlab="Time in Lifestage [min]", ylab="Expression Coefficient Omega")
+plot(t.spent, meanBeta[-1], type='n', xlab="Time in Lifestage [min]", ylab="Expression Coefficient")
 ribModel:::upper.panel.plot(t.spent, meanBeta[-1])
 
-order.occurred <-c(1,2,3,4,5,6,7,8,9,10,11,12,13)
+order.occurred <-c(1,2,3,4,5,6,7,8,9,10,11,12)
 names(order.occurred) <- colnames(dat)
-plot(order.occurred,meanBeta[-1],type= 'n', xlab= "Order of Life Stages", ylab="Expression Coefficient Omega")
+plot(order.occurred,meanBeta[-1],type= 'n', xlab= "Order of life stages", ylab="Expression Coefficient")
 ribModel:::upper.panel.plot(order.occurred, meanBeta[-1])
 
 #Reads this way if you have the Celegans_mean_expression_confirmed file
 #mean.expr <- read.table(file="Data/Celegans_hermaphrodite_mean_expression_confirmed.csv", sep=",", as.is=T, header=T)
 #mean.expr <- log(mean.expr[-row.remove,2])
 
-celeg.mean.expr <- rowMeans(dat, na.rm =T)
-mean.expr <- celeg.mean.expr
-plot(mean.expr, y, type="n", xlab = "log(Mean Emperical Expression)", ylab = "log(ROC Estimated Expression)")
-ribModel:::upper.panel.plot(mean.expr, y,)
+#I guessed what the data was in that file and tried to make the data in this code as follows:
+
+
+### This is the same graphe everytime.
+#celeg.mean.expr <- rowMeans(dat, na.rm =T)
+#mean.expr <- celeg.mean.expr
+#plot(mean.expr, y, type="n", xlab = "log(Mean Emperical Expression)", ylab = "log(ROC Estimated Expression)")
+#ribModel:::upper.panel.plot(mean.expr, y,)
 
 dev.off()
 
-pdf("lower_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_singles.pdf", height=20, width=20)
+pdf("Higher_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_singles.pdf", height=20, width=20)
 par(mfrow=c(4,5))
 cn <- colnames(X)
-for(i in 2:14)
+for(i in 2:11)
 {
   plot(as.numeric(X[,i]), y, type="n", xlab = "log(Emperical Expression)", ylab = "log(ROC Estimated Expression)", main = cn[i])
   ribModel:::upper.panel.plot(X[,i], y)
 }
 par(mfrow=c(4,5))
-for(i in 2:14)
+for(i in 2:11)
 {
   plot(as.numeric(X[,i]*meanBeta[i]), y, type="n", xlab = "log(Emperical Expression)", ylab = "log(ROC Estimated Expression)", main = cn[i])
   ribModel:::upper.panel.plot(X[,i]*meanBeta[i], y)
 }
 dev.off()
 
+#Need to Manually Store the mean log likelihood each time.
 
 plot(logLik2[,1], type = "l")
-mean(logLik2[,1])
-
+meanLogLik <- mean(logLik2[,1])
+as.data
 plot(density(logLik2[,1]))
 
-print(meanBeta)
-print(hdiBeta)
+
+#Export Results
+#Don't forget to adjust the output file name.
+lifestages <- as.matrix(t.spent)
+dnames <- rownames(lifestages)
+rownames(lifestages) <- NULL
+lifestages <- cbind(dnames, lifestages)
+lifestages <- rbind(c("Intercept",NA), lifestages)
+
+betaResults <- as.data.frame(cbind(lifestages, meanBeta, hdiBeta))
+write.csv(betaResults, "Higher_Hierarchy_With_Dauer_Results_2Aug2016T1.csv")
+
+meanLogLik <- as.data.frame(mean(logLik2[,1]))
+write.csv(meanLogLik, "Higher_Hierarchy_With_Dauer_Mean_Log_Likelihood_2Aug2016T1.csv")

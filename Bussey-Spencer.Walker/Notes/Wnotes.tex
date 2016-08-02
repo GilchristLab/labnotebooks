@@ -377,20 +377,20 @@
 \item I would assume that all the cell activity is similar throughout the replication processes in each of the proliferating stages. 
 \item Getting an expected time equal to the full time of proliferation for the 4-cell stage is a hypothesis in the lower hierarchy.
 \item I further catalogued all of the ages given by the experiment into the same excel file that has the original life stage and order numbers.
-\item That file name is \enquote{Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
+\item That file name is \enquote{C\_Elegans/Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
 \item Below I will attach two PDFs that have the graphic results from each trial run.
 \end{itemize}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.45]{../Higher_Hierarchy_with_Dauer_1/Plots/Higher_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
+\includegraphics[scale=.45]{../C_Elegans/Higher_Hierarchy_with_Dauer_1/Plots/Higher_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
 \end{center}
 \caption{July 27th Graphs From Higher Hierarchy With Dauer Model Run}
 \end{figure}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.45]{../Lower_Hierarchy_With_Dauer_1/Plots/lower_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
+\includegraphics[scale=.45]{../C_Elegans/Lower_Hierarchy_With_Dauer_1/Plots/lower_hierarchy_with_dauer_original_model_celegans_weighted_expr_vector_beta_noise_fixed_sroc_withIntercept.pdf}
 \end{center}
 \caption{July 27th Graphs From Lower Hierarchy With Dauer Model Run}
 \end{figure}
@@ -402,8 +402,49 @@
 \item The third graph displays the Time in Lifestage plotted with the Expression Coefficients
 \item The fourth graph displays the ordering of the life stages.
 \item I put these expected life stage durations and orderings in the file
-\item  \enquote{Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
+\item  \enquote{C\_Elegans/Data/Ordered.Time.Spent.Lifestages.Celeg\_1.csv}.
 \item The fifth graph displays the original log Roc expression data plotted against the log Mean Empirical Expression.
 \item TO DO: While I am gone, Cedric has asked me to read a paper and compare it to our method of estimating codon optimality.
 \end{itemize}
+
+
+\labday{2 August 2016}
+\experiment{Optimal Codons}
+\begin{itemize}
+\item Over the weekend Cedric asked me to read \enquote{Codon usage in "Caenorhabditis elegans": delineation of translational selection and mutational biases} (Stenico, et. al. 1994) and to see how our estimates of codon optimality line up with the paper's. 
+\item I wrote my findings up in a word document, but I can easily move them to latex if need be.
+\item For now I will put the word document in the Optimal Codons file.
+\item I talked to Cedric and realized that I should have looked at the ROC SEMPRR data on C. Elegans instead of Yeast.
+\item I analyzed and compared the C. Elegans optimal codons from ROC and from the Stenico file and compiled a table.
+\item Just about all of the optimal codons were agreed upon by the two papers with the exception of Ser2, Arg, and Ser4, which are very logically explainable.
+\begin{itemize}
+\item Ser2- Stenico found no optimal codon between these two because neither shows up very often in high bias genes.
+\item Arg- the top two most optimal codons are very close at the max phi levels, so it is not surprising that Stenico found CGC to be more optimal (but both to be optimal) while ROC found CGT/CGU to be more optimal.
+\end{itemize}
+\item I emailed Cedric the table and my comparison.
+\item I printed the paper Dr. Gilchrist sent me to read and will comb through it.
+\item When I talked to him a minute ago he said to focus on the methods of analysis and try to glean which method better fits the data and which method allows us to make more biological inferences.
+\end{itemize}
+
+\experiment{C. Elegans}
+\begin{itemize}
+\item Somehow I saved a blank sheet when I could have sworn I input the data from the Higher hierarchy with Dauer run, so the first thing I am doing this morning is re-inputting that data and making sure I save the file correctly.
+\item I need to write code to send the results to an excel file so that I do not have to take the time and so there will be no human error when transferring the results.
+\item Also writing code to export a file containing the mean log likelihood.
+\item Finished writing those two codes and put them in both the rcodes on github.
+\item Now that I have a table with all of the information about the mean betas and the expected life lengths, I can work on the mathematical code for deriving insight from this data.
+\item Just realized I missed one life stage before that I somehow deleted from the data Cedric originally sent me.
+\item It is called Newly Molted Young Adult Hermaphrodite.
+\item This life stage occurs for the first 24 hours after the L4 and is considered part of the adult stage.
+\item I am going back to alter the code and data for both datasets to include this life stage.
+\item Changed the data and code and am re-running both datasets under the model.
+\item I ran the lower hierarchy model and will run the higher hierarchy model tonight.
+\item TO DO
+\begin{itemize}
+\item Add the newest data and figures to these notes and to the github.
+\item Adjust the exported data's column names!
+\item Talk to Gilchrist again about the Undergraduate Research Conference because I do not know if I can do it over fall break.
+\end{itemize}
+\end{itemize}
+
 \end{document}
