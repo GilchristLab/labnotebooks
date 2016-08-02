@@ -642,31 +642,103 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     \begin{figure}
         \centering
         \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/LogLikeTrace}
-        \caption{LogLikelihood trace for FONSE}
+        \caption{LogLikelihood trace}
         \label{fig:JULY27_LIKE}
     \end{figure}
     \begin{figure}
         \centering
         \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/ExpectedPhiTrace}
-        \caption{LogLikelihood trace for FONSE}
+        \caption{Expected Phi trace for FONSE}
         \label{fig:JULY27_EPHI}
     \end{figure}
     \begin{figure}
         \centering
         \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/SynthesisRateComp}
-        \caption{LogLikelihood trace for FONSE}
+        \caption{Synthesis Rate Plot for FONSE}
         \label{fig:JULY27_SYNTH}
     \end{figure}
     \begin{figure}
         \centering
         \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/MutationTrace}
-        \caption{LogLikelihood trace for FONSE}
+        \caption{Mutation trace for FONSE}
         \label{fig:JULY27_MUT}
     \end{figure}
     \begin{figure}
         \centering
         \includegraphics[scale=.65]{FONSE_Plots/2016/July_27/SelectionTrace}
-        \caption{LogLikelihood trace for FONSE}
+        \caption{Selection trace for FONSE}
         \label{fig:JULY27_SEL}
     \end{figure}
+    
+\labday{July 28, 2016}
+    \begin{itemize}
+        \item Ran FONSE again this time with the calculateCodonProbabilityVector function being changed to the calculateLogCodonProbability function. I ran it with the same simulated data and parameters as yesterday's run
+            \begin{itemize}
+                \item The log likelihood values started out much lower than the previous run, with the status at iteration 100 being around -670000. The values still climbed, though not as much. By the end, the values settled around -630000 as shown by the plot of the trace in figure \ref{fig:JULY28_LIKE}
+                \item The sudden spike in the expected phi values was not present in this run. Instead, the expected phi values highest point was at the beginning at around .6 but then went down and leveled off at a little above 0 as shown by the plot of the trace in figure \ref{fig:JULY28_EPHI}
+                \item The plot of the true values for the synthesis rate vs. the expected values was also fairly different. Instead of having two distinct groupings of points with one having almost no correlation and the other being close to 1-to-1 as in yesterday's run, this run produced a plot with only one grouping as shown in figure \ref{fig:JULY28_SYNTH}
+                \item The mutation and selection traces were both similar to yesterdays run in that most took some time to start begin accepted then hovered around a certain value bar the few amino acids that were consistently 0. These are found in figures \ref{fig:JULY28_MUT} and \ref{fig:JULY28_SEL} respectively.
+            \end{itemize}
+        \item Worked on documentation for the changes I made to the calculateCodonProbabilityVector functions in ROC and FONSE.
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_28/LogLikeTrace}
+        \caption{LogLikelihood trace for FONSE}
+        \label{fig:JULY28_LIKE}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_28/ExpectedPhiTrace}
+        \caption{Expected Phi trace for FONSE}
+        \label{fig:JULY28_EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_28/SynthesisRateComp}
+        \caption{Synthesis Rate Plot for FONSE}
+        \label{fig:JULY28_SYNTH}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_28/MutationTrace}
+        \caption{Mutation trace for FONSE}
+        \label{fig:JULY28_MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/July_28/SelectionTrace}
+        \caption{Selection trace for FONSE}
+        \label{fig:JULY28_SEL}
+    \end{figure}
+    
+\labday{July 29, 2016}
+    \begin{itemize}
+        \item First, I let FONSE run for longer than usual, 40000 iteration, to see if what kind of change that would bring about specifically with the acceptance rates of the AA's. At the end of the run it's status was almost identical to that of yesterday's main run. 
+        \item While I was letting the model run, I worked on creating my own simulated data. I used S. Cereviciae's genome file, mutation file, selection file, and phi value file to simulate my own S. Cereviciae genome. I then ran FONSE on this simulated data with b = 0.001, samples = 1000, and thinning = 10, but it exited with a NAN error at iteration 10. This is probably due to an error I made while simulating the genome so I'll run it through the debugger tomorrow to try and see what happened.
+    \end{itemize}
+    
+\labday{July 30, 2016}
+    \begin{itemize}
+        \item Running the debugger revealed that NAN is being reached prior to the tenth iteration. The error was only thrown at iteration 10 because I was running the model with a thinning of 10, and when I ran it through the debugger, NAN was reached at the first iteration. After some searching and trial and error, I found that the source of the NAN error in this case comes from a division operation where it ends up being 0/0. With where this is in the code, the error is coming from where it calculates the log likelihood per gene, which involves calculating the log likelihood per AA. Unfortunately I was not able to find the root cause of it today.
+        \item Since running the debugger takes a lot of time, especially when it reads genome files, I spent the down time further documenting the changes I've made to FONSE and ROC and doing file clean-up where I made the file names 
+    \end{itemize}
+    
+\labday{August 1, 2016}
+    \begin{itemize}
+        \item Meeting Notes:
+            \begin{itemize}
+                \item Check codon counts between true genome and simulated genome.
+                \item Don't do the ratio calculation on a non log scale. i.e. I don't have to exponentiate.
+            \end{itemize}
+        \item The first thing I was able to find was that the unexpected 0's in the 0/0 operation came from an exponential function where the argument x in exp(x) was so small that it evaluated it as 0, similar to the problem we saw in calculating the codon probability vector with largely scaled phi values.
+    \end{itemize}
+    
+\labday{August 2, 2016}
+    \begin{itemize}
+        \item Checked the codon counts as directed in yesterdays meeting and both the codon counts of the true genome and the simulated genome matched up.
+        \item Helped Hollis debug a weird error in one of his scripts by running it on a different environment, my laptop.
+        \item In order to help Hollis I had to resolve some issues I've unknowingly been having with GitHub. My issues were that GitHub wasn't registering my fetch or pull requests even though it was giving me indication that it had. This is why my previous notes weren't uploaded until today, but the problem has been resolved.
+    \end{itemize}
 \end{document}
