@@ -2096,8 +2096,23 @@ Afterwards, moved an old working R script to use this data for testing.
     Started writing them today.
 \end{itemize}
 
-%\labday{August 2, 2016}
+\labday{August 2, 2016}
 
+\begin{itemize}
+    \item Checked on the simulation that used the first genome I simulated: it was still running.
+    \item According to the log file of the second genome I simulated, the run should last about 25.6 hours.
+    Will have to wait for completion before I can do anything else with Gauley.
+    \item Note: The run with Jeremy's simulated genome took only 20 hours.
+    \item Continued trying to write functions to plot the data I have.
+    \item Also sent over the simulateGenome script to Alan so he can help debug that function.
+    \begin{itemize}
+      \item Results inconclusive once Alan finally fixed his github problems.
+      His script also crashes without any error messages printed.
+      \item If anything, the bug should be in the section of R-code is encapsulated by the C code.
+      \item Will test on Gauley next as runs will have finished by then.
+    \end{itemize}
+    \item To modify parameterObject.R with the ability to extract CSP posterior means and quantiles for Alpha and Lambda Prime, I needed to expose CodonsToAA from sequenceSummary.
+\end{itemize}
 
 
 \end{document}
