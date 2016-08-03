@@ -1485,7 +1485,7 @@ again to re-generate proper documentation files.
 # a correct loglikelihood with the same seed should be equal, disregarding other variables.
 #
 # Thus, in the future, simply take the logLikelihood value and hard code it here, and compare via
-# mcmc$getLogLikelihoodTrace(), which returns a vector. Get the average of these values
+# mcmc\$getLogLikelihoodTrace(), which returns a vector. Get the average of these values
 # and compare it with the hard-coded average of logLikelihoodTrace.
 # This is currently not implemented due to laziness and mild helpfulness, and it is currently working.
 # Once it breaks, it should be converted.
@@ -1988,6 +1988,10 @@ Afterwards, moved an old working R script to use this data for testing.
         \label{Jeremy Correlation 7-27-16}
     \end{figure}
     \item The bottom axis, not shown (see the folder 7\sep -\sep 27\sep -\sep 16\sep -\sep Jeremy\sep Correlation) is True Values.
+\footnote{mikeg: Please do not put incomplete figures and make sure all axes are well documented in the notebook.
+  For example, what exactly are the RFP rates? The gene specific estimates of $\phi$? $\ln(\phi)$?  Don't assume you'll remember.
+  Also please note that for a number of reasons, we generally visualize the log of expression, not expression itself.
+}
     \item I am not sure how to interpret this data. 
     While with 10 samples it had plotted a very nice x = Cy correlation as mentioned before, this data implies that the estimated values have a log relationship to the true values.
     \item May have to ask someone how to extract the Phi values -- perhaps the Trace chosen was wrong?
@@ -2047,6 +2051,8 @@ Afterwards, moved an old working R script to use this data for testing.
     \begin{itemize}
         \item It should be easy to convert existing code to plot in the package from ROC to FONSE/RFP, but it hasn't been.
         \item Re-explained the problem: while getting the whole trace plotting was simple to extend (as I have done by adding mean and var waiting time), the existing code to get the codon specific posterior mean was in a function (getCSPEstimates) that was to be used specifically for ROC.
+          \footnote{mikeg: 08/03/16 -- I can't find this function in the RibModelFramework repository using the command  \tokenize{grep -r "getCSPEstimates"}.
+          You should be more clear in identifying files and functions.}
         \item There was even a TODO note to implement this function in a variation for FONSE and RFP.
         \item Suggestion by Dr. Gilchrist: avoid \enquote{copying and pasting} code and reproducing it, rather find a way to make it easily extendible like the existing trace plotting has been.
         \item Would have to talk to Cedric about this.
