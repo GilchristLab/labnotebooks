@@ -1987,11 +1987,13 @@ Afterwards, moved an old working R script to use this data for testing.
         \includegraphics[width=\textwidth,keepaspectratio]{figures/7-27-16-JeremyCorrelation.png}
         \label{Jeremy Correlation 7-27-16}
     \end{figure}
-    \item The bottom axis, not shown (see the folder 7\sep -\sep 27\sep -\sep 16\sep -\sep Jeremy\sep Correlation) is True Values.
-\footnote{mikeg: Please do not put incomplete figures and make sure all axes are well documented in the notebook.
-  For example, what exactly are the RFP rates? The gene specific estimates of $\phi$? $\ln(\phi)$?  Don't assume you'll remember.
-  Also please note that for a number of reasons, we generally visualize the log of expression, not expression itself.
+    \item The bottom axis, not shown (see the file RFPJeremyConfidenceIntervalsForAlphaAndLambdaPrime.pdf, figure on the final page, under the folder 7\sep -\sep 27\sep -\sep 16\sep -\sep Jeremy\sep Correlation under the folder runLogs) is True Values.
+        \footnote{mikeg: Please do not put incomplete figures and make sure all axes are well documented in the notebook.
+        For example, what exactly are the RFP rates? The gene specific estimates of $\phi$? $\ln(\phi)$?  Don't assume you'll remember.
+        Also please note that for a number of reasons, we generally visualize the log of expression, not expression itself.
 }
+        \footnote{Hollis: 08/03/16 -- Acknowledged and resolved in-person.
+        They were the gene-specific estimates of $\phi$}
     \item I am not sure how to interpret this data. 
     While with 10 samples it had plotted a very nice x = Cy correlation as mentioned before, this data implies that the estimated values have a log relationship to the true values.
     \item May have to ask someone how to extract the Phi values -- perhaps the Trace chosen was wrong?
@@ -2051,8 +2053,10 @@ Afterwards, moved an old working R script to use this data for testing.
     \begin{itemize}
         \item It should be easy to convert existing code to plot in the package from ROC to FONSE/RFP, but it hasn't been.
         \item Re-explained the problem: while getting the whole trace plotting was simple to extend (as I have done by adding mean and var waiting time), the existing code to get the codon specific posterior mean was in a function (getCSPEstimates) that was to be used specifically for ROC.
-          \footnote{mikeg: 08/03/16 -- I can't find this function in the RibModelFramework repository using the command  \tokenize{grep -r "getCSPEstimates"}.
-          You should be more clear in identifying files and functions.}
+            \footnote{mikeg: 08/03/16 -- I can't find this function in the RibModelFramework repository using the command \enquote{grep -r \enquote{getCSPEstimates}}.
+            You should be more clear in identifying files and functions.}
+            \footnote{Hollis: 08/04/16 -- Using that same command in the top level of the repository yields the function under RibModelFramework/R/parameterObject.R. 
+            Resolved in-person.}
         \item There was even a TODO note to implement this function in a variation for FONSE and RFP.
         \item Suggestion by Dr. Gilchrist: avoid \enquote{copying and pasting} code and reproducing it, rather find a way to make it easily extendible like the existing trace plotting has been.
         \item Would have to talk to Cedric about this.
@@ -2106,13 +2110,56 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Continued trying to write functions to plot the data I have.
     \item Also sent over the simulateGenome script to Alan so he can help debug that function.
     \begin{itemize}
-      \item Results inconclusive once Alan finally fixed his github problems.
-      His script also crashes without any error messages printed.
-      \item If anything, the bug should be in the section of R-code is encapsulated by the C code.
-      \item Will test on Gauley next as runs will have finished by then.
+        \item Results inconclusive once Alan finally fixed his github problems.
+        His script also crashes without any error messages printed.
+        \item One idea Alan pointed out was that intializing the parameter object was significantly faster with my RFP script than it was with the similar FONSE script, despite the FONSE script using a genome file that was significantly larger.
+        Perhaps I need to check if there is a bug with initialization with the Alpha and Lambda files.
+        \item If anything, the bug should be in the section of R-code is encapsulated by the C code.
+        \item Will test on Gauley next as runs will have finished by then.
     \end{itemize}
     \item To modify parameterObject.R with the ability to extract CSP posterior means and quantiles for Alpha and Lambda Prime, I needed to expose CodonsToAA from sequenceSummary.
+    \item After doing so, I discovered that the function I was modifying had not been used in one of the older development scripts before.
+    Thus, there may be a degree of uncertainty if it actually works.
 \end{itemize}
 
+\labday{August 3, 2016}
+
+\begin{itemize}
+    \item Yesterday's progress was stalled by a bug compiling the package: Need to update NAMESPACE.
+    \item Finished naively editing our current file. TODO: Make this more easily modifiable by allowing us to use roxygen2 rather than manual edits.
+    \item Talk with Dr. Gilchirst:
+    \begin{itemize}
+        \item Should try to let us add AAs rather than one-at-a-time codons to modifying RFP etc groupList parameter.
+        I.E. currently there is no easy way to. Long-term TODO, low priority.
+        \item Quickly hack up scripts to plot the data I have already.
+        \item Just get, instead of just the tail of the trace, the last 20 items of the trace and average it. I.e. the posterior mean.
+        \item What we want:
+        \begin{itemize}
+            \item Posterior Mean Lambda Estimate vs Lambda True
+            \item Posterior Mean Alpha Estimate vs Alpha True
+            \item Posterior Mean log(Phi) Estimate vs log(Phi) Estimate
+        \end{itemize}
+        \item Run these things until it reaches stationary section near the end.
+        \item Just look at the existing scripts to see examples of restart file loading usage.
+    \end{itemize}
+    \item Debugging RFP's version of simulateGenome further:
+    \begin{itemize}
+        \item Unfortunately, cannot run on Rstudio server at all.
+        May have to ask Cedric what the command is to locally reload the package on the server, if possible.
+        \item Running a script directly on gauley: Error seems to be when the Parameter::getSelectionCategory is called, resulting in a SEGSEV or seg fault error.
+    \end{itemize}
+    \item More function generalization: Need to discuss plotModel.R with Cedric.
+    \item Currently this file has two functions (plotting synthesis rates for ROC and FONSE) with identitical code.
+    \item Perhaps generalize it for just models in general and then adding RFP functionality from there.
+    \item In general, R code is still extremely fragmented and incomplete, particularly for RFP.
+    \item One nice-looking function hierarchy to discuss in particular is found in plotParameterObject.R.
+    \item This file has specific plot calls for the Parameter object for ROC and FONSE, but these functions just call a more general function (plotParameterObject).
+\end{itemize}
+
+\labday{August 4, 2016}
+
+\begin{itemize}
+    \item Had to fix some quirks with LaTeX, and later merge conflicts with git's labnotebooks directory.
+\end{itemize}
 
 \end{document}
