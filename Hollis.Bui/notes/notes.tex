@@ -12,6 +12,7 @@
 \usepackage{csquotes}
 \usepackage{xspace}
 \usepackage[normalem]{ulem} % For strikeout text
+\usepackage{pdfpages} % allows inclusion of PDF files
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -2172,7 +2173,24 @@ Afterwards, moved an old working R script to use this data for testing.
 \begin{itemize}
     \item Goal for today is to figure out restart files and just plot log-log Phi posterior means, and then continue to struggle with figuring out why the Alpha and Lambda Prime script part doesn't work.
     \item Reorganized notes again: Now separated between notes and figures, and runnable scripts and data.
+    \item Cedric answer: Would probably prefer using plotModel.R's inheritance hierarchy.
     \item Cedric comment: For getCodonSpecificPosteriorMean to simplify R-side code, perhaps make it so that instead of returning one value at a time return an entire vector and avoiding an R-side for loop.
+    \item In the course of messing with restart files, I can tell the following:
+    \begin{itemize}
+        \item To start an MCMC run again from a certain point in a prior set of runs, load a restart file into the parameter initialization rather than starting conditions.
+        \item Restart files are saved every 10 steps, and only one is needed to reinitialize.
+        \item To load the MCMC and the Parameter info for \textbf{graphing}, we must use the loadMCMCObject and loadParameterObject functions.
+    \end{itemize}
+    \item Playing with these functions, loading the saved .Rdat files seems to work perfectly: the .csv files re-produced are identical to the ones saved prior to this repository.
+    \item One caveat that caused problems when re-loading the data is ensuring that the calculated plots are the same.
+    \item In the scripts I used to run with 20,000 samples with the MCMC, I only changed one value -- the initial percentage of the trace for only one plot.
+    \item In the new script I wrote to get a log-log plot of the estimated versus true Phi posterior means, I finally figured out where else this value must be changed to affect other plots.
+    \item Thus, while the scripts took the last 30\% of the trace for one plot, they took the last 50\% of the trace for every other plot; my new plotting script will keep this consistent.
+    \item For future runs and plots, a new variable has been declared to be stored as the percentage of the trace to take throughout the plots.
+    \item Happily, there is a good correlation between Jeremy's estimated Phi values versus the true values.
+    \includepdf[pages={1}]{../RunnableScriptsAndData/runLogs/7-27-16-JeremyCorrelation/newPDFs/RFPJeremyEstimatedVsTrue.pdf}
+    \item Ending the day waiting for gauley's Rstudio console to stop spitting out error messages and clogging the system.
+    \item Seems to be a bug with my quick edit to the ploting script to script with my own simulated genomes.
 \end{itemize}
 
 \end{document}

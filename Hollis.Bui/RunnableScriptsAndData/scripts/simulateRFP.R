@@ -1,11 +1,11 @@
 library(ribModel)
 rm(list=ls())
 
-genome <- initializeGenomeObject(file.path("HollisTestingData", "s288c.genome.fasta"))
-alpha.file <- file.path("HollisTestingData", "RFPAlphaValues.csv")
-lambdaPrime.file <- file.path("HollisTestingData", "RFPLambdaPrimeValues.csv")
-phi.file <- file.path("HollisTestingData", "RFPPhiValues.csv")
-genome.out.file <- file.path("HollisTestingOut", "HollisSimulatedGenome.fasta")
+genome <- initializeGenomeObject(file.path("..", "JeremyData", "s288c.genome.fasta"))
+alpha.file <- file.path("..", "JeremyData", "RFPAlphaValues.csv")
+lambdaPrime.file <- file.path("..", "JeremyData", "RFPLambdaPrimeValues.csv")
+phi.file <- file.path("..", "JeremyData", "RFPPhiValues.csv")
+genome.out.file <- file.path("..", "HollisSimulatedGenomes", "HollisSimulatedGenomeNew.fasta")
 
 sphi_init <- c(2)
 numMixtures <- 1

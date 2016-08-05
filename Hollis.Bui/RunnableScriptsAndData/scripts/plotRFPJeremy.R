@@ -19,6 +19,9 @@ context("RFP Model")
   fileTrueAlphaValues = file.path("UnitTestingData", "testJeremyFiles", "RFPAlphaValues.csv")
   fileTrueLambdaPrimeValues = file.path("UnitTestingData", "testJeremyFiles", "RFPLambdaPrimeValues.csv")
   
+  folder = "7-27-16-JeremyCorrelation"
+  restartFile = file.path("..", "runLogs", folder, "20000_restartJeremyFile.rst")
+
   # Ensure the input files exist.
   test_that("file exists: JeremySimulatedRFPData.csv", {
     expect_equal(file.exists(fileName), T)
@@ -39,15 +42,20 @@ context("RFP Model")
   test_that("file exists: RFPLambdaPrimeValues.csv", {
     expect_equal(file.exists(fileTrueLambdaPrimeValues), T)
   })
-  
+
+  test_that("file exists: 20000_restartJeremyFile.rst", {
+    expect_equal(file.exists(restartFile), T)
+  })
+
   genome <- initializeGenomeObject(file = fileName, FALSE)
   
-  sphi_init <- c(2)
-  numMixtures <- 1
-  mixDef <- "allUnique"
-  geneAssignment <- c(rep(1, length(genome))) 
-  parameter <- initializeParameterObject(genome, sphi_init, numMixtures, geneAssignment, model= "RFP", split.serine = TRUE, mixture.definition = mixDef)
-  #parameter <- initializeParameterObject(model="RFP", restart.file="30restartFile.rst")
+  # sphi_init <- c(2)
+  # numMixtures <- 1
+  # mixDef <- "allUnique"
+  # geneAssignment <- c(rep(1, length(genome))) 
+  # parameter <- initializeParameterObject(genome, sphi_init, numMixtures, geneAssignment, model= "RFP", split.serine = TRUE, mixture.definition = mixDef)
+  
+  parameter <- initializeParameterObject(model="RFP", restart.file=restartFile)
   
   samples <- 10
   thinning <- 10
