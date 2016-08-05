@@ -1,0 +1,187 @@
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+
+Utility my_print --- Pass
+Testing my_printError, no argument.
+Testing my_printError, one argument: 0.
+Testing my_printError, multiple arguments: String, 0, 0.5.
+Utility my_printError --- Pass
+testthat results ================================================================
+    OK: 122 SKIPPED: 0 FAILED: 1
+1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) 
+
+    Error: testthat unit tests failed
+In addition: There were 15 warnings (use warnings() to see them)
+    Execution halted checking for missing documentation entries ... WARNING
+    Undocumented code objects:
+    ‘AAToCodon’ ‘aminoAcids’ ‘codons’ ‘combineThreeDimensionalTrace’
+    ‘combineTwoDimensionalTrace’ ‘confidenceInterval.plot’
+    ‘convergence.test.Rcpp_MCMCAlgorithm’
+    ‘convergence.test.Rcpp_ROCTrace’ ‘CovarianceMatrix’ ‘densityLogNorm’
+    ‘densityNorm’ ‘extractBaseInfo’ ‘FONSEModel’ ‘FONSEParameter’ ‘Gene’
+    ‘Genome’ ‘getCSPbyLogit’ ‘getCSPEstimates.Rcpp_ROCParameter’
+    ‘getExpressionEstimatesForMixture’ ‘getMixtureAssignmentEstimate’
+    ‘initializeCovarianceMatricies’ ‘initializeFONSEParameterObject’
+    ���initializeRFPParameterObject’ ‘initializeROCParameterObject’
+    ‘loadFONSEParameterObject’ ‘loadRFPParameterObject’
+    ‘loadROCParameterObject’ ‘lower.panel.plot’ ‘MCMCAlgorithm’ ‘Model’
+    ‘NAMESPACE’ ‘Parameter’ ‘plot.Rcpp_FONSEParameter’
+    ‘plotCodonSpecificParameters’ ‘plotExpectedPhiTrace’
+    ‘plotExpressionTrace’ ‘plotHyperParameterTrace’
+    ‘plotMixtureProbability’ ‘plotParameterObject’ ‘plotSinglePanel’
+    ‘randExp’ ‘randGamma’ ‘randLogNorm’ ‘randNorm’ ‘randUnif’ ‘RFPModel’
+    ‘RFPParameter’ ‘ROCModel’ ‘ROCParameter’ ‘runMCMC.Rcpp_MCMCAlgorithm’
+    ‘SequenceSummary’ ‘setBaseInfo’
+    ‘setRestartSettings.Rcpp_MCMCAlgorithm’ ‘splitMatrix’ ‘subMatrices’
+    ‘testCovarianceMatrix’ ‘testGene’ ‘testGenome’ ‘testMCMCAlgorithm’
+    ‘testParameter’ ‘testRFPParameter’ ‘testSequenceSummary’
+    ‘testUtility’ ‘Trace’ ‘upper.panel.plot’
+    ‘writeParameterObject.Rcpp_FONSEParameter’
+    ‘writeParameterObject.Rcpp_RFPParameter’
+    ‘writeParameterObject.Rcpp_ROCParameter’
+    Undocumented S4 classes:
+    ‘Rcpp_MCMCAlgorithm’ ‘Rcpp_Gene’ ‘Rcpp_Trace’ ‘Rcpp_Genome’
+    ‘Rcpp_ROCModel’ ‘Rcpp_Parameter’ ‘Rcpp_CovarianceMatrix’
+    ‘Rcpp_SequenceSummary’ ‘Rcpp_RFPModel’ ‘Rcpp_FONSEModel’
+    ‘Rcpp_FONSEParameter’ ‘Rcpp_RFPParameter’ ‘Rcpp_Model’
+    ‘Rcpp_ROCParameter’
+All user-level objects in a package (including S4 classes and methods)
+    should have documentation entries.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual. checking Rd contents ... WARNING
+    Argument items with no description in Rd object 'convergence.test':
+    ‘trace’ ‘what’ ‘mixture’ ‘n.samples’ ‘frac1’ ‘frac2’ ‘plot’ ‘...’
+    Argument items with no description in Rd object 'plot.Rcpp_FONSEModel':
+    ‘...’
+    Argument items with no description in Rd object 'plot.Rcpp_MCMCAlgorithm':
+    ‘zoom.window’
+    Argument items with no description in Rd object 'plot.Rcpp_ROCModel':
+    ‘...’
+    Argument items with no description in Rd object 'plot.Rcpp_Trace':
+    ‘...’
+    Argument items with no description in Rd object 'summary.Rcpp_Genome':
+    ‘...’
+    checking compilation flags in Makevars ... WARNING
+    Non-portable flags in variable 'PKG_CPPFLAGS':
+    -fopenmp -O3 checking for GNU extensions in Makefiles ... WARNING
+    Found the following file(s) containing GNU extensions:
+    src/Makevars
+    Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),
+    $(wildcard), ifeq ... endif. See section ‘Writing portable packages’ in
+    the ‘Writing R Extensions’ manual. checking installed package size ... NOTE
+    installed size is 16.9Mb
+    sub-directories of 1Mb or more:
+    libs  16.7Mb checking top-level files ... NOTE
+    Non-standard file/directory found at top level:
+    ‘desc’ checking S3 generic/method consistency ... NOTE
+    Found the following apparent S3 methods exported but not registered:
+    convergence.test.Rcpp_MCMCAlgorithm convergence.test.Rcpp_ROCTrace
+    getCSPEstimates.Rcpp_ROCParameter length.Rcpp_Genome
+    plot.Rcpp_FONSEModel plot.Rcpp_FONSEParameter plot.Rcpp_MCMCAlgorithm
+    plot.Rcpp_ROCModel plot.Rcpp_ROCParameter plot.Rcpp_Trace
+    runMCMC.Rcpp_MCMCAlgorithm setRestartSettings.Rcpp_MCMCAlgorithm
+    summary.Rcpp_Genome writeParameterObject.Rcpp_FONSEParameter
+    writeParameterObject.Rcpp_RFPParameter
+    writeParameterObject.Rcpp_ROCParameter
+    See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
+    manual. checking R code for possible problems ... NOTE
+    confidenceInterval.plot: no visible global function definition for
+    ‘points’
+    confidenceInterval.plot: no visible global function definition for
+    ‘segments’
+    confidenceInterval.plot: no visible global function definition for ‘lm’
+    convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+    variable ‘object’
+    convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+    variable ‘nsamples’
+    convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+    variable ‘thin’
+    convergence.test.Rcpp_ROCTrace: no visible binding for global variable
+    ‘nsamples’
+    convergence.test.Rcpp_ROCTrace: no visible global function definition
+    for ‘mcmc’
+    convergence.test.Rcpp_ROCTrace: no visible binding for global variable
+    ‘thin’
+    convergence.test.Rcpp_ROCTrace: no visible global function definition
+    for ‘geweke.diag’
+    convergence.test.Rcpp_ROCTrace: no visible global function definition
+    for ‘geweke.plot’
+    getCSPEstimates.Rcpp_ROCParameter: no visible global function
+    definition for ‘write.csv’
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘par’
+    plot.Rcpp_FONSEModel: no visible global function definition for
+    ‘layout���
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘plot’
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘text’
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘box’
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘axis’
+    plot.Rcpp_FONSEModel: no visible global function definition for ‘hist’
+    plot.Rcpp_MCMCAlgorithm: no visible global function definition for
+    ‘plot’
+    plot.Rcpp_MCMCAlgorithm: no visible global function definition for
+    ‘grid’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘par’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘layout’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘plot’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘text’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘box’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘axis’
+    plot.Rcpp_ROCModel: no visible global function definition for ‘hist’
+    plotCodonSpecificParameters: no visible global function definition for
+    ‘par’
+    plotCodonSpecificParameters: no visible global function definition for
+    ‘layout’
+    plotCodonSpecificParameters: no visible global function definition for
+    ‘plot’
+    plotCodonSpecificParameters: no visible global function definition for
+    ‘text’
+    plotCodonSpecificParameters: no visible binding for global variable
+    ‘sd’
+    plotCodonSpecificParameters: no visible global function definition for
+    ‘lines’
+    plotCodonSpecificParameters: no visible global function definition for
+    ���legend’
+    plotExpectedPhiTrace: no visible global function definition for ‘par’
+    plotExpectedPhiTrace: no visible global function definition for ‘plot’
+    plotExpectedPhiTrace: no visible global function definition for
+    ‘abline’
+    plotExpressionTrace: no visible global function definition for ‘plot’
+    plotHyperParameterTrace: no visible global function definition for
+    ‘plot’
+    plotHyperParameterTrace: no visible global function definition for
+    ‘lines’
+    plotHyperParameterTrace: no visible global function definition for
+    ‘legend’
+    plotMixtureProbability: no visible global function definition for
+    ‘plot’
+    plotMixtureProbability: no visible global function definition for
+    ‘lines’
+    plotMixtureProbability: no visible global function definition for
+    ‘legend’
+    plotParameterObject: no visible global function definition for ‘pairs’
+    plotSinglePanel: no visible global function definition for ‘plot’
+    plotSinglePanel: no visible global function definition for ‘quantile’
+    plotSinglePanel: no visible binding for global variable ‘sd’
+    plotSinglePanel: no visible global function definition for ‘points’
+    plotSinglePanel: no visible global function definition for ‘median’
+    plotSinglePanel: no visible global function definition for ‘lines’
+    plotSinglePanel: no visible global function definition for ‘legend’
+    upper.panel.plot: no visible global function definition for ‘abline’
+    upper.panel.plot: no visible global function definition for ‘points’
+    upper.panel.plot: no visible global function definition for ‘segments’
+    upper.panel.plot: no visible global function definition for ‘lm’
+    upper.panel.plot: no visible global function definition for ‘qt’
+    upper.panel.plot: no visible global function definition for ‘text’
+    Undefined global functions or variables:
+    abline axis box geweke.diag geweke.plot grid hist layout legend lines
+    lm mcmc median nsamples object pairs par plot points qt quantile sd
+    segments text thin write.csv
+    Consider adding
+    importFrom("graphics", "abline", "axis", "box", "grid", "hist",
+            "layout", "legend", "lines", "pairs", "par", "plot",
+            "points", "segments", "text")
+    importFrom("stats", "lm", "median", "qt", "quantile", "sd")
+    importFrom("utils", "write.csv")
+    to your NAMESPACE file. checking Rd files ... NOTE
+    prepare_Rd: convergence.test.Rd:27-29: Dropping empty section \value 

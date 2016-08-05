@@ -1,0 +1,30 @@
+Abstract
+
+	labbook.cls - a document class that produces an index of sectioning
+  commands 
+
+  This class is designed to typeset laboratory journals that contain
+  chronologically ordered records about experiments. From the
+  sectioning commands, an experiment index is generated. The class
+  is based on the KOMA-Script class scrbook.cls.
+
+To produce the class and example files
+
+	latex labbook.ins
+
+
+To produce the documentation 
+
+  (pdf)latex labbook.dtx
+
+	To produce an index for the documentation:
+
+    makeindex -s gind.ist labbook
+
+  To produce a change history for the documentation:
+  
+    makeindex -s gglo.ist -o labbook.gls labbook.glo
+
+Users of Emacs and AUCTeX might want to copy the file labbook.el to
+a place where AUCTeX finds its style files.
+

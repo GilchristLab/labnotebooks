@@ -1,0 +1,722 @@
+Allowing divergence from initial conditions for 0 iterations.
+
+maxGrouping: 61
+entering MCMC loop
+	Estimate Codon Specific Parameters? TRUE 
+	Estimate Hyper Parameters? TRUE 
+	Estimate Synthesis rates? TRUE 
+	Starting MCMC with 1000 iterations
+	Adapting will stop after 1000 steps
+Status at iteration 100 
+	 current logLikelihood: 1.01292e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.25729
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.26 with std csp = 0.1
+GCC	0.33 with std csp = 0.1
+GCG	0.32 with std csp = 0.1
+GCT	0.37 with std csp = 0.1
+TGC	0.28 with std csp = 0.1
+TGT	0.35 with std csp = 0.1
+GAC	0.33 with std csp = 0.1
+GAT	0.34 with std csp = 0.1
+GAA	0.27 with std csp = 0.1
+GAG	0.33 with std csp = 0.1
+TTC	0.36 with std csp = 0.1
+TTT	0.39 with std csp = 0.1
+GGA	0.28 with std csp = 0.1
+GGC	0.35 with std csp = 0.1
+GGG	0.34 with std csp = 0.1
+GGT	0.34 with std csp = 0.1
+CAC	0.34 with std csp = 0.1
+CAT	0.3 with std csp = 0.1
+ATA	0.35 with std csp = 0.1
+ATC	0.27 with std csp = 0.1
+ATT	0.29 with std csp = 0.1
+AAA	0.19 with std csp = 0.1
+AAG	0.37 with std csp = 0.1
+CTA	0.21 with std csp = 0.1
+CTC	0.3 with std csp = 0.1
+CTG	0.28 with std csp = 0.1
+CTT	0.37 with std csp = 0.1
+TTA	0.22 with std csp = 0.1
+TTG	0.31 with std csp = 0.1
+ATG	0.26 with std csp = 0.1
+AAC	0.38 with std csp = 0.1
+AAT	0.25 with std csp = 0.1
+CCA	0.36 with std csp = 0.1
+CCC	0.31 with std csp = 0.1
+CCG	0.28 with std csp = 0.1
+CCT	0.28 with std csp = 0.1
+CAA	0.41 with std csp = 0.1
+CAG	0.3 with std csp = 0.1
+AGA	0.3 with std csp = 0.1
+AGG	0.27 with std csp = 0.1
+CGA	0.26 with std csp = 0.1
+CGC	0.28 with std csp = 0.1
+CGG	0.34 with std csp = 0.1
+CGT	0.31 with std csp = 0.1
+TCA	0.4 with std csp = 0.1
+TCC	0.35 with std csp = 0.1
+TCG	0.35 with std csp = 0.1
+TCT	0.24 with std csp = 0.1
+ACA	0.31 with std csp = 0.1
+ACC	0.3 with std csp = 0.1
+ACG	0.29 with std csp = 0.1
+ACT	0.37 with std csp = 0.1
+GTA	0.32 with std csp = 0.1
+GTC	0.37 with std csp = 0.1
+GTG	0.27 with std csp = 0.1
+GTT	0.31 with std csp = 0.1
+TGG	0.37 with std csp = 0.1
+TAC	0.39 with std csp = 0.1
+TAT	0.33 with std csp = 0.1
+AGC	0.38 with std csp = 0.1
+AGT	0.35 with std csp = 0.1
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 0
+	 acceptance rate to high: 4599
+Status at iteration 200 
+	 current logLikelihood: 1.01614e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.25106
+	 current stdDevSynthesisRate proposal width: 0.08
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.1 with std csp = 0.1
+GCC	0.09 with std csp = 0.12
+GCG	0.13 with std csp = 0.12
+GCT	0.04 with std csp = 0.12
+TGC	0.13 with std csp = 0.1
+TGT	0.06 with std csp = 0.12
+GAC	0.08 with std csp = 0.12
+GAT	0.07 with std csp = 0.12
+GAA	0.09 with std csp = 0.1
+GAG	0.07 with std csp = 0.12
+TTC	0.09 with std csp = 0.12
+TTT	0.13 with std csp = 0.12
+GGA	0.08 with std csp = 0.1
+GGC	0.19 with std csp = 0.12
+GGG	0.11 with std csp = 0.12
+GGT	0.07 with std csp = 0.12
+CAC	0.13 with std csp = 0.12
+CAT	0.15 with std csp = 0.1
+ATA	0.16 with std csp = 0.12
+ATC	0.1 with std csp = 0.1
+ATT	0.13 with std csp = 0.1
+AAA	0.12 with std csp = 0.08
+AAG	0.06 with std csp = 0.12
+CTA	0.16 with std csp = 0.1
+CTC	0.2 with std csp = 0.1
+CTG	0.16 with std csp = 0.1
+CTT	0.1 with std csp = 0.12
+TTA	0.07 with std csp = 0.1
+TTG	0.07 with std csp = 0.12
+ATG	0.11 with std csp = 0.1
+AAC	0.08 with std csp = 0.12
+AAT	0.07 with std csp = 0.1
+CCA	0.1 with std csp = 0.12
+CCC	0.11 with std csp = 0.12
+CCG	0.11 with std csp = 0.1
+CCT	0.16 with std csp = 0.1
+CAA	0.09 with std csp = 0.12
+CAG	0.11 with std csp = 0.1
+AGA	0.11 with std csp = 0.1
+AGG	0.1 with std csp = 0.1
+CGA	0.13 with std csp = 0.1
+CGC	0.16 with std csp = 0.1
+CGG	0.17 with std csp = 0.12
+CGT	0.12 with std csp = 0.12
+TCA	0.2 with std csp = 0.12
+TCC	0.1 with std csp = 0.12
+TCG	0.15 with std csp = 0.12
+TCT	0.11 with std csp = 0.1
+ACA	0.15 with std csp = 0.12
+ACC	0.16 with std csp = 0.1
+ACG	0.12 with std csp = 0.1
+ACT	0.11 with std csp = 0.12
+GTA	0.08 with std csp = 0.12
+GTC	0.08 with std csp = 0.12
+GTG	0.13 with std csp = 0.1
+GTT	0.1 with std csp = 0.12
+TGG	0.14 with std csp = 0.12
+TAC	0.09 with std csp = 0.12
+TAT	0.07 with std csp = 0.12
+AGC	0.16 with std csp = 0.12
+AGT	0.09 with std csp = 0.12
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 476
+	 acceptance rate to high: 3523
+Status at iteration 300 
+	 current logLikelihood: 1.01635e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.23655
+	 current stdDevSynthesisRate proposal width: 0.064
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.14 with std csp = 0.08
+GCC	0.07 with std csp = 0.096
+GCG	0.08 with std csp = 0.096
+GCT	0.07 with std csp = 0.096
+TGC	0.08 with std csp = 0.08
+TGT	0.08 with std csp = 0.096
+GAC	0.06 with std csp = 0.096
+GAT	0.05 with std csp = 0.096
+GAA	0.03 with std csp = 0.08
+GAG	0.08 with std csp = 0.096
+TTC	0.06 with std csp = 0.096
+TTT	0.09 with std csp = 0.096
+GGA	0.07 with std csp = 0.08
+GGC	0.09 with std csp = 0.096
+GGG	0.07 with std csp = 0.096
+GGT	0.04 with std csp = 0.096
+CAC	0.05 with std csp = 0.096
+CAT	0.13 with std csp = 0.08
+ATA	0.04 with std csp = 0.096
+ATC	0.06 with std csp = 0.08
+ATT	0.09 with std csp = 0.08
+AAA	0.1 with std csp = 0.064
+AAG	0.01 with std csp = 0.096
+CTA	0.11 with std csp = 0.08
+CTC	0.17 with std csp = 0.1
+CTG	0.1 with std csp = 0.08
+CTT	0.17 with std csp = 0.096
+TTA	0.1 with std csp = 0.08
+TTG	0.04 with std csp = 0.096
+ATG	0.09 with std csp = 0.08
+AAC	0.07 with std csp = 0.096
+AAT	0.06 with std csp = 0.08
+CCA	0.05 with std csp = 0.096
+CCC	0.09 with std csp = 0.096
+CCG	0.18 with std csp = 0.08
+CCT	0.21 with std csp = 0.08
+CAA	0.13 with std csp = 0.096
+CAG	0.08 with std csp = 0.08
+AGA	0.12 with std csp = 0.08
+AGG	0.1 with std csp = 0.08
+CGA	0.21 with std csp = 0.08
+CGC	0.17 with std csp = 0.08
+CGG	0.16 with std csp = 0.096
+CGT	0.12 with std csp = 0.096
+TCA	0.04 with std csp = 0.12
+TCC	0.09 with std csp = 0.096
+TCG	0.14 with std csp = 0.096
+TCT	0.05 with std csp = 0.08
+ACA	0.06 with std csp = 0.096
+ACC	0.08 with std csp = 0.08
+ACG	0.15 with std csp = 0.08
+ACT	0.09 with std csp = 0.096
+GTA	0.09 with std csp = 0.096
+GTC	0.12 with std csp = 0.096
+GTG	0.07 with std csp = 0.08
+GTT	0.05 with std csp = 0.096
+TGG	0.11 with std csp = 0.096
+TAC	0.07 with std csp = 0.096
+TAT	0.08 with std csp = 0.096
+AGC	0.13 with std csp = 0.096
+AGT	0.09 with std csp = 0.096
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 612
+	 acceptance rate to high: 2891
+Status at iteration 400 
+	 current logLikelihood: 1.01649e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24302
+	 current stdDevSynthesisRate proposal width: 0.0512
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.05 with std csp = 0.064
+GCC	0.06 with std csp = 0.0768
+GCG	0.09 with std csp = 0.0768
+GCT	0.05 with std csp = 0.0768
+TGC	0.1 with std csp = 0.064
+TGT	0.1 with std csp = 0.0768
+GAC	0.08 with std csp = 0.0768
+GAT	0.06 with std csp = 0.0768
+GAA	0.06 with std csp = 0.064
+GAG	0.11 with std csp = 0.0768
+TTC	0.06 with std csp = 0.0768
+TTT	0.16 with std csp = 0.0768
+GGA	0.08 with std csp = 0.064
+GGC	0.05 with std csp = 0.0768
+GGG	0.03 with std csp = 0.0768
+GGT	0.05 with std csp = 0.0768
+CAC	0.12 with std csp = 0.0768
+CAT	0.13 with std csp = 0.064
+ATA	0.08 with std csp = 0.0768
+ATC	0.05 with std csp = 0.064
+ATT	0.06 with std csp = 0.064
+AAA	0.06 with std csp = 0.0512
+AAG	0.07 with std csp = 0.0768
+CTA	0.08 with std csp = 0.064
+CTC	0.07 with std csp = 0.08
+CTG	0.09 with std csp = 0.064
+CTT	0.09 with std csp = 0.0768
+TTA	0.08 with std csp = 0.064
+TTG	0.07 with std csp = 0.0768
+ATG	0.11 with std csp = 0.064
+AAC	0.06 with std csp = 0.0768
+AAT	0.07 with std csp = 0.064
+CCA	0 with std csp = 0.0768
+CCC	0.09 with std csp = 0.0768
+CCG	0.13 with std csp = 0.064
+CCT	0.12 with std csp = 0.08
+CAA	0.16 with std csp = 0.0768
+CAG	0.08 with std csp = 0.064
+AGA	0.07 with std csp = 0.064
+AGG	0.11 with std csp = 0.064
+CGA	0.11 with std csp = 0.08
+CGC	0.15 with std csp = 0.064
+CGG	0.1 with std csp = 0.0768
+CGT	0.1 with std csp = 0.0768
+TCA	0.09 with std csp = 0.096
+TCC	0.06 with std csp = 0.0768
+TCG	0.15 with std csp = 0.0768
+TCT	0.04 with std csp = 0.064
+ACA	0.08 with std csp = 0.0768
+ACC	0.05 with std csp = 0.064
+ACG	0.12 with std csp = 0.064
+ACT	0.08 with std csp = 0.0768
+GTA	0.08 with std csp = 0.0768
+GTC	0.05 with std csp = 0.0768
+GTG	0.16 with std csp = 0.064
+GTT	0.1 with std csp = 0.0768
+TGG	0.08 with std csp = 0.0768
+TAC	0.12 with std csp = 0.0768
+TAT	0.1 with std csp = 0.0768
+AGC	0.15 with std csp = 0.0768
+AGT	0.17 with std csp = 0.0768
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 646
+	 acceptance rate to high: 2389
+Status at iteration 500 
+	 current logLikelihood: 1.01658e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.26566
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.03 with std csp = 0.0512
+GCC	0.09 with std csp = 0.06144
+GCG	0.06 with std csp = 0.06144
+GCT	0.13 with std csp = 0.06144
+TGC	0.14 with std csp = 0.0512
+TGT	0.15 with std csp = 0.06144
+GAC	0.04 with std csp = 0.06144
+GAT	0.1 with std csp = 0.06144
+GAA	0.08 with std csp = 0.0512
+GAG	0.08 with std csp = 0.06144
+TTC	0.08 with std csp = 0.06144
+TTT	0.08 with std csp = 0.06144
+GGA	0.09 with std csp = 0.0512
+GGC	0.09 with std csp = 0.06144
+GGG	0.08 with std csp = 0.06144
+GGT	0.08 with std csp = 0.06144
+CAC	0.07 with std csp = 0.06144
+CAT	0.14 with std csp = 0.0512
+ATA	0.11 with std csp = 0.06144
+ATC	0.1 with std csp = 0.0512
+ATT	0.12 with std csp = 0.0512
+AAA	0.07 with std csp = 0.04096
+AAG	0.07 with std csp = 0.06144
+CTA	0.12 with std csp = 0.0512
+CTC	0.1 with std csp = 0.064
+CTG	0.1 with std csp = 0.0512
+CTT	0.11 with std csp = 0.06144
+TTA	0.13 with std csp = 0.0512
+TTG	0.07 with std csp = 0.06144
+ATG	0.09 with std csp = 0.0512
+AAC	0.07 with std csp = 0.06144
+AAT	0.09 with std csp = 0.0512
+CCA	0.06 with std csp = 0.06144
+CCC	0.14 with std csp = 0.06144
+CCG	0.17 with std csp = 0.0512
+CCT	0.12 with std csp = 0.064
+CAA	0.07 with std csp = 0.06144
+CAG	0.07 with std csp = 0.0512
+AGA	0.08 with std csp = 0.0512
+AGG	0.13 with std csp = 0.0512
+CGA	0.08 with std csp = 0.064
+CGC	0.23 with std csp = 0.0512
+CGG	0.17 with std csp = 0.06144
+CGT	0.07 with std csp = 0.06144
+TCA	0.07 with std csp = 0.0768
+TCC	0.12 with std csp = 0.06144
+TCG	0.15 with std csp = 0.06144
+TCT	0.05 with std csp = 0.0512
+ACA	0.03 with std csp = 0.06144
+ACC	0.09 with std csp = 0.0512
+ACG	0.09 with std csp = 0.0512
+ACT	0.06 with std csp = 0.06144
+GTA	0.09 with std csp = 0.06144
+GTC	0.05 with std csp = 0.06144
+GTG	0.09 with std csp = 0.0512
+GTT	0.08 with std csp = 0.06144
+TGG	0.09 with std csp = 0.06144
+TAC	0.08 with std csp = 0.06144
+TAT	0.09 with std csp = 0.06144
+AGC	0.11 with std csp = 0.06144
+AGT	0.11 with std csp = 0.06144
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 624
+	 acceptance rate to high: 1929
+Status at iteration 600 
+	 current logLikelihood: 1.01663e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24826
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.02 with std csp = 0.04096
+GCC	0.05 with std csp = 0.049152
+GCG	0.13 with std csp = 0.049152
+GCT	0.1 with std csp = 0.049152
+TGC	0.1 with std csp = 0.04096
+TGT	0.1 with std csp = 0.049152
+GAC	0.04 with std csp = 0.049152
+GAT	0.07 with std csp = 0.049152
+GAA	0.05 with std csp = 0.04096
+GAG	0.06 with std csp = 0.049152
+TTC	0.07 with std csp = 0.049152
+TTT	0.08 with std csp = 0.049152
+GGA	0.09 with std csp = 0.04096
+GGC	0.09 with std csp = 0.049152
+GGG	0.05 with std csp = 0.049152
+GGT	0.1 with std csp = 0.049152
+CAC	0.08 with std csp = 0.049152
+CAT	0.12 with std csp = 0.04096
+ATA	0.09 with std csp = 0.049152
+ATC	0.06 with std csp = 0.04096
+ATT	0.07 with std csp = 0.04096
+AAA	0.07 with std csp = 0.032768
+AAG	0.04 with std csp = 0.049152
+CTA	0.07 with std csp = 0.04096
+CTC	0.11 with std csp = 0.0512
+CTG	0.06 with std csp = 0.04096
+CTT	0.11 with std csp = 0.049152
+TTA	0.15 with std csp = 0.04096
+TTG	0.03 with std csp = 0.049152
+ATG	0.1 with std csp = 0.04096
+AAC	0.1 with std csp = 0.049152
+AAT	0.13 with std csp = 0.04096
+CCA	0.04 with std csp = 0.049152
+CCC	0.13 with std csp = 0.049152
+CCG	0.12 with std csp = 0.04096
+CCT	0.08 with std csp = 0.0512
+CAA	0.11 with std csp = 0.049152
+CAG	0.17 with std csp = 0.04096
+AGA	0.05 with std csp = 0.04096
+AGG	0.07 with std csp = 0.04096
+CGA	0.15 with std csp = 0.0512
+CGC	0.19 with std csp = 0.0512
+CGG	0.15 with std csp = 0.049152
+CGT	0.17 with std csp = 0.049152
+TCA	0.03 with std csp = 0.06144
+TCC	0.06 with std csp = 0.049152
+TCG	0.1 with std csp = 0.049152
+TCT	0.1 with std csp = 0.04096
+ACA	0.11 with std csp = 0.049152
+ACC	0.11 with std csp = 0.04096
+ACG	0.11 with std csp = 0.04096
+ACT	0.09 with std csp = 0.049152
+GTA	0 with std csp = 0.049152
+GTC	0.02 with std csp = 0.049152
+GTG	0.14 with std csp = 0.04096
+GTT	0.07 with std csp = 0.049152
+TGG	0.07 with std csp = 0.049152
+TAC	0.04 with std csp = 0.049152
+TAT	0.06 with std csp = 0.049152
+AGC	0.11 with std csp = 0.049152
+AGT	0.06 with std csp = 0.049152
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 684
+	 acceptance rate to high: 1578
+Status at iteration 700 
+	 current logLikelihood: 1.01666e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24955
+	 current stdDevSynthesisRate proposal width: 0.04096
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.06 with std csp = 0.032768
+GCC	0.09 with std csp = 0.0393216
+GCG	0.16 with std csp = 0.0393216
+GCT	0.05 with std csp = 0.0393216
+TGC	0.08 with std csp = 0.032768
+TGT	0.13 with std csp = 0.0393216
+GAC	0.09 with std csp = 0.0393216
+GAT	0.06 with std csp = 0.0393216
+GAA	0.06 with std csp = 0.032768
+GAG	0.04 with std csp = 0.0393216
+TTC	0.14 with std csp = 0.0393216
+TTT	0.03 with std csp = 0.0393216
+GGA	0.1 with std csp = 0.032768
+GGC	0.09 with std csp = 0.0393216
+GGG	0.07 with std csp = 0.0393216
+GGT	0.04 with std csp = 0.0393216
+CAC	0.09 with std csp = 0.0393216
+CAT	0.11 with std csp = 0.032768
+ATA	0.13 with std csp = 0.0393216
+ATC	0.09 with std csp = 0.032768
+ATT	0.05 with std csp = 0.032768
+AAA	0.08 with std csp = 0.0262144
+AAG	0.05 with std csp = 0.0393216
+CTA	0.07 with std csp = 0.032768
+CTC	0.13 with std csp = 0.04096
+CTG	0.12 with std csp = 0.032768
+CTT	0.08 with std csp = 0.0393216
+TTA	0.08 with std csp = 0.032768
+TTG	0.08 with std csp = 0.0393216
+ATG	0.12 with std csp = 0.032768
+AAC	0.05 with std csp = 0.0393216
+AAT	0.06 with std csp = 0.032768
+CCA	0.02 with std csp = 0.0393216
+CCC	0.16 with std csp = 0.0393216
+CCG	0.1 with std csp = 0.032768
+CCT	0.04 with std csp = 0.04096
+CAA	0.07 with std csp = 0.0393216
+CAG	0.11 with std csp = 0.032768
+AGA	0.08 with std csp = 0.032768
+AGG	0.09 with std csp = 0.032768
+CGA	0.19 with std csp = 0.04096
+CGC	0.2 with std csp = 0.04096
+CGG	0.14 with std csp = 0.0393216
+CGT	0.14 with std csp = 0.0393216
+TCA	0.08 with std csp = 0.049152
+TCC	0.12 with std csp = 0.0393216
+TCG	0.09 with std csp = 0.0393216
+TCT	0.1 with std csp = 0.032768
+ACA	0.09 with std csp = 0.0393216
+ACC	0.12 with std csp = 0.032768
+ACG	0.16 with std csp = 0.032768
+ACT	0.1 with std csp = 0.0393216
+GTA	0.05 with std csp = 0.0393216
+GTC	0.09 with std csp = 0.0393216
+GTG	0.1 with std csp = 0.032768
+GTT	0.04 with std csp = 0.0393216
+TGG	0.06 with std csp = 0.0393216
+TAC	0.08 with std csp = 0.0393216
+TAT	0.12 with std csp = 0.0393216
+AGC	0.12 with std csp = 0.0393216
+AGT	0.08 with std csp = 0.0393216
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 663
+	 acceptance rate to high: 1372
+Status at iteration 800 
+	 current logLikelihood: 1.01669e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24249
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.08 with std csp = 0.0262144
+GCC	0.11 with std csp = 0.0314573
+GCG	0.21 with std csp = 0.0314573
+GCT	0.1 with std csp = 0.0314573
+TGC	0.24 with std csp = 0.0262144
+TGT	0.06 with std csp = 0.0314573
+GAC	0.1 with std csp = 0.0314573
+GAT	0.08 with std csp = 0.0314573
+GAA	0.07 with std csp = 0.0262144
+GAG	0.06 with std csp = 0.0314573
+TTC	0.14 with std csp = 0.0314573
+TTT	0.06 with std csp = 0.0314573
+GGA	0.11 with std csp = 0.0262144
+GGC	0.07 with std csp = 0.0314573
+GGG	0.08 with std csp = 0.0314573
+GGT	0.04 with std csp = 0.0314573
+CAC	0.09 with std csp = 0.0314573
+CAT	0.18 with std csp = 0.0262144
+ATA	0.11 with std csp = 0.0314573
+ATC	0.06 with std csp = 0.0262144
+ATT	0.11 with std csp = 0.0262144
+AAA	0.11 with std csp = 0.0209715
+AAG	0.06 with std csp = 0.0314573
+CTA	0.19 with std csp = 0.0262144
+CTC	0.17 with std csp = 0.032768
+CTG	0.07 with std csp = 0.0262144
+CTT	0.16 with std csp = 0.0314573
+TTA	0.12 with std csp = 0.0262144
+TTG	0.02 with std csp = 0.0314573
+ATG	0.17 with std csp = 0.0262144
+AAC	0.08 with std csp = 0.0314573
+AAT	0.08 with std csp = 0.0262144
+CCA	0.02 with std csp = 0.0314573
+CCC	0.1 with std csp = 0.0314573
+CCG	0.11 with std csp = 0.0262144
+CCT	0.07 with std csp = 0.032768
+CAA	0.1 with std csp = 0.0314573
+CAG	0.15 with std csp = 0.0262144
+AGA	0.12 with std csp = 0.0262144
+AGG	0.12 with std csp = 0.0262144
+CGA	0.26 with std csp = 0.032768
+CGC	0.13 with std csp = 0.04096
+CGG	0.18 with std csp = 0.0314573
+CGT	0.1 with std csp = 0.0314573
+TCA	0.13 with std csp = 0.0393216
+TCC	0.15 with std csp = 0.0314573
+TCG	0.13 with std csp = 0.0314573
+TCT	0.09 with std csp = 0.0262144
+ACA	0.14 with std csp = 0.0314573
+ACC	0.21 with std csp = 0.0262144
+ACG	0.08 with std csp = 0.0262144
+ACT	0.12 with std csp = 0.0314573
+GTA	0.12 with std csp = 0.0314573
+GTC	0.04 with std csp = 0.0314573
+GTG	0.1 with std csp = 0.0262144
+GTT	0.03 with std csp = 0.0314573
+TGG	0.04 with std csp = 0.0314573
+TAC	0.06 with std csp = 0.0314573
+TAT	0.04 with std csp = 0.0314573
+AGC	0.11 with std csp = 0.0314573
+AGT	0.17 with std csp = 0.0314573
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 672
+	 acceptance rate to high: 1230
+Status at iteration 900 
+	 current logLikelihood: 1.01671e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24646
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.1 with std csp = 0.0209715
+GCC	0.09 with std csp = 0.0251658
+GCG	0.14 with std csp = 0.0314573
+GCT	0.1 with std csp = 0.0251658
+TGC	0.11 with std csp = 0.0262144
+TGT	0.14 with std csp = 0.0251658
+GAC	0.05 with std csp = 0.0251658
+GAT	0.09 with std csp = 0.0251658
+GAA	0.1 with std csp = 0.0209715
+GAG	0.02 with std csp = 0.0251658
+TTC	0.07 with std csp = 0.0251658
+TTT	0.11 with std csp = 0.0251658
+GGA	0.08 with std csp = 0.0209715
+GGC	0.11 with std csp = 0.0251658
+GGG	0.1 with std csp = 0.0251658
+GGT	0.08 with std csp = 0.0251658
+CAC	0.15 with std csp = 0.0251658
+CAT	0.19 with std csp = 0.0209715
+ATA	0.12 with std csp = 0.0251658
+ATC	0.11 with std csp = 0.0209715
+ATT	0.09 with std csp = 0.0209715
+AAA	0.04 with std csp = 0.0167772
+AAG	0.1 with std csp = 0.0251658
+CTA	0.2 with std csp = 0.0209715
+CTC	0.23 with std csp = 0.0262144
+CTG	0.13 with std csp = 0.0209715
+CTT	0.17 with std csp = 0.0251658
+TTA	0.11 with std csp = 0.0209715
+TTG	0.08 with std csp = 0.0251658
+ATG	0.1 with std csp = 0.0209715
+AAC	0.04 with std csp = 0.0251658
+AAT	0.08 with std csp = 0.0209715
+CCA	0.07 with std csp = 0.0251658
+CCC	0.17 with std csp = 0.0251658
+CCG	0.2 with std csp = 0.0209715
+CCT	0.08 with std csp = 0.0262144
+CAA	0.14 with std csp = 0.0251658
+CAG	0.23 with std csp = 0.0209715
+AGA	0.1 with std csp = 0.0209715
+AGG	0.11 with std csp = 0.0209715
+CGA	0.19 with std csp = 0.032768
+CGC	0.19 with std csp = 0.032768
+CGG	0.23 with std csp = 0.0251658
+CGT	0.17 with std csp = 0.0251658
+TCA	0.12 with std csp = 0.0314573
+TCC	0.13 with std csp = 0.0251658
+TCG	0.13 with std csp = 0.0251658
+TCT	0.1 with std csp = 0.0209715
+ACA	0.08 with std csp = 0.0251658
+ACC	0.12 with std csp = 0.0262144
+ACG	0.17 with std csp = 0.0209715
+ACT	0.08 with std csp = 0.0251658
+GTA	0.16 with std csp = 0.0251658
+GTC	0.11 with std csp = 0.0251658
+GTG	0.09 with std csp = 0.0209715
+GTT	0.06 with std csp = 0.0251658
+TGG	0.13 with std csp = 0.0251658
+TAC	0.08 with std csp = 0.0251658
+TAT	0.12 with std csp = 0.0251658
+AGC	0.14 with std csp = 0.0251658
+AGT	0.08 with std csp = 0.0251658
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 681
+	 acceptance rate to high: 1121
+Status at iteration 1000 
+	 current logLikelihood: 1.01673e+08 
+stdDevSynthesisRate posterior estimate for selection category 0: 1.24158
+	 current stdDevSynthesisRate proposal width: 0.032768
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.13 with std csp = 0.0167772
+GCC	0.09 with std csp = 0.0201327
+GCG	0.15 with std csp = 0.0251658
+GCT	0.06 with std csp = 0.0201327
+TGC	0.31 with std csp = 0.0209715
+TGT	0.11 with std csp = 0.0201327
+GAC	0.05 with std csp = 0.0201327
+GAT	0.07 with std csp = 0.0201327
+GAA	0.05 with std csp = 0.0167772
+GAG	0.1 with std csp = 0.0201327
+TTC	0.07 with std csp = 0.0201327
+TTT	0.08 with std csp = 0.0201327
+GGA	0.19 with std csp = 0.0167772
+GGC	0.09 with std csp = 0.0201327
+GGG	0.1 with std csp = 0.0201327
+GGT	0.06 with std csp = 0.0201327
+CAC	0.24 with std csp = 0.0201327
+CAT	0.18 with std csp = 0.0167772
+ATA	0.18 with std csp = 0.0201327
+ATC	0.08 with std csp = 0.0167772
+ATT	0.11 with std csp = 0.0167772
+AAA	0.08 with std csp = 0.0134218
+AAG	0.08 with std csp = 0.0201327
+CTA	0.09 with std csp = 0.0209715
+CTC	0.15 with std csp = 0.0262144
+CTG	0.19 with std csp = 0.0167772
+CTT	0.2 with std csp = 0.0201327
+TTA	0.21 with std csp = 0.0167772
+TTG	0.12 with std csp = 0.0201327
+ATG	0.15 with std csp = 0.0167772
+AAC	0.13 with std csp = 0.0201327
+AAT	0.14 with std csp = 0.0167772
+CCA	0.16 with std csp = 0.0201327
+CCC	0.25 with std csp = 0.0201327
+CCG	0.18 with std csp = 0.0209715
+CCT	0.15 with std csp = 0.0209715
+CAA	0.1 with std csp = 0.0201327
+CAG	0.11 with std csp = 0.0209715
+AGA	0.13 with std csp = 0.0167772
+AGG	0.16 with std csp = 0.0167772
+CGA	0.31 with std csp = 0.0262144
+CGC	0.33 with std csp = 0.0262144
+CGG	0.25 with std csp = 0.0251658
+CGT	0.16 with std csp = 0.0201327
+TCA	0.18 with std csp = 0.0251658
+TCC	0.16 with std csp = 0.0201327
+TCG	0.16 with std csp = 0.0201327
+TCT	0.17 with std csp = 0.0167772
+ACA	0.19 with std csp = 0.0201327
+ACC	0.1 with std csp = 0.0209715
+ACG	0.19 with std csp = 0.0167772
+ACT	0.04 with std csp = 0.0201327
+GTA	0.17 with std csp = 0.0201327
+GTC	0.15 with std csp = 0.0201327
+GTG	0.1 with std csp = 0.0167772
+GTT	0.1 with std csp = 0.0201327
+TGG	0.06 with std csp = 0.0201327
+TAC	0.06 with std csp = 0.0201327
+TAT	0.14 with std csp = 0.0201327
+AGC	0.14 with std csp = 0.0201327
+AGT	0.16 with std csp = 0.0201327
+
+acceptance rate for synthesis rate:
+	 acceptance rate to low: 716
+	 acceptance rate to high: 1049
+leaving MCMC loop
+   user  system elapsed 
+276.383   2.948 296.214 
