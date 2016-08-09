@@ -2189,8 +2189,45 @@ Afterwards, moved an old working R script to use this data for testing.
     \item For future runs and plots, a new variable has been declared to be stored as the percentage of the trace to take throughout the plots.
     \item Happily, there is a good correlation between Jeremy's estimated Phi values versus the true values.
     \includepdf[pages={1}]{../RunnableScriptsAndData/runLogs/7-27-16-JeremyCorrelation/newPDFs/RFPJeremyEstimatedVsTrue.pdf}
+    \item This pdf file is \enquote{RFP\sep Jeremy\sep Estimated\sep Vs\sep True\sep .\sep pdf}.
+    \item These new pdfs (the relevant page already included above) are found in Runnable\sep Scripts\sep And\sep Data\sep /\sep run\sep Logs\sep /\sep 7-27-16\sep -\sep Jeremy\sep Correlation\sep /\sep new\sep PDFs.
     \item Ending the day waiting for gauley's Rstudio console to stop spitting out error messages and clogging the system.
     \item Seems to be a bug with my quick edit to the ploting script to script with my own simulated genomes.
+\end{itemize}
+
+\labday{August 7, 2016}
+
+\begin{itemize}
+    \item Mostly worked with checking R-side functions today.
+    \item Spent a lot of time looking up differences between R-side data structures, no real progress made however.
+    \item TODO: Continue debugging scripts on Monday.
+    Might have to bother Cedric at this point on how to write these scripts.
+\end{itemize}
+
+\labday{August 8, 2016}
+
+\begin{itemize}
+    \item Looking at gauley results: The outputted .pdf files from the error messages are, as expected, bugged.
+    \item Not only are Lambda and Alpha Prime still bugged, but the plot for Phi values do not show up at all.
+    \item Now rerunning the script line-by-line to find where the errors start happening.
+    \item The error messages appear in a for loop that should work fine; error message is that indexes are out of bounds.
+    \item Specifically, the parameter function call below spits out the error message:
+    \begin{lstlisting}
+    for (geneIndex in 1:length(genome))
+    {
+        psiList[geneIndex] <- 
+        parameter$getSynthesisRatePosteriorMeanByMixtureElementForGene(
+        samples * percentTraceIgnore, 
+        geneIndex, 1)
+
+        g <- genome$getGeneByIndex(geneIndex, F)
+        ids[geneIndex] <- g$id
+    }
+    \end{lstlisting}
+    \item Initializing the second genome that I generated also crashes Rstudio for some reason.
+    \item Restarted gauley Rstudio after a long delay and reran the script I used to produce the Jeremy pdf to export to labnotebooks, to compare the difference between this working script and the failing one for my own Genome.
+    \item The script can now be found in RunnableScriptsAndData/scripts.
+    \item This script will not work in labnotebooks because it requests several files located in different folders and more importantly requests giant .Rdat files that cannot be included in our git repo.
 \end{itemize}
 
 \end{document}
