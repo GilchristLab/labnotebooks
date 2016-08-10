@@ -3,7 +3,8 @@
 1. `scripts`: R files to run.
   1. `simulateRFP.R` -- A failing script to simulate genomes based on `JeremyData`.
   Kept for debugging purposes, as it should work but crashes in Rstudio when `model$simulateGenome`   is run.
-  2. `plotRFPJeremy.R` -- A script to plot all relevant parts of an MCMC run by loading an existing restart file.
+  2. `testJeremyRestart.R` -- Script that requires restart files (not included) and the simulated genome file used to generate these restart files (included) to plot an MCMC run.
+  3. `toCSV.pl` -- Perl script to simply transform Lareau data to .csv format for PANSE reading. Input file not included for size constraints.
 
 2. `HollisSimulatedGenomes`: Simulated genomes produced by `JeremyData` and running `simulateGenome` in C++ only.
   1. `HollisSimulatedGenome` -- A genome simulated using the `JeremyData` file `s288c.genome.fasta`, `RFPAlphaValues.csv`, `RFPLambdaPrimeValues.csv`, and `RFPPhiValues.csv`, based on Dr. Gilchrist's suggestion of genome file to use.

@@ -2230,4 +2230,46 @@ Afterwards, moved an old working R script to use this data for testing.
     \item This script will not work in labnotebooks because it requests several files located in different folders and more importantly requests giant .Rdat files that cannot be included in our git repo.
 \end{itemize}
 
+\labday{August 9, 2016}
+
+\begin{itemize}
+    \item Talk with Dr. Gilchrist:
+    \begin{itemize}
+        \item For R/initializeGenomeObject, default should be fasta.
+        In retrospect looking at the code, this is already the default.
+        \item Check at what gene the reading in drops out at for HollisSimulatedGenome.csv
+        \item Comparing printed RFP file to read-in RFP file: identical. Dead end.
+        \item Check the restart file's genes!
+        \item RFPROC reading and writing RFP files may be completely wrong: We \textbf{need} the codon\_counts, but currently we do not preserve it.
+        \item Recall Pop et al data (originally): Name, Length, Sum mRNA, Sum FP, FP per Codon, which is a mess.
+        \item This data was simplified via Dr. Gilchrist's Mathematica script into the current RFPROC format.
+        \item RFPROC: Format should be ID, RFP Count, Codon Count, Codon (current format).
+        \item The NAs for codon counts that are not preserved \textbf{should} be filled in 
+        \item When using Simulate Genome, all that should change out of this format is the RFP Count (compared to what was read in originally)
+        \item This is, of course, since we are just making fake data as a simulation.
+        \item PANSE: Format will be ID, RFP Count, Position, Codon
+        \item For RFP Codon counts: Perhaps worry about ambiguous or non-observable positions.
+        To do this, should be fairly trivia: let Position be an integer, with -1 meaning that this data should be discarded while other values are valid.
+        \item New function: ProcessLareau: Should be pretty simple, let this be the default for now?
+        \item TODO LATER: SimulatePANSE: just for each position, make RFP count number.
+        \item TODO: Later on do Process Pop (which would also call readFasta) to get the RFPROC format or the PANSE format.
+        \item On average, 61 calculations per gene for RFPROC/PA, 400ish per gene for PANSE since it's a per-position basis rather than a summary.
+        \item FOR NOW, let's try and make the PANSE format the default and summarize it for RFP, rather than the current RFP being the default.
+        \item Make RFP\_count data to have both long and short categories and combined.
+        \item Gilchrist clarification: Don't make a combined category in C++ yourself.
+        If the researcher wanted to have a combined category, they would have made it one of the categories like long and short, so simply treat is as another category to process.
+        \item Make an integer defaulting to just calculating long category.
+    \end{itemize}
+    \item Modified an existing Perl script to now simply transform Lareau data to the new PANSE format.
+    Script is now found in Runnable\sep Scripts\sep And\sep Data\sep /\sep scripts as \enquote{to\sep CSV\sep .\sep pl}.
+    \item Also removed \enquote{plotRFPJeremy.R}, as it is redundant with \enquote{testJeremyRestart.R} (older version of same script function).
+    \item PANSE format mentioned above was out-of-order.
+    Format is geneID, position, codon, RFPcount[0] etc, as additional categories will be appended at the end.
+    \item TODO: Rename the RFP model to PAModel to be similar to PANSEModel.
+    Will also help solve confusion and needing to distinguish it as RFPROC.
+    \item Next step is a longer process: Modify the function readPANSE (now readPA) to read in multiple different categories.
+    \item First step is modifying the sequenceSummary data structure to allow for multiple categories: convert from vector to vector of vectors (one vector per RFP\_count category).
+    \item Not committing current changes: Fails Unit Testing on Genome.cpp and reading in the new file format with the multiple category architecture (even though right now it's supposed to default to just one category).
+\end{itemize}
+
 \end{document}
