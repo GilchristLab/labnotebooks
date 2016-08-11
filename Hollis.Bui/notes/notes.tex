@@ -2272,4 +2272,13 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Not committing current changes: Fails Unit Testing on Genome.cpp and reading in the new file format with the multiple category architecture (even though right now it's supposed to default to just one category).
 \end{itemize}
 
+\labday {August 10, 2016}
+
+\begin{itemize}
+    \item Pinpointed error from yesterday: It seems that when a Gene is retrieved from a genome, it does not retain the RFP\_count data in the new format.
+    \item The functions themselves work perfectly, but something is lost when a gene with a vector of vectors representing RFP\_count for each category is added to a Genome.
+    \item Once a Gene is added to a Genome, retrieving the Gene from the Genome results in a Gene with all the old data preserved, but not the new RFP\_count information at all.
+    \item Commenting out existing functions revealed that when SequenceSummary::clear() is called, it clears RFP\_count, and somehow the new RFP\_count vector of vectors is completely cleared rather than once per gene.
+\end{itemize}
+
 \end{document}
