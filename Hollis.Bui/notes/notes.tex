@@ -2281,4 +2281,45 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Commenting out existing functions revealed that when SequenceSummary::clear() is called, it clears RFP\_count, and somehow the new RFP\_count vector of vectors is completely cleared rather than once per gene.
 \end{itemize}
 
+\labday {August 11, 2016}
+
+\begin{itemize}
+    \item Continuing to try to figure out why the new RFP\_count structure is failing.
+    \item Important note for future researchers: As of present, we have two different structures to count RFP data.
+    \begin{itemize}
+        \item RFP\_count is the currently-unused-outside-of-testing structure that is intended to be used for the PANSE model.
+        It is currently going to be adapted to use for both the PA and the PANSE models.
+        Also, I still haven't renamed the RFP model to the PA model yet.
+        \item RFPObserved is the currently-used structure to record RFP data for the RFP model.
+        Because the RFP model does not use a fasta file or anything else to record the number of codons, this may be incorrectly implemented.
+    \end{itemize}
+    \item Narrowing down bug location: SequenceSummary's clear() function is only called when a constructor is used OR when Gene::setSequence is called.
+    \item The sequence summary constructor is implicitly called when a Gene object is constructed.
+    \item Genome::addGene() does not create a Gene object, but Genome::getGene does:
+    \begin{lstlisting}
+Gene& Genome::getGene(std::string id, bool simulated)
+{
+	Gene tempGene;
+	unsigned geneIndex;
+
+	for (geneIndex = 0; geneIndex < getGenomeSize(); geneIndex++)
+	{
+		tempGene = simulated ? simulatedGenes[geneIndex] : genes[geneIndex];
+
+		if (tempGene.getId().compare(id) == 0) break;
+	}
+	return simulated ? simulatedGenes[geneIndex] : genes[geneIndex];
+}
+    \end{lstlisting}
+	\item In the next hour of work, I discovered that Gene::setSequence does clear the sequence summary.
+	\item This is an intended feature of the function, but my implementation of reading in the PA file initialized the sequence summary's RFP\_count before setSequence is called, resulting in no initialization of RFP\_count (as it is cleared right after).
+	\item This explains the bug I had been experiencing when I get the gene back out of the genome structure and tried to look at the RFP\_count data, which was lost (and resulted in a memory error).
+	\item Normally, this error would be detected much earlier -- I had tried (and successfully did) print RFP\_count data before adding the gene to the genome.
+	Under normal conditions, this indicates that the sequence had not been cleared and everything was fine until it was added to the genome.
+	\item I suspect it was simply a lucky memory location that kept the RFP\_count data in the same place despite it being cleared, and when this retrieval call was done again on a copied gene, it called a different (non-existent) memory location.
+	\item Thus, I fixed the problem that had delayed me for two days now by initializing the RFP\_count data after setting the sequence.
+	Also added more notes on this effect, since it was documented before but not as emphasized.
+	\item New format passed tests; now to use these new categories rather than defaulting to just one.
+\end{itemize}
+
 \end{document}
