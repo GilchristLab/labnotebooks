@@ -2322,4 +2322,66 @@ Gene& Genome::getGene(std::string id, bool simulated)
 	\item New format passed tests; now to use these new categories rather than defaulting to just one.
 \end{itemize}
 
+\labday {August 12, 2016}
+
+\begin{itemize}
+    \item Currently continuing debugging from yesterday -- reading in with multiple categories currently results in exit code 6, which Google says is a SIGABRT signal.
+    \item This error occurs sporadically in the code, which makes me think this is another (difficult to solve by nature) memory error; there is no consistent place where it occurs, but I suspect it is in the reading of the PA file format.
+    \item Further testing with code practically confirms a memory error: same code has different results when run, one time passing and another time failing.
+    \item These errors are difficult to check on Mac (hence the time spent debugging); may need to ask Alan to run Visual Studio debugger etc which are available on Windows.
+	\item To account for possible bugs with multiple categories, limited it back to a single category but with the new code to read in with multiple categories possible.
+    \item A snippet of code I'm running to check the differences between genomes being read in (panse) versus the hard-coded Unit Testing data (testGenome):
+    \begin{lstlisting}
+     	Gene blah1 = testGenome.getGene("TEST001");
+        Gene blah2 = testGenome.getGene("TEST002");
+        Gene blah3 = genome.getGene("TEST001");
+        Gene blah4 = genome.getGene("TEST002");
+        std::vector <unsigned> blah1Vect = blah1.getRFP_count(0);
+        std::vector <unsigned> blah2Vect = blah2.getRFP_count(0);
+        std::vector <unsigned> blah3Vect = blah3.getRFP_count(0);
+        std::vector <unsigned> blah4Vect = blah4.getRFP_count(0);
+
+        my_print("testGenome gene 1: size %: ", blah1Vect.size());
+        for (unsigned i = 0; i < blah1Vect.size(); i++){
+            my_print("% ", blah1Vect[i]);
+        }
+        my_print("\ntestGenome gene 2: size %: ", blah2Vect.size());
+        for (unsigned i = 0; i < blah2Vect.size(); i++){
+            my_print("% ", blah2Vect[i]);
+        }
+        my_print("\npanse gene 1: size %: ", blah3Vect.size());
+        for (unsigned i = 0; i < blah3Vect.size(); i++){
+            my_print("% ", blah3Vect[i]);
+        }
+        my_print("\npanse gene 2: size %: ", blah4Vect.size());
+        for (unsigned i = 0; i < blah4Vect.size(); i++){
+            my_print("% ", blah4Vect[i]);
+        }
+	\end{lstlisting}
+	\item The outputs vary wildly, always with a difference between the last gene's RFP\sep \_\sep counts.
+	\begin{lstlisting}
+testGenome gene 1: size 4: 0 2 0 0 
+testGenome gene 2: size 4: 0 0 1 1 
+panse gene 1: size 4: 0 2 0 0 
+panse gene 2: size 4: 2 0 0 0 
+	\end{lstlisting}
+	\begin{lstlisting}
+testGenome gene 1: size 4: 0 2 0 0 
+testGenome gene 2: size 4: 0 0 1 1 
+panse gene 1: size 4: 0 2 0 0 
+panse gene 2: size 4: 0 2684354560 3549298901 4026533884 
+	\end{lstlisting}
+	\item With this testing code reveal, fixed the error: It was related to the change in RFP\_count format yet again.
+	\item I was clearing the entire vector of vectors, destroying the initialized structure that had the number of categories.
+	Fixed by making it clear each vector inside of the vector of vectors instead.
+	\item With this fixed, the package passes unit testing with multiple categories of RFP\sep \_\sep counts!
+	\item Next step: Summarize this read in PA-format data into RFP summary data.
+	\item Data to be summarized: RFP\_Counts and Codon\_Counts for each same Codon.
+	\item Right now, RFP\_count data is stored as a vector ordered by the order in which lines are read in.
+	\item Once again, this vector is encapsulated by a sort of summary vector to account for the different categories.
+	\item Meanwhile, the other gene data is read in with the same format as other file formats, storing information as genes with sequence summaries and IDs but not preserving positioned RFPs.
+	\item Need to think of a way to store this summary data.
+	\item Also began to add support to ignore a line if its position is ambiguous (marked by integer -1).
+\end{itemize}
+
 \end{document}
