@@ -2222,6 +2222,7 @@ Afterwards, moved an old working R script to use this data for testing.
 
         g <- genome$getGeneByIndex(geneIndex, F)
         ids[geneIndex] <- g$id
+        //$
     }
     \end{lstlisting}
     \item Initializing the second genome that I generated also crashes Rstudio for some reason.
@@ -2382,6 +2383,13 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 	\item Meanwhile, the other gene data is read in with the same format as other file formats, storing information as genes with sequence summaries and IDs but not preserving positioned RFPs.
 	\item Need to think of a way to store this summary data.
 	\item Also began to add support to ignore a line if its position is ambiguous (marked by integer -1).
+\end{itemize}
+
+\labday {August 16, 2016}
+
+\begin{itemize}
+    \item Our old data for PA files was in the form of Codons,Position rather than Position,Codons; changed this for ease of calculating what lines to discard (if position was unknown or ambiguous).
+    \item Finished support for ignoring ambiguous lines, and added an example of this to unit testing.
 \end{itemize}
 
 \end{document}
