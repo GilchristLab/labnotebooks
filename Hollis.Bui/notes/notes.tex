@@ -2319,6 +2319,10 @@ Gene& Genome::getGene(std::string id, bool simulated)
 	Under normal conditions, this indicates that the sequence had not been cleared and everything was fine until it was added to the genome.
 	\item I suspect it was simply a lucky memory location that kept the RFP\_count data in the same place despite it being cleared, and when this retrieval call was done again on a copied gene, it called a different (non-existent) memory location.
 	\item Thus, I fixed the problem that had delayed me for two days now by initializing the RFP\_count data after setting the sequence.
+\footnote{mg:Strong argument for \emph{always} initializing your structures, at least during code development.
+Would have saved you 2 days of work.
+Ahh the school of hard knocks.
+}
 	Also added more notes on this effect, since it was documented before but not as emphasized.
 	\item New format passed tests; now to use these new categories rather than defaulting to just one.
 \end{itemize}
@@ -2329,6 +2333,7 @@ Gene& Genome::getGene(std::string id, bool simulated)
     \item Currently continuing debugging from yesterday -- reading in with multiple categories currently results in exit code 6, which Google says is a SIGABRT signal.
     \item This error occurs sporadically in the code, which makes me think this is another (difficult to solve by nature) memory error; there is no consistent place where it occurs, but I suspect it is in the reading of the PA file format.
     \item Further testing with code practically confirms a memory error: same code has different results when run, one time passing and another time failing.
+\footnote{mg:Nice job testing this hypothesis.}
     \item These errors are difficult to check on Mac (hence the time spent debugging); may need to ask Alan to run Visual Studio debugger etc which are available on Windows.
 	\item To account for possible bugs with multiple categories, limited it back to a single category but with the new code to read in with multiple categories possible.
     \item A snippet of code I'm running to check the differences between genomes being read in (panse) versus the hard-coded Unit Testing data (testGenome):
@@ -2376,6 +2381,7 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 	\item I was clearing the entire vector of vectors, destroying the initialized structure that had the number of categories.
 	Fixed by making it clear each vector inside of the vector of vectors instead.
 	\item With this fixed, the package passes unit testing with multiple categories of RFP\sep \_\sep counts!
+\footnote{mg: Yea!}
 	\item Next step: Summarize this read in PA-format data into RFP summary data.
 	\item Data to be summarized: RFP\_Counts and Codon\_Counts for each same Codon.
 	\item Right now, RFP\_count data is stored as a vector ordered by the order in which lines are read in.
