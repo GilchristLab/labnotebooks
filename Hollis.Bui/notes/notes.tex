@@ -2392,4 +2392,21 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
     \item Finished support for ignoring ambiguous lines, and added an example of this to unit testing.
 \end{itemize}
 
+\labday {August 17, 2016}
+
+\begin{itemize}
+    \item Now need to store position and count the number of times a codon occurs per gene.
+    \item This would probably be stored in the Gene structure (while the RFP\_counts information was stored in the SequenceSummary structure).
+\end{itemize}
+
+\labday {August 18 - 19, 2016}
+
+\begin{itemize}
+    \item This labday set is merged because August 18 was mostly testing the package.
+    \item Problem revealed: Currently, while the Lareau data has scrambled rfp\_counts for each codon for each gene, this is not supported.
+    \item This means that if Gene A has the codon AAA defined, and then it is redefined later (when it should merely append to the existing data), it destroys the old data.
+    \item First step is to add the ability to store the data position based: right now, data is read is purely on the order in which data is read.
+    \item Cedric had encountered a weird error that turned out to be local-only when installing the package, while I had some bugs related to the Travis CI admins messing with sudo privileges and causing the server to not install the package.
+\end{itemize}
+
 \end{document}
