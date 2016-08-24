@@ -1751,6 +1751,7 @@ Afterwards, moved an old working R script to use this data for testing.
       
         logL <- logL <- mean(loglik.trace[start:length(loglik.trace)]) #get the mean for the subset
         plot(loglik.trace[start:length(loglik.trace)], type="l", main=paste("logL:", logL), xlab="Sample", ylab="log(Likelihood)")
+        //$ For latex syntax coloring fix only
     \end{lstlisting}
     \item Also spent some time debugging why Travis was failing again when I added the output directory to .gitignore.
     \item Source of the problem was that files cannot be written to a directory that does not exist, and git does not recognize empty directories (removing the output files did the same thing).
@@ -1864,6 +1865,7 @@ Afterwards, moved an old working R script to use this data for testing.
     /usr/bin/xdg-open: 461: /usr/bin/xdg-open: lynx: not found
     /usr/bin/xdg-open: 461: /usr/bin/xdg-open: w3m: not found
     xdg-open: no method available for opening 'RFP_Genome_allUnique_startCSP_startPhi_adaptSphi_true.pdf'
+    //$ For latex syntax coloring fix only
     \end{lstlisting}
     \item Meanwhile, for the script itself I tried to relabeled the plots and re-added restart files.
     \item Turns out that another missing functionality of our code is the ability to title most of our plots. 
@@ -2222,7 +2224,7 @@ Afterwards, moved an old working R script to use this data for testing.
 
         g <- genome$getGeneByIndex(geneIndex, F)
         ids[geneIndex] <- g$id
-        //$
+        //$ For latex syntax coloring fix only
     }
     \end{lstlisting}
     \item Initializing the second genome that I generated also crashes Rstudio for some reason.
@@ -2323,6 +2325,7 @@ Gene& Genome::getGene(std::string id, bool simulated)
 Would have saved you 2 days of work.
 Ahh the school of hard knocks.
 }
+\footnote{Hollis: 08/23/16 -- Noted! See August 23 notes -- we're probably going to just make this function a part of a constructor to (mostly, hopefully) guarantee a size is assigned rather than assuming there are no categories.}
 	Also added more notes on this effect, since it was documented before but not as emphasized.
 	\item New format passed tests; now to use these new categories rather than defaulting to just one.
 \end{itemize}
@@ -2413,6 +2416,56 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
     \item This means that if Gene A has the codon AAA defined, and then it is redefined later (when it should merely append to the existing data), it destroys the old data.
     \item First step is to add the ability to store the data position based: right now, data is read is purely on the order in which data is read.
     \item Cedric had encountered a weird error that turned out to be local-only when installing the package, while I had some bugs related to the Travis CI admins messing with sudo privileges and causing the server to not install the package.
+\end{itemize}
+
+\labday {August 22 - 23, 2016}
+
+\begin{itemize}
+    \item August 22 -- sick day.
+    Filled out hours and updated to current repos.
+    \item August 23 -- Mostly a discussion day with Cedric on how to re-implement RFPModel (TODO: Still need to rename this to PAModel).
+    \begin{itemize}
+        \item TODO: Screenshot taken of board to be uploaded to notes here.
+        The board currently has a summary of the data structures Cedric and I have figured out.
+        \item Beginning of talk with Cedric: Confirmed that Gabriel (probably) messed up with Codon\_Count calculations, and thus would indeed require a major rework of RFPModel.
+        \begin{itemize}
+            \item Privately asked Gabriel about prior work, but he doesn't remember the justification he and Jeremy had made about this calculation.
+        \end{itemize}
+        \item Current PA file read-in is largely deficient of information-storing structures to easily calculate log likelihoods.
+        \item Core problem: While my new vector of vectors for RFP\_counts for different categories was a good start, we need to associate directly the codon (or, for convenience, the codon id as an unsigned integer) with the position and with the RFP\_counts from there.
+        Currently, my vector of vectors does not track the codon, as I was intending to associate this data indirectly with the stored sequence string to re-find the codon internally each time.
+        \item Solution: While looping over the string is a bad idea, we can still keep my vector of vectors as long as another, 1-dimensional vector is created that associates the position with the codonID, since each position can (should, if my ambiguous position check still works after I finally edit the code) only hold one codon.
+        \item These two data structures, combined, can be re-summarized into the current RFPModel data: A 2-dimensional vector that sums the RFP\_counts for each category for each gene ID, and retaining the nCodons 1-dimensional vector (but actually storing the right number rather than doing voodoo Hanas calculations).
+        \item Another major problem: Current functions to set sequence don't really work for RFP\_count based data.
+        \item Since PA data is presented line-by-line with the size of the sequence unknown, we should make a new function to process and set this sequence at the very end of a set of genes.
+        \item Currently, a PA file has consecutive gene IDs, so we can assume that all gene-wise information is correctly clustered together until the next cluster shows up.
+        \item Additional discussion topic: How to read in data so that it's all associated easily.
+        \item Cedric suggested reading in a table-style vector of vectors: For each line, make this a vector that is pushed unto a vector that is sized to the number of csv columns of the file.
+        \item Planned steps:
+        \begin{itemize}
+            \item Add the position vector and the sumRFPCount vector
+            \item Modify the Genome.cpp function reading in PA files: Store each line as a table-style vector of vectors
+            \item Make sure to retain the current set-up of reading in the file twice, the first pass checking the size of the genome and each gene
+            \item Then read in this vector of vectors in a function in Gene.cpp, a new version of setSequence that accepts a vector of vectors as an argument.
+            \item This will concatenate each inner vector's sequence string together to form a sequence, etc.
+            \item From the new setSequence, call processRFP in SequenceSummary.cpp: Accept a 2-dimensional vector, that same table, to finally store this information as well as summarize it.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\labday{August 24, 2016}
+
+\begin{itemize}
+    \item Began implementing plan set forth yesterday.
+    \item Started by modifying (and thus simplifying, for now) the readPAFile function in Genome.cpp and added barebone support for setPASequence in Gene.cpp.
+    \item TODO: Ask Cedric about SequenceSummary and the difference between codonArray and codonArrayParameter as required by the boolean forParamVector when using the function indexToCodon
+    \item Current workload:
+    \begin{itemize}
+        \item Clean up defunct notes
+        \item Continue cleaning up old, now defunct code to fit the plan
+        \item NOTE (and note elsewhere and likewise fix defunct notes) that we don't need to read in the file twice anymore because the ingenious table design lets us extract the size of the gene from the number of rows of the table
+        \item Currently code is a mess but works up to the point where it calls processPA: It reads in a PA file, ignores ambiguous positions still, but reads in the sequence correctly (and just the sequence, no internal storage of RFP data yet).
+    \end{itemize}
 \end{itemize}
 
 \end{document}
