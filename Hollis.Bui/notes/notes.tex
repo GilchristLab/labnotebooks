@@ -2482,8 +2482,49 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 
 \begin{itemize}
     \item Began creating new data structures.
-    \item While memory problems caused another small delay, finished creating and setting the data sturctures.
+    \item While memory problems caused another small delay, finished creating and setting the data structures.
     \item TODO: Add helper functions to initialize, get, set, and in general check these data structures.
+\end{itemize}
+
+\labday{August 30 - 31, 2016}
+
+\begin{itemize}
+    \item August 30 -- Mostly was in the lab to discuss issues with other researchers.
+    Did not actively work on own project.
+    \item August 31 -- Recall: about half a month ago, Cedric asked me to fix getGenomeForGeneIndicesR, which was incorrectly implemented.
+    \begin{itemize}
+        \item I fixed the implementation, but did not have a chance to go back and unit test or error-check my changes.
+    \end{itemize}
+    \item Today Alex brought up a segmentation fault (memory error he was experiencing) after finally bringing all repositories up to date.
+    Summary of problems and testing:
+    \begin{itemize}
+        \item On Gauley with R studio (running Gauley locally rather than remotely):
+        \begin{lstlisting}
+        *** caught segfault ***
+        address 0xfffffffffffffff8, cause 'memory not mapped'
+
+        Traceback:
+         1: .External(list(name = "CppMethod__invoke_notvoid", address = <pointer: 0x2cdce60>,     dll = list(name = "Rcpp", path = "/usr/lib/R/site-library/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x2df0a00>,         info = <pointer: 0x7f3a5ebf9860>), numParameters = -1L),     <pointer: 0x238f690>, <pointer: 0x23a9af0>, .pointer, ...)
+          2: genome$getGenomeForGeneIndices(genes.in.mixture, simulated)
+           3: plot.Rcpp_ROCModel(model, genome, samples = samples * 0.1, mixture = 1,     main = "E.coli Codon Usage Plot")
+            4: plot(model, genome, samples = samples * 0.1, mixture = 1, main = "E.coli Codon Usage Plot")
+        //$ For latex syntax coloring fix only
+        \end{lstlisting}
+        \item For now, script and data file is located in \enquote{AlexTesting} folder under RunnableScriptsAndData, and can be run from scratch.
+        \item Locally on his own machine (Ubuntu 15.2), he does not encounter any problems.
+        \item This same script on my machine, however, runs into a memory problem as well:
+        \begin{lstlisting}
+          rsession(99676,0x7fff770b0000) malloc: *** mach_vm_map(size=4795577582035439616) failed (error code=3)
+          *** error: can't allocate region
+          *** set a breakpoint in malloc_error_break to debug
+          Error: std::bad_alloc
+        \end{lstlisting}
+        \item Furthermore, both memory issues with error messages may occasionally run to crash R studio without any error messages at all.
+        \item Currently, we suspect it is a machine or system-dependent bug.
+        \item TODO: Ask Alan to run this script on windows because, once again, Mac lacks the memory-breakdown tools that Windows does.
+        \item Also should reexamine the C++ code I wrote, just in case it is the problem.
+        However, this is less likely (since once again, Alex's machine runs this without memory problems).
+    \end{itemize}
 \end{itemize}
 
 \end{document}
