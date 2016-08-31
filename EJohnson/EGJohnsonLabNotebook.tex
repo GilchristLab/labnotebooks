@@ -1,0 +1,295 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Daily Laboratory Book
+% LaTeX Template 
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Frank Kuster (http://www.ctan.org/tex-archive/macros/latex/contrib/labbook/)
+%
+% Important note:
+% This template requires the labbook.cls file to be in the same directory as the
+% .tex file. The labbook.cls file provides the necessary structure to create the
+% lab book.
+%  %%mikeg: Since labbook is installed shouldn't need to do this
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing lab book content.
+%
+% HOW TO USE THIS TEMPLATE 
+% Each day in the lab consists of three main things:
+%
+% 1. LABDAY: The first thing to put is the \labday{} command with a date in 
+% curly brackets, this will make a new page and put the date in big letters 
+% at the top.
+%
+% 2. EXPERIMENT: Next you need to specify what experiment(s) you are 
+% working on with an \experiment{} command with the experiment shorthand 
+% in the curly brackets. The experiment shorthand is defined in the 
+% 'DEFINITION OF EXPERIMENTS' section below, this means you can 
+% say \experiment{pcr} and the actual text written to the PDF will be what 
+% you set the 'pcr' experiment to be. If the experiment is a one off, you can 
+% just write it in the bracket without creating a shorthand. Note: if you don't 
+% want to have an experiment, just leave this out and it won't be printed.
+%
+% 3. CONTENT: Following the experiment is the content, i.e. what progress 
+% you made on the experiment that day.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,index=totoc,hyperref,openany]{labbook} % 'openany' here removes the gap page between days, erase it to restore this gap; 'oneside' can also be added to remove the shift that odd pages have to the right for easier reading
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[ 
+%  backref=page, %incompatible with biblatex
+  pdfpagelabels=true,
+  plainpages=false,
+  colorlinks=true,
+  bookmarks=true,
+  pdfview=FitB]{hyperref} % Required for the hyperlinks within the PDF
+  
+\usepackage{booktabs} % Required for the top and bottom rules in the table
+\usepackage{float} % Required for specifying the exact location of a figure or table
+\usepackage{graphicx} % Required for including images
+
+%%Customizations by mikeg
+\usepackage{marginnote}%provides ability to put notes in the margin using \marginnote{} coommand
+\usepackage{ifthen}
+\usepackage{amsmath,amssymb}
+\usepackage{xspace}
+\usepackage{listings} %provides lstlisting environment for typesetting code
+\usepackage[natbib=true,backref=page]{biblatex} %alternative to natbib
+
+\bibliography{/home/mikeg/BiBTeX/bibliography.full}
+
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+%\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+%remove numbering of experiments
+%\renewcommand*\theexperiment{}
+%\renewcommand*\thesubexperiment{}
+\makeatother 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Use Roman numerals for page numbers
+\title{
+\begin{center}
+\HRule \\[0.4cm]
+{\Huge \bfseries Research Journal \\[0.4cm] % Degree
+\HRule \\[1.5cm]}
+\end{center}
+}
+\author{\LARGE Elizabeth G. Johnson \\ \Large ejohns60@utk.edu \\[2cm]} % Your name and email address
+\date{Beginning Auguestr 2016} % Beginning date
+
+
+
+%\newexperiment{<abbrev>}[<short form>]{<long form>}
+%Here, <abbrev> is the abbreviation that can be given later to make LATEX
+%use the <long form> and <short form>. The short form is for index, table of
+%contents and running title, and giving it is optional. When using the abbre-
+%viation, specify it without prepending a backslash, i.e. \experiment{abbrev}.
+%Abbreviations may contain any char except the backslash, the tilde ( ̃), comma
+
+\newexperiment{NSE}{NSE SEMPPR}
+\newexperiment{ROC}{ROC SEMPPR}
+\newexperiment{RPF-ROC}[RPF-ROC]{Ribosome Profile Footprints: Pausing Model}
+\newexperiment{RPF-NSE}[RPF-NSE \& ROC]{Ribosome Profile Footprints: NSE \& Pausing Model}
+\newexperiment{FONSE}{FONSE SEMPPR}
+\newexperiment{DIMCMC}[DIMCMC]{Doubly Intractable MCMC}
+\newexperiment{Knight}{Student Learning, Jennifer Knight}
+\newexperiment{SELAC}{Main SELAC model}
+\newexperiment{Lab}{Lab Meeting}
+\newexperiment{LSAs}{LSAs}
+\newexperiment{Cedric}{Cedric Landerer}
+\newexperiment{Mehmet}{Mehmet Aydeniz}
+\newexperiment{SMBE Satellite Meeting on Protein Evolution in Denver}{SMBEDen}
+%\newexperiment{shorthand}{Description of the experiment}
+
+
+%COMMANDS
+%%% Sort using M-x 'sort-lines'
+\newcommand{\GTR}{GTR+$\Gamma$\xspace}
+\newcommand{\LogN}{\ensuremath{\text{LogN}}\xspace}
+\newcommand{\Lik}{\ensuremath{\text{\textbf{Lik}}}\xspace}
+\newcommand{\LLik}{\ensuremath{\mathcal{L}}\xspace}
+\newcommand{\Ne}{\ensuremath{{N_e}}\xspace}
+\newcommand{\Piihat}{\ensuremath{\hat{\pi}_i}\xspace}
+\newcommand{\Pii}{\ensuremath{\pi_{i}}\xspace}
+\newcommand{\Pijhat}{\ensuremath{\hat{\pi}_j}\xspace}
+\newcommand{\Pij}{\ensuremath{\pi_{j}}\xspace}
+\newcommand{\Pivechat}{\ensuremath{\hat{\Pivec}}\xspace}
+\newcommand{\Pivec}{\ensuremath{\Vec{\pi}}\xspace}
+%\newcommand{\Pr}{\ensuremath{\text{Pr}}\xspace}
+\newcommand{\Qmatrixa}{\ensuremath{\Qmatrix_a}\xspace}
+\newcommand{\Qmatrix}{\mathbf{Q}\xspace}
+\newcommand{\ROC}{\ensuremath{\text{ROC}}\xspace}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\var}{\Var}
+\newcommand{\Wi}{\ensuremath{{W_i}}\xspace}
+\newcommand{\Wj}{\ensuremath{{W_j}}\xspace}
+\newcommand{\acivec}{\ensuremath{a\left(\cveci\right)}\xspace}
+\newcommand{\acvecg}{\ensuremath{a\left(\vec{c}_{i,g}\right)}\xspace}
+\newcommand{\acvecj}{\ensuremath{a\left(\cvecj\right)}\xspace}
+\newcommand{\acvec}{\ensuremath{a\left(\Vec{c}\right)}\xspace}
+\newcommand{\aip}{\ensuremath{a_{i,p}}\xspace}
+\newcommand{\aivecg}{\ensuremath{{\avec}_{i,g}}\xspace}
+\newcommand{\aivec}{\aveci}
+\newcommand{\ajp}{\ensuremath{a_{j,p}}\xspace}
+\newcommand{\ajvecg}{\ensuremath{{\ajvec}_{,g}}\xspace}
+\newcommand{\ajvec}{\ensuremath{\Vec{a}_{j}}\xspace}
+\newcommand{\aj}{\ensuremath{a__j}\xspace}
+\newcommand{\alphac}{\ensuremath{\alpha_c}\xspace}
+\newcommand{\alphap}{\ensuremath{\alpha_p}\xspace}
+\newcommand{\alphavec}{\ensuremath{\Vec{\alpha}}\xspace}
+\newcommand{\alphav}{\ensuremath{\alpha_v}\xspace}
+\newcommand{\aobsvecg}{\ensuremath{{\avec}_{\text{obs},g}}\xspace}
+\newcommand{\aobsvec}{\ensuremath{\Vec{a}_{\text{obs}}}\xspace}
+\newcommand{\aobs}{\ensuremath{a_{\text{obs}}}\xspace}
+\newcommand{\aoptip}{\ensuremath{\aopt_{i,p}}\xspace}
+\newcommand{\aoptpg}{\ensuremath{\aopt_{p,g}}\xspace}
+\newcommand{\aoptp}{\ensuremath{\aopt_p}\xspace}
+\newcommand{\aoptvecg}{\ensuremath{{{\aoptvec}_g}}\xspace}
+\newcommand{\aoptvec}{\ensuremath{\Vec{a}^*}\xspace}
+\newcommand{\aopt}{\ensuremath{{a^*}}\xspace}
+\newcommand{\aveci}{\ensuremath{\Vec{a}_i}\xspace}
+\newcommand{\avecj}{\ensuremath{\Vec{a}_j}\xspace}
+\newcommand{\avec}{\ensuremath{\Vec{a}}\xspace}
+\newcommand{\avecopt}{\aoptvec}
+\newcommand{\celegans}{\emph{C.~elegans}\xspace}
+\newcommand{\cveci}{\ensuremath{\cvec_i}\xspace}
+\newcommand{\cvecj}{\ensuremath{\cvec_j}\xspace}
+\newcommand{\cvec}{\ensuremath{\Vec{c}}\xspace}
+\newcommand{\deltaT}{\ensuremath{\delta t}\xspace}
+\newcommand{\ecoli}{\emph{E.~coli}\xspace}
+\newcommand{\Lklu}{\emph{L.~kluyveri}\xspace}
+\newcommand{\bsubtilis}{\emph{B.~subtilis}\xspace}
+\newcommand{\fij}{\ensuremath{f_{i,j}}\xspace}
+\newcommand{\gen}{\ensuremath{\text{gen}}\xspace}
+\newcommand{\jmax}{\ensuremath{{j_{\max}}}\xspace}
+\newcommand{\kmax}{\ensuremath{{k_{\max}}}\xspace}
+\newcommand{\muij}{\ensuremath{\mu_{i,j}}\xspace}
+\newcommand{\phiROC}{\ensuremath{\phi_\ROC}\xspace}
+\newcommand{\phig}{\ensuremath{\phi_{g}}\xspace}
+\newcommand{\pij}{\ensuremath{p_{i,j}}\xspace}
+\newcommand{\qij}{\ensuremath{q_{i,j}}\xspace}
+\newcommand{\qji}{\ensuremath{q_{i,j}}\xspace}
+\newcommand{\rib}{\ensuremath{\text{rib}}\xspace}
+\newcommand{\cell}{\ensuremath{\text{cell}}\xspace}
+\newcommand{\sphi}{\ensuremath{s_\phi}\xspace}
+\newcommand{\scer}{\emph{S.~cerevisiae}\xspace}
+\newcommand{\setG}{\ensuremath{\mathbb{G}}\xspace}
+\newcommand{\setP}{\ensuremath{\mathbb{P}}\xspace}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}\xspace}
+\newcommand{\setF}{\ensuremath{\mathbb{F}}\xspace}
+\renewcommand{\ng}{\ensuremath{{n_g}}\xspace}
+\newcommand{\researcher}{\subsubsection}
+%---------------------------------------------------------------------------------------
+
+\graphicspath{{./Figures//}} % double slash indicates search recursively within folder
+%%Figures will be organized in subfolders by year/month
+\DeclareGraphicsExtensions{.pdf, .png, .jpg} %prevent the need for using file extensions
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\tableofcontents
+
+\mainmatter % Use Arabic numerals for page numbers
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+
+% Blank template to use for new days:
+
+%\labday{Day, Date Month \Year}
+
+%\experiment{}
+
+%Text
+
+%-----------------------------------------
+
+%\experiment{}
+
+%\begin{figure}[H] % Example of including images
+%\begin{center}
+%\includegraphics[width=0.5\linewidth]{example_figure}
+%\end{center}
+%\caption{Example figure.}
+%\label{fig:example_figure}
+%\end{figure}
+
+%Text
+
+%----------------------------------------------------------------------------------------
+
+
+%=======================================================================================
+\labday{August 29th}
+\experiment{Reversion}
+%=======================================================================================
+\begin{itemize}
+\item Fixed Immune Fitting so optimizer does not get lodged in an inappropriate local minimum.
+\item ISSUE 1: optimizer will not fit PAT OX at position 449
+    \begin{itemize}
+    \item{error A: ERROR IN BINOMIALPMF FUNCTION}
+    \item{address A: a list instead of an array was being input, added a check for an array in binomialpmf function}
+    \end{itemize}
+\item ISSUE 2: optimizer does not fit PAT OX 449 well
+\begin{itemize}
+\item{Not sure if stuck in local minima again}
+\end{itemize}
+%Graphics
+%--------------------------------------------------------------------------
+%\includegraphics[width=\textwidth]{Figures/2016/07/IMG_152.JPG}
+%-------------------------------------------------------------------------
+
+
+\end{itemize}
+
+
+\experiment{Co-linkage}
+\begin{itemize}
+\item{ on hold}
+\end{itemize}
+
+\experiment{Physio-Chem Model}
+\begin{itemize}
+\item{ on hold}
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\printbibliography
+
+\end{document}
+
+\experiment{}
+\researcher{}
+\begin{description}
+  \item[Project State:]
+    \begin{itemize}
+    \end{itemize}
+  \item[Current Tasks:] 
+  \item[Future Tasks:] 
+  \end{description}
