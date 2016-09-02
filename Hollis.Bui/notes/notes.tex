@@ -2527,4 +2527,17 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
     \end{itemize}
 \end{itemize}
 
+\labday{September 2, 2016}
+
+\begin{itemize}
+    \item I want to prioritize looking at getGenomeForGeneIndices.
+    \item I haven't set up a separate development branch from my own repo, so while I could look up Cedric's main repo I cannot push any major edits.
+    \item Since Alex isn't in today either, I'm going to try and polish off the PA file reading and then finally push these changes to the main repository.
+    \item Finished adding helper functions for sumRFP\_count information.
+    \item The unit tests for everything with RFP\_counts now works again after changing the data structure style of RFP\_counts, and RFP\_counts testing takes into account position (and is position-based from index 0 to index n).
+    \item TODO: Test the helper functions for sumRFP\_count work.
+    \item TODO: Add a checker to ensure all the positions are correct for my new positionCodonID vector.
+    \item TODO: Of course, remove the old RFPObserved structure and edit the code so that it not longer uses this miscalculation.
+\end{itemize}
+
 \end{document}
