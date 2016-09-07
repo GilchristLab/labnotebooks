@@ -403,30 +403,91 @@ contracts slowly.
 
 
 
+
+
+
 \begin{itemize}
 \item{Issue 9.5.A: Some trajectories will not tolerate likelihood adjustments and the optimization hangs. The Python optimization function minimize calls a  wrapper to a FORTRAN function . When it fails the call just hangs and will not exit. There is not a good way as far as I can tell to look at what is causing the hang up. I do notice that it occurs when I have initial conditions that are too near to 1. (fo and lambda). Will try a time-out  multiprocessing /or callback function.  
 
 http://stackoverflow.com/questions/24825441/
-stop-scipy-minimize-after-set-time. 
+stop-scipy-minimize-after-set-time.}
 \end{itemize}
 
 
 
-%=======================================================================================
-\labday{September 6th }
-
+\labday{September 5th }
 %=======================================================================================
 \experiment{Reversion}
-begin{description}
+\researcher{}
+\begin{description}
   \item[Project State:]
     \begin{itemize}
-	\item{Vitaly is concerned about the fact that the fo parameter does not seem to be fitting well wants me to trouble shoot}
-	\item{High un-biological c-values are due to the fact that the immune response is contracting slowly and the cost differential has to be very high in order for 	the revertant to emerge in an environment where there is still an immune response targeted against I suggested creating an exhaustion term for the effector 		cells to address the fact that the immune response seems to be contracting and expanding at different rates during the 500 day time-course. In this formulation,
-	the $\kappa$ clearance term is modulated to account for exhaustion as follow}
+    
+    \item{Vitaly is concerned about the fact that the initial condition parameter $fo$ is not fitting well. Wants me to trouble shoot}
+    \item{High un-biological c-values are due to the fact that the immune response is contracting slowly and the cost differential has to be very high in order for 	the revertant to emerge in an environment where there is still an immune response targeted against it. I suggested creating an exhaustion term for the effector cells to address the fact that the immune response seems to be contracting and expanding at different rates during the 500 day time-course. This exhaustion term should hopefully give us more biological c-values. In this formulation,
+	the $\kappa$ clearance term (which denotes how well the effectors clear the virus) is modulated to account for exhaustion as follows in equation below text.}
+	
+$$\text{Reversion with Effector Response and Exhaustion of the Effector Response}$$
+
+
+$$\diamond\diamond\text{ODE Equations}\diamond\diamond$$
+
+$$\dot W=  rW- \kappa(t) E W -\mu_w rW + \mu_m r(1-c)M $$
+$$\dot M = r(1-c)M  +\mu_w rW -\mu_m r(1-c)M $$
+$$\dot E =\alpha E$$
+
+
+
+
+$$\kappa=
+\begin{cases}
+\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $t \geq t_{exh}$},\\[2ex]
+\hphantom{-}\kappa_0  &\text{if $ t< t_{exh}$}.
+\end{cases}$$
+
+
+
+$$\diamond \diamond \text{Closed form Solution}\diamond \diamond$$
+
+$$f_w(t)=\dfrac{f_0 e^{\frac{\lambda}{\alpha}} } {(1-f_0) e^{\frac{\lambda e^{\alpha t}}{\alpha}-crt}+ f_0 e^{ \frac{\lambda}{\alpha}} }$$
+
+$$\lambda=\kappa E_0$$
+
+$$\kappa=
+\begin{cases}
+\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $t \geq t_{exh}$},\\[2ex]
+\hphantom{-}\kappa_0  &\text{if $t < t_{exh}$}.
+\end{cases}$$
+
+
+\begin{table}[H]
+\centering
+\caption{}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+                 & Parameters and State Variables               \\ \hline
+$$M$$            & rna copies of mutant variant per ml of blood \\ \hline
+$$W$$            & rna copies of wild variant per ml blood      \\ \hline
+$$E$$            & effector response of immune system           \\ \hline
+$$f_w$$          & frequency of wild variant                    \\ \hline
+$$f_0$$          & initial frequency of wild variant            \\ \hline
+$$\mu_w$$        & mutation rate of wild into mutant population \\ \hline
+$$\mu_m$$        & mutation rate of mutant into wild population \\ \hline
+$$c$$            & replicative cost of mutation                 \\ \hline
+$$r$$            & growth constant of wild variant              \\ \hline
+$$\kappa$$       & killing rate of effector cells               \\ \hline
+$$\alpha$$       & expansion rate of effector cells             \\ \hline
+$$\rho$$         & exhaustion rate of effector cells            \\ \hline
+$$t_{exh}$$      & beginning of exhaustion phase                \\ \hline
+\end{tabular}
+\end{table}
+    
     \end{itemize}
-  \item[Current Tasks:] 
-  \item[Future Tasks:] 
+  \item[Current Tasks:]{ Prototype new variation of model in mathematica and fit to 4 test cases. Decide if $fo$ value can be fit better.}
+  \item[Future Tasks:] {Create a python version of model and fit to 4 test cases.}
   \end{description}
+
 
 \printbibliography
 

@@ -427,7 +427,7 @@ stop-scipy-minimize-after-set-time.}
     \item{High un-biological c-values are due to the fact that the immune response is contracting slowly and the cost differential has to be very high in order for 	the revertant to emerge in an environment where there is still an immune response targeted against it. I suggested creating an exhaustion term for the effector cells to address the fact that the immune response seems to be contracting and expanding at different rates during the 500 day time-course. This exhaustion term should hopefully give us more biological c-values. In this formulation,
 	the $\kappa$ clearance term (which denotes how well the effectors clear the virus) is modulated to account for exhaustion as follows in equation below text.}
 	
-	$$\text{Reversion with Effector Response and Exhaustion of the Effector Response}$$
+$$\text{Reversion with Effector Response and Exhaustion of the Effector Response}$$
 
 
 $$\diamond\diamond\text{ODE Equations}\diamond\diamond$$
@@ -441,8 +441,8 @@ $$\dot E =\alpha E$$
 
 $$\kappa=
 \begin{cases}
-\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $\kappa \geq t_{exh}$},\\[2ex]
-\hphantom{-}\kappa_0  &\text{if $\kappa < t_{exh}$}.
+\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $t \geq t_{exh}$},\\[2ex]
+\hphantom{-}\kappa_0  &\text{if $ t< t_{exh}$}.
 \end{cases}$$
 
 
@@ -455,9 +455,10 @@ $$\lambda=\kappa E_0$$
 
 $$\kappa=
 \begin{cases}
-\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $\kappa \geq t_{exh}$},\\[2ex]
-\hphantom{-}\kappa_0  &\text{if $\kappa < t_{exh}$}.
+\hphantom{-}\kappa_0 e^{-\rho t} &\text{if $t \geq t_{exh}$},\\[2ex]
+\hphantom{-}\kappa_0  &\text{if $t < t_{exh}$}.
 \end{cases}$$
+
 
 \begin{table}[H]
 \centering
