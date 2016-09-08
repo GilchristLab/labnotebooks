@@ -489,6 +489,44 @@ $$t_{exh}$$      & beginning of exhaustion phase                \\ \hline
   \end{description}
 
 
+
+
+\labday{September 7th }
+%=======================================================================================
+\experiment{Reversion}
+\researcher{}
+\begin{description}
+  \item[Project State:]
+    \begin{itemize}
+    
+    \item{Vit wants me to write the equation with the actual delay in it, not restart our function with a new $\alpha$ and new initial conditions}
+    
+    \item{Vit thinks we are getting bad estimates of c because the data is bad for the examples I showed him. I think this might be outside my realm of control.}
+    \end{itemize}
+  \item[Current Tasks:]
+  \item{have ODE with delay. Just need to finish solving it.}
+  \item[Future Tasks:] {rerun fits with new equation that incorporates immune exhaustion}
+  \end{description}
+  
+  
+  $$\dot W=  rW- \kappa E W -\mu_w rW + \mu_m r(1-c)M $$
+$$\dot M = r(1-c)M  +\mu_w rW -\mu_m r(1-c)M $$
+$$\dot E =\alpha E$$
+
+
+
+
+$$\dot \kappa=
+\begin{cases}
+ -\rho \kappa   &\text{if $t \leq t_{exh}$},\\[2ex]
+\hphantom{-}  0  &\text{otherwise}.
+\end{cases}$$
+  
+  $$\dot{z}=\Big( \dfrac{W}{M} \Big)\dfrac{d}{dt} =
+\begin{cases}
+\hphantom{-} \dfrac{M \Big( rW- (\kappa_0 e^{\rho  t_{exh}})  E_0 e^{(\alpha -\rho) t}  W \Big)}{M^2}-\dfrac{ W \Big(r(1-c)M \Big)}{M^2} &\text{if $t \geq t_{exh}$},\\[2ex]
+\hphantom{-} \dfrac{M \Big( rW- \kappa E_0 e^{\alpha t} W \Big)}{M^2}-\dfrac{ W \Big(r(1-c)M \Big)}{M^2}  &\text{if $t < t_{exh}$}.
+\end{cases}$$
 \printbibliography
 
 \end{document}
