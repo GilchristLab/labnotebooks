@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.22)  6 SEP 2016 22:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.22)  12 SEP 2016 09:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -494,6 +494,50 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks27
 \verbatim@in@stream=\read1
 )
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2015/06/15 v0.4y Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count118
+\calc@Bcount=\count119
+\calc@Adimen=\dimen128
+\calc@Bdimen=\dimen129
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count120
+\calc@Cskip=\skip55
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/04/20 v2.0e eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+))
+\AM@pagewidth=\dimen130
+\AM@pageheight=\dimen131
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2015/06/15 v0.4y Pdfpages driver for pdfTeX (AM)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
+)
+\AM@pagebox=\box31
+\AM@toc@title=\toks28
+\c@AM@survey=\count121
+\AM@templatesizebox=\box32
+)
 (./lab_notebook.aux)
 \openout1 = `lab_notebook.aux'.
 
@@ -512,17 +556,17 @@ LaTeX Font Info:    ... okay on input line 23.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count118
-\scratchdimen=\dimen128
-\scratchbox=\box31
-\nofMPsegments=\count119
-\nofMParguments=\count120
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count121
-\MPscratchDim=\dimen129
-\MPnumerator=\count122
-\makeMPintoPDFobject=\count123
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count122
+\scratchdimen=\dimen132
+\scratchbox=\box33
+\nofMPsegments=\count123
+\nofMParguments=\count124
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count125
+\MPscratchDim=\dimen133
+\MPnumerator=\count126
+\makeMPintoPDFobject=\count127
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -601,7 +645,8 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count124
+\c@lstlisting=\count128
+\AtBeginShipoutBox=\box34
 [1
 
 
@@ -651,67 +696,174 @@ Underfull \hbox (badness 10000) in paragraph at lines 145--147
 
  []
 
-[5] [6] [7
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 198--203
 
-] [8
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 204--209
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--209
+
+ []
+
+[7] [8] [9
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 214--216
+
+LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
+(Font)              using `OT1/cmss/bx/n' instead on input line 269.
+
+[10
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 324--326
 
  []
 
-[9
+[11
 
-] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 262--273
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 277--299
+] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 372--383
 
  []
 
-[11]
-Overfull \hbox (54.70206pt too wide) in paragraph at lines 302--303
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--409
+
+ []
+
+[13]
+Overfull \hbox (54.70206pt too wide) in paragraph at lines 412--413
 []\OT1/cmr/m/n/10.95 The place where things are break-ing is at the call for RO
 C-Model::updateTracesWithInitialValues(Genome
  []
 
 
-Overfull \hbox (81.71094pt too wide) in paragraph at lines 309--310
+Overfull \hbox (81.71094pt too wide) in paragraph at lines 419--420
 \OT1/cmr/m/n/10.95 CUB plots), it looks like it pulls out the genes in a mix-tu
 re and passes into Genome::getGenomeForGeneIndicesR()
  []
 
-[12] [13] (./lab_notebook.aux) ) 
+[14] <Autocorrelation_just_genes_w_sigpep.pdf, id=62, 505.89pt x 505.89pt>
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf used on input 
+line 446.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf used on input 
+line 446.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+
+<Autocorrelation_just_genes_w_sigpep.pdf, id=65, page=8, 505.89pt x 505.89pt>
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf, page 8>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf, page8 used on
+ input line 446.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf, page 8>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf, page8 used on
+ input line 446.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf, page 8>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf, page8 used on
+ input line 446.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf, page 8>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf, page8 used on
+ input line 446.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+ [15]
+File: Autocorrelation_just_genes_w_sigpep.pdf Graphic file (type pdf)
+
+<use Autocorrelation_just_genes_w_sigpep.pdf, page 8>
+Package pdftex.def Info: Autocorrelation_just_genes_w_sigpep.pdf, page8 used on
+ input line 446.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+ [16 <./Autocorrelation_just_genes_w_sigpep.pdf>] <acf_loglikelihood.pdf, id=78
+, 505.89pt x 505.89pt>
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+
+<use acf_loglikelihood.pdf>
+Package pdftex.def Info: acf_loglikelihood.pdf used on input line 450.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+ <use acf_loglikelihood.pdf>
+Package pdftex.def Info: acf_loglikelihood.pdf used on input line 450.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+
+<acf_loglikelihood.pdf, id=81, page=1, 505.89pt x 505.89pt>
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+
+<use acf_loglikelihood.pdf, page 1>
+Package pdftex.def Info: acf_loglikelihood.pdf, page1 used on input line 450.
+(pdftex.def)             Requested size: 505.88875pt x 505.88875pt.
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+ <use acf_loglikelihood.pdf, page 1>
+Package pdftex.def Info: acf_loglikelihood.pdf, page1 used on input line 450.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+
+<use acf_loglikelihood.pdf, page 1>
+Package pdftex.def Info: acf_loglikelihood.pdf, page1 used on input line 450.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+ <use acf_loglikelihood.pdf, page 1>
+Package pdftex.def Info: acf_loglikelihood.pdf, page1 used on input line 450.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+
+[17]
+File: acf_loglikelihood.pdf Graphic file (type pdf)
+ <use acf_loglikelihood.pdf, page 1>
+Package pdftex.def Info: acf_loglikelihood.pdf, page1 used on input line 450.
+(pdftex.def)             Requested size: 598.55833pt x 598.55833pt.
+ [18 <./acf_loglikelihood.pdf>]
+(./lab_notebook.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6049 strings out of 494957
- 90610 string characters out of 6180028
- 229539 words of memory out of 5000000
- 9204 multiletter control sequences out of 15000+600000
+ 6898 strings out of 494957
+ 104793 string characters out of 6180028
+ 245569 words of memory out of 5000000
+ 10022 multiletter control sequences out of 15000+600000
  11232 words of font info for 40 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 47i,11n,48p,1158b,220s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmti10.pfb>
-Output written on lab_notebook.pdf (13 pages, 199420 bytes).
+ 47i,18n,48p,1158b,424s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on lab_notebook.pdf (18 pages, 368833 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
+ 142 PDF objects out of 1000 (max. 8388607)
+ 96 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

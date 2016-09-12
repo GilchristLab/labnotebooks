@@ -8,7 +8,7 @@
 \usepackage{array}
 \usepackage{amsmath}
 \usepackage{verbatim}
-
+\usepackage[final]{pdfpages}
 %%%%%%%%%%%%%%% Section for new commands %%%%%%%%%%%%%%%%%%%
 \newcommand{\Loss}[2]{L\left(#1,#2\right)}
 
@@ -180,18 +180,128 @@ $\bullet$ Usually need to check model \textbf{before} getting new data
 To measure discrepancy between models and data, define test quantity T(y,$\theta$). Think test statistic in frequentist hypothesis testing, which depends only on data. To measure lack of fit of data with respect to posterior predictive distribution can be measured as p-value of test quantity. In a Bayesian framework, the p-value is 
 
 \begin{align*}
-p_B &= Pr(T(y^{rep},\theta) \geq T(y,\theta)|y)
+p_B &= Pr(T(y^{rep},\theta) \geq T(y,\theta)|y)\\
+&= \iint{I_{T(y^{rep},\theta) \geq T(y,\theta)}p(y^{rep}|\theta)p(\theta|y)dy^{rep}d\theta}
 \end{align*}
 
+which translates to the probability a set of replicated data could be more extreme than the observed (\textbf{how is this different from the frequentist's definition?}). A p-value can be calculated via simulations: drawing from joint posterior distribution, the p-value is simply the ration of
+
+\begin{align*}
+T(y^{rep s},\theta) \geq T(y,\theta^s)
+\end{align*}
+
+where the $y^{rep s}$ are drawn from the simulated values of $\theta^s$.
+
+\experiment{Chapter 7: Evaluating, comparing, and expanding models}
+
+\subexperiment{7.1 Measures of predictive accuracy}
+Measures of predictive accuracy should be guided by the application:
+$\bullet$ point prediction - single value reported as prediction of future observation (mean squared error)
+\newline
+$\bullet$ probabilistic prediction - report inferences about $\tilde{y}$ that takes into account full uncertainty over $\tilde{y}$
+\newline
+
+Log-likelihood, $\log{p(y|\theta)}$, is a probabilistic prediction. Proportional to the mean squared error if model is normal with constant variance. With large sample sizes, minimizing Kullback-Leibler information is the same as maximizing expected log-likelihood. Use log-likelihood because of its generality and because we are interested in summarizing the model fit to data (prior density is not relevant in computing predictive accuracy). 
+\newline
+\newline
+\underline{Ideal measure of model fit: predictive performance for new data (external validation).} 
+\newline
+
+Let:\newline
+$\bullet$ f be the true model \newline
+$\bullet$ y be the observed data \newline
+$\bullet$ $\tilde{y}$ be the future/alternative data
+
+Out-of-sample predictive fit for new data point $\tilde{y}_i$ is
+\begin{align*}
+\log{p_{post}(\tilde{y}_i)} &= \log{E_{post}(p(\tilde{y}_i|\theta))}\\
+&= \log{\int p(\tilde{y}_i|\theta)p_{post}(\theta)d\theta}
+\end{align*}
+where $p_{post}(\tilde{y}_i$ is the predictive density and $p_{post}(\theta)$ is the posterior. 
+
+Expected out-of-sample log-likelihood, since future data unknown:
+\begin{align*}
+E_f(\log{p_{post}(\tilde{y}_i)}) &= \int(\log{p_{post}(\tilde{y}_i)})f(\tilde{y}_i)d\tilde{y}
+\end{align*}
+
+Generally, $\theta$ is not known, so can't get $\log{p(y|\theta)}$. Want to summarize predictive accuracy with
+\begin{align*}
+\log{\prod p_{post}(y_i)} &= \sum_{i=1}^n \log{\int p(y_i|\theta)p_{post}(\theta)d\theta}
+\end{align*} 
+which is usually computed in practice by generating $\theta^s, s = 1,...,S$ from $p_{post}(\theta)$ and then
+\begin{align*}
+\sum_{i=1}^n \log{\left(\frac{1}{S} \sum_{s=1}^S p(y_i|\theta^s)\right)}
+\end{align*}
+
+\subexperiment{7.2 Information criteria and cross-validation}
+
+\textit{Information criteria} typically defined based on deviance = $-2\log{p(y|\hat{\theta})}$ 
+
+Interested in prediction accuracy for model validation and comparing models. \textbf{From pg. 170 of BDA: "When different models have the same number of parameters estimated in the same way, one might simply compare their best-fit log predictive densities directly,"...So in my current case, can I just compare the log-likelihoods of the different ROC results?}
+
+Can approximate out-of-sample predictive accuracy using existing data:
+
+1) \textit{Within-sample predictive accuracy} - Naive estimate of log-likelihood for new data is log-likelihood of existing data. In general, overestimate
+
+2) \textit{Adjusted within-sample predictive accuracy} - Corrections for bias in computed log-likelihood based on existing data and is approximately unbiased. Corrects bias by subtracting off biases produced via number of (effective) parameters being fit. Reasonable, but correct at best only in expectation
+
+3) Cross-validation
 
 
+Gelman et al recommend using WAIC as a measure of predictive performance, which is a more Bayesian approach than AIC or DIC. WAIC has the property that it averages over the posterior distribution, as opposed to conditioning on a point estimate. 
 
+\begin{align*}
+p_{WAIC} &= 2 \sum_{i=1}^n\left(\log{(E_{post}p(y_i|\theta))} - E_{post}(\log{p(y_i|\theta)})\right) \\
+computed\ p_{WAIC} &= 2 \sum_{i=1}^n\left(\log{\left(\frac{1}{S} \sum_{s=1}^S p(y_i|\theta^s)\right)} - \frac{1}{S}\sum_{s=1}^S\log{p(y_i|\theta^s)}\right)
+\end{align*}
 
+They also DO NOT recommend using BIC, as the goal of this criterion is to approximate the marginal probability density of the data p(y) under the model, which can then be used to estimate relative posterior probabilities. 
 
 \labday{Computer Science Notes}
 
+\experiment{Working with Pandas (Python package)}
+
 
 \labday{Biology Notes}
+
+\experiment{Journal club: \textit{Integrative proteomic profiling of ovarian cancer
+cell lines reveals precursor cell associated proteins
+and functional status}}
+
+Difficult to perform mechanistic studies with primary tissue, so need cellular models. Models need to be representative of tumor. 
+
+Genomic/Transriptomic analyses do not necessarily reflect proteomic profile. 
+
+Use streamline MS-based proteomics approach for molecular subtype characterization.
+
+Many OvCa cell lines have been assigned to the wrong tissue of origin. 
+
+
+~229,000 unique peptide sequences $\rightarrow$ 11,070 distinct protein groups (FDR < 1%). 
+
+Look into Label-free protein quantification. 
+
+Used clustering based on expression of ~8,500 distinct proteins quantified in at least 10 of 30 cell lines, which resulted in three main groups:\newline
+ 1) Group 1: cells lines previously reported to represent HGSOC cell lines based on genomic profiles\newline
+ 2) Group 2: unlikely HGSOC lines \newline
+ 3) Group 3: Note how some of the cell lines in this group are related, but doesn't address how all of them are related, so why is this not split up into multiple groups
+ 
+Expected two cell lines to cluster in group 1 based on genomic similarity to HGSOC tumors, but instead were in group 3. They hypothesize that there is a discriminating feature of these tumors only visible at protein level.
+
+Used principal component analysis at whole-proteome levels, which also showed three groupings. Determined 67 proteins with highest discriminating power between groups using feature selection and SVMs. 
+
+\subexperiment{Sarvesh's presentation}
+Incorrect tissue origin:
+$\bullet$ cell lines representative of tumor \newline
+$\bullet$ 30 years since ovarian cell lines have been established \newline
+$\bullet$ cross-contamination 
+
+Goal of study: Integrated/streamlined MS-based proteomics approach for linking proteomic profiles from cell lines, tumor tissues and primary cells for evaluation of OvCa cellular model systems.
+
+Functional signature are at protein and metabolite level.
+
+Longer chromatography dilutes sample more, For narrow peak, MS might scan twice and then able to get new peak. Broader peak will be scanned by MS more, becomes redundant. 
+
 
 \labday{Progress Tracker}
 \experiment{8-25-2016}
@@ -321,5 +431,23 @@ Focused on learning about model checking. I just want to get a solid base in thi
 Last week, Mike noted that sometimes it is hard to tell if the traces are actually converging based on the plots. I think adding a moving average function might make this task a little bit easier. 
 
 In one of the earlier SignalP paper, the authors note that SignalP should not be used to identify extracellular proteins; instead, researchers should use SecretomeP (by the same group). This brings up a good point: most of the papers that have done analysis of codon usage bias in signal peptides have seemed to imply that signal peptide = extracellular. It might be worth dividing up those with signal peptides into two groups: those that are predicted to be extracellular via SecretomeP and those that are not and fit these in ROC with a mixture model. 
+
+\experiment{9-7-2016}
+Talk to Cedric about autocorrelation functions. Look at Geweke scores. 
+
+
+\experiment{9-11-2016}
+Since 9-7-2016:
+$\bullet$ Set up a Github repository for Bob's lab. Should make it easier for us to keep track of the scripts we write and make accessing them easier. I also commented/documented some of the scripts I had previously written to make them more accessible to my labmates who have little programming experience. \newline
+$\bullet$ Got a little bit of experience working with the Python package, Pandas. Supposed to be good for data analysis, which is why Yaojin has suggested teaching it in LFSC 507. \newline
+$\bullet$ Looked into autocorrelation functions and MCMC checking methods, including the Geweke score. \newline
+$\bullet$ Performed an autocorrelation on the $\Delta\eta$ and $\delta$M traces using R's acf function. Generally, they looked something like this.
+
+\includepdf[pages=8]{Autocorrelation_just_genes_w_sigpep.pdf}
+
+$\bullet$ I also ran the acf for the loglikelihood trace and also got good results.
+
+\includepdf[pages=1]{acf_loglikelihood.pdf}
+
 
 \end{document}
