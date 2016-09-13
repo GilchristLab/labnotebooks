@@ -2540,4 +2540,60 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
     \item TODO: Of course, remove the old RFPObserved structure and edit the code so that it not longer uses this miscalculation.
 \end{itemize}
 
+\labday{September 8, 2016}
+
+\begin{itemize}
+    \item Mostly discussion with Cedric about the contents of the email Dr. Gilchrist sent on September 7, 2016.
+    \item The following have been copied from my quickly jotted notes:
+    \item \enquote{Same weird stuff that Cedric mentioned with genome\$read\sep Observed\sep Phi\sep Values, where it somehow enters the error loop and starts setting things when it shouldn’t in byID}
+    \item \enquote{Also seg faults inconsistently (memory error somewhere in this function)}
+    \item \enquote{Restart files: Can be put as an argument into parameterObject. Should make it more clear that this argument is a restart file initialization. Maybe rename as "initWithRestartFile" instead of just "restartFile"}
+\end{itemize}
+
+\labday{September 12, 2016}
+
+\begin{itemize}
+    \item Sporadic work done over the last week.
+    Mostly discussion-related, nothing concrete to report.
+    \item Alex seems to have nailed down the error: getGenomeForGeneIndices takes a R-style vector (1-indexed) while it uses C++ code that is 0-indexed.
+    \item He should have fixed it, but Cedric as of today (September 11, 2016) is asking for help to check why this new function is failing the Unit Checks (I had thought that they didn't even check this function)
+    \item Checking this code with my fresh repo without committed changes (still a major TODO; school work has set me behind): I also get a failure in unit testing.
+    \begin{lstlisting}
+* checking tests ...
+  Running 'testthat.R'
+ ERROR
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+  Error in Genome::getGenomeForGeneIndices. An index specified is out of bounds for the genome!Returning empty Genome.Error in Genome::getGenomeForGeneIndices. An index specified is out of bounds for the genome!Returning empty Genome.MCMCAlgorithm is/setEstimateSynthesisRate --- Pass
+  MCMCAlgorithm is/setEstimateCodonSpecificParameter --- Pass
+  MCMCAlgorithm is/setEstimateHyperParameter --- Pass
+  MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
+  ERROR: Cannot set steps - value must be smaller than samples times thinning (maxIterations)
+  MCMCAlgorithm get/setStepsToAdapt --- Pass
+  MCMCAlgorithm getLogLikelihoodTrace --- Pass
+  Error in initializeMCMCObject(samples = samples, thinning = thinning,  : 
+    unused argument (thinning = thinning)
+  Calls: test_check ... source_file -> eval -> eval -> initializeMCMCObject
+  testthat results ================================================================
+  OK: 72 SKIPPED: 0 FAILED: 0
+  Execution halted
+    \end{lstlisting}
+    \item Later in the day Cedric mentioned that the readObservedPhiValues bug mysteriously resolved itself.
+    No idea what changed (nor does Cedric), but because of the mounting task load I'm shelfing that potential problem as well.
+    \item Ended day by confirming that read\sep PA fully works putting in positions and RFP\sep \_\sep counts.
+    \item Next TODO to finally push to main repo: test the newly implemented RFP data models, particularly a summation of each RFP\_count per index.
+\end{itemize}
+
+\labday{September 13, 2016}
+
+\begin{itemize}
+    \item After hardcoding in the unit testing for readPA for the RFP data models, I unfortunately encounted no change in testing results.
+    \item Expected result was that, since I enabled checking sumRFP data structures, there should have been an error immediately.
+    \item Whether or not I modify the hard-coded sumRFP that is checked versus the read-in genome, I get a successful check.
+    \item Currently suspect that it's related to how I still haven't implemented unit testing for the smaller component getter/setter functions. This is my next step.
+    \item Ended the day by writing the unit testing for the getter/setter functions, but the readPA weirdness still occurs.
+    \item Looking things up, a simple == statement should check if C++ arrays are equivalent (or, more importantly, if they're not); not sure at the moment how to proceed debugging this.
+    \item In the meantime, finally pushed notes.
+\end{itemize}
+
 \end{document}
