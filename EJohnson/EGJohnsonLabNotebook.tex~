@@ -529,6 +529,162 @@ $$\dot \kappa=
 \end{cases}$$
 
 
+
+
+\labday{September 13th }
+%=======================================================================================
+\experiment{Reversion}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{I need to add a callback function for the immune equation optimization and then the optimization should be able to run automatically without hanging over multiple difficult patient trajectories. In my opinion the model is terrible and we are just not going to get reasonable fits with the immune resposne term we have. For those patient positions that prove to be too difficult to get a reasonable fit and hang, I will simply flag and make a personal call on whether or not to reject the fit. I also need at some point figure out where the immune fits should be integrated into the hash table.} 
+    \end{itemize}
+  \item[Current Tasks:] 1.5 hrs I need to get the callback function working today. Success. I had to use an optimization algorithm other that COBYLA and swap it out for Nelder-Mead.
+  
+  \item[Future Tasks:]
+  \begin{itemize}
+  \item{I cleaned up my code so I need to make sure it still works up to the brute force optimization}
+  \item{I need to run the new optimizer with the callback through its paces and  and make sure it does not have any problems}
+  \item{I need to integrate my immune freq fits into the hash table and regenerate my fitness landscape}
+  \end{itemize}
+  \end{description}
+  
+  
+  \experiment{Physio-Chemical Distance}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{ Currently, I have a fitness map generated from our physio-chemical model but it uses amino acid distance values taken directly from the grantham paper. What I would like to do instead, is derive those amino acid distance values for HIV and describe my distance function instead with three weighting parameters for differences between polarity, molecular weight and side-chain composition. Right now, I need to integrate my function for physio-chemical distance (written in terms of these properties) into the optimization so I can identify what my three weighting terms are. }
+    \end{itemize}
+    
+  \item[Current Tasks:] integrate distance function into code
+  \item[Future Tasks:]
+  \begin{itemize}
+  \item{streamline optimization so it is faster (pre-generate all values)}
+  \item{create a a function that can easily generate toy subsets of sequences that will allow me to verify that my code works.}
+   landscape}
+  \item{I need create outer loop for testing different weighting parameters for the distances}
+  \item{Need to verify my optimization schema works by testing it on the toy sequences}
+  \item{Identify which optimization algorithm works best on toy sequences}
+  \item{implement a basin-hopping algorithm to verify we have reached the real local optimum}
+  \item{test optimization schema on real subset of the gag sequences}
+  \item{run optimization schema on entire protein}
+  \end{itemize}
+  \end{description}
+
+
+
+
+\labday{September 13th }
+%=======================================================================================
+\experiment{Reversion}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{I need to add a callback function for the immune equation optimization and then the optimization should be able to run automatically without hanging over multiple difficult patient trajectories. In my opinion the model is terrible and we are just not going to get reasonable fits with the immune resposne term we have. For those patient positions that prove to be too difficult to get a reasonable fit and hang, I will simply flag and make a personal call on whether or not to reject the fit. I also need at some point figure out where the immune fits should be integrated into the hash table.} 
+    \end{itemize}
+  \item[Current Tasks:] 1.5 hrs I need to get the callback function working today. Success. I had to use an optimization algorithm other that COBYLA and swap it out for Nelder-Mead.
+  
+  \item[Future Tasks:]
+  \begin{itemize}
+  \item{I cleaned up my code so I need to make sure it still works up to the brute force optimization}
+  \item{I need to run the new optimizer with the callback through its paces and  and make sure it does not have any problems}
+  \item{I need to integrate my immune freq fits into the hash table and regenerate my fitness landscape}
+  \end{itemize}
+  \end{description}
+  
+  
+  \experiment{Physio-Chemical Distance}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{ Currently, I have a fitness map generated from our physio-chemical model but it uses amino acid distance values taken directly from the grantham paper. What I would like to do instead, is derive those amino acid distance values for HIV and describe my distance function instead with three weighting parameters for differences between polarity, molecular weight and side-chain composition. Right now, I need to integrate my function for physio-chemical distance (written in terms of these properties) into the optimization so I can identify what my three weighting terms are. }
+    \end{itemize}
+    
+  \item[Current Tasks:] integrate distance function into code
+  \item[Future Tasks:]
+  \begin{itemize}
+  \item{streamline optimization so it is faster (pre-generate all values)}
+  \item{create a a function that can easily generate toy subsets of sequences that will allow me to verify that my code works.}
+   landscape}
+  \item{I need create outer loop for testing different weighting parameters for the distances}
+  \item{Need to verify my optimization schema works by testing it on the toy sequences}
+  \item{Identify which optimization algorithm works best on toy sequences}
+  \item{implement a basin-hopping algorithm to verify we have reached the real local optimum}
+  \item{test optimization schema on real subset of the gag sequences}
+  \item{run optimization schema on entire protein}
+  \end{itemize}
+  \end{description}
+
+
+
+
+\labday{September 19th }
+%=======================================================================================
+
+  
+  
+  \experiment{Physio-Chemical Distance}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{ Currently have a function that updates the grantham distance matrix/hash table for every new alpha beta and gamma weight. Using alpha beta and gamma from the paper I can recreate the Grantham distance matrix between the amino acids displayed in the paper for all but one pair of amino acids: Tryptophan and Aspartic Acid. I generate a value of 191 but the paper lists a value of 181. I need to look into this. Otherwise, the script is ready to be turned into a nested likelihood optimization.  }
+    \end{itemize}
+    
+  \item[Current Tasks:] Next time I need to figure out why there is a discrepency between my matrix and the paper's matrix between tryptophan and aspartic acid. I also need to finish implementing my nested optimization loop.
+  \item[Future Tasks:]
+  \begin{itemize}
+  \item{streamline optimization so it is faster (pre-generate all values): $X$}
+  \item{create a a function that can easily generate toy subsets of sequences that will allow me to verify that my code works.}
+   landscape}
+  \item{I need create outer loop for testing different weighting parameters for the distances: Next}
+  \item{Need to verify my optimization schema works by testing it on the toy sequences}
+  \item{Identify which optimization algorithm works best on toy sequences}
+  \item{implement a basin-hopping algorithm to verify we have reached the real local optimum}
+  \item{test optimization schema on real subset of the gag sequences}
+  \item{run optimization schema on entire protein}
+  \end{itemize}
+  \end{description}
+  
+  
+  
+  
+  
+\labday{September 20th }
+%=======================================================================================
+
+  
+ \experiment{Reversion}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{Fixed hanging issue, and created framework to integrate immune fits into dictionary. Reworked a function allowing me to quickly consensus useful parts of the dictionary into a csv file.} 
+    \end{itemize}
+  \item[Current Tasks:] I need to integrate my immune freq fits into the hash table and regenerate my fitness landscape.
+  
+  \item[Future Tasks:]
+  \begin{itemize}
+  
+  \item{Need to re-run immune fits by type}
+  \item{Need to address and flag parameters that have gone out of bounds}
+  \item{I need to integrate my immune freq fits into the hash table and regenerate my fitness landscape}
+  \item{need to write likelihood ratio test routine to accept/reject immune model fits}
+  \end{itemize}
+  \end{description}
+   
+  
+
+
+
+
+
+
 \printbibliography
 
 \end{document}
