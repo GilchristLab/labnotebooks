@@ -2596,4 +2596,33 @@ Last 13 lines of output:
     \item In the meantime, finally pushed notes.
 \end{itemize}
 
+\labday{September 15, 2016}
+
+\begin{itemize}
+    \item Mostly checked up with Dr. Gilchrist on progress.
+    \item Very busy with classwork -- will take a break until after midterms.
+    \item TODO: I should keep checking with these C++ arrays, especially since in terms of implementation they are as easy as vectors to use and they should be more efficient.
+    \item Let's start with printing out each element of the arrays and make sure they're even properly constructed.
+    \item Also want to see why it is that I \textbf{always} get a success even when I'm expecting a failure -- check on a smaller level with getter/setter functions.
+\end{itemize}
+
+\labday{September 26, 2016}
+
+\begin{itemize}
+    \item Finally back to working after taking a break due to classwork -- quick recap of things to do:
+    \begin{itemize}
+        \item First, check C++ arrays and ensure they're working.
+        \item Then, finally push my changes -- very far behind in this instance of the package but should have no merge conflicts.
+        \item New issue cropped up today as mentioned by Cedric: Investigate memory issues with R-side initialization of Parameter objects.
+        \item It seems that the memory that is allocated is never properly deleted.
+        \item We fixed some memory issues by changing copy constructors to pointers, so multiple instances should not be created -- still, need to see why it is that Parameter is never deleted when Model is deleted (despite Model calling delete Parameter).
+        \item First step to that that I suggested was to simply make a loop in C++ to create and delete Parameters, Genomes, etc. and see if it ever memory leaks (it shouldn't).
+    \end{itemize}
+    \item Another thing to do next time I come back is to change many of my testing functions to also return pointers and references rather than copies of objects -- would likely save time when running tests.
+    \item Biggest change: finally finished implementing readPA!
+    \item Seems like the work I'd been doing slowly but steadily with unit testing revealed what I now think caused the constant successes: the == checks were not accounting for the new data strucutres.
+    \item In addition to this, even when the == comparators did check the new data structures, memory oddities had occurred because my C++ arrays were not initialized -- this was fixed by calling fill(0) after creating each array.
+    \item Latest change to finally fix and push the commit was to fix a hardcoding error / series of typos that made the unit testing fail.
+\end{itemize}
+
 \end{document}
