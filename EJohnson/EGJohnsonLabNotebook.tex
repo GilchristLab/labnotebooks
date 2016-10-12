@@ -680,6 +680,29 @@ $$\dot \kappa=
    
   
 
+  \labday{September 26th }
+%=======================================================================================
+
+  
+ \experiment{Phys-Chem}
+\researcher{}
+\begin{description}
+  \item[Project State:]{
+    \begin{itemize}
+    \item{I have fixed the divide by zero error in the optimization. I do notice that the optimizer was getting stuck when the choice of weights
+    for the physio-chemical properties generated a distance matrix with over-large distances. I need to rescale the grantham matrix for each run so the distances are on average 100 units. We can easily compare Gs by multiplying our estimated G by the particular scaling term for that run. Alternatively, we can simply conceptualize the scaling as being a bound on our weighting parameters. We always linearly scale our property weights so that we always have a distance matrix averaged around 100 units} 
+    \end{itemize}
+  \item[Current Tasks:] I need to edit the grantham matrix function so that the mean of the distances scale to 100. 
+  
+  \item[Future Tasks:]
+  \begin{itemize}
+
+  \item{Make sure likelihood scoring function for nested fit makes sense}
+  \item{Make sure I understand how the Physics Models and the Population Genetics Models are related}
+  \end{itemize}
+  \end{description}
+   
+
 
 
 
