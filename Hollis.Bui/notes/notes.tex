@@ -2625,4 +2625,19 @@ Last 13 lines of output:
     \item Latest change to finally fix and push the commit was to fix a hardcoding error / series of typos that made the unit testing fail.
 \end{itemize}
 
+\labday{October 12, 2016}
+
+\begin{itemize}
+    \item Getting back into work, hopefully consistently, now that school has lightened up a bit after Fall Break.
+    \item Starting with checking Unit Testing: Currently, we have four failures.
+    \begin{itemize}
+        \item First three failures are the result of renaming logLikelihoodTrace to logPosteriorTrace on only the R-side code (some of it) without editing the existing Unit Testing files nor the cpp files.
+        Renamed the two functions affected (get and set functions) to logPosteriorTrace.
+        \item The final failure is somewhere in the cpp code's unit testing for testParameter.
+        \item Error was in Testing.cpp.
+        Cedric had changed one of the hard-coded values in the function being tested (initParameterSet) and the Unit Testing hadn't been edited accordingly.
+    \end{itemize}
+    \item With this change pushed, the framework passes existing Unit Testing again.
+\end{itemize}
+
 \end{document}
