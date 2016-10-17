@@ -741,4 +741,62 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \item Helped Hollis debug a weird error in one of his scripts by running it on a different environment, my laptop.
         \item In order to help Hollis I had to resolve some issues I've unknowingly been having with GitHub. My issues were that GitHub wasn't registering my fetch or pull requests even though it was giving me indication that it had. This is why my previous notes weren't uploaded until today, but the problem has been resolved.
     \end{itemize}
+
+\labday{October 17, 2016}
+    \begin{itemize}
+        \item Items from previous meetings:
+            \begin{itemize}
+                \item Compare and contrast FONSE fittings for simulated and empirical data:  When starting FONSE with simulated data and using true starting values, the initial logLikelihood starts out at around -1000000 and climbs quickly to -900000 - -800000. The fitting seems to go as expected with the previous problem of some AA's having an expression rate of 0 not being apparent since the change in the calculateLogLikelihood function. You can see the results of one of these runs in figures \ref{fig:OCT17_S.T.LIK}, \ref{fig:OCT17_S.T.EPHI}, \ref{fig:OCT17_S.T.MUT}, and \ref{fig:OCT17_S.T.SEL} Using empirical data and starting at true values yields a much higher starting point for the loglikelihood at around -3000000 each time. While the simulated data's logLikelihood and AA acceptance rates reached relative stability withing the first 2000 to 3000 iterations, the empirical data, even with starting at true values, takes longer to stabilize, even to the point of needing to run the fitting with double the amount of iterations. For both simulated and empirical data, starting from a naive guess instead of true values yields the expected result of a lower starting logLikelihood value; however, both simulated and empirical data experience a quick and large jump after the first couple of iterations instead of a more steady rise like the ones experienced in fittings that start at true values. The plots from the fitting with simulated data and a naive guess for a starting point can be found in figures \ref{fig:OCT17_S.N.LIK}, \ref{fig:OCT17_S.N.EPHI}, \ref{fig:OCT17_S.N.MUT}, and \ref{fig:OCT17_S.N.SEL} Unfortunately the plotting issue I've been experiencing has me unable to generate the plots for the empirical runs though I am working on getting that done. So far the only difference I've seen between simulated and empirical is a smaller starting logLikelihood and a longer time until the logLikelihood stops increasing and the AA acceptance rates stabilize.
+                \item NOTE: In the plots for the fitting with simulated data and naive starting point, every plot drops off a little after the 1000th sample. This is because I initially started the MCMC algorithm planning to execute for 20000 iterations. Halfway through I noticed that the logLikelihood had stopped rising and the AA acceptance rates had stabilized, so I ended the run early to save time. The plots still show that starting with a naive guess leads to a longer time until stabilization just not as long as previously hypothesized.
+            \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_true_lik}
+        \caption{LogLikelihood trace: Sim data, true start}
+        \label{fig:OCT17_S.T.LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_true_expectedPhi}
+        \caption{Expected Phi: Sim data, true start}
+        \label{fig:OCT17_S.T.EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_true_mut}
+        \caption{Mutation: Sim data, true start}
+        \label{fig:OCT17_S.T.MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_true_sel}
+        \caption{Selection: Sim data, true start}
+        \label{fig:OCT17_S.T.SEL}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_naive_lik}
+        \caption{LogLikelihood trace: Sim data, Naive start}
+        \label{fig:OCT17_S.N.LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_naive_expectedPhi}
+        \caption{Expected Phi: Sim data, Naive start}
+        \label{fig:OCT17_S.N.EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_naive_mut}
+        \caption{Mutation: Sim data, Naive start}
+        \label{fig:OCT17_S.N.MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/October_17/simulated_naive_sel}
+        \caption{Selection: Sim data, Naive start}
+        \label{fig:OCT17_S.N.SEL}
+    \end{figure}
 \end{document}
