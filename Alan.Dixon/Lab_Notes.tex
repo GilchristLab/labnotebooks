@@ -605,7 +605,7 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
     
 \labday{July 19, 2016}
     \begin{itemize}
-        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate e^-1000 it just evaluates it as 0.
+        \item I discovered that the reason calculateCodonProbabilityVector was producing strange vectors was that when it uses the exponential function, the number it ends up using for its argument is so small, around -1000, that when it tries to evaluate e\^-1000 it just evaluates it as 0.
         \item I changed the way the code calculates the codon probability vector so that it does -(deltaM) + (phi * deltaOmega) but it led to a different issue where it'd be raising e to the power of +1000 instead of -1000. This lead to the value of both the numerator and denominator being infinity, so when the code tried to evaluate inf/inf, it lead to the NAN error, so I reverted the change.
         \item As directed, I implemented a way for the code to recognize when the value is 0 and instead of just ignoring it, it throws a warning and adjusts all non-zero codons to where the probability is still negligible yet still has a value to add so that we don't end up with logLikelihoods of 0. I chose to make the adjusting constant .0001. The issue is that even though the values are no longer 0, they'd still be 0 when it calculates the codon probability vector so the vectors for both the current and proposed are still identical which still leads to their logLikelihoods being equal, so this didn't avoid the problem of acceptance ratios of 0. Because of this I reverted the changes but kept in the warning that triggers when a codon's probability is 0.
     \end{itemize}
@@ -613,9 +613,9 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
 \labday{July 21, 2016}
     \begin{itemize}
         \item Today I tried to find the reason that the numerator in the equation that calculates the codon probability vector, the deltaM + phi*deltaOmega term, to be so small that it ends up as 0 when we use the exponential function on it.
-        \item I noticed that the step size from the current selection values to the proposed ones was much larger than the steps for the mutation values. Both changed around the same amount, but the selection values, the omega values, start off much smaller. The mutation values and the selection values when Eta is being used are around the order of 10^-1 and 10^-2, and the code proposes values of the same order. The initial omega values. however, start off much smaller, around the order of 10^-4 and 10^-5. I initially hypothesized that these larger than expected selection values could be what's causing the numerator to be such a larger negative number.
-        \item Using VS's debugger to manually alter the proposed selection values so that they were of the same order as the initial ones, I tested this hypothesis, and while it made a slight difference initially by making the numerator large enough so that the exponential function evaluates it as a number on the magnitude of 10^-20 instead of 0; however, as the position increased, the numerator decreased leading to the same issue where the numerator is too small for the exponential function to evaluate it as anything but 0.
-        \item After more combing it seems the problem lies mainly in the phi values. For a while now I've been using simulated genomes and data to run FONSE and the particular ones I was directed by Jeremy to focus on had scaled phi values. At the time I didn't notice the significance of it though it's probably meant to simulate genes with high expression levels so that selection plays a larger role. These phi values however, are scaled so high that they seem to be the main factor in the numerator being so high. I tested this by running the model with different files and without the sclaed phi values, the log likelihoods stayed fairly steady at around -900,000.
+        \item I noticed that the step size from the current selection values to the proposed ones was much larger than the steps for the mutation values. Both changed around the same amount, but the selection values, the omega values, start off much smaller. The mutation values and the selection values when Eta is being used are around the order of 10\^-1 and 10\^-2, and the code proposes values of the same order. The initial omega values. however, start off much smaller, around the order of 10\^-4 and 10\^-5. I initially hypothesized that these larger than expected selection values could be what's causing the numerator to be such a larger negative number.
+        \item Using VS's debugger to manually alter the proposed selection values so that they were of the same order as the initial ones, I tested this hypothesis, and while it made a slight difference initially by making the numerator large enough so that the exponential function evaluates it as a number on the magnitude of 10\^-20 instead of 0; however, as the position increased, the numerator decreased leading to the same issue where the numerator is too small for the exponential function to evaluate it as anything but 0.
+        \item After more combing it seems the problem lies mainly in the phi values. For a while now I've been using simulated genomes and data to run FONSE and the particular ones I was directed by Jeremy to focus on had scaled phi values. At the time I didn't notice the significance of it though it's probably meant to simulate genes with high expression levels so that selection plays a larger role. These phi values however, are scaled so high that they seem to be the main factor in the numerator being so high. I tested this by running the model with different files and without the scaled phi values, the log likelihoods stayed fairly steady at around -900,000.
     \end{itemize}
     
 \labday{July 26, 2016}
@@ -799,4 +799,136 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \caption{Selection: Sim data, Naive start}
         \label{fig:OCT17_S.N.SEL}
     \end{figure}
+    
+\labday{November 2, 2016}
+    \begin{itemize}
+        \item Notes from Meeting
+            \begin{itemize}
+                \item Update notes every workday
+                \item Use scientific notation for large numbers
+                \item Put each sentence on its own line
+                \item Make "itemize" sections shorter
+                \item Empirical data with true start
+                    \begin{itemize}
+                        \item Expected Phi is too low, should be around 1
+                        \item There are sign inconsistencies in the mutation and selection trace.
+                    \end{itemize}
+                \item Record runtimes
+                \item There are indications that fittings with empirical data need more time to run.
+            \end{itemize}
+        \item TODO:
+            \begin{itemize}
+                \item Obtain a plot of the trace of Sphi
+                \item Obtain a histogram for the disrtribution of phi values at the state of the chain.
+                \item Run fittings with a fixed Sphi for both empirical and simulated data
+            \end{itemize}
+    \end{itemize}
+    
+\labday{November 8, 2016}
+    \begin{itemize}
+        \item Ran a model fitting for FONSE with simulated data, a true start, and a fixed SPhi.
+            \begin{itemize}
+                \item After 10,000 iterations the log likelihood settled at -984,069
+                \item Looking at the log likelihood trace in figure \ref{fig:NOV8_F.S.LIK}, the likelihood is still rising.
+                      We may need to run the fitting for longer, maybe 20,000 iterations,
+                \item NOTE: Ask Dr. Gilchrist about the ACF plot.
+                \item The trace of the expected value of Phi is no longer abnormally low.
+                      Making the sphi value fixed seems to make the phi values act more normally. (see figure \ref{fig:NOV8_F.S.EPHI})
+                \item The mutation and selection traces are found in figures \ref{fig:NOV8_F.S.MUT} and \ref{fig:NOV8_F.S.SEL}.
+                    \begin{itemize}
+                        \item Mutation: C and N still seem like they're climbing, another indicator that a larger iteration count is needed
+                        \item The Selection values are very suspect.
+                              Multiple amino acids seem to fall out and remain constant after sample 400.
+                    \end{itemize}
+            \end{itemize}
+        \item Worked on implementing the histogram from the second item of the most recent TODO list.
+              Multiple errors were encountered and further debugging is required.
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_8/fixedSphi_sim_like}
+        \caption{Log Likelihood: Fixed Sphi, True Start}
+        \label{fig:NOV8_F.S.LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_8/fixedSphi_sim_expectedPhi}
+        \caption{Expected Phi: Fixed Sphi, True Start}
+        \label{fig:NOV8_F.S.EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_8/fixedSphi_sim_mut}
+        \caption{Mutation: Fixed Sphi, True Start}
+        \label{fig:NOV8_F.S.MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_8/fixedSphi_sim_sel}
+        \caption{Selection: Fixed Sphi, True Start}
+        \label{fig:NOV8_F.S.SEL}
+    \end{figure}
+
+\labday{November 9, 2016}
+    \begin{itemize}
+        \item Ran a model fitting for FONSE with simulated data and an estimated SPhi for a comparison to yesterday's fitting.
+            \begin{itemize}
+                \item The final log likelihood value after 10,000 iterations was similiar to yesterday's fitting, -977,119.
+                \item The zoom at the last tenth of the trace in figure \ref{fig:NOV9_E.S.LIK} does not show the same rise as yesterday.
+                \item The trace of Sphi in figure \ref{fig:NOV9_E.S.SPHI} shows the values climbing before falling slightly and settling between 2.5 and 3
+                \item NOTE: Ask Dr. Gilchrist how to better interpret this plot.
+                \item Without the fixed value for Sphi, the trace of Expected Phi shown in figure \ref{fig:NOV9_E.S.EPHI} once goes to an abnormally low number, 0.1
+                \item Both mutation and selection in figures \ref{fig:NOV9_E.S.MUT} and \ref{fig:NOV9_E.S.SEL} were similar to other runs with simulated data, true start, and estimated hyperparameters.
+            \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_9/estSphi_sim_like}
+        \caption{Log Likelihood: Estimated Sphi, True Start}
+        \label{fig:NOV9_E.S.LIK}
+    \end{figure}
+     \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_9/estSphi_sim_sphi}
+        \caption{Log Likelihood: Estimated Sphi, True Start}
+        \label{fig:NOV9_E.S.SPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_9/estSphi_sim_expectedPhi}
+        \caption{Expected Phi: Estimated Sphi, True Start}
+        \label{fig:NOV9_E.S.EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_9/estSphi_sim_mut}
+        \caption{Mutation: Estimated Sphi, True Start}
+        \label{fig:NOV9_E.S.MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/November_9/estSphi_sim_sel}
+        \caption{Selection: Estimated Sphi, True Start}
+        \label{fig:NOV9_E.S.SEL}
+    \end{figure}
+    
+\labday{November 11, 2016}
+    \begin{itemize}
+        \item Github Issues:
+            \begin{itemize}
+                \item Merge conflicts prevented uploading.
+                \item In trying to resolve the conflicts, multiple plots were removed, making me revert to an older, unmergable version.
+                \item Got the hist function for plotting the histogram from the second item of the TODO list to stop throwing error messages.
+                \item It still needs more debugging, however, because the plot is still not appearing.
+                \item TODO for Monday:
+                    \begin{itemize}
+                        \item Run 2 Fittings: Empirical data with and without a fixed SPhi value.
+                        \item Find why github will not allow me to upload my notes. \footnote{Alan: 11/14/16 Merge conflict came from my version of Hollis's notes not being up to date, has been fixed and notes will be updated today.}
+                        \item Continue debugging my plot of the histogram.
+                    \end{itemize}
+            \end{itemize}
+    \end{itemize}
+
 \end{document}
