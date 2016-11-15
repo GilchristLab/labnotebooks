@@ -1,0 +1,216 @@
+* using log directory ‘/Users/hollisbui/RibModelFramework/ribModel.Rcheck’
+* using R version 3.3.1 (2016-06-21)
+* using platform: x86_64-apple-darwin13.4.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘ribModel/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ribModel’ version ‘1.0’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘ribModel’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+confidenceInterval.plot: no visible global function definition for
+  ‘points’
+confidenceInterval.plot: no visible global function definition for
+  ‘segments’
+confidenceInterval.plot: no visible global function definition for ‘lm’
+convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+  variable ‘object’
+convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+  variable ‘nsamples’
+convergence.test.Rcpp_MCMCAlgorithm: no visible binding for global
+  variable ‘thin’
+convergence.test.Rcpp_ROCTrace: no visible binding for global variable
+  ‘nsamples’
+convergence.test.Rcpp_ROCTrace: no visible global function definition
+  for ‘mcmc’
+convergence.test.Rcpp_ROCTrace: no visible binding for global variable
+  ‘thin’
+convergence.test.Rcpp_ROCTrace: no visible global function definition
+  for ‘geweke.diag’
+convergence.test.Rcpp_ROCTrace: no visible global function definition
+  for ‘geweke.plot’
+getCSPEstimates.Rcpp_ROCParameter: no visible global function
+  definition for ‘write.csv’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘par’
+plot.Rcpp_FONSEModel: no visible global function definition for
+  ‘layout’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘plot’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘text’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘box’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘axis’
+plot.Rcpp_FONSEModel: no visible global function definition for ‘hist’
+plot.Rcpp_MCMCAlgorithm: no visible global function definition for
+  ‘plot’
+plot.Rcpp_MCMCAlgorithm: no visible global function definition for
+  ‘grid’
+plot.Rcpp_ROCModel: no visible global function definition for ‘par’
+plot.Rcpp_ROCModel: no visible global function definition for ‘layout’
+plot.Rcpp_ROCModel: no visible global function definition for ‘plot’
+plot.Rcpp_ROCModel: no visible global function definition for ‘text’
+plot.Rcpp_ROCModel: no visible global function definition for ‘box’
+plot.Rcpp_ROCModel: no visible global function definition for ‘axis’
+plot.Rcpp_ROCModel: no visible global function definition for ‘hist’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘par’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘layout’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘plot’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘text’
+plotCodonSpecificParameters: no visible binding for global variable
+  ‘sd’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘lines’
+plotCodonSpecificParameters: no visible global function definition for
+  ‘legend’
+plotExpectedPhiTrace: no visible global function definition for ‘par’
+plotExpectedPhiTrace: no visible global function definition for ‘plot’
+plotExpectedPhiTrace: no visible global function definition for
+  ‘abline’
+plotExpressionTrace: no visible global function definition for ‘plot’
+plotHyperParameterTrace: no visible global function definition for
+  ‘plot’
+plotHyperParameterTrace: no visible global function definition for
+  ‘lines’
+plotHyperParameterTrace: no visible global function definition for
+  ‘legend’
+plotMixtureProbability: no visible global function definition for
+  ‘plot’
+plotMixtureProbability: no visible global function definition for
+  ‘lines’
+plotMixtureProbability: no visible global function definition for
+  ‘legend’
+plotParameterObject: no visible global function definition for ‘pairs’
+plotSinglePanel: no visible global function definition for ‘plot’
+plotSinglePanel: no visible global function definition for ‘quantile’
+plotSinglePanel: no visible binding for global variable ‘sd’
+plotSinglePanel: no visible global function definition for ‘points’
+plotSinglePanel: no visible global function definition for ‘median’
+plotSinglePanel: no visible global function definition for ‘lines’
+plotSinglePanel: no visible global function definition for ‘legend’
+upper.panel.plot: no visible global function definition for ‘abline’
+upper.panel.plot: no visible global function definition for ‘points’
+upper.panel.plot: no visible global function definition for ‘segments’
+upper.panel.plot: no visible global function definition for ‘lm’
+upper.panel.plot: no visible global function definition for ‘qt’
+upper.panel.plot: no visible global function definition for ‘text’
+Undefined global functions or variables:
+  abline axis box geweke.diag geweke.plot grid hist layout legend lines
+  lm mcmc median nsamples object pairs par plot points qt quantile sd
+  segments text thin write.csv
+Consider adding
+  importFrom("graphics", "abline", "axis", "box", "grid", "hist",
+             "layout", "legend", "lines", "pairs", "par", "plot",
+             "points", "segments", "text")
+  importFrom("stats", "lm", "median", "qt", "quantile", "sd")
+  importFrom("utils", "write.csv")
+to your NAMESPACE file.
+* checking Rd files ... NOTE
+prepare_Rd: convergence.test.Rd:27-29: Dropping empty section \value
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘AAToCodon’ ‘CovarianceMatrix’ ‘FONSEModel’ ‘FONSEParameter’ ‘Gene’
+  ‘Genome’ ‘MCMCAlgorithm’ ‘Model’ ‘NAMESPACE’ ‘Parameter’ ‘RFPModel’
+  ‘RFPParameter’ ‘ROCModel’ ‘ROCParameter’ ‘SequenceSummary’ ‘Trace’
+  ‘aminoAcids’ ‘codons’ ‘combineThreeDimensionalTrace’
+  ‘combineTwoDimensionalTrace’ ‘confidenceInterval.plot’
+  ‘convergence.test.Rcpp_MCMCAlgorithm’
+  ‘convergence.test.Rcpp_ROCTrace’ ‘densityLogNorm’ ‘densityNorm’
+  ‘extractBaseInfo’ ‘getCSPEstimates.Rcpp_ROCParameter’ ‘getCSPbyLogit’
+  ‘getExpressionEstimatesForMixture’ ‘getMixtureAssignmentEstimate’
+  ‘initializeCovarianceMatricies’ ‘initializeFONSEParameterObject’
+  ‘initializeRFPParameterObject’ ‘initializeROCParameterObject’
+  ‘loadFONSEParameterObject’ ‘loadRFPParameterObject’
+  ‘loadROCParameterObject’ ‘lower.panel.plot’
+  ‘plot.Rcpp_FONSEParameter’ ‘plotCodonSpecificParameters’
+  ‘plotExpectedPhiTrace’ ‘plotExpressionTrace’
+  ‘plotHyperParameterTrace’ ‘plotMixtureProbability’
+  ‘plotParameterObject’ ‘plotSinglePanel’ ‘randExp’ ‘randGamma’
+  ‘randLogNorm’ ‘randNorm’ ‘randUnif’ ‘runMCMC.Rcpp_MCMCAlgorithm’
+  ‘setBaseInfo’ ‘setRestartSettings.Rcpp_MCMCAlgorithm’ ‘splitMatrix’
+  ‘subMatrices’ ‘testCovarianceMatrix’ ‘testGene’ ‘testGenome’
+  ‘testMCMCAlgorithm’ ‘testParameter’ ‘testRFPParameter’
+  ‘testSequenceSummary’ ‘testUtility’ ‘upper.panel.plot’
+  ‘writeParameterObject.Rcpp_FONSEParameter’
+  ‘writeParameterObject.Rcpp_RFPParameter’
+  ‘writeParameterObject.Rcpp_ROCParameter’
+Undocumented S4 classes:
+  ‘Rcpp_MCMCAlgorithm’ ‘Rcpp_Gene’ ‘Rcpp_Trace’ ‘Rcpp_Genome’
+  ‘Rcpp_ROCModel’ ‘Rcpp_Parameter’ ‘Rcpp_CovarianceMatrix’
+  ‘Rcpp_SequenceSummary’ ‘Rcpp_RFPModel’ ‘Rcpp_FONSEModel’
+  ‘Rcpp_FONSEParameter’ ‘Rcpp_RFPParameter’ ‘Rcpp_Model’
+  ‘Rcpp_ROCParameter’
+All user-level objects in a package (including S4 classes and methods)
+should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... WARNING
+Argument items with no description in Rd object 'convergence.test':
+  ‘trace’ ‘what’ ‘mixture’ ‘n.samples’ ‘frac1’ ‘frac2’ ‘plot’ ‘...’
+
+Argument items with no description in Rd object 'plot.Rcpp_FONSEModel':
+  ‘...’
+
+Argument items with no description in Rd object 'plot.Rcpp_MCMCAlgorithm':
+  ‘zoom.window’
+
+Argument items with no description in Rd object 'plot.Rcpp_ROCModel':
+  ‘...’
+
+Argument items with no description in Rd object 'plot.Rcpp_Trace':
+  ‘...’
+
+Argument items with no description in Rd object 'summary.Rcpp_Genome':
+  ‘...’
+
+* checking for unstated dependencies in examples ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... WARNING
+Non-portable flags in variable 'PKG_CPPFLAGS':
+  -O3
+* checking for GNU extensions in Makefiles ... WARNING
+Found the following file(s) containing GNU extensions:
+  src/Makevars
+Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),
+$(wildcard), ifeq ... endif. See section ‘Writing portable packages’ in
+the ‘Writing R Extensions’ manual.
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking PDF version of manual ... OK
+* DONE
+Status: 4 WARNINGs, 2 NOTEs

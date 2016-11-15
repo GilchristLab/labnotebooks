@@ -1,0 +1,20 @@
+### PDF files ##
+
+# Alan's labnotes pdf
+Lab_Notes.pdf
+
+# Hollis's labnotes pdf 
+notes.pdf 
+
+# Walker's lanotes pdf
+Wnotes.pdf 
+
+# LaTeX stuff
+*.aux
+*.idx
+*.log
+*.out
+*.toc
+
+# R stuff
+.Rhistory
