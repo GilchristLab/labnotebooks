@@ -931,4 +931,46 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
             \end{itemize}
     \end{itemize}
 
+\labday{December 8, 2016}
+    \begin{itemize}
+        \item RibModelDev Cleanup
+            \begin{itemize}
+                \item Removed clutter involving old, out-of-date restart files.
+                \item Pushed changes to the R scripts for simulating genomes and running fittings with FONSE.
+            \end{itemize}
+        \item New Simulated Genome
+            \begin{itemize}
+                \item Name--simFONSE2000.fasta
+                \item Genome--file used: genome\_2000.fasta
+                \item Mutation--file used: S.cer.mut.ref.csv
+                \item Selection--file used: selection3ref.csv
+                \item Phi file used--genome\_2000.phi.csv
+            \end{itemize}
+        \item Fitting with the new simulated genome
+            \begin{itemize}
+                \item 10,000 iterations, fixed Sphi, naive start
+                \item Log likelihood ended at -1,000,600. Plot shown in Figure \ref{fig:DEC8_LIK}.
+                \item Plot of expected phi values shown in Figure \ref{fig:DEC8_EPHI} shows evidence that values are still climbing.
+                \item The sign flipping issue we've previously observed in the mutation traces seems to be resolved in Figure \ref{fig:DEC8_MUT}.
+            \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_8/loglike_trace}
+        \caption{Log Likelihood}
+        \label{fig:DEC8_LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_8/expectedPhi_trace}
+        \caption{Trace of Expected Phi Values}
+        \label{fig:DEC8_EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_8/mutation_trace}
+        \caption{Mutation Trace}
+        \label{fig:DEC8_MUT}
+    \end{figure}
 \end{document}
