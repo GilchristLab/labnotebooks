@@ -973,4 +973,181 @@ If not, then LLik(data$\|$parmeters) surfaces, although similiar, will differ be
         \caption{Mutation Trace}
         \label{fig:DEC8_MUT}
     \end{figure}
-\end{document}
+    
+\labday{December 14, 2016}
+    \begin{itemize}
+        \item As requested, I scaled the selection file used in the previous FONSE simulation.
+        I used k for the scaling constant.
+            \begin{itemize}
+                \item Original File: selection3ref.csv
+                \item Scaled by 10: selection3ref\_k-10.csv
+                \item Scaled by 100: selection3ref\_k-100.csv
+            \end{itemize}
+        \item Simulated new data using the scaled selection data.
+            \begin{itemize}
+                \item Name--simFONSE2000\_k-10.fasta
+                    \begin{itemize}
+                        \item Genome--file used: genome\_2000.fasta
+                        \item Mutation--file used: S.cer.mut.ref.csv
+                        \item Selection--file used: selection3ref\_k-10.csv
+                        \item Phi file used--genome\_2000.phi.csv
+                    \end{itemize}
+                \item Name--simFONSE2000\_k-100.fasta
+                    \begin{itemize}
+                        \item Genome--file used: genome\_2000.fasta
+                        \item Mutation--file used: S.cer.mut.ref.csv
+                        \item Selection--file used: selection3ref\_k-100.csv
+                        \item Phi file used--genome\_2000.phi.csv
+                    \end{itemize}
+            \end{itemize}
+        \item FONSE Fittings (all with fixed Sphi and ROC's method for a naive start)
+            \begin{itemize}        
+                \item simFONSE\_k-10.fasta Fitting (first half) 
+                    \begin{itemize}
+                        \item Runtime: 2968 s
+                        \item Iterations: 5000
+                        \item Log Likelihood: Figure \ref{fig:k-10_1LIK}
+                        \item Expected Phi: Figure \ref{fig:k-10_1EPHI}
+                        \item Mutation: Figure \ref{fig:k-10_1MUT}
+                        \item Selection: Figure \ref{fig:k-10_1SEL}
+                    \end{itemize}
+                \item simFONSE\_k-10.fasta Fitting (second half)
+                    \begin{itemize}
+                        \item Contiued from the restart file from the previous fitting.
+                        \item Runtime: 3018 s
+                        \item Total runtime: 5985 s (~1.6 hours)
+                        \item Iterations: 5000
+                        \item Log Likelihood: Figure \ref{fig:k-10_2LIK}
+                        \item Expected Phi: Figure \ref{fig:k-10_2EPHI}
+                        \item Mutation: Figure \ref{fig:k-10_2MUT}
+                        \item Selection: Figure \ref{fig:k-10_2SEL}
+                    \end{itemize}
+                \item simFONSE\_k-100.fasta Fitting (first half)
+                    \begin{itemize}
+                        \item Runtime: 5863 s
+                        \item Iterations: 5000
+                         \item Log Likelihood: Figure \ref{fig:k-100_1LIK}
+                        \item Expected Phi: Figure \ref{fig:k-100_1EPHI}
+                        \item Mutation: Figure \ref{fig:k-100_1MUT}
+                        \item Selection: Figure \ref{fig:k-100_1SEL}
+                    \end{itemize}
+                \item simFONSE\_k-100.fasta Fitting (second half)
+                    \begin{itemize}
+                        \item Like the k-10 fitting, I continued from the restart file from the previous fitting.
+                        \item Runtime: 6669 s
+                        \item Total runtime: 12,532 s (~3.5 hours)
+                        \item Iterations: 5000
+                        \item Log Likelihood: Figure \ref{fig:k-100_2LIK}
+                        \item Expected Phi: Figure \ref{fig:k-100_2EPHI}
+                        \item Mutation: Figure \ref{fig:k-100_2MUT}
+                        \item Selection: Figure \ref{fig:k-100_2SEL}
+                    \end{itemize}
+                \item Notes
+                    \begin{itemize}
+                        \item In both of the second half fittings, the expected values of phi are rising
+                        Longer fittings using the restart files should be conducted.
+                        \item The final selection plot for the k-100 fitting shows values still clibming and falling with a few codons going to 0.
+                        \item Given these trends I'll run two more fittings overnight using the restart files gained from today.
+                        \item I'll let them go for 40,000 additional iterations for a total of 50,000 iterations each.
+                    \end{itemize}
+                \item For tomorrow: Analyze the overnight fittings and obtain the plots and repeat today's fittings with an estimated Sphi and true start.
+            \end{itemize}
+    \end{itemize}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_loglike5000}
+        \caption{k-10 Fitting, First Half}
+        \label{fig:k-10_1LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_expectedPhi5000}
+        \caption{k-10 Fitting, First Half}
+        \label{fig:k-10_1EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_mutation5000}
+        \caption{k-10 Fitting, First Half}
+        \label{fig:k-10_1MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_selection5000}
+        \caption{k-10 Fitting, First Half}
+        \label{fig:k-10_1SEL}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_loglike_final}
+        \caption{k-10 Fitting, Second Half}
+        \label{fig:k-10_2LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_expectedPhi_final}
+        \caption{k-10 Fitting, Second Half}
+        \label{fig:k-10_2EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_mutation_final}
+        \caption{k-10 Fitting, Second Half}
+        \label{fig:k-10_2MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-10_selection_final}
+        \caption{k-10 Fitting, Second Half}
+        \label{fig:k-10_2SEL}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_loglike500}
+        \caption{k-100 Fitting, First Half}
+        \label{fig:k-100_1LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_expectedPhi500}
+        \caption{k-10 Fitting, First Half}
+        \label{fig:k-100_1EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_mutation500}
+        \caption{k-100 Fitting, First Half}
+        \label{fig:k-100_1MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_selection500}
+        \caption{k-100 Fitting, First Half}
+        \label{fig:k-100_1SEL}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_loglike_final}
+        \caption{k-100 Fitting, Second Half}
+        \label{fig:k-100_2LIK}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_expectedPhi_final}
+        \caption{k-100 Fitting, Second Half}
+        \label{fig:k-100_2EPHI}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_mutation_final}
+        \caption{k-100 Fitting, Second Half}
+        \label{fig:k-100_2MUT}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=.65]{FONSE_Plots/2016/December_14/k-100_selection_final}
+        \caption{k-100 Fitting, Second Half}
+        \label{fig:k-100_2SEL}
+    \end{figure}
+    \end{document}
