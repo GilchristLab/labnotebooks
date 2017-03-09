@@ -2663,4 +2663,50 @@ Last 13 lines of output:
     \end{itemize}
 \end{itemize}
 
+\labday{November 18, 2016}
+
+\begin{itemize}
+    \item Standardized RFP\_count as RFPCount since other variable names with abbreviations, such as those with the abbreviation AA, are in this style (AAToAAIndex etc).
+\end{itemize}
+
+\labday{January 10, 2017}
+
+\begin{itemize}
+    \item Debugged a personal Mac issue with workflow speed: Newest update had messed up my SSH authentication, so I had to spend some time today just fixing this to return to usual work.
+\end{itemize}
+
+\labday{February - March 2017}
+
+\begin{itemize}
+    \item Let Cedric handle the Travis Hmisc error in the description.
+    \item Make the writing function a priority! -- Finish by March 9th.
+    \item Talked to Cedric later that day (March 1st) -- He knows about the Hmisc error but doesn't know how to fix it.
+\end{itemize}
+
+\labday{March 8th, 2017}
+
+\begin{itemize}
+    \item Chose to add an array of strings describing the names of the RFP count categories to Genome.h.
+    \item Implemented positionCodonID detection into the functions.
+    \item End of day result: Writing function 90\% completed writing function.
+    \item Will comment out testing for now, return later.
+    \item Currently my position vector only stores the codon ID, while RFP counts store the sum of the RFP for each category (or sum of all).
+    \item Need to record RFP data for each position for each category -- I'm thinking another vector of vectors, outer vector being position and inner being a vector of RFP values.
+    \item 
+\end{itemize}
+
+\labday{March 9th, 2017}
+
+\begin{itemize}
+    \item Notes on Gilchrist meeting:
+    \item OK'd spring break schedule: I will be away taking care of my health for Monday through Wednesday and return Thursday afternoon.
+    \item TODO (after finishing writing function):
+    \begin{itemize}
+        \item Generate data.
+        \item Use a wide range of values, ensure bugs are not being masked (edge cases).
+        \item See if results are similar to what are expected.
+        \item Fit real data, see if well-correlated.
+    \end{itemize}
+\end{itemize}
+
 \end{document}
