@@ -7,10 +7,12 @@
 \usepackage{color}
 \usepackage{array}
 \usepackage{amsmath}
+\usepackage{float}
 \usepackage{verbatim}
 \usepackage[final]{pdfpages}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{algpseudocode}
 %%%%%%%%%%%%%%% Section for new commands %%%%%%%%%%%%%%%%%%%
 \newcommand{\Loss}[2]{L\left(#1,#2\right)}
 
@@ -298,12 +300,58 @@ computed\ p_{WAIC} &= 2 \sum_{i=1}^n\left(\log{\left(\frac{1}{S} \sum_{s=1}^S p(
 
 They also DO NOT recommend using BIC, as the goal of this criterion is to approximate the marginal probability density of the data p(y) under the model, which can then be used to estimate relative posterior probabilities. 
 
+
+\experiment{Review of Differential Equations, Blanchard et al}
+
+
+
 \labday{Computer Science Notes}
 
 
 \labday{Biology Notes}
 
-\
+\experiment{\textit{The Origins of Genome Architecture}, Lynch}
+\subexperiment{Chapter: Genome Size and Organismal Complexity}
+Weak relationship between gene number and organismal complexity (ex. unicellular eukaryotes Paramecium has more genes than vertebrates), complexity of higher eukaryotes result of new ways of deploying genes.
+\newline
+\textbf{Question: Is this the result of selection for higher complexity (ie. new cell types) or did evolution of large size/multicellularity provoke non-adaptive changes in genome architecture, which then paved way for new cell functions? Lynch makes case for latter situation.}
+\newline
+
+\textit{The Selfish-DNA hypothesis}: \newline
+Noncoding deal largely is made up of selfish elements that spread in the genome until fitness cost is so large that further spread is prevented. Supported by presence of mobile elements in eukaryotes. Central challenge to hypothesis is explaining proliferation of noncoding regions that are not self-replicating (like splicesomal introns and small repetitive DNAs). 
+
+\textit{Bulk-DNA hypothesis}: \newline
+Total content of noncoding DNA result of natural selection and affects nuclear volume, cell size, and cell division rate. Main challenge is the nature of filler material (mainly mobile elements), which impose heavy mutational burden in eukaryotes.
+\newline
+No direct evidence that cell replication in prokaryotes is limited by DNA metabolism.
+Reasons to think otherwise include: (1) no correlation between cell division rate and genome size between/with-in prokaryotes, (2) during rapid growth phases, chromosomes are often present in nesterd series of replication stages, with some species harboring 10s to 100s of chromosomal copies at various stages of the life cycle, (3) in E.coli and other eubacteria, DNA replication forks progress 10-20 times faster than mRNA elognation rates, and (4) estimated cost of genome replication relative to cell's entire energy budget is less than 2\% - 5\%. 
+\newline
+Genome size evolution depends on two key factors: relative rates of mutational production of insertions/deletions and natural selections ability to eliminate these changes.
+
+Some evidence suggests mutational tendency to delete excess DNA is primary determinant of genome size (higher rates of deletion \= smaller genome). Work with C. elegans suggests a 15:4 insertion/deletion ratio raises questions about the previous evidence (maybe mutational deletions are not universally sufficient to prevent runaway genome growth).
+
+\textbf{The primary cost of excess DNA is its mutational liability, changing the structure of a gene or surrounding area increases chances gene will be rendered defective by later mutations}
+
+\textbf{Populations size determines efficiency of natural selection}
+
+\subexperiment{Chapter 4: Why Population Size Matters}
+\textbf{Key Point: The types of evolution that can occur within a species depends on population size}
+
+Non-neutral mutations can behave as if neutral in the context of small populations. This is because selection is overwhelmed by genetic drift.
+
+\textit{Wright-Fischer Model}
+\newline
+Populations consists of N diploid individuals. Each member contributes equally to and sychronously to infinite gamete pool, pairs of gametes drawn randomly to produce next generation. Ignore overlapping generations, spatial structure, effects of environment, etc.
+
+Diploid populations of N contains 2N gene copies. Initial frequency of allele is $p_0 = 1/(2N)$. Mutation will go either to fixation or removed from population. 
+
+
+
+
+
+\experiment{Mathematical Biology, Murray}
+\subexperiment{Chapter 1: Continuous Models for Single Species}
+ 
 
 \labday{Signal Peptide Project - Progress as of 11-17-2016}
 \textbf{All graphs in the following sections are of $\Delta\eta$ values, which represent selection. Dotted lines in all graphs represent y=x.}
@@ -311,17 +359,12 @@ They also DO NOT recommend using BIC, as the goal of this criterion is to approx
 
 Treated mutation as shared between the categories. Gene expression was kept constant. Mixture Element 1 and Mixture Element 3 correspond to genes with no signal peptides and mature peptides. Mixture Element 2 is the signal peptide region. As can be seen, there is a strong linear correlation and slope of 0.93 between the genes with no signal peptides and mature peptides, which is expected. Ideally, this would be closer to 1. I wonder if the fact that genes with a signal peptide region are generally lower expression genes (mean $\Phi$ value of 0.95) is causing a slight drop in the estimates of $\Delta\eta$ values for codons in these genes. Relative to the signal peptide regions, there is a drop-off in correlation and the slopes are much different from 1 for both mature peptides and signal peptides. However, this could be because of increases in variation introduced by the small regions of signal peptides.
 \begin{figure}
-\fbox{\includegraphics[page=2,scale=0.6]{Ecoli_results/ecoli_mix_traces.pdf}}
+\fbox{\includegraphics[page=2,scale=0.6]{Ecoli_results/Nosp_sp_mp/Graphs/ecoli_mix_traces.pdf}}
 \caption{Three mixture model fit using \textit{E. coli} K12 MG1655 genome. Mixture Element 1 represents genes without a predicted signal peptide. Mixture Element 2 represents signal peptide regions. Mixture Element 3 represents the mature peptide regions.}
 \end{figure}
 \experiment{Three categories: Same as above, but simulated genome (See Figure 2)}
 My thought was that if the decreased correlation seen in Figure 1 between signal peptides and the other regions of the genome is because of increased variation, then signal peptides simulated under codon-specific parameters generated from the whole genome (minus the signal peptide regions) will produce similar results. Results for a fitting to a simulated genome are shown in Figure 2. This resulted in a slightly improved correlation between $\Delta\eta$ values for the three categories. The slopes for the comparisons to the $\Delta\eta$ values for signal peptides improve slightly (ie. get closer to 1). However, the slope of the comparison between $\Delta\eta$ values for the genes without a signal peptide and mature peptides decreases from 0.93 to 0.85.
 
-\begin{figure}
-\fbox{\includegraphics[page=2,scale=0.6]{Ecoli_results/ecoli_mix_traces_sim.pdf}}
-\caption{Three mixture model fit using simulated genome based on parameters estimated from whole \textit{E. coli} genome minus signal peptide regions. Mixture Element 1 represents genes without a predicted signal peptide. Mixture Element 2 represents signal peptide regions. Mixture Element 3 represents the mature peptide regions.}
-\end{figure}
-\newpage
 
 \experiment{Other model fittings}
 Description:\newline
@@ -342,128 +385,7 @@ All cases in which regions are assumed to be different categories are set to sha
 5. ROC(Simulated MP = Simulated SP $|\Phi$) and ROC(Simulated MP != Simulated SP $|\Phi$) \newline
 6. ROC(First 31 codons of NoSP gene = Rest of Gene $|\Phi$) and ROC(First 31 codons of NoSP!= Rest of Gene $|\Phi$)
 
-\subexperiment{ROC(NoSp = MP) and ROC(NoSp != MP) (See Figure 3)}
-As expected, the estimates of $\Delta\eta$ for NoSP and MP, when treated as together and as separate categories, demonstrate a strong positive correlation and a practically 1-1 relationship. In addition, $\Delta\eta$ estimates generally have tight confidence intervals. This provides evidence that genes without signal peptides and mature peptide regions are under similar selective pressures. 
 
-\begin{figure}
-\begin{center}
-\begin{subfigure}{0.6\textwidth}
-\fbox{\includegraphics[page=2,scale=0.4]{Ecoli_results/ecoli_nosp_w_mp_cat_traces.pdf}}
-\caption{$\Delta\eta$ comparisons from treating NoSP and MP as separate categories. Mixture element 1 represents genes not predicted to have a signal peptide. Mixture element 2 represents mature peptides.}
-\end{subfigure}%
-\end{center}
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=1,scale=0.45]{Ecoli_results/Nosp_vs_mp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when NoSP and MP are treated as same category and when NoSP is treated as own category.}
-\end{subfigure}%
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=2,scale=0.45]{Ecoli_results/Nosp_vs_mp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when NoSP and MP are treated as same category and when MP is treated as own category.}
-\end{subfigure}
-\caption{Results from ROC(NoSP = MP) and ROC(NoSP != MP)}
-\end{figure}
-
-\subexperiment{ROC(NoSp = SP) and ROC(NoSp != SP) (See Figure 4)}
-Figure 4b shows a very linear relationship between the $\Delta\eta$ values when NoSP and SP are treated as the same category and the $\Delta\eta$ values of just NoSP. Figure 4a and Figure 4c show that SP regions have a similar direction of selection to NoSP (ie. codons with high $\Delta\eta$ values in NoSP have high $\Delta\eta$ in SP), but the strength of the selection might differ.
-
-\begin{figure}
-\begin{center}
-\begin{subfigure}{0.6\textwidth}
-\fbox{\includegraphics[page=2,scale=0.4]{Ecoli_results/ecoli_nosp_w_sp_cat_traces.pdf}}
-\caption{$\Delta\eta$ comparisons from treating NoSP and SP as separate categories. Mixture element 1 represents genes not predicted to have a signal peptide. Mixture element 2 represents signal peptides.}
-\end{subfigure}%
-\end{center}
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=1,scale=0.45]{Ecoli_results/Nosp_vs_sp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when NoSP and SP are treated as same category and when NoSP is treated as own category.}
-\end{subfigure}%
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=2,scale=0.45]{Ecoli_results/Nosp_vs_sp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when NoSP and SP are treated as same category and when SP is treated as own category.}
-\end{subfigure}
-\caption{Results from ROC(NoSP = SP) and ROC(NoSP != SP)}
-\end{figure}
-
-\subexperiment{ROC(MP = SP $|\Phi$) and ROC(MP != SP $|\Phi$) (See Figure 5)}
-Due to the limited amount of data, $\Phi$ values were set to constant for these fittings. Interestingly, doing so seemed to cause the $\Delta\eta$ values of the signal peptide regions to be much more constrained than when MP = SP (Note that the scale for SP only goes up to 1.5, while when MP = SP, values go up to 4). Overall, there is still a positive linear correlation between $\Delta\eta$ values between MP and SP.
-\begin{figure}
-\begin{center}
-\begin{subfigure}{0.6\textwidth}
-\fbox{\includegraphics[page=2,scale=0.4]{Ecoli_results/ecoli_mc_w_sp_cat_traces.pdf}}
-\caption{$\Delta\eta$ comparisons from treating MP and SP as separate categories. Mixture element 1 represents mature peptides. Mixture element 2 represents signal peptides.}
-\end{subfigure}%
-\end{center}
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=1,scale=0.45]{Ecoli_results/Mp_vs_sp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when MP and SP are treated as same category and when MP is treated as own category.}
-\end{subfigure}%
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=2,scale=0.45]{Ecoli_results/Mp_vs_sp.pdf}}
-\caption{Comparison between $\Delta\eta$ values when MP and SP are treated as same category and when SP is treated as own category.}
-\end{subfigure}
-\caption{Results from ROC(MP = SP) and ROC(MP != SP)}
-\end{figure}
-
-
-\subexperiment{ROC(Simulated MP = Simulated SP $|\Phi$) and ROC(Simulated MP != Simulated SP $|\Phi$) (See Figure 6)}
-Using the SP and MP from the simulated genome, I did a similar fit to the previous one. Results show a stronger linear correlation, and slope is a little closer to 1. However, the scale of the $\Delta\eta$ values for the signal peptide regions is much greater (up to approx 6.0). This makes me wonder if I made a mistake. I will need to double check my work here.
-
-\begin{figure}
-\begin{center}
-\begin{subfigure}{0.6\textwidth}
-\fbox{\includegraphics[page=2,scale=0.4]{Ecoli_results/ecoli_mc_w_sp_sim_cat_traces.pdf}}
-\caption{$\Delta\eta$ comparisons from treating MP and SP as separate categories.Mixture element 1 represents mature peptides. Mixture element 2 represents signal peptides.}
-\end{subfigure}%
-\end{center}
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=1,scale=0.45]{Ecoli_results/Mp_vs_sp_sim.pdf}}
-\caption{Comparison between $\Delta\eta$ values when MP and SP are treated as same category and when MP is treated as own category.}
-\end{subfigure}%
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=2,scale=0.45]{Ecoli_results/Mp_vs_sp_sim.pdf}}
-\caption{Comparison between $\Delta\eta$ values when MP and SP are treated as same category and when SP is treated as own category.}
-\end{subfigure}
-\caption{ Results from ROC(Simulated MP = Simulated SP $|\Phi$) and ROC(Simulated MP != Simulated SP $|\Phi$)}
-\end{figure}
-
-
-\subexperiment{ROC(First 31 codons of NoSP genes = Rest of gene $|\Phi$) and ROC(First 31 codons of NoSP genes != Rest of gene $|\Phi$) (See Figure 7)}
-One potential question is whether or not there are general differences between codon usage in the 5' regions of genes and the rest of the genome. A random set of genes not predicted to have signal peptides were selected such that the mean and variation of gene expression was comparable to the set of genes predicted to have signal peptides (0.95 and 0.42, respectively). This produced a set of 361 genes (compared to 425 genes with a signal peptide). Each gene was split into two sections: the first 31 codons and the rest of the gene. Again, there is a clear positive linear correlation.  
-
-\begin{figure}
-\begin{center}
-\begin{subfigure}{0.6\textwidth}
-\fbox{\includegraphics[page=2,scale=0.4]{Ecoli_results/ecoli_mc_w_sp_cat_traces_fake.pdf}}
-\caption{$\Delta\eta$ comparisons from treating first 31 codons and rest of gene as separate categories.Mixture element 1 represents the rest of the gene. Mixture element 2 represents the first 31 codons.}
-\end{subfigure}%
-\end{center}
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=1,scale=0.45]{Ecoli_results/Mp_vs_sp_fake.pdf}}
-\caption{Comparison between $\Delta\eta$ values when first 31 genes and rest of gene are treated as same category and when rest of gene is treated as own category.}
-\end{subfigure}%
-\begin{subfigure}{0.52\textwidth}
-\fbox{\includegraphics[page=2,scale=0.45]{Ecoli_results/Mp_vs_sp_fake.pdf}}
-\caption{Comparison between $\Delta\eta$ values when first 31 genes and rest of gene are treated as same category and when first 31 codons is treated as own category.}
-\end{subfigure}
-\caption{Results from ROC(First 31 codons of NoSP gene = Rest of Gene $|\Phi$) and ROC(First 31 codons of NoSP!= Rest of Gene $|\Phi$)}
-\end{figure}
-
-
-
-\subexperiment{Comparisons between mature peptides and signal peptides (See Figure 8)}
-Below are graphs comparing the $\Delta\eta$ estimates for MP and SP from the 3 fittings that estimated $\Delta\eta$ values for these regions while considered separate categories.
-\begin{figure}
-\begin{subfigure}{0.55\textwidth}
-\caption{Comparison of $\Delta\eta$ values for MP from ROC(NoSP!=MP) (x-axis) and ROC(MP!=SP$|\Phi$) (y-axis)}
-\fbox{\includegraphics[page=1,scale=0.4]{Ecoli_results/Mature_peptide_comp.pdf}}
-\end{subfigure}%
-\begin{subfigure}{0.55\textwidth}
-\caption{Comparison of $\Delta\eta$ values for SP from ROC(NoSP!=SP) (x-axis) and ROC(MP!=SP$|\Phi$) (y-axis)}
-\fbox{\includegraphics[page=1,scale=0.4]{Ecoli_results/Signal_peptide_comp.pdf}}
-\end{subfigure}
-\caption{Comparing $\Delta\eta$ values for MP and SP from ROC(NoSP!=SP), ROC(NoSP!=MP), and ROC(MP!=SP$|\Phi$)}
-\end{figure}
-\newpage
 
 \experiment{My thoughts and next steps}
 As expected, it looks like genes without signal peptides and mature peptides have very similar codon usage patterns and the strength of selection on these codons is generally the same. Overall, the positive correlations between $\Delta\eta$ values for actual signal peptides and the rest of the genome suggests to me that, in \textit{E. coli}, codon selection in signal peptides is fairly consistent with the rest of the genome. However, based on comparisons to simulated data and the 5' end of genes, it appears there are some differences in the strength of selection for certain codons, as evidence by greater variations from the line y = x.
@@ -762,57 +684,327 @@ $\bullet$ I greatly enjoyed the python section, and I recommend that the course 
 
 
 \experiment{1-6-2017}
-Took a set of genes not predicted to have signal peptides and treated them as pseudo-signal peptides genes. The psuedo-signal peptide region was the first 23 codons, which is the average length of a signal peptide in \textit{E. coli}. This set of pseudo-signal peptides was chosen such that the average expression and standard deviation would be appoximately equal to those of genes with signal peptides (0.95 and 0.42, respectively). The comparison of $\Delta\eta$ estimates from a ROC fitting treating the pseudo-signal peptides and pseudo-mature peptides as separate categories is shown below in Figure 1. It is worth noting that this is a better correlation than the $\Delta\eta$ seen between actual signal and mature peptides. \newline
+Took a set of genes not predicted to have signal peptides and treated them as pseudo-signal peptides genes. The psuedo-signal peptide region was the first 23 codons, which is the average length of a signal peptide in \textit{E. coli}. This set of pseudo-signal peptides was chosen such that the average expression and standard deviation would be appoximately equal to those of genes with signal peptides (0.95 and 0.42, respectively). The comparison of $\Delta\eta$ estimates from a ROC fitting treating the pseudo-signal peptides and pseudo-mature peptides as separate categories is shown below in Figure 1. It is worth noting that this is a better correlation than the $\Delta\eta$ seen between actual signal and mature peptides.
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/dEta_pseudo_sp_mp.pdf}}
-\caption{$\Delta\eta$ estimates from ROC fitting with subset of genes not containing a signal peptide. These genes were split into two sections: a pseudo-signal peptide (all 23 amino acids long) and a pseudo-mature peptide. }
-\end{figure}
 
-Wanted to check to makes sure $\Delta\mathit{M}$ values were correlated between the different categories. Results can be seen in Figures 2-5. Figures 2 shows that $\Delta\mathit{M}$ estimates for non-signal peptides genes are approximately equal when fit with either mature peptides or signal peptides as a separate cateogory. $\Delta\mathit{M}$ is shared in these runs, this implies a strong correlation between these estimates for signal peptides and mature peptides, which can be seen in Figure 3. It is worth noting that estimates of $\Delta\mathit{M}$ for mature peptides across model fittings do not have the approximately $y = x$ relationship we would like to see (Figure 4). The same is true for signal peptides (Figure 5). Part of this could be because when the mature peptides or signal peptides are fit along with non-signal peptide genes, expression is estimated. However, when mature peptides and signal peptides are fit in the same run, expression is treated as absolute and not estimated. This likely affects the estimates of $\Delta\mathit{M}$. \newline
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Comparison_delta_m_nosp_categories.pdf}}
+Wanted to check to makes sure $\Delta\mathit{M}$ values were correlated between the different categories. Results can be seen in Figures 2-5. Figures 2 shows that $\Delta\mathit{M}$ estimates for non-signal peptides genes are approximately equal when fit with either mature peptides or signal peptides as a separate cateogory. $\Delta\mathit{M}$ is shared in these runs, this implies a strong correlation between these estimates for signal peptides and mature peptides, which can be seen in Figure 3. It is worth noting that estimates of $\Delta\mathit{M}$ for mature peptides across model fittings do not have the approximately $y = x$ relationship we would like to see (Figure 4). The same is true for signal peptides (Figure 5). Part of this could be because when the mature peptides or signal peptides are fit along with non-signal peptide genes, expression is estimated. However, when mature peptides and signal peptides are fit in the same run, expression is treated as absolute and not estimated. This likely affects the estimates of $\Delta\mathit{M}$.
+
+\begin{figure}[H]
+\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Mutation_comparisons/Comparison_delta_m_nosp_categories.pdf}}
 \caption{Comparison of $\Delta\mathit{M}$ values of genes not containing signal peptides (NoSP). The x-axis represents the $\Delta\mathit{M}$ values when NoSP is fit with signal peptides treated as a separate category. The y-axis represents when $\Delta\mathit{M}$ values when NoSP is fit with mature peptides treated as a separate category.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Comparison_delta_m_sp_mp_when_nosp_separate_category.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Mutation_comparisons/Comparison_delta_m_sp_mp_when_nosp_separate_category.pdf}}
 \caption{Comparison of $\Delta\mathit{M}$ values of signal peptides (SP) and mature peptides (MP), both fit with genes with no signal peptides as a separate category. The x-axis represents the $\Delta\mathit{M}$ values of SP. The y-axis represents when $\Delta\mathit{M}$ values of MP.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Comparison_delta_m_mp.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Mutation_comparisons/Comparison_delta_m_mp.pdf}}
 \caption{Comparison of $\Delta\mathit{M}$ values of mature peptides (MP). The x-axis represents the $\Delta\mathit{M}$ values of MP when genes with no signal peptide is treated as a separate category. The y-axis represents the $\Delta\mathit{M}$ values of MP when signal peptides are treated as separate category. In the latter case, $\phi$ is not estimated, but treated as constant. This might explain why the $\Delta\mathit{M}$ values deviate from the y=x line.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Comparison_delta_m_sp.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=1,scale=0.5]{Ecoli_results/Mutation_comparisons/Comparison_delta_m_sp.pdf}}
 \caption{Comparison of $\Delta\mathit{M}$ values of signal peptides (SP). The x-axis represents the $\Delta\mathit{M}$ values of SP when genes with no signal peptide is treated as a separate category. The y-axis represents the $\Delta\mathit{M}$ values of SP when mignal peptides are treated as separate category. In the latter case, $\phi$ is not estimated, but treated as constant. This might explain why the $\Delta\mathit{M}$ values deviate from the y=x line.}
 \end{figure}
 
 
 Over break, collected data for \textit{C. bescii} as a comparison to the results in \textit{E. coli}. Signal peptides in \textit{C. bescii} showed similar behavior to those in \textit{E. coli}. Below is a comparison of the $\Delta\eta$ values for signal peptides and mature peptides in \textit{C. bescii}. Much like in \textit{E. coli}, selection is generally in the same direction, meaning highly selected for codons in one region are likely to be highly selected for in the mature peptides. It should be noted that in the signal peptide regions, the arginine codon CGG trace appears to trend towards inifinity. As a result, this one is excluded from many of the plots. 
 
-\begin{figure}
-\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_mp/cbescii_dEta_dM_comp_plots.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_mp_cat/Graphs/cbescii_dEta_dM_comp_plots.pdf}}
 \caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and mature peptides.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_sp/cbescii_dEta_dM_comp_plots.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_sp_cat/Graphs/cbescii_dEta_dM_comp_plots.pdf}}
 \caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and signal peptides.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=6,scale=0.6]{Cbescii_results/Nosp_w_sp/cbescii_nosp_w_sp_cat_traces.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=6,scale=0.6]{Cbescii_results/Nosp_w_sp_cat/Graphs/cbescii_nosp_w_sp_cat_traces.pdf}}
 \caption{Traces of $\Delta\eta$ values for signal peptides when fit with genes with no signal peptides as a separate category. Many of the traces do not look like they are mixing well. Also, the arginine codon (R) CGG looks unrealistically high. This may need to be run for more iterations.}
 \end{figure}
 
-\begin{figure}
-\fbox{\includegraphics[page=1,scale=0.5]{Cbescii_results/Nosp_w_sp/delta_eta_comp_R_CGG_removed.pdf}}
+\begin{figure}[H]
+\fbox{\includegraphics[page=1,scale=0.5]{Cbescii_results/Nosp_w_sp_cat/Graphs/delta_eta_comp_R_CGG_removed.pdf}}
 \caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and signal peptides. Same as Figure 6, but arginine codon CGG removed.}
 \end{figure}
 
 
+\experiment{1-10-2017}
+\subexperiment{$\phi$ Mixture Model}
+Tested mixture model for $\phi$ using \textit{S. cerevisiae} genome taken from \underline{yeastgenome.org}. Results of traces and CUB plot shown in Figures 10 - 12. Traces of Log(Posterior Probability) and expected value of $\phi$ shown in Figures 13 and 14. It is worth noting these results were taken with 100000 samples with 100 thining and 100 adaptiveWidth
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Mixture_model_testing/Test_mixture/real_data/Graphs/yeast_deltaEta_deltaM_traces_CUB_plot_updated.pdf}
+\caption{$\Delta\mathit{M}$ traces with mixture model for $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=2,scale=0.6]{Mixture_model_testing/Test_mixture/real_data/Graphs/yeast_deltaEta_deltaM_traces_CUB_plot_updated.pdf}
+\caption{$\Delta\eta$ traces with mixture model for $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=3,scale=0.6]{Mixture_model_testing/Test_mixture/real_data/Graphs/yeast_deltaEta_deltaM_traces_CUB_plot_updated.pdf}
+\caption{CUB plot with mixture model for $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Mixture_model_testing/Test_mixture/real_data/Graphs/yeast_logPost_mixProb_phi_traces_updated.pdf}
+\caption{Log(Posterior Probability) trace with mixture model for $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=9,scale=0.6]{Mixture_model_testing/Test_mixture/real_data/Graphs/yeast_logPost_mixProb_phi_traces_updated.pdf}
+\caption{Expected value of $\phi$ trace with mixture model for $\phi$}
+\end{figure}
+
+
+\experiment{1-11-2017}
+\textit{Meeting with Mike}
+Likelihood ratio tests for treating them as same categories vs together. \textbf{Question: From a statisical philosophy point of view, can you take parameters estiamted in a Bayesian context and apply Frequentists/Classical hypothesis testing?} Fit model to mature peptides + pseudo-mature peptides. Compare confidence intervals. See if they overlap. Look up Deviance Information Criterion, might be useful here. Do the same thing for pseudo-signal peptides. 
+
+Redo runs from before, but let diverge for about 100 iterations. Do traces converge to same spot. This gives confidence that our parameter estimation is correct.
+
+Add function for calculating autocorrelation for different traces to package.
+
+\textit{C. bescii} looks like it hasn't converged, so just run for longer. \textbf{It's interesting to me that $\Delta\eta$ and $\Delta\mathit{M}$ values for \textit{C. bescii} seem to be struggling to converge, where as \textit{E. coli} seems to have no problems. These are both prokaryotic organisms. Why would they be so different?} 
+
+\subexperiment{Plan Going Forward}
+
+
+\experiment{1-16-2017}
+Re-ran ROC treating non-signal peptide genes and mature peptides as separate regions, but this time MCMC was allowed to diverge for 100 steps. Comparisons of $\Delta\eta$ values can be seen below. Clearly, the divergence had almost no impact on the parameter estimates, giving confidence that these results are likely correct. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_results/Nosp_w_mp_cat_divergence_100/Graphs/Comp_nosp_no_divergence_to_divergence_100.pdf}
+\caption{Comparison of $\Delta\eta$ estimates in non-signal peptides genes when MCMC not allowed to diverge vs allowed to diverge for 100 steps}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_results/Nosp_w_mp_cat_divergence_100/Graphs/Comp_mp_no_divergence_to_divergence_100.pdf}
+\caption{Comparison of $\Delta\eta$ estimates in mature peptide regions when MCMC not allowed to diverge vs allowed to diverge for 100 steps}
+\end{figure}
+
+\experiment{1-18-2016}
+Ran pseudo-mature peptides with actual mature peptides as separate categories. 
+
+
+
+\textit{Meeting with Mike}
+1) Make divergence more robust, if it puts you in realm of underflow or overflow, either go back a step and stop (produce warining) or step back and keep proposing something until numerically valid range. \newline
+2) Find reference for rejection sampling, look back at Wikipedia sources \newline
+3) Work on wrapping head around model comparisons \newline
+4) Compare posteriors when treating sp and mp as the same thing \newline
+5) Compare yeast to benchmarks, should be in testing \newline
+6) Don't worry about initial conditions being worried about single lognormal distribution \newline
+7) Fit mixture model to real data, simulate based on true value, fit to simulated data, do not expect much divergence. Then try with old approach. Expect values to climb. \newline
+8) How do confidence intervals for signal peptides and pseudo - signal peptides overlap? \newline
+
+
+\experiment{1-25-2017}
+Reference for rejection sampling: "Generalized Accept–Reject sampling schemes", Casella et al, Institute of Mathematical Statistics Lecture Notes, Monograph Series \newline
+
+Performed Likelihood Ratio tests for Mature Peptide and Signal Peptide, which indicated significance at significance level 0.005 (critical value 66.7659). However, this is also true of Non-signal peptide genes treating mature peptides as same or separate category (290). Ran only non-signal peptide genes, split into two cateogories of equal size, and compared this to previous run treating non-signal peptide genes as one cateogry using Likelihood ratio test. This again indicates significance (180). \newline
+ 
+Compared yeast. Need to simulate genome, run with model.
+
+\subexperiment{Lab meeting}
+Cedric is trying to get at idea where C Left originated. Basd estimates off of Rocus tree. 
+
+Calculate effective sample size (ESS), Coda in R. Look into ESS. Want around 500 for every parameter. Start with CSP parameter. After that what are ESS for acf. 
+
+Take over autocorrelation stuff. Say thinning is 10. Run for longer, how do confidence intervals change? Do they grow? 
+
+\subexperiment{Math Eco Seminar - Preface and Chapter 1}
+The "best" model is constrained by the types of models you are considering. 
+
+ 
+ 
+For acf, for phis, calculate average and std pf autocorrelations and plot these. Cedric saw some autocorrelation of the autocorrelation. How well does posterior probability trace autocorrelation reflect autocorrelation with other parameters (genome and CSP parameters). Alternatively, look at effetive samples sizes for the different parameters. 
+
+\experiment{2-1-2017}
+Autocorrelation
+
+Effective sample size for posterior trace using Ecoli full genome, 5000 samples, 50 thinning, was roughly 35. 
+
+Average effective sample size of phi traces 
+
+Make sure burn-in is thrown out, add 95\% confidence intervals.
+
+
+For acf, modify acceptance-rejection target, lower rate, expect greater independence. Possibly add code to stop after achieving some level of ESS. Also could start independent chains, let diverge, do they converge to the same value. 
+
+Brian says not to change acceptance-rejection target, probably won't change much.
+
+
+Looked at DIC for Mature peptides and Signal Peptides, and Pseudo Signal Peptides and Real Signal Peptides.
+
+DIC for MP = SP: 269364.2
+DIC for MP != SP: 268584.8
+
+DIC for PSP = RSP: 88066.73
+DIC for PSP != RSP: 87887.16
+
+In both cases, DIC is lower for alternative model. However, DIC tends to favor models that are overfitting.
+
+Ando (2007) notes some problems with DIC. It is assumed that parameteric family of probability distributions that generate future observations encompasses the true model, which is not actually the case. Observed data are used to both construct posterior distribution and to computer the posterion mean of expected loglikelihood, which results in underestimating the bias. Same data used twice in calculating number of effective parameters.
+
+Ando proposed BPIC
+
+Do 100K run for phi mixture model. Look at simulated genome. Take last half of current parameter traces.
+
+
+\experiment{2-2-2017}
+Began phi mixture run using 100000 samples for yeast. Also started 40000 sample run for E. coli for purposes of looking at effective sample size (ideally want around 500 samples for everything). Tried to further understanding of PBIC, but still not quite sure how to implement. Finished reading Chapter 3A for seminar presentation. Got first draft of ASMS abstract to Bob. Want to have submitted before 5 tomorrow.
+
+\experiment{2-3-2017}
+Large portion of day was spent editing the ASMS abstract. Bob really wanted me to include results for C. bescii and C. thermocellum, but I'm still not convinced about the reliability of these results. We spun this so that validation of the results is on-going. Talked with Suresh about getting some gene expression data for C. bescii, but he says the results have still not been processed and likely won't be useable at the moment. I found some C therm RNASeq results produced by the Steve Brown lab at ORNL, but it looks like these use different identifiers. Will need to find mapping.
+
+I remembered today that I need to re-run some of the E. coli fittings with divergence. Cedric said he usually allows divergence for 10 iterations. 
+
+
+\experiment{2-5-2017}
+Spent part of today cleaning up and testing some code (stuff for ACF I wrote that will be added to the repository. Looks like I need to fix the $S_\phi$, $\epsilon$, $M_\phi$ hyperparameter plots for the  $\phi$ mixtures. Also need to update reading and writing restart files and Robjects to account for changes in code (such as save likelihood, etc.)
+
+\experiment{2-6-2017} 
+Got around to looking at results of E.coli fittings with divergence. Patterns for $\Delta Eta$ correlated well, but the slope deviated significanlty from 1 (roughly 0.5). This was certainly concerning and I began digging into the code in order to find out what was going on. I had previously allowed divergence for 100 iterations when fitting the non-signal peptide genes and mature peptides, but this did not result in the strange behavior I was currently seeing. I checked some of the previous updates to ROC to make sure none of the changes would cause these strange results Eventually, I realized the problem was in the varyInitialConditions() function in MCMCAlgorithm module. This function varies everything, even parameters not being estimated. This would be problematic in the cases where I do not estimate phi, such as runs where I fit to the mature peptides and signal peptides. By allowing the $\phi$s to diverge, I'm effecitively shifting the search space for the algorithm and it has no chance to get back to that space because $\phi$s will not be changed after the initial divergence. 
+
+\experiment{2-7-2017}
+Spent most of the day preparing for Math Eco seminar. Also assisted with Darwin Day. Tried simulating Yeast genome, but I got an error when I tried to load the saved parameter object. I will need to fix this before I can proceed further. Need to fix restart files and R objects issues before I proceed further. This will save me time in the future.  
+ 
+\experiment{2-8-2017}
+Realized I made a mistake in changing varying initial conditions. Somehow, I accidentally deleted the for loop in this function, so I need to redo the runs I did previously; however, I expect results should still be consistent with results that don't allow divergence. 
+
+\subexperiment{Gilchrist Lab Meeting} 
+Run DIC calculations on PseudoMp-Mp runs. 
+
+
+\experiment{2-9-2017}
+Made edits to Bioinformatics paper based on Mike's comments. Pushed to directory
+
+\experiment{2-10-2017}
+New functions for plotting posterior and likelihood seem to be working. Need to test on case where don't estimate expression. Will not modify code to update these terms when estimating hyperparameters. Seems unlikely there would ever be a case when someone wants just these parameters and to keep everything else constant. 
+
+\experiment{2-12-2017}
+Was testing something with my old implementation of the $\phi$ mixture model to make sure the hyperparameters were being updated. Noticed both epsilon terms were staying at 0. This might partially explain why results from that second run looked decent.
+
+
+
+\experiment{2-13-2017}
+\subexperiment{$\phi$ Mixture Model Math Notes}
+
+Want to be able to represent $\phi$ estimates as mixture of two distributions to more accurately reflect empirical data. Typically, gene expression data appears bimodal, with the a distribution 
+
+
+\experiment{2-20-2017}
+\subexperiment{Meeting with Bob}
+
+SIPROS - home built version of MiriMatch, allows for isotopic labeling 
+
+We know the Adams and Kelly groups, so we can contact them if necessary. 
+
+
+\experiment{2-22-2017}
+
+I've been thinking about the divergence problem for MCMC. Goal was to make it if overflow or underflow occurred while diverging, then go back to the previous state and re-sample the parameters. This would be easy enough if dealing with unsigned or signed integers. If unsigned, the output is defined in C++. Signed integer arithmetic is not well-defined, but typically overflow will result in two positive numbers summing to produce a smaller number and underflow will result in two negative numbers summing for a positive. This would be very easy to detect. The problem is we are dealing with floats/doubles. The way these are defined by IEEE allows for gradual overflow or underflow. What this means is overflow/underflow will not occur the moment you 
+
+
+\experiment{2-27-2017}
+Make plots of phis for each segment - how do they vary
+Plot uncertainty for all of the fits through the origin
+Maybe can just initialize value and not estimate hyperparameters. Also reduce $s_\epsilon$ by an order of magnitude. 
+
+Plot estimates of slope and intercept, how do they vary? We want to be able to tell if slope differentiates from 1 and if intercept differentiates from 0. How do confidence intervals vary from 1 and 0 (plot these lines, do they overlap). 
+
+For Ctherm, check ribosomal genes are. Ideally, indicate where they are in CUB-expression plot histogram
+Create histrograms of deltaEta and deltaM, grouped by third nucleotide for 2 codon amino acids only.  
+
+Plot histogram of differences for delta etas. 
+
+Start looking at journals for signal peptide paper for E.coli.  
+
+\experiment{3-7-2017}
+Potential journals for signal peptide paper
+\begin{itemize}
+	\item Biochemical and Biophysical Research Communications
+	\item Nucleic Acids Research
+	\item Trends in Microbiology
+	\item BMC Genomics
+\end{itemize}
+
+\experiment{3-8-2017}
+
+\textbf{Documentation to edit for ribModel package}
+\begin{itemize}
+	\item convergence\_test.Rd
+\end{itemize}
+
+
+\experiment{3-14-2017}
+
+\subexperiment{Histogram of Phis by segment for \textit{E. coli}}
+\includepdf[pages=-]{Ecoli_results/Segments_expression/Histograms_phis_by_segment.pdf}
+
+\subexperiment{Histograms of $\Delta\eta$ and $\Delta\mathit{M}$ for \textit{C. thermocellum} 2 codon amino acids, grouped by 3rd codon}
+\includepdf[pages=-]{Ctherm_results/Full_genome/second_run/Graphs/dEta_dM_histograms_2_codon_aa.pdf}
+
+
+\subexperiment{Ribosomal Proteins for \textit{C. thermocellum}}
+Bars marked with red means at least one ribosomal protein was contained in this range. Black or green mean a ribosomal protein was not found.
+
+\includepdf{Ctherm_results/Full_genome/second_run/Graphs/ribo_prot_ctherm_dist.pdf}
+
+\subexperiment{MLE search for linear regression when errors in both variables}
+
+\begin{algorithmic}
+	\State $iterations \gets 1000000$
+	\State $start \gets 0$
+	\State $end \gets 2$
+	\State $step \gets 0.01$
+	\State $\beta \gets start$
+	\State $best.\beta \gets \beta$
+	\State $likelihood.max \gets -\infty$
+	\While {$\beta \leq end$}
+		\For {$i$ in range(1,iterations,step)}
+			\State $likelihood.current \gets 0$
+			\State $x^* \gets N(x,\sigma_x)$
+			\State $y^* \gets \beta \times x^*$
+			\State $likelihood.current \gets \log(Pr(x^*|x,\sigma_x)) + \log(Pr(y^*|y,\sigma_y)$
+			\If {$likelihood.current > likelihood.max$}
+				\State $best.\beta \gets \beta$
+				\State $likelihood.mac \gets likelihood.current$
+			\EndIf 
+		\EndFor
+		\State $\beta \gets \beta + 1$
+	\EndWhile 
+\end{algorithmic}
+
+\includepdf[pages=1]{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/Results_of_max_like_search.pdf}
+
+\includepdf{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/psp_sp_mle_slope.pdf}
+
+\includepdf[pages=1]{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/Results_of_max_like_search_smaller_range.pdf}
+
+\includepdf{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/psp_sp_mle_smaller_search_range.pdf}
 \end{document}
+
+
+\experiment{3-16-2017}
+
+\subexperiment{Divergence iterations numerical errors}
+Initial testing seems promising. Initialized all CSP parameters to 1000, which resulted in numerical errors in the $\phi$ estimates, which was reported by the code. Similarly, if CSP are started near the upper bound of floating point representation ($10^308$), numerical errors are achieved and reported. The code is able to report these warnings during the divergence steps. One interesting behavior about R is it does not allow gradual overflow, meaning anything greater than or equal to $10^308$ will be set as infinity, but gradual underflow is allowed, meaning you can go lower than $10^-308$. I'm concerned about how this will impact the software because C++ does allow for gradual overflow. 
+
+\subexperiment{Signal Peptide Project}
+Took a closer look at some of the $\Delta\eta$ confidence intervals for the signal peptides and pseudo-signal peptides. It looks like quite a few of them overlap with 0, which means we can't be certain which is the optimal codon. I don't think this changes the overall story, but I would rather eliminate any sources of possible doubt in our analysis.  
