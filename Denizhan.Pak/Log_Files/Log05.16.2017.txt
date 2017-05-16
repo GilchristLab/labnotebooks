@@ -1,0 +1,101 @@
+Allowing divergence from initial conditions for 0 iterations.
+
+maxGrouping: 61
+Starting MCMC
+	Estimate Codon Specific Parameters? TRUE 
+	Estimate Hyper Parameters? TRUE 
+	Estimate Synthesis rates? TRUE 
+	Starting MCMC with 500 iterations
+	Adapting will stop after 500 steps
+Status at thinned sample (iteration): 10 (100)
+	 current logPosterior: -8420.08 
+stdDevSynthesisRate posterior estimate for selection category 0: 2.00647
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+Status at thinned sample (iteration): 20 (200)
+	 current logPosterior: 3323.88 
+stdDevSynthesisRate posterior estimate for selection category 0: 2.06723
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+Status at thinned sample (iteration): 30 (300)
+	 current logPosterior: 2989.33 
+stdDevSynthesisRate posterior estimate for selection category 0: 2.08424
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+Status at thinned sample (iteration): 40 (400)
+	 current logPosterior: 2713.35 
+stdDevSynthesisRate posterior estimate for selection category 0: 2.09729
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+Status at thinned sample (iteration): 50 (500)
+	 current logPosterior: 2385.45 
+stdDevSynthesisRate posterior estimate for selection category 0: 2.10911
+	 current stdDevSynthesisRate proposal width: 0.1
+	 current Mixture element probability for element 0: 1
+acceptance rate for codon:
+GCA	0.848 with std csp = 0.1
+GCC	0.804 with std csp = 0.1
+GCG	0.83 with std csp = 0.1
+GCT	0.83 with std csp = 0.1
+TGC	0.928 with std csp = 0.1
+TGT	0.876 with std csp = 0.1
+GAC	0.798 with std csp = 0.1
+GAT	0.796 with std csp = 0.1
+GAA	0.792 with std csp = 0.1
+GAG	0.73 with std csp = 0.1
+TTC	0.836 with std csp = 0.1
+TTT	0.842 with std csp = 0.1
+GGA	0.818 with std csp = 0.1
+GGC	0.792 with std csp = 0.1
+GGG	0.814 with std csp = 0.1
+GGT	0.838 with std csp = 0.1
+CAC	0.816 with std csp = 0.1
+CAT	0.786 with std csp = 0.1
+ATA	0.804 with std csp = 0.1
+ATC	0.822 with std csp = 0.1
+ATT	0.806 with std csp = 0.1
+AAA	0.756 with std csp = 0.1
+AAG	0.756 with std csp = 0.1
+CTA	0.822 with std csp = 0.1
+CTC	0.894 with std csp = 0.1
+CTG	0.85 with std csp = 0.1
+CTT	0.864 with std csp = 0.1
+TTA	0.82 with std csp = 0.1
+TTG	0.766 with std csp = 0.1
+ATG	0.796 with std csp = 0.1
+AAC	0.85 with std csp = 0.1
+AAT	0.81 with std csp = 0.1
+CCA	0.782 with std csp = 0.1
+CCC	0.776 with std csp = 0.1
+CCG	0.808 with std csp = 0.1
+CCT	0.834 with std csp = 0.1
+CAA	0.832 with std csp = 0.1
+CAG	0.842 with std csp = 0.1
+AGA	0.764 with std csp = 0.1
+AGG	0.846 with std csp = 0.1
+CGA	0.864 with std csp = 0.1
+CGC	0.892 with std csp = 0.1
+CGG	0.838 with std csp = 0.1
+CGT	0.816 with std csp = 0.1
+TCA	0.746 with std csp = 0.1
+TCC	0.852 with std csp = 0.1
+TCG	0.872 with std csp = 0.1
+TCT	0.824 with std csp = 0.1
+ACA	0.846 with std csp = 0.1
+ACC	0.882 with std csp = 0.1
+ACG	0.848 with std csp = 0.1
+ACT	0.844 with std csp = 0.1
+GTA	0.784 with std csp = 0.1
+GTC	0.826 with std csp = 0.1
+GTG	0.868 with std csp = 0.1
+GTT	0.788 with std csp = 0.1
+TGG	0.764 with std csp = 0.1
+TAC	0.784 with std csp = 0.1
+TAT	0.806 with std csp = 0.1
+AGC	0.818 with std csp = 0.1
+AGT	0.874 with std csp = 0.1
+
+acceptance rate for synthesis rate:
+	 acceptance rate too low: 0
+	 acceptance rate too high: 4625
+leaving MCMC loop

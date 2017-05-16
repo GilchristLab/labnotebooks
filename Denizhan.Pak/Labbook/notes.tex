@@ -1,0 +1,132 @@
+\documentclass[12pt,hyperref]{labbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage[]{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{csquotes}
+\usepackage{xspace}
+\usepackage[normalem]{ulem} % For strikeout text
+\usepackage{pdfpages} % allows inclusion of PDF files
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+%\textwidth=16.5cm
+%mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
+% Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
+% was used as a bandage on an abundance of overfull hboxes. 
+% June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
+
+% For verbatim quotes
+\lstnewenvironment{verbquote}[1][]
+  {\lstset{columns=fullflexible,
+           basicstyle=\ttfamily,
+           xleftmargin=2em,
+           xrightmargin=2em,
+           breaklines,
+           breakindent=0pt,
+           #1}}% \begin{verbquote}[..]
+  {}% \end{verbquote}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+\newcommand{\sep}{\discretionary{}{}{}} % Used to help with text separation, hboxes.
+
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% BEGIN LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother 
+
+%%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
+
+
+\title{Notes for Undergraduate Research Work}
+\author{Denizhan Pak}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\labday{General}
+
+\experiment{Purpose}
+
+\experiment{Terminology}
+
+\begin{itemize} 
+	\item Codon Usage Bias (CUB): The variation between codons which are synonomous (code for the same amino acid) in a genome.
+	\item Monte Carlo Markov Chain (MCMC): A technique used to create sets of data that is pseudorandomly distributed based on a given distribution. Utilizes random walks on a markov chain to generate random data for a Monte Carlo method.
+	\item Mutation Bias: The variation between codon sequences caused by genetic mutations.
+	\item Nonsense Error: An error in protein synthesis, when a stop codon is found prematurely, and the resulting protein is not what was initially expected.
+	\item Pausing Time Model: A biological model to acquire information about protein translation. A freeze frame in which translation is stopped and the ribosome remains still. Locations of ribosomes can be analyzed. Ribosomes will spend more time on parts of mRNA that is less efficient to code and based on probabillity we can calculate which sets of codons are more innefficient based on the frequency of ribosomes that are attached to them.
+\end{itemize}
+
+\experiment{The Code Base}
+
+\subsubsection{Models:}
+The following is a list of the different types of MCMC models in this lab for the purpose of producing data that is reflective of CUB in a given genome or set of genomes. The models can be used to calculate the effects of synonymous substitutions on protein translation costs, gene expression levels and the strength of selection on CUB.
+\begin{itemize}
+	\item ROC: The Ribosome Overhead Cost model, it is the basic model for achieving the goal stated above. (described in Gilchrist et al. 2015).
+	\item RFP: The Ribosome Footprinting model, is based on the ROC model however it is concerned with the position of ribosome using a Pausing Time model.
+	\item PANSE: The Pausing and Nonsense Error model, this model accounts for nonsense errors by accoutning for the probabliity a codon is not reached due to nonsense errors in its random sampling it is an extension of the RFP model.
+	\item FONSE: 
+\end{itemize}
+
+\labday{May 16, 2017 Notes}
+
+\experiment{First Run}
+The following is a sample log file run with the objects initialized as follows:
+\begin{itemize}
+	\item genome(file = "rfp.counts.by.codon.and.gene.GSE63789.wt.csv", fasta = FALSE)
+	\item parameter(genome = genome, sphi = 1, num.mixtures = 1, gene.assignment = rep(1, length(genome)), model = “RFP”)
+	\item mcmc (samples = 50, thinning = 10, adaptive.width=50)
+	\item model(parameter = parameter, model = "RFP")
+	\item runMCMC(mcmc = mcmc, genome = genome, model = model)
+\end{itemize}
+The genome data used is from \textit{Pop et al (2014)}. The file was in "RFP" format as opposed to "Fasta" format. There were 50 samples with a thinning of 10, and the sphi value was set to a generic expectaion of 1.
+\newline \newline
+The output of the experiment was recorded in Log05.16.2017.txt.
+
+\experiment{TO DO:}
+\begin{itemize}
+	\item Interpret and review log data
+	\item Test MCMC with larger sample size
+	\item Once new RFP model is pushed use as basis to start a working PANSE model.
+\end{itemize}
+
+\end{document}
