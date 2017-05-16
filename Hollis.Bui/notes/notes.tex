@@ -2709,4 +2709,33 @@ Last 13 lines of output:
     \end{itemize}
 \end{itemize}
 
+\labday{March 16, 2017}
+
+\begin{itemize}
+    \item Back in the office, decided to help with debugging Travis and R CMD check since Cedric was also in.
+    \item Cedric will be gone tomorrow + next week, so I'll return to main work then.
+    \item Added Hmisc to travis.yml -- this fixes Hmisc on my Travis check, pushing to main now when Cedric's ready.
+    \item Added acf to imports for NAMESPACE.
+    \item Used document() to update the documentation changes Cedric made.
+\end{itemize}
+
+\labday{March 17, 2017}
+
+\begin{itemize}
+    \item Finishing the writing function.
+    \item Goal: need to record, for each position, the RFP values for each category. All other info is optional or already stored elsewhere.
+\end{itemize}
+
+\labday{May 16, 2017}
+
+\begin{itemize}
+    \item Returning to full-time work -- looks like I've missed a chance to submit a pull request on my work before the school semester had ended.
+    \item I have some backlogged local changes I need to debug ASAP.
+    \item There currently seems to be a bug in the writing function where I misdirect the writing output and overwrite the file I had originally read in.
+    \item Fixed it as well as updated the testGene.R file to account for a new parameter, categoryIndex, in the updated function for getRFPObserved.
+    \item Pushed a change that added and tested getSingleRFPCount (used in writing the PA file), a helper function called testGenomePAHelper for testing the PA file genome creation, and finalized and tested the writePA function.
+    \item Spent some time resolving a ton of merge conflicts due to failure to update with the team during the semester.
+    \item Requested a pull finally adding Hmisc, added c++ code for RFPCategoryName support, position-based storage of codon IDs, writePA, getSingleRFPCount.
+\end{itemize}
+
 \end{document}
