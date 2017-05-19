@@ -138,6 +138,7 @@ Take the functions in the description for the PANSE model and develop pseudocode
 	\item Map association between mathematical functions and implementation in models
 \end{enumerate}
 The notes taken can be found in the compositional lab notebook, scans can be found in the documents directory.
+
 \labday{May 18, 2017 Notes}
 
 \experiment{Pseudocode for PANSE Model (Continued)}
@@ -149,4 +150,19 @@ The notes taken can be found in the compositional lab notebook, scans can be fou
 \experiment{Rewrite PANSE}
 Wroteover original files for PANSE, with new PANSE files all of which are directly copied from new RFP and have their functions renamed. Both of these were compiled and tested and were seen to work.
 
+\labday{May 19, 2017 Notes}
+\experiment{Turn PANSE Functions to Log}
+Converted first 4 functions of PANSE model to loglikelihood from likelihood as it increases efficency and decreases processing time. The PANSE model requires an incomplete upper gamma function for caluclating the probabillity of elongation at a point j. The c++ standard library does not provide a generic incomplete upper gamma function. I have found two methods to implement this function:
+\begin{enumerate}
+	\item Using continued fractions, a method found on the git account of user Heng Li at url https://github.com/lh3/samtools/blob/master/bcftools/kfunc.c. This method uses a modified version of Lentz's algorithm to compute continued fractions to approximate the upper gamma function. There is currently an error in this implementation as aone of the coefficients is undefined somewhere with in the main loop body.
+	\item The second is found on the wikipedia page for incomplete gamma functions. This implementation uses a combination of an evaluated gamma distribution and the gamma function to calculate the incomplete gamma result. The implementation on the wikipedia page is done in Excel. I will need to revise the implementation to work in c++.
+\end{enumerate}
+\experiment{TODO:}
+\begin{enumerate}
+	\item Debug continued fractions method.
+	\item Implement wikipedia methon in c++.
+	\item Test a few random variables with new upper gamma function and compare to R to see if results are accurate.
+	\item Write a main function to test upper gamma on the order of 1000 times, with seeded random variables. Time both implementations compare results.
+	\item Implement more efficient implementation in PANSE model.
+\end{enumerate}
 \end{document}
