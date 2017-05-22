@@ -129,4 +129,51 @@ The output of the experiment was recorded in Log05.16.2017.txt.
 	\item Once new RFP model is pushed use as basis to start a working PANSE model.
 \end{itemize}
 
+\labday{May 17, 2017 Notes}
+
+\experiment{Pseudocode for PANSE Model}
+Take the functions in the description for the PANSE model and develop pseudocode for their implementation. To do this use ROC and RFP implementations as example.
+\begin{enumerate}
+	\item Write out functions and legends for RFP and ROC models.
+	\item Map association between mathematical functions and implementation in models
+\end{enumerate}
+The notes taken can be found in the compositional lab notebook, scans can be found in the documents directory.
+
+\labday{May 18, 2017 Notes}
+
+\experiment{Pseudocode for PANSE Model (Continued)}
+\begin{enumerate}
+	\item Write out functions and legend for PANSE model
+	\item Using maps create functions to associate with PANSE model
+\end{enumerate}
+
+\experiment{Rewrite PANSE}
+Wroteover original files for PANSE, with new PANSE files all of which are directly copied from new RFP and have their functions renamed. Both of these were compiled and tested and were seen to work.
+
+\labday{May 19, 2017 Notes}
+\experiment{Turn PANSE Functions to Log}
+Converted first 4 functions of PANSE model to loglikelihood from likelihood as it increases efficency and decreases processing time. The PANSE model requires an incomplete upper gamma function for caluclating the probabillity of elongation at a point j. The c++ standard library does not provide a generic incomplete upper gamma function. I have found two methods to implement this function:
+\begin{enumerate}
+	\item Using continued fractions, a method found on the git account of user Heng Li at url https://github.com/lh3/samtools/blob/master/bcftools/kfunc.c. This method uses a modified version of Lentz's algorithm to compute continued fractions to approximate the upper gamma function. There is currently an error in this implementation as aone of the coefficients is undefined somewhere with in the main loop body.
+	\item The second is found on the wikipedia page for incomplete gamma functions. This implementation uses a combination of an evaluated gamma distribution and the gamma function to calculate the incomplete gamma result. The implementation on the wikipedia page is done in Excel. I will need to revise the implementation to work in c++.
+\end{enumerate}
+\experiment{TODO:}
+\begin{enumerate}
+	\item Debug continued fractions method.
+	\item Implement wikipedia methon in c++.
+	\item Test a few random variables with new upper gamma function and compare to R to see if results are accurate.
+	\item Write a main function to test upper gamma on the order of 1000 times, with seeded random variables. Time both implementations compare results.
+	\item Implement more efficient implementation in PANSE model.
+\end{enumerate}
+
+\labday{May 22, 2017 Notes}
+\experiment{Finish Log Conversion}
+All equations presented under the PANSE simulation in the documentation for the RFP model have been converted to their Logarithmis equivalents.
+\experiment{Turn Equations to Pseudocode}
+Have begun doing this to all equations for PANSE Model. Issue currently being faced is the lack of an upper incomplete gamma (UIG) function in the C++ standard library. So far the following techniques have been considered as possibillities:
+\begin{enumerate}
+	\item Use Gamma DIstibution CDF: The Cumulative distribution function of a gamma distribution is proportional to the UIG, so we can use this function to calculate UIG.
+	\item Use Continued Fractions: This method is approximating the distribution using continued fractions. Code is partially written but requires debugging.
+	\item Use Lower Incomplete Gamma Function: The lower incomplete gamma function is easier to approximate because it's limit does not approach infinity. We could use this function and the regular Gamma Function to compute a value for UIG.
+\end{enumerate}
 \end{document}

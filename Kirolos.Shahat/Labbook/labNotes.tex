@@ -1,0 +1,328 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Daily Laboratory Book
+% LaTeX Template 
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Frank Kuster (http://www.ctan.org/tex-archive/macros/latex/contrib/labbook/)
+%
+% Important note:
+% This template requires the labbook.cls file to be in the same directory as the
+% .tex file. The labbook.cls file provides the necessary structure to create the
+% lab book.
+%  %%mikeg: Since labbook is installed shouldn't need to do this
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing lab book content.
+%
+% HOW TO USE THIS TEMPLATE 
+% Each day in the lab consists of three main things:
+%
+% 1. LABDAY: The first thing to put is the \labday{} command with a date in 
+% curly brackets, this will make a new page and put the date in big letters 
+% at the top.
+%
+% 2. EXPERIMENT: Next you need to specify what experiment(s) you are 
+% working on with an \experiment{} command with the experiment shorthand 
+% in the curly brackets. The experiment shorthand is defined in the 
+% 'DEFINITION OF EXPERIMENTS' section below, this means you can 
+% say \experiment{pcr} and the actual text written to the PDF will be what 
+% you set the 'pcr' experiment to be. If the experiment is a one off, you can 
+% just write it in the bracket without creating a shorthand. Note: if you don't 
+% want to have an experiment, just leave this out and it won't be printed.
+%
+% 3. CONTENT: Following the experiment is the content, i.e. what progress 
+% you made on the experiment that day.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,index=totoc,hyperref,openany]{labbook} % 'openany' here removes the gap page between days, erase it to restore this gap; 'oneside' can also be added to remove the shift that odd pages have to the right for easier reading
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[ 
+%  backref=page, %incompatible with biblatex
+  pdfpagelabels=true,
+  plainpages=false,
+  colorlinks=true,
+  bookmarks=true,
+  pdfview=FitB]{hyperref} % Required for the hyperlinks within the PDF
+  
+\usepackage{booktabs} % Required for the top and bottom rules in the table
+\usepackage{float} % Required for specifying the exact location of a figure or table
+\usepackage{graphicx} % Required for including images
+
+%%Customizations by mikeg
+\usepackage{marginnote}%provides ability to put notes in the margin using \marginnote{} coommand
+\usepackage{ifthen}
+\usepackage{amsmath,amssymb}
+\usepackage{xspace}
+\usepackage{listings} %provides lstlisting environment for typesetting code
+\usepackage[natbib=true,backref=page]{biblatex} %alternative to natbib
+
+\bibliography{/home/mikeg/BiBTeX/bibliography.full}
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+%\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+%remove numbering of experiments
+%\renewcommand*\theexperiment{}
+%\renewcommand*\thesubexperiment{}
+\makeatother 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Use Roman numerals for page numbers
+\title{
+\begin{center}
+\HRule \\[0.4cm]
+{\Huge \bfseries Research Journal \\[0.4cm] % Degree
+\HRule \\[1.5cm]}
+\end{center}
+}
+\author{\LARGE Kirolos A. Shahat \\ \Large kshahat@vols.utk.edu \\[2cm]} % Your name and email address
+\date{Beginning 19 May 2017} % Beginning date
+
+
+
+%\newexperiment{<abbrev>}[<short form>]{<long form>}
+%Here, <abbrev> is the abbreviation that can be given later to make LATEX
+%use the <long form> and <short form>. The short form is for index, table of
+%contents and running title, and giving it is optional. When using the abbre-
+%viation, specify it without prepending a backslash, i.e. \experiment{abbrev}.
+%Abbreviations may contain any char except the backslash, the tilde ( ̃), comma
+
+\newexperiment{NSE}{NSE SEMPPR}
+\newexperiment{ROC}{ROC SEMPPR}
+\newexperiment{RPF-ROC}[RPF-ROC]{Ribosome Profile Footprints: Pausing Model}
+\newexperiment{RPF-NSE}[RPF-NSE \& ROC]{Ribosome Profile Footprints: NSE \& Pausing Model}
+\newexperiment{FONSE}{FONSE SEMPPR}
+\newexperiment{DIMCMC}[DIMCMC]{Doubly Intractable MCMC}
+\newexperiment{Knight}{Student Learning, Jennifer Knight}
+\newexperiment{SELAC}{Main SELAC model}
+\newexperiment{Lab}{Lab Meeting}
+\newexperiment{LSAs}{LSAs}
+\newexperiment{Cedric}{Cedric Landerer}
+\newexperiment{Mehmet}{Mehmet Aydeniz}
+\newexperiment{SMBE Satellite Meeting on Protein Evolution in Denver}{SMBEDen}
+%\newexperiment{shorthand}{Description of the experiment}
+
+
+%COMMANDS
+%%% Sort using M-x 'sort-lines'
+\newcommand{\GTR}{GTR+$\Gamma$\xspace}
+\newcommand{\LogN}{\ensuremath{\text{LogN}}\xspace}
+\newcommand{\Lik}{\ensuremath{\text{\textbf{Lik}}}\xspace}
+\newcommand{\LLik}{\ensuremath{\mathcal{L}}\xspace}
+\newcommand{\Ne}{\ensuremath{{N_e}}\xspace}
+\newcommand{\Piihat}{\ensuremath{\hat{\pi}_i}\xspace}
+\newcommand{\Pii}{\ensuremath{\pi_{i}}\xspace}
+\newcommand{\Pijhat}{\ensuremath{\hat{\pi}_j}\xspace}
+\newcommand{\Pij}{\ensuremath{\pi_{j}}\xspace}
+\newcommand{\Pivechat}{\ensuremath{\hat{\Pivec}}\xspace}
+\newcommand{\Pivec}{\ensuremath{\Vec{\pi}}\xspace}
+%\newcommand{\Pr}{\ensuremath{\text{Pr}}\xspace}
+\newcommand{\Qmatrixa}{\ensuremath{\Qmatrix_a}\xspace}
+\newcommand{\Qmatrix}{\mathbf{Q}\xspace}
+\newcommand{\ROC}{\ensuremath{\text{ROC}}\xspace}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\var}{\Var}
+\newcommand{\Wi}{\ensuremath{{W_i}}\xspace}
+\newcommand{\Wj}{\ensuremath{{W_j}}\xspace}
+\newcommand{\acivec}{\ensuremath{a\left(\cveci\right)}\xspace}
+\newcommand{\acvecg}{\ensuremath{a\left(\vec{c}_{i,g}\right)}\xspace}
+\newcommand{\acvecj}{\ensuremath{a\left(\cvecj\right)}\xspace}
+\newcommand{\acvec}{\ensuremath{a\left(\Vec{c}\right)}\xspace}
+\newcommand{\aip}{\ensuremath{a_{i,p}}\xspace}
+\newcommand{\aivecg}{\ensuremath{{\avec}_{i,g}}\xspace}
+\newcommand{\aivec}{\aveci}
+\newcommand{\ajp}{\ensuremath{a_{j,p}}\xspace}
+\newcommand{\ajvecg}{\ensuremath{{\ajvec}_{,g}}\xspace}
+\newcommand{\ajvec}{\ensuremath{\Vec{a}_{j}}\xspace}
+\newcommand{\aj}{\ensuremath{a__j}\xspace}
+\newcommand{\alphac}{\ensuremath{\alpha_c}\xspace}
+\newcommand{\alphap}{\ensuremath{\alpha_p}\xspace}
+\newcommand{\alphavec}{\ensuremath{\Vec{\alpha}}\xspace}
+\newcommand{\alphav}{\ensuremath{\alpha_v}\xspace}
+\newcommand{\aobsvecg}{\ensuremath{{\avec}_{\text{obs},g}}\xspace}
+\newcommand{\aobsvec}{\ensuremath{\Vec{a}_{\text{obs}}}\xspace}
+\newcommand{\aobs}{\ensuremath{a_{\text{obs}}}\xspace}
+\newcommand{\aoptip}{\ensuremath{\aopt_{i,p}}\xspace}
+\newcommand{\aoptpg}{\ensuremath{\aopt_{p,g}}\xspace}
+\newcommand{\aoptp}{\ensuremath{\aopt_p}\xspace}
+\newcommand{\aoptvecg}{\ensuremath{{{\aoptvec}_g}}\xspace}
+\newcommand{\aoptvec}{\ensuremath{\Vec{a}^*}\xspace}
+\newcommand{\aopt}{\ensuremath{{a^*}}\xspace}
+\newcommand{\aveci}{\ensuremath{\Vec{a}_i}\xspace}
+\newcommand{\avecj}{\ensuremath{\Vec{a}_j}\xspace}
+\newcommand{\avec}{\ensuremath{\Vec{a}}\xspace}
+\newcommand{\avecopt}{\aoptvec}
+\newcommand{\celegans}{\emph{C.~elegans}\xspace}
+\newcommand{\cveci}{\ensuremath{\cvec_i}\xspace}
+\newcommand{\cvecj}{\ensuremath{\cvec_j}\xspace}
+\newcommand{\cvec}{\ensuremath{\Vec{c}}\xspace}
+\newcommand{\deltaT}{\ensuremath{\delta t}\xspace}
+\newcommand{\ecoli}{\emph{E.~coli}\xspace}
+\newcommand{\Lklu}{\emph{L.~kluyveri}\xspace}
+\newcommand{\bsubtilis}{\emph{B.~subtilis}\xspace}
+\newcommand{\fij}{\ensuremath{f_{i,j}}\xspace}
+\newcommand{\gen}{\ensuremath{\text{gen}}\xspace}
+\newcommand{\jmax}{\ensuremath{{j_{\max}}}\xspace}
+\newcommand{\kmax}{\ensuremath{{k_{\max}}}\xspace}
+\newcommand{\muij}{\ensuremath{\mu_{i,j}}\xspace}
+\newcommand{\phiROC}{\ensuremath{\phi_\ROC}\xspace}
+\newcommand{\phig}{\ensuremath{\phi_{g}}\xspace}
+\newcommand{\pij}{\ensuremath{p_{i,j}}\xspace}
+\newcommand{\qij}{\ensuremath{q_{i,j}}\xspace}
+\newcommand{\qji}{\ensuremath{q_{i,j}}\xspace}
+\newcommand{\rib}{\ensuremath{\text{rib}}\xspace}
+\newcommand{\cell}{\ensuremath{\text{cell}}\xspace}
+\newcommand{\sphi}{\ensuremath{s_\phi}\xspace}
+\newcommand{\scer}{\emph{S.~cerevisiae}\xspace}
+\newcommand{\setG}{\ensuremath{\mathbb{G}}\xspace}
+\newcommand{\setP}{\ensuremath{\mathbb{P}}\xspace}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}\xspace}
+\newcommand{\setF}{\ensuremath{\mathbb{F}}\xspace}
+\renewcommand{\ng}{\ensuremath{{n_g}}\xspace}
+\newcommand{\researcher}{\subsubsection}
+%---------------------------------------------------------------------------------------
+
+\graphicspath{{./Figures//}} % double slash indicates search recursively within folder
+%%Figures will be organized in subfolders by year/month
+\DeclareGraphicsExtensions{.pdf, .png, .jpg} %prevent the need for using file extensions
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\tableofcontents
+
+\mainmatter % Use Arabic numerals for page numbers
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+
+% Blank template to use for new days:
+
+%\labday{Day, Date Month \Year}
+
+%\experiment{}
+
+%Text
+
+%-----------------------------------------
+
+%\experiment{}
+
+%\begin{figure}[H] % Example of including images
+%\begin{center}
+%\includegraphics[width=0.5\linewidth]{example_figure}
+%\end{center}
+%\caption{Example figure.}
+%\label{fig:example_figure}
+%\end{figure}
+
+%Text
+
+%----------------------------------------------------------------------------------------
+
+
+
+\labday{Friday, May 19 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Get LaTeX up and running to begin taking notes
+	\item Study 2007 article and use it to begin learning terminology and understand key concepts
+	\item Study Jeremy Rogers' and Alan Dixon's previous notes and see how they began their research
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Beginning to understand layout and format of LaTeX files.
+	\item Terminology:
+	\begin{enumerate}
+		\item Codon - Sequence of three nucleotides that together form a unit of genetic code in a DNA or RNA molecule.
+		\item Codon Usage Bias (CUB) - Nonuniform usage of particular synonymous codons within a genetic sequence. 
+		\item Genome - The genetic material of an organism. 
+		\item Stochastic Model - A model that allows for random variation of one or more inputs over time. 
+		\item Stochastic Evolutionary Model of a Protein's Production Rate (SEMPPR) - A way to link CUB and the average protein production rate mechanistically. Essentially the model makes inferences about the production rate of a gene based on its elevation on the fitness landscape of protein production costs. 
+		\item Polypeptide - Linear amino-acid chain which forms most, or all, of a protein.
+		\item Genetic Fitness (n) - The reproductive success of a genotype.
+		\item Gene - Represented as a vector of Codons.
+	\end{enumerate}
+	\item Concepts:
+	\begin{enumerate}
+		\item A major cost of a nonsense error is the amount of energy invested into assembling the incomplete polypeptide. 
+		\item Selection on codon usage against nonsense errors should increase with codon position along a sequence because the cost is related to the length. This leads to the prediction of increasing codon bias with codon position.
+		\item Adaptation of a codon sequence, within SEMPPR, refers to the state of its expected cost of producing a protein relative to the minimal possible cost.
+		\item The resulting output from SEMPPR is a posterior probability distribution for the protein production rate of a gene based on its observed codon sequence.
+		\item Incomplete proteins are the result of nonsense errors. The cost of these nonsense errors is a function of their expected number and the length of the incomplete proteins. 
+	\end{enumerate}
+	\item Notes for next time
+	\begin{enumerate}
+		\item Figure out math and vector notation for LaTeX.
+		\item Continue studying 2007 article
+		\item Attempt to get to Jeremy and Alan's labbooks
+	\end{enumerate}
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, May 22 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Short review of what I learned on May 19th 2017
+	\item Figure out how to get mathematical notation in LaTeX documents
+	\item After speaking with Hollis, he suggested that I look at the existing FONSE code and cross reference that code with given articles and refer to the layout of the ROC model for implementation so that is where I'll focus my time now and address questions when needed in order of relative importance.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+
+	\item Terminology:
+	\begin{enumerate}
+		\item Elongation - The stepwise addition of amino acids to the growing protein chain.
+	\end{enumerate}
+	
+	\item Questions:
+	\begin{enumerate}
+		\item Not sure what the variables bias\_csp or mutation\_prior\_sd are in the FONSEParameter. mutation\_prior\_sd is the likelihood that there is a mutation where it is defaulted to 0.35.  I believe that the bias\_csp is the codon bias based on current position.	
+		\item Unsure how those values are getting updated or where they show up in the \begin{math} \eta (\vec{c}) \end{math} equations.
+	\end{enumerate}
+
+	\item Current Notes:
+	\begin{enumerate}
+		\item Running runFONSEmodel.R and saving the output into a file to understand what is going on
+		\item Beginning scan of FONSEParameter.h and FONSEParameter.cpp and trying to document where I can from current understanding
+		\item Currently looking through the constructors in FONSEParameter.cpp and following the methods that are being called. Currently in initFromRestartFile which leads me to 
+		\item rep(x, y) returns a vector of size y with all elements as value x in R
+		\item sd = standard deviation, csp = codon specific parameter.
+	\end{enumerate}
+
+	\item Notes for next time:
+	\begin{enumerate}
+		\item Ask Dr. Gilchrist what the variables in the FONSE equations represent so that I can understand how to get them/decipher them in code.
+		\item Continue trying to decipher the FONSEParameter code and relating them to articles/equations. Mostly get help with initvalues methods and from there it shouldn't be too difficult to follow.
+	\end{enumerate}
+
+\end{itemize}
+
+
+%----------------------------------------------------------------------------------------
+
+\printbibliography
+
+\end{document}
