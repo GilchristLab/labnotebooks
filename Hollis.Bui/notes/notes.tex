@@ -2738,4 +2738,40 @@ Last 13 lines of output:
     \item Requested a pull finally adding Hmisc, added c++ code for RFPCategoryName support, position-based storage of codon IDs, writePA, getSingleRFPCount.
 \end{itemize}
 
+\labday{May 17, 2017}
+
+\begin{itemize}
+    \item Will begin removing old code for readRFP format.
+    \item Currently debugging errors from updating R from 3.3 to 3.4 -- may be related to the updated RibModel package using openMP, even on Mac which doesn't have openMP support.
+\end{itemize}
+
+\labday{May 18, 2017}
+
+\begin{itemize}
+    \item openMP flags that were added by Cedric don't currently check OS, but there's a way to fix that -- TODO, investigate makevars.in and a configure file to detect system OS to enable/disable openMP.
+    \item Finished fixing R installation errors -- had to individually reload packages between versions, rather than blindly moving installed files.
+    \item Decided to try and debug the Makevars issue between versions via using autoconf and configure.ac file.
+\end{itemize}
+
+\labday{May 22, 2017}
+
+Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation runs to test the RFP model again (TODO: Still need to rename it... Low priority).
+
+\begin{itemize}
+    \item Talked with Dr. Gilchrist and Brian about the openMP issue.
+    \begin{itemize}
+        \item Formerly, Cedric had the Makevars file attempt to use openMP if available -- this allowed the RibModel package to run out-of-the-box for all systems, but this code was not CRAN-compliant.
+        \item On May 14, Cedric made Makevars CRAN-compliant by adding code according to the CRAN manual for writing Makevars files enabling openMP.
+        \item This code works for Linux and Windows, but it does not work out-of-the-box for Mac.
+        \item I had begun writing fairly complicate autoconfigure files and Makevars alternatives that detects the system in R, while installing the package, and more, but this seemed extraneous (code based on ARTP2 package in CRAN).
+        \item Instead, asking Brian, it seems OK to leave the code like Cedric had -- it had passed on CRAN, after all. The basic idea is that it works on two of the three primary operating systems (Windows, Linux, but not Mac).
+        \item Mac users must instead download their own solution to the lack of openMP as needed, and we will include a note in the DESCRIPTION file to address this need and link to help.
+        \item For me and other researchers working on Mac, this can be easily accomplished by symbolically linking an openMP-enabled compiler on top of the under-supported Apple default.
+        \item I will also write a much simpler configure file to detect the operating system and inform the user of the lack of openMP support.
+        \item It should be noted that upon further investigation, CRAN allows the source files to have this openMP Makevars support, but it seems the binaries for OSX completely exclude this: see package mvnfast, which cannot be installed via source files but can via specific binaries.
+    \end{itemize}
+    \item Cedric's input is that the more complicated configure script is probably preferred, especially with the new information about the difference between the source and binary package of the other openMP example in CRAN.
+    \item For now, I am pushing the simpler configure file that informs the user, on package installation failure, that the cause is the lack of openMP -- users will be slightly more able to install openMP as needed compared to before (when there would be a missing compiler flag).
+\end{itemize}
+
 \end{document}
