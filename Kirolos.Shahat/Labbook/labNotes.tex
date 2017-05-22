@@ -241,7 +241,7 @@
 
 
 
-\labday{Friday May 19, 2017}
+\labday{Friday, May 19 2017}
 \experiment{Goals for today}
 \begin{itemize}
 	\item Get LaTeX up and running to begin taking notes
@@ -279,6 +279,49 @@
 	\end{enumerate}
 \end{itemize}
 
+%-----------------------------------------
+
+\labday{Monday, May 22 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Short review of what I learned on May 19th 2017
+	\item Figure out how to get mathematical notation in LaTeX documents
+	\item After speaking with Hollis, he suggested that I look at the existing FONSE code and cross reference that code with given articles and refer to the layout of the ROC model for implementation so that is where I'll focus my time now and address questions when needed in order of relative importance.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+
+	\item Terminology:
+	\begin{enumerate}
+		\item Elongation - The stepwise addition of amino acids to the growing protein chain.
+	\end{enumerate}
+	
+	\item Questions:
+	\begin{enumerate}
+		\item Not sure what the variables bias\_csp or mutation\_prior\_sd are in the FONSEParameter. mutation\_prior\_sd is the likelihood that there is a mutation where it is defaulted to 0.35.  I believe that the bias\_csp is the codon bias based on current position.	
+		\item Unsure how those values are getting updated or where they show up in the \begin{math} \eta (\vec{c}) \end{math} equations.
+	\end{enumerate}
+
+	\item Current Notes:
+	\begin{enumerate}
+		\item Running runFONSEmodel.R and saving the output into a file to understand what is going on
+		\item Beginning scan of FONSEParameter.h and FONSEParameter.cpp and trying to document where I can from current understanding
+		\item Currently looking through the constructors in FONSEParameter.cpp and following the methods that are being called. Currently in initFromRestartFile which leads me to 
+		\item rep(x, y) returns a vector of size y with all elements as value x in R
+		\item sd = standard deviation, csp = codon specific parameter.
+	\end{enumerate}
+
+	\item Notes for next time:
+	\begin{enumerate}
+		\item Ask Dr. Gilchrist what the variables in the FONSE equations represent so that I can understand how to get them/decipher them in code.
+		\item Continue trying to decipher the FONSEParameter code and relating them to articles/equations. Mostly get help with initvalues methods and from there it shouldn't be too difficult to follow.
+	\end{enumerate}
+
+\end{itemize}
+
+
+%----------------------------------------------------------------------------------------
 
 \printbibliography
 
