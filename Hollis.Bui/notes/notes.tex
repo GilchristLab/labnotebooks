@@ -2774,4 +2774,14 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item For now, I am pushing the simpler configure file that informs the user, on package installation failure, that the cause is the lack of openMP -- users will be slightly more able to install openMP as needed compared to before (when there would be a missing compiler flag).
 \end{itemize}
 
+\labday{May 23, 2017}
+
+\begin{itemize}
+    \item Finished modifying the more complex configure script to account for OSX.
+    \item Now the Makevars file is dynamically created per package built to account for existence of openMP.
+    \item While testing Makevars compatibility between systems, I tried to use both Gauley and Newton.
+    \item Gauley seems to be having consistent issues with checking the update ribModel package. I will have to debug this later, for now I'll try to use Newton.
+    \item Also setting up SSH permissions and keys to more easily use Newton and Gauley -- Newton can now be accessed via SSH, and both can use my github directory permissions.
+\end{itemize}
+
 \end{document}
