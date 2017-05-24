@@ -171,9 +171,19 @@ Converted first 4 functions of PANSE model to loglikelihood from likelihood as i
 All equations presented under the PANSE simulation in the documentation for the RFP model have been converted to their Logarithmis equivalents.
 \experiment{Turn Equations to Pseudocode}
 Have begun doing this to all equations for PANSE Model. Issue currently being faced is the lack of an upper incomplete gamma (UIG) function in the C++ standard library. So far the following techniques have been considered as possibillities:
-\begin{enumerate}
+\begin{itemize}
 	\item Use Gamma DIstibution CDF: The Cumulative distribution function of a gamma distribution is proportional to the UIG, so we can use this function to calculate UIG.
 	\item Use Continued Fractions: This method is approximating the distribution using continued fractions. Code is partially written but requires debugging.
 	\item Use Lower Incomplete Gamma Function: The lower incomplete gamma function is easier to approximate because it's limit does not approach infinity. We could use this function and the regular Gamma Function to compute a value for UIG.
+\end{itemize}
+\labday{May 23, 2017 Notes}
+\experiment{Test Upper Gamma Function}
+\begin{enumerate}
+	\item Tested new Gamma function comparing output to python and Mathematica implementations. The tests showed the implementation as accurrate for positive numbers greater than 0.
+	\item Randomly generated input for function and timed for maximum of 10,000 iterations with an average of 0.3 second.
 \end{enumerate}
+
+\labday{May 24, 2017}
+\experiment{Use Upper Incomplete Gamma Function}
+There is a problem. The upper incomplete gamma function is undefined for negative values however in the description file we see that the gamma function may indeed recieve a negative value if the shape parameter for the distribution is greater than 1. To address this problem I will need to implement a new version of the upper incomplete gamma function that is defined at a negative value. The most likely candidate seems to be using the wikipedia suggested upper incomplete gamma distribution.
 \end{document}
