@@ -320,6 +320,24 @@
 
 \end{itemize}
 
+%-----------------------------------------
+
+\labday{Wednesday, May 24 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue running runFONSEmodel.R and saving the output to file
+	\item Continue scanning through FONSEParameter.h and FONSEParameter.cpp and documenting where I can from current understanding
+	\item If time allows, get the meanings of the variables from Dr. Gilchrist 
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Ran through about 930 iterations of runFONSEmodel.R and stopped it. I have the outputs from that program to follow.
+	\item Currently tracing through the FONSEParameter.cpp and it's leading me to initBaseValuesFromFile method so I am checking it out and documenting where I can.
+	\item Spoke with Dr. Gilchrist and he confirmed that I should be going through the C++ code and trying to understand it. He also gave me an understanding of what the variables represent so that I can understand some of the math in the code when I come across it.
+	\item Going through the init methods in FONSEParameter.cpp and I found that sequenceSummary is implemented using maps to emulate enumerators. I haven't seen what all it is being used for but I think enumerators are constant time when maps are log(n) time to find an element. I think it be a nice speedup if it was changed over. Just a thought for later, potentially.
+	\item I'm adding comments and I'm noticing that the code is pretty cluttered, my impulse is to start cleaning it and making it more legible but I'm refraining from doing so for now...
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 
