@@ -108,7 +108,13 @@ The following is a list of the different types of MCMC models in this lab for th
 \end{itemize}
 
 \labday{May 16, 2017 Notes}
-
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 9 - 12: Looking through RFP Model.
+	\item 1 - 3: Writing general notes for notebook
+	\item 3 - 5: Ran a sample of RFP MCMC.
+	\item Total: 7 hours spent for learning.
+\end{itemize}
 \experiment{First Run}
 The following is a sample log file run with the objects initialized as follows:
 \begin{itemize}
@@ -130,7 +136,13 @@ The output of the experiment was recorded in Log05.16.2017.txt.
 \end{itemize}
 
 \labday{May 17, 2017 Notes}
-
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 9 - 11: Write Down ROC functions with descriptions.
+	\item 11 - 1: Compare implmentation with function descriptions
+	\item 2 - 5: Wrote down RFP functions with descriptions
+	\item Total: 7 hours spent learning.
+\end{itemize}
 \experiment{Pseudocode for PANSE Model}
 Take the functions in the description for the PANSE model and develop pseudocode for their implementation. To do this use ROC and RFP implementations as example.
 \begin{enumerate}
@@ -140,7 +152,13 @@ Take the functions in the description for the PANSE model and develop pseudocode
 The notes taken can be found in the compositional lab notebook, scans can be found in the documents directory.
 
 \labday{May 18, 2017 Notes}
-
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 9 - 12: Looking through new RFP Model and comparing implementation to written equations
+	\item 1 - 4: Wrote down all functions for PANSE and turned to Pseudocode
+	\item 4 -5: Copied functions from RFP to PANSE and tested and ran code
+	\item Total: 7 hours in Lab. 4 Hours spent working, 3 hours spent learning
+\end{itemize}
 \experiment{Pseudocode for PANSE Model (Continued)}
 \begin{enumerate}
 	\item Write out functions and legend for PANSE model
@@ -151,6 +169,13 @@ The notes taken can be found in the compositional lab notebook, scans can be fou
 Wroteover original files for PANSE, with new PANSE files all of which are directly copied from new RFP and have their functions renamed. Both of these were compiled and tested and were seen to work.
 
 \labday{May 19, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 9 - 1: Turned PANSE functions into log to ease implementation like in RFP
+	\item 2 - 3: Wrote pseudocode for PANSE Implementation using log version
+	\item 3 - 5: Looked and found a log implementation of upper incomplete gamma function
+	\item Total: 7 hours in Lab all spent working
+\end{itemize}
 \experiment{Turn PANSE Functions to Log}
 Converted first 4 functions of PANSE model to loglikelihood from likelihood as it increases efficency and decreases processing time. The PANSE model requires an incomplete upper gamma function for caluclating the probabillity of elongation at a point j. The c++ standard library does not provide a generic incomplete upper gamma function. I have found two methods to implement this function:
 \begin{enumerate}
@@ -167,6 +192,13 @@ Converted first 4 functions of PANSE model to loglikelihood from likelihood as i
 \end{enumerate}
 
 \labday{May 22, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 10 - 12: Tested Sam tools implementation and finished converting functions to Logs
+	\item 1 - 3: Searched for new upper incomplete gamma function implementation.
+	\item 3 - 5: Learned about continued fractional representation for functions.
+	\item Total: 6 hours in Lab. 4 Hours spent working, 2 hours spent learning
+\end{itemize}
 \experiment{Finish Log Conversion}
 All equations presented under the PANSE simulation in the documentation for the RFP model have been converted to their Logarithmis equivalents.
 \experiment{Turn Equations to Pseudocode}
@@ -176,14 +208,56 @@ Have begun doing this to all equations for PANSE Model. Issue currently being fa
 	\item Use Continued Fractions: This method is approximating the distribution using continued fractions. Code is partially written but requires debugging.
 	\item Use Lower Incomplete Gamma Function: The lower incomplete gamma function is easier to approximate because it's limit does not approach infinity. We could use this function and the regular Gamma Function to compute a value for UIG.
 \end{itemize}
+
 \labday{May 23, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 10 - 1: Searched for lower incomplete gamma implementation
+	\item 1 - 3: Implemented lower incomplete gamma and wrote code to convert to upper
+	\item 3 - 5: Tested code.
+	\item Total: 7 hours in Lab all spent working
+\end{itemize}
 \experiment{Test Upper Gamma Function}
 \begin{enumerate}
+	\item Decided to use a lower incomplete gamma implementation to calculate upper incomplete gamma implementation.
 	\item Tested new Gamma function comparing output to python and Mathematica implementations. The tests showed the implementation as accurrate for positive numbers greater than 0.
 	\item Randomly generated input for function and timed for maximum of 10,000 iterations with an average of 0.3 second.
 \end{enumerate}
 
-\labday{May 24, 2017}
+\labday{May 24, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 9 - 10: Test new gamma function with values acquired from previous MCMC's
+	\item 10 - 1: Looked for new Gamma function implementation
+	\item 2 - 5: Looked for Cumulative distribution function of gamma distribution for c++ implementation.
+	\item Total: 7 hours in Lab. 4 hours spent working, 3 hours spent learning
+\end{itemize}
 \experiment{Use Upper Incomplete Gamma Function}
 There is a problem. The upper incomplete gamma function is undefined for negative values however in the description file we see that the gamma function may indeed recieve a negative value if the shape parameter for the distribution is greater than 1. To address this problem I will need to implement a new version of the upper incomplete gamma function that is defined at a negative value. The most likely candidate seems to be using the wikipedia suggested upper incomplete gamma distribution.
+
+\labday{May 25, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 10 - 12: Learned about accurracy measurement in approximations
+	\item 12 - 2: Read through GSL and R documentation on Incomplete Gamma Functions
+	\item Total: 4 hours spent in Lab for learning.
+\end{itemize}
+Read into the implementation of upper incomplete functions in R and GSL libraries. Neither were able to provide insight into their implementation.
+
+\labday{May 26, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+	\item 11 - 12: Looked at readings from Dr. Gilchrist
+	\item 12 - 2: Look at implementations of upper incomplete in GSL.
+	\item 2 - 5: Implement Continued fractions version of Upper incomplete estimation.
+	\item Total: 6 hours in lab, 5 hours working 1 hour learning
+\end{itemize}
+\experiment{Upper Incomplete Gamma}
+I was having trouble finding a working implementation of the upper incomplete gamma function. After reading on the GNU library I was not able to find the source code. Using the contnued fractions approximation describe \textit{Abramowitz and Stegun} I was able to write my own recursive algorithm which having tested with minimal data seems to work for both positive and negative values.
+\experiment{TODO:}
+\begin{itemize}
+	\item Benchmarks: Need to test upper incomplete with a wider range of inputs
+	\item Timing: Must measure and average timing for function to improve runtime
+	\item Implement: Implement ress of probability of elongation calculation in PANSE Model.
+\end{itemize}
 \end{document}
