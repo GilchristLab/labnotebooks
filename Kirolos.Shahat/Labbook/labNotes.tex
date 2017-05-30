@@ -307,7 +307,7 @@
 	\begin{enumerate}
 		\item Running runFONSEmodel.R and saving the output into a file to understand what is going on
 		\item Beginning scan of FONSEParameter.h and FONSEParameter.cpp and trying to document where I can from current understanding
-		\item Currently looking through the constructors in FONSEParameter.cpp and following the methods that are being called. Currently in initFromRestartFile which leads me to 
+		\item Currently looking through the constructors in FONSEParameter.cpp and following the methods that are being called. Currently in initFromRestartFile.
 		\item rep(x, y) returns a vector of size y with all elements as value x in R
 		\item sd = standard deviation, csp = codon specific parameter.
 	\end{enumerate}
@@ -337,6 +337,26 @@
 	\item Spoke with Dr. Gilchrist and he confirmed that I should be going through the C++ code and trying to understand it. He also gave me an understanding of what the variables represent so that I can understand some of the math in the code when I come across it.
 	\item Going through the init methods in FONSEParameter.cpp and I found that sequenceSummary is implemented using maps to emulate enumerators. I haven't seen what all it is being used for but I think enumerators are constant time when maps are log(n) time to find an element. I think it be a nice speedup if it was changed over. Just a thought for later, potentially.
 	\item I'm adding comments and I'm noticing that the code is pretty cluttered, my impulse is to start cleaning it and making it more legible but I'm refraining from doing so for now...
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Friday, May 26 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through init methods in FONSEParameter.cpp and FONSEParameter.h
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Currently in initFONSEValuesFromFile in FONSEParameter.cpp. I see a print statement that just says "here" so I'm going to assume this method is not working properly for some reason, might be because eof is not doing anything differently? It's essentially breaking through the structure of the loop.
+	\item Finished going through initFONSEValuesFromFile. I condensed two for loops into one at the end of that method. I documented what I did and left the previous code in case someone needs the previous code.
+	\item Going through writeBasicRestartFile in Parameter.cpp. It's pretty well written, my only confusing is why a ostringstream is used, doesn't seem needed to me. Just seems to be extra memory because it's just copied to a string at the end. Can cut out the string and ostringstream and just write to the file directly and save on memory.
+	\item Went through writeFONSERestartFile, nothing too strange there.
+	\item Going through initParameterSet in Parameter.cpp
+	\item Indexing vectors in R start at element 1 not 0 (Mathematicians....)
+	\item STANDALONE represents not being run by R
+	\item Condensed initParameterSet vector assignment loop using iterators and the push\_back method but now I'm noticing a segFault in runFONSEmodel.R which is strange because I wasn't getting that before. Will have to look into that next time by re-cloning the RibModelFramework repo and seeing if re-installing that fixes the issue or not.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
