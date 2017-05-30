@@ -260,4 +260,24 @@ I was having trouble finding a working implementation of the upper incomplete ga
 	\item Timing: Must measure and average timing for function to improve runtime
 	\item Implement: Implement ress of probability of elongation calculation in PANSE Model.
 \end{itemize}
+
+\labday{May 30, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 12:30: Discussion with Dr. Gilchrist
+    \item 12:30 - 2: Set up GNU Scientific Library
+    \item 2 - 5: Work on testing script discussed with Dr Gilchrist
+    \item Total: 5 hours spent in lab, 2 hours learning 3 hours working
+\end{itemize}
+\experiment{Benchmarking}
+The working upper incomplete gamma function uses a 1000 iteration recursion process this is innefficient. To address this issue Dr. Gilchrist suggested benchmark testing. I am doing this using the following method.
+\begin{itemize}
+    \item Find comparable and well developed implementation (GSL).
+    \item Develop a testing application.
+    \item Test based on accurracy against GNU implementation.
+    \item Test based on timing comparison against GNU implementation.
+    \item Determine flexibillity in iteration count while maintaing accurracy.
+\end{itemize}
+I have begun developing the testing application. Under Dr. Gilchrist sugestion I will test with initial sample sizes ranging frm 500 to 1000.
+
 \end{document}

@@ -29,6 +29,3 @@ double gamma_inc(double v, double x){
     return rv/d;
 }
 
-int main(){
-    printf("%f\n", gamma_inc(-0.5, 3));
-}
