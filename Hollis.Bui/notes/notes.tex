@@ -1643,7 +1643,7 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
     
     \item \sout{Not sure why this occurs; will try to work on the RFP data testing first.}\footnote{Hollis: July 12, 2016 -- In retrospect, this seems to be normal behavior. The R CMD check fail log only displays if it fails, and otherwise this message is displayed by default.\label{fn:TravisError}}
     \item Continued scripting a way to cross-reference existing data with Pop data.
-    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
+    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
     \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
     \item Notably, because I don't know where it's from, I can't access the documentation on why the positions start arbitrarily and end arbitrarily; there are less positions with footprints recorded than the length of the gene listed in the main, documented Pop directory.
     \item Will have to ask Dr. Gilchrist on how to proceed; in meantime taking a break and then going to contribute to work hours by doing documentation.
@@ -2803,6 +2803,25 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Renamed all instances of RFPModel, RFPParameter, and the like to PAModel, PAParameter, etc.
     \item TODO: Ask Cedric the standard format to write something in the DESCRIPTION file strongly suggesting a user have access to OpenMP, even though it's not longer necessary.
     \item Added a case for reading in PA data: If a codon count is < 0, it is assumed to be a typo, and 0 is input instead.
+\end{itemize}
+
+\labday{May 30, 2017}
+
+\begin{itemize}
+    \item Asked Cedric about the DESCRIPTION file explicitly mentioning openMP -- the other openMP-enabled CRAN module I reference (ARTP2) for our own configure file does not mention it, so he thinks we can ignore it as well.
+    \item Gilchrist talk:
+    \begin{itemize}
+        \item Likelihood of an RFP count: With a negative codon count value, don't modify the likelihood at all.
+        \item Rethink the \enquote{If a codon count is < 0, set to 0} idea from the May 26th notes. Instead, if an RFP count value is ambiguous or unknown, it can be set to -1 and ignored \textit{for just that category}. This is what is meant by it not affecting the Likelihood.
+        \item From Dr. Gilchrist's board: if x(arrow) = {x1, x2, x3} and x(arrow prime) = {-1, x2, x3}, then LogLikelihood (xarrow) = summation of the Loglikelihood of each xi (three of them), and LogLikehood (x arrow prime) = summation of the Loglikelihood of each valid xi (two of them).
+        \item In terms of implementation, store the line after all (keeping the RFP count at -1) but when calculating Likelihood, ignore that -1 (for example, setting it to 0 for Likelihood only).
+        This would also make retaining data better when re-printing out information.
+        \item Make sure the user can specify which category to use of the multiple we have stored (TODO, but obvious when/where!)
+        \item For the record, \textbf{I have fixed the August 9th bug that was originally in RFP}. ncodons are correctly calculated. This was fixed when I split \enquote{processSequence} in sequenceSummary.cpp with PA's version, which is \enquote{processPa}.
+        \item Also went over the Gauley check bug with Dr. Gilchrist (it was not a compilation error, but a check error; avoid that terminology confusion in notes). It seems the R code checks spitting out a ton of notes is just a \enquote{possible} problem and may not affect the actual package. Recall: There still is some weird random number seeding discrepancy between Gauley and other machines that results in the literal value checking of testMCMCROC to fail. This is fine; remove the check for Gauley-only.
+        \item Meeting concluded with Dr. Gilchrist updating Gauley's version of R to 3.4. Will re-check the passage for bugs.
+    \end{itemize}
+    \item Next step is simulating a genome and compare with Pop's data.
 \end{itemize}
 
 \end{document}
