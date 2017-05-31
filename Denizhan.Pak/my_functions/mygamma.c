@@ -4,7 +4,7 @@
 double cont_frac(double v, double x, int flag){
     double c, rv;
 
-    if(flag == 1000) return 1;
+    if(flag == 10000) return x;
 
     if(flag % 2 == 0){
         c = x;

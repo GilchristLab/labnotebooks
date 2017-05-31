@@ -1,0 +1,702 @@
+The sample size was 100, The seed was 1
+Iteration 0: 
+Inputs: s = 0.566198 x = 6.840188
+Their value: 0.000440
+My value: 0.000440
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 1: 
+Inputs: s = -0.604897 x = 3.798440
+Their value: 0.001934
+My value: 0.001934
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 2: 
+Inputs: s = -0.444451 x = 2.335223
+Their value: 0.019012
+My value: 0.019012
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 3: 
+Inputs: s = 0.257742 x = 2.553970
+Their value: 0.031544
+My value: 0.031544
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 4: 
+Inputs: s = 0.904459 x = 9.364784
+Their value: 0.000069
+My value: 0.000069
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 5: 
+Inputs: s = 0.434594 x = 0.916195
+Their value: 0.302627
+My value: 0.302627
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 6: 
+Inputs: s = -0.967399 x = 6.141603
+Their value: 0.000047
+My value: 0.000047
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 7: 
+Inputs: s = 0.608354 x = 7.242887
+Their value: 0.000314
+My value: 0.000314
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 8: 
+Inputs: s = -0.740419 x = 0.156679
+Their value: 2.965579
+My value: 2.965579
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 9: 
+Inputs: s = -0.563486 x = 7.108809
+Their value: 0.000032
+My value: 0.000032
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 10: 
+Inputs: s = 0.225280 x = 2.512932
+Their value: 0.031929
+My value: 0.031929
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 11: 
+Inputs: s = 0.048574 x = 9.296032
+Their value: 0.000010
+My value: 0.000010
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 12: 
+Inputs: s = -0.414966 x = 6.493583
+Their value: 0.000090
+My value: 0.000090
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 13: 
+Inputs: s = 0.539828 x = 9.771358
+Their value: 0.000019
+My value: 0.000019
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 14: 
+Inputs: s = -0.433371 x = 9.400229
+Their value: 0.000003
+My value: 0.000003
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 15: 
+Inputs: s = 0.838053 x = 8.352458
+Their value: 0.000164
+My value: 0.000164
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 16: 
+Inputs: s = 0.051991 x = 0.069755
+Their value: 2.015270
+My value: 2.015270
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 17: 
+Inputs: s = 0.326454 x = 1.086056
+Their value: 0.226035
+My value: 0.226035
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 18: 
+Inputs: s = -0.871657 x = 3.890233
+Their value: 0.001138
+My value: 0.001138
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 19: 
+Inputs: s = -0.873808 x = 6.020023
+Their value: 0.000066
+My value: 0.000066
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 20: 
+Inputs: s = 0.804416 x = 5.238280
+Their value: 0.003721
+My value: 0.003721
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 21: 
+Inputs: s = 0.079521 x = 6.850920
+Their value: 0.000161
+My value: 0.000161
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 22: 
+Inputs: s = 0.025071 x = 9.375207
+Their value: 0.000009
+My value: 0.000009
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 23: 
+Inputs: s = -0.921439 x = 4.667724
+Their value: 0.000358
+My value: 0.000358
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 24: 
+Inputs: s = 0.861620 x = 5.437638
+Their value: 0.003367
+My value: 0.003367
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 25: 
+Inputs: s = 0.477069 x = 4.720952
+Their value: 0.003614
+My value: 0.003614
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 26: 
+Inputs: s = 0.375723 x = 0.639979
+Their value: 0.445301
+My value: 0.445301
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 27: 
+Inputs: s = 0.760150 x = 6.165974
+Their value: 0.001312
+My value: 0.001312
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 28: 
+Inputs: s = -0.542064 x = 4.829201
+Their value: 0.000551
+My value: 0.000551
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 29: 
+Inputs: s = 0.373340 x = 4.893372
+Their value: 0.002496
+My value: 0.002496
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 30: 
+Inputs: s = 0.314608 x = 0.956468
+Their value: 0.270687
+My value: 0.270687
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 31: 
+Inputs: s = 0.847940 x = 9.858676
+Their value: 0.000036
+My value: 0.000036
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 32: 
+Inputs: s = 0.368437 x = 6.398437
+Their value: 0.000474
+My value: 0.000474
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 33: 
+Inputs: s = -0.568350 x = 5.910972
+Their value: 0.000135
+My value: 0.000135
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 34: 
+Inputs: s = -0.704680 x = 8.950252
+Their value: 0.000003
+My value: 0.000003
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 35: 
+Inputs: s = -0.136093 x = 7.881062
+Their value: 0.000032
+My value: 0.000032
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 36: 
+Inputs: s = 0.572004 x = 2.619596
+Their value: 0.042769
+My value: 0.042769
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 37: 
+Inputs: s = -0.547787 x = 1.307458
+Their value: 0.095088
+My value: 0.095088
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 38: 
+Inputs: s = 0.112888 x = 1.187533
+Their value: 0.172542
+My value: 0.172542
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 39: 
+Inputs: s = 0.813608 x = 4.416501
+Their value: 0.008842
+My value: 0.008842
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 40: 
+Inputs: s = -0.009112 x = 9.103171
+Their value: 0.000011
+My value: 0.000011
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 41: 
+Inputs: s = 0.870008 x = 7.760475
+Their value: 0.000322
+My value: 0.000322
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 42: 
+Inputs: s = 0.499542 x = 5.684445
+Their value: 0.001323
+My value: 0.001323
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 43: 
+Inputs: s = -0.535477 x = 7.368664
+Their value: 0.000025
+My value: 0.000025
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 44: 
+Inputs: s = -0.695220 x = 3.584489
+Their value: 0.002274
+My value: 0.002274
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 45: 
+Inputs: s = 0.586941 x = 6.732149
+Their value: 0.000514
+My value: 0.000514
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 46: 
+Inputs: s = -0.850940 x = 4.164102
+Their value: 0.000801
+My value: 0.000801
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 47: 
+Inputs: s = 0.043127 x = 2.950104
+Their value: 0.014710
+My value: 0.014710
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 48: 
+Inputs: s = 0.595596 x = 9.176211
+Their value: 0.000041
+My value: 0.000041
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 49: 
+Inputs: s = 0.934810 x = 8.732654
+Their value: 0.000139
+My value: 0.000139
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 50: 
+Inputs: s = -0.813039 x = 9.639458
+Their value: 0.000001
+My value: 0.000001
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 51: 
+Inputs: s = -0.843536 x = 8.134902
+Their value: 0.000005
+My value: 0.000005
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 52: 
+Inputs: s = -0.077159 x = 1.069906
+Their value: 0.188085
+My value: 0.188085
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 53: 
+Inputs: s = 0.511162 x = 9.819677
+Their value: 0.000017
+My value: 0.000017
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 54: 
+Inputs: s = 0.999987 x = 8.051939
+Their value: 0.000318
+My value: 0.000318
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 55: 
+Inputs: s = -0.749063 x = 3.204329
+Their value: 0.003630
+My value: 0.003630
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 56: 
+Inputs: s = 0.741080 x = 4.997799
+Their value: 0.004263
+My value: 0.004263
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 57: 
+Inputs: s = 0.846138 x = 7.072329
+Their value: 0.000616
+My value: 0.000616
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 58: 
+Inputs: s = -0.673737 x = 1.593892
+Their value: 0.051503
+My value: 0.051503
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 59: 
+Inputs: s = 0.639390 x = 9.391690
+Their value: 0.000036
+My value: 0.000036
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 60: 
+Inputs: s = 0.158860 x = 1.359095
+Their value: 0.137944
+My value: 0.137944
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 61: 
+Inputs: s = -0.800720 x = 5.452576
+Their value: 0.000156
+My value: 0.000156
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 62: 
+Inputs: s = -0.391410 x = 1.530808
+Their value: 0.071051
+My value: 0.071051
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 63: 
+Inputs: s = 0.755228 x = 9.992228
+Their value: 0.000025
+My value: 0.000025
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 64: 
+Inputs: s = -0.929158 x = 3.747809
+Their value: 0.001279
+My value: 0.001279
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 65: 
+Inputs: s = 0.850753 x = 3.747803
+Their value: 0.018739
+My value: 0.018739
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 66: 
+Inputs: s = 0.958868 x = 9.873271
+Their value: 0.000047
+My value: 0.000047
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 67: 
+Inputs: s = 0.967191 x = 3.743811
+Their value: 0.022500
+My value: 0.022500
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 68: 
+Inputs: s = -0.672064 x = 8.666880
+Their value: 0.000004
+My value: 0.000004
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 69: 
+Inputs: s = -0.846011 x = 4.830012
+Their value: 0.000327
+My value: 0.000327
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 70: 
+Inputs: s = 0.258959 x = 8.649707
+Their value: 0.000033
+My value: 0.000033
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 71: 
+Inputs: s = -0.366266 x = 7.229137
+Their value: 0.000042
+My value: 0.000042
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 72: 
+Inputs: s = -0.851678 x = 3.328777
+Their value: 0.002629
+My value: 0.002629
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 73: 
+Inputs: s = 0.302264 x = 0.633072
+Their value: 0.444166
+My value: 0.444166
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 74: 
+Inputs: s = -0.439916 x = 5.510686
+Their value: 0.000281
+My value: 0.000281
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 75: 
+Inputs: s = -0.773439 x = 5.546107
+Their value: 0.000146
+My value: 0.000146
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 76: 
+Inputs: s = 0.888636 x = 6.471483
+Their value: 0.001238
+My value: 0.001238
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 77: 
+Inputs: s = 0.695369 x = 2.450918
+Their value: 0.059896
+My value: 0.059896
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 78: 
+Inputs: s = -0.310114 x = 7.434513
+Their value: 0.000037
+My value: 0.000037
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 79: 
+Inputs: s = -0.532217 x = 8.598481
+Their value: 0.000006
+My value: 0.000006
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 80: 
+Inputs: s = -0.036128 x = 8.675476
+Their value: 0.000016
+My value: 0.000016
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 81: 
+Inputs: s = -0.634888 x = 6.304956
+Their value: 0.000073
+My value: 0.000073
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 82: 
+Inputs: s = -0.172033 x = 2.621823
+Their value: 0.017266
+My value: 0.017266
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 83: 
+Inputs: s = 0.275280 x = 5.695984
+Their value: 0.000857
+My value: 0.000857
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 84: 
+Inputs: s = 0.218212 x = 0.347116
+Their value: 0.754846
+My value: 0.754846
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 85: 
+Inputs: s = -0.343251 x = 0.627158
+Their value: 0.419571
+My value: 0.419571
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 86: 
+Inputs: s = 0.841829 x = 6.740438
+Their value: 0.000856
+My value: 0.000856
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 87: 
+Inputs: s = -0.485469 x = 8.684757
+Their value: 0.000006
+My value: 0.000006
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 88: 
+Inputs: s = -0.479006 x = 8.532441
+Their value: 0.000007
+My value: 0.000007
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 89: 
+Inputs: s = -0.812520 x = 2.877384
+Their value: 0.005439
+My value: 0.005439
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 90: 
+Inputs: s = 0.153381 x = 6.111276
+Their value: 0.000427
+My value: 0.000427
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 91: 
+Inputs: s = -0.422444 x = 9.593211
+Their value: 0.000002
+My value: 0.000002
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 92: 
+Inputs: s = -0.340716 x = 1.775767
+Their value: 0.049660
+My value: 0.049660
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 93: 
+Inputs: s = -0.992843 x = 1.189751
+Their value: 0.095092
+My value: 0.095092
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 94: 
+Inputs: s = -0.623598 x = 4.827391
+Their value: 0.000480
+My value: 0.000480
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 95: 
+Inputs: s = 0.837861 x = 9.436497
+Their value: 0.000055
+My value: 0.000055
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 96: 
+Inputs: s = -0.757714 x = 6.764871
+Their value: 0.000032
+My value: 0.000032
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 97: 
+Inputs: s = 0.548547 x = 3.685786
+Their value: 0.012638
+My value: 0.012638
+Difference: 0.000000
+Error: 0.000000
+
+Iteration 98: 
+Inputs: s = 0.723834 x = 5.943051
+Their value: 0.001541
+My value: 0.001541
+Difference: -0.000000
+Error: -0.000000
+
+Iteration 99: 
+Inputs: s = 0.096084 x = 4.203548
+Their value: 0.003450
+My value: 0.003450
+Difference: -0.000000
+Error: -0.000000
+
+The average error is -0.000000
