@@ -1225,22 +1225,15 @@ Goals:
 
 \begin{itemize}
     \item Found a operating system independent function for grabbing file locations.
-    Will talk to Cedric (who is not in today) to add this into mainline code.
     \item Changed occurrences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
 more efficient implementation without separators.
-    \item Looks like the script I wrote works based on its modified file location. 
-    What remains is to have a concrete result to compare it to (currently don't know what to look for).
-    \item Started by reading the Pop 2014 paper.
+    \item Started reading the Pop 2014 paper.
 \end{itemize}
 
 Talked with Dr. Gilchrist further --
 
 \begin{itemize}
-    \item Again, we are working with RFP data rather than fasta data. Seems like all
-    the data I have available to me is for RFP rather than ROC-based.
-    \item With this in mind, stopping work on the ROC model file I have been editing.
-    Nice as reference for future code but continuing to think of outputs in this form
-    detracts from my understanding of what we're doing in the big picture.
+    \item Stopping work on the ROC model file I have been editing for now.
     \item Instead, recall the supplemental material descriptions of what is in the Pop folder
     I have extracted. It will describe better what they get: in particular, look at Codon
     Translation Rates (codon.specific.translation.rates.table.xlsx) for rates.
@@ -1264,89 +1257,30 @@ Talked with Dr. Gilchrist further --
 \labday {July 1, 2016}
 
 \begin{itemize}
-    \item Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future changes to the mainline code doesn't result in bugs. 
-    \begin{itemize}
-        \item Cedric wants me to write this since Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
-that was working the day before.
-        \item Spent about an hour talking to Alan about it and then working independently trying to figure out any potential problems.
-        \item Can't see anything wrong right now, scrapping ideas -- I had
-worked with dynamic array to vector conversion before with no results, after all.
-        \item Note that while I encountered slowdown in an initialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
-    \end{itemize}
-    \item Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
-for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
-and on future testthat runs see if the output matches (specifically the Loglikelihood).
-    \begin{itemize}
-        \item My first iteration of this file is a fairly absurd but quick run: Use a seed to generate a file that contains the output of an MCMC loop.
-        \item Then use that same seed on subsequent runs of the testthat file to literally compare
-the outputs of a newly-generated MCMC loop and the one that had been created today.
-        \item Since it is the same seed being used, it should be an exact match.
-        \item Runs in about 3 seconds for ROC.
-    \end{itemize}
+    \item Switching to unit testing with testMCMCROC by Cedric request, as Alan had changed dynamic arrays to vectors and this will ease debugging.
+    \item Note that I had tested them before; inconclusive results.
+    \item While I encountered slowdown in an initialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
+    \item Unit Testing for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
+and on future testthat runs see if the output matches (specifically the Loglikelihood). Runs in about 3 seconds for ROC.
     \item Minor edits to the R-side documentation files, ran document() again. 
     \item During this mess I commented to Dr. Gilchrist on my progress on writing the PA unit testing.
-    \item Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep /\sep test\sep MCMC\sep ROC\sep .\sep R. See below as well.
+    \item Finished file, works currently by literally comparing output files. Future implementation idea: Implement it comparing averaged logPosterior vector versus hard-coded value.
 \end{itemize}
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-# TODO: This file unit checks an entire outputting format, checking not only logLikelihood but also
-# other variables (good, if errors occur there) 
-# in a set formatted corpus (bad, this means future edits to the printing will result in testthat errors!)
-#
-# If no tampering is done to the correct variables,
-# a correct loglikelihood with the same seed should be equal, disregarding other variables.
-#
-# Thus, in the future, simply take the logLikelihood value and hard code it here, and compare via
-# mcmc\$getLogLikelihoodTrace(), which returns a vector. Get the average of these values
-# and compare it with the hard-coded average of logLikelihoodTrace.
-# This is currently not implemented due to laziness and mild helpfulness, and it is currently working.
-# Once it breaks, it should be converted.
-\end{lstlisting}
-\end{minipage}
 
 \labday {July 5, 2016}
 
 \begin{itemize}
-    \item Started writing a hotfix to Travis check failing when the newest bit of code is pushed to Cedric's main repository for RibModelFramework due to the new MCMCROC.R file testing MCMC functionality.
-    \begin{itemize}
-        \item Increasingly unsure of where this error is: directory and file traversal had worked before with unit testing (via testGenome.R).
-        \item Changing the format of the test to only check the log likelihoods does not seem to help either, so it may not be a file issue at all.
-        \item Fully confirmed it was a file issue by adding test\_that checks on if the files existed (they do).
-        \item Now thinking the Travis server may produce different seeds.
-        \item Will have to discuss a way to test this with Cedric further -- the last 13 lines of output that Travis produces for error checking does not change due to how testthat formats its output.
-    \end{itemize}
+    \item Trying to debug Travis failure with testMCMCROC.R.
+    \item Changed test so it checks the last log likelihood versus a hardcoded value only, so it wasn't a file issue.
+    \item Suspect it may be due to different seeds being produced.
 \end{itemize}
 
 \labday {July 6, 2016}
 
 \begin{itemize}
-    \item To reiterate and confirm the error in the Travis check failing, I have now uploaded the raw output files to this directory -- They are named July5Travis.txt and July5Local.txt.
-    \item To put it shortly, the local build passes while the Travis server build does not.
-    \item Presents a significant problem -- will have to either deal with non-exact comparisons between outputs in future unit testing.
-    \item Returning to this problem -- Cedric recommended I temporarily remove the other testthat functions and then ran solely testMCMCROC.R.
-    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log:
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-> library(testthat)
-> test_check("ribModel")
-Loading required package: ribModel
-Loading required package: Rcpp
-ERROR: Log likelihood is NaN, exiting at iteration 10
-[1] 0
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) --
-`knownLogLikelihood` not equal to `testLogLikelihood`.
-1/1 mismatches
-[1] -825482 - 0 == -825482
-testthat results ================================================================
-OK: 3 SKIPPED: 0 FAILED: 1
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) 
-Error: testthat unit tests failed
-\end{lstlisting}
-\end{minipage}
-    
-    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
+    \item Further attempts to debug testMCMCROC.R on Travis failing, while locally it passed.
+    \item Testing just the one file shows the log likelihood returns NaN on iteration 10.
+    \item While brainstorming ways to fix, started writing Pop processing and testing.
     \begin{itemize}
         \item First, need to convert the format of Pop raw data to something that can be read by our program.
         \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
@@ -1355,25 +1289,15 @@ Error: testthat unit tests failed
         \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
     \end{itemize}
     \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
-    \item Talk some more about the MCMC unit test problem, if needed.
-    I should try to get some results in terms of asking Cedric and checking Gauley's run first.
 \end{itemize}
 
 \labday {July 7, 2016}
 
 \begin{itemize}
     \item Clarified that the genomes are the same as in previous data sets, and can be cross-referenced to get codon information.
-    \item Continued trying to debug the MCMC unit test:
-    \begin{itemize}
-        \item Running and checking the package on gauley reveals that the Travis check error also applied. Log saved to notes as July7Gauley.txt.
-        \item Re-checking the package locally also shows same error.
-        Began re-converting code to when I had originally not seen the error.
-        \item After a bit of cross-referencing and remembering that I fetched files today, I have concluded that \textbf{Alan had forgotten to fix his latest pull request to Cedric's repo}. 
-        \item The changes to MCMCAlgorithm.cpp and Parameter.cpp that I noticed this morning were from Alan's implementation.
-        \item Before I had fetched these changes, my local machine was working fine since it still had the older implementation.
-        \item Alan had tried to change dynamic arrays to vectors and had warned us that his then-implementation of vectors had created NaN bugs, but both Cedric and I thought we had his latest changes where he said he had fixed these bugs.
-        \item Temporarily removed the MCMC unit test to allow Cedric a slightly cleaner merge of the two pull requests between me and Alan, who should be pushing vector fixes now.
-    \end{itemize}
+    \item Continued trying to debug the MCMC unit test.
+    \item In summary, it was caused by merge conflicts with Alan's work changing dynamic arrays to vectors (causing NaN bugs), which was not debugged before being accepted into the main repo -- pulling from the main repo had caused the bugs.
+    \item My local machine had not pulled from the main, bugged repo, so it ran fine, but other sources had to be pulled.
     \item Formally counted the sum of the FPs; confirmed that they equaled the amount recorded.
     \item Now that Cedric has re-merged all the branches and everything works on Travis, re-added testMCMCROC, which should also work on everything (and, in the future, avoid bad pull requests and prevent this from happening ever again).
     \item Began looking over folders to cross-reference genome positions; will continue tomorrow.
@@ -1382,55 +1306,9 @@ Error: testthat unit tests failed
 \labday {July 8, 2016}
 
 \begin{itemize}
-    \item Latest attempt to re-add testMCMCROC still fails. 
-    Relevant log snippet is posted below.
-    
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Running the tests in 'tests/testthat.R' failed.
-Last 13 lines of output:
-MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
-ERROR: Cannot set steps - value must be smaller than samples times thining (maxIterations)
-MCMCAlgorithm get/setStepsToAdapt --- Pass
-MCMCAlgorithm getLogLikelihoodTrace --- Pass
-File opened
-EOF reached
-Error in file(file, if (append) "a" else "w") : 
-cannot open the connection
-Calls: test_check ... force -> source_file -> eval -> eval -> sink -> file
-In addition: There were 16 warnings (use warnings() to see them)
-testthat results ================================================================
-OK: 72 SKIPPED: 0 FAILED: 0
-\end{lstlisting}
-\end{minipage}
-
-    \item The error that is explicitly listed is intentionally caused as part of unit testing, so it is not a problem.
-    \item Once again running on Mac succeeds.
-    \item Suspect that it may be an issue to writing (sinking) to a file that does not exist.
-    \item Running on Gauley replicated the \enquote{Last 13 lines of output}.
-    \item Upon removing the output redirection, the package ran locally and on Travis successfully.
-    \item Oddly, it did \textbf{not} run on Gauley, resulting in the second log snippet below.
-    
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Running the tests in 'tests/testthat.R' failed.
-Last 13 lines of output:
-  
-Utility my_print --- Pass
-Testing my_printError, no argument.
-Testing my_printError, one argument: 0.
-Testing my_printError, multiple arguments: String, 0, 0.5.
-Utility my_printError --- Pass
-testthat results ================================================================
-OK: 121 SKIPPED: 0 FAILED: 1
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#84) 
-
-Error: testthat unit tests failed
-In addition: There were 14 warnings (use warnings() to see them)
-Execution halted
-\end{lstlisting}
-\end{minipage}
-    
+    \item Latest attempt to re-add testMCMCROC still fails.
+    \item The first issue was that it was trying to write (sink) to a file that did not exist -- removing output redirection let the package run locally and on Travis successfully.
+    \item Does not work currently on Gauley due to (as discovered later) Gauley using a buggy version of R -- logLikelihood is calculated differently despite using the same seed. 
     \item It also created a new NOTE; on my local machine, the installed package size is OK.
     
 \noindent\begin{minipage}{\linewidth}
@@ -1443,13 +1321,6 @@ libs  20.0Mb
 \end{minipage}
     
     \item Travis also produces a package size total of 16.9Mb, with a subdirectory \enquote{libs} that is 16.7Mb by itself.
-    \item \sout{While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:}
-
-\begin{verbquote}
-The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\"), \"\n\")"" exited with 0.
-\end{verbquote}
-    
-    \item \sout{Not sure why this occurs; will try to work on the RFP data testing first.}\footnote{Hollis: July 12, 2016 -- In retrospect, this seems to be normal behavior. The R CMD check fail log only displays if it fails, and otherwise this message is displayed by default.\label{fn:TravisError}}
     \item Continued scripting a way to cross-reference existing data with Pop data.
     \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
     \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
@@ -1463,7 +1334,6 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
 \begin {itemize}
     \item One major thing I worked on was setting up R Studio's server version to work properly.
     \item Cedric's version is able to work, mine is not.
-    \item \sout{Seems to be related to the bug with Travis mentioned the previous day.}\footnote{July 12, 2016 (Hollis): See previous footnote \ref{fn:TravisError}.}
     \item Asked Dr. Gilchrist about the RFP data: It was data he had processed before.
     \item It is now recorded in process\sep .\sep rfp\sep .\sep counts\sep .\sep nb\sep \_\sep 07\sep .\sep 11\sep .\sep 16\sep .\sep pdf, under gilchrist\sep -\sep notes\sep /\sep Pop\sep /\sep rfpSort.
     \item The source code itself, which requires Mathematica (now downloading) is similarly found there.
@@ -1481,11 +1351,7 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
     \item The parallelization did not affect the loglikelihood returned.
     \item Asked Cedric to run it on his computer -- it also works on his computer correctly, like on my local machine.
     \item Still does not work on Gauley with Cedric's admin privileges either.
-    \item Talk with Dr. Gilchrist: Unit Testing should be architecture and mostly version-independent. 
-    So, maybe rework the code so that the script works.
-    \item Going to reexamine the data set that is put in and perhaps change it.
-    \item Trying to run the script again without Phi values set, and then without Phi values set and with only half as many entries, still does not change the difference in results between Gauley and locally.
-    \item In retrospect, the Travis message output seems to be the default message for a successful build. Ended up keeping the testMCMCROC.R files, with minor changes.
+    \item Discovered in the future this was an R-version related bug, and it is solved as of June 1, 2017.
     \item Another additional TODO: The R code is currently outdated in that it asks for Parameter as an argument when this is unneeded (Model holds Parameter); change code, minor change.
     \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readPA function demanded.
 \end{itemize}
@@ -2402,6 +2268,39 @@ Agenda for May 22: Planning for tomorrow's simulation runs to test the RFP model
     \item Currently, Gauley still doesn't compile package correctly, but Newton does.
     \item Removed old read/writeRFP functions, fixed documentation around these areas of code, cleaned up testing folder and naming convention (.pa files renamed to standard .csv).
     \item Moved desc folder from RibModelFramework to RibModelDev.
+\end{itemize}
+
+\labday{May 26, 2017}
+
+\begin{itemize}
+    \item Renamed all instances of RFPModel, RFPParameter, and the like to PAModel, PAParameter, etc.
+    \item Added a case for reading in PA data: If a codon count is < 0, it is assumed to be a typo, and 0 is input instead.
+\end{itemize}
+
+\labday{May 30, 2017}
+\begin{itemize}
+    \item Asked Cedric about the DESCRIPTION file explicitly mentioning openMP -- the other openMP-enabled CRAN module I reference (ARTP2) for our own configure file does not mention it, so he thinks we can ignore it as well. 
+    \item Gilchrist talk:
+    \begin{itemize}
+        \item Likelihood of an RFP count: With a negative codon count value, don't modify the likelihood at all.     
+        \item Rethink the \enquote{If a codon count is < 0, set to 0} idea from the May 26th notes. Instead, if an RFP count value is ambiguous or unknown, it can be set to -1 and ignored \textit{for just that category}. This is what is meant by it not affecting the Likelihood.
+        \item From Dr. Gilchrist's board: if x(arrow) = {x1, x2, x3} and x(arrow prime) = {-1, x2, x3}, then LogLikelihood (xarrow) = summation of the Loglikelihood of each xi (three of them), and LogLikehood (x arrow prime) = summation of the Loglikelihood of each valid xi (two of them). 
+        \item In terms of implementation, store the line after all (keeping the RFP count at -1) but when calculating Likelihood, ignore that -1 (for example, setting it to 0 for Likelihood only).
+        This would also make retaining data better when re-printing out information. 
+        \item Make sure the user can specify which category to use of the multiple we have stored (TODO, but obvious when/where!)
+        \item For the record, \textbf{I have fixed the August 9th bug that was originally in RFP}. ncodons are correctly calculated. This was fixed when I split \enquote{processSequence} in sequenceSummary.cpp with PA's version, which is \enquote{processPa}.
+        \item Also went over the Gauley check bug with Dr. Gilchrist (it was not a compilation error, but a check error; avoid that terminology confusion in notes). It seems the R code checks spitting out a ton of notes is just a \enquote{possible} problem and may not affect the actual package. Recall: There still is some weird random number seeding discrepancy between Gauley and other machines that results in the literal value checking of testMCMCROC to fail. This is fine; remove the check for Gauley-only. 
+        \item Meeting concluded with Dr. Gilchrist updating Gauley's version of R to 3.4. Will re-check the package for bugs.
+    \end{itemize}
+    \item Next step is simulating a genome and compare with Pop's data.
+\end{itemize}
+
+\labday{May 31, 2017}
+
+\begin{itemize}
+    \item Worked at home today; re-checked the package on Gauley and it now works correctly after Dr. Gilchrist updated R (including the old random number testMCMCROC error).
+    \item Over the past few days including today, starting to rewrite my labbook notes -- results can be seen in abridgedNotes.tex. Obsolete or erroneous information is cut out here.
+    \item In that vein, removed some old, cluttering folders -- the old MCMCTestLogs and AlexTesting folders' associated bugs have been long-solved.
 \end{itemize}
 
 \end{document}

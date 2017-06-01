@@ -21,6 +21,5 @@
 
 4. `runLogs`: Various finished runs that are archived.
   1. `7-27-16-JeremyCorrelation` -- Output from running an MCMC script with 20,000 samples, 10 thinning, 10 adaptive width, and using the input files from `JeremyData` with Jeremy's simulated genome.
-  2. `MCMCTestLogs` -- Pure output logs from the MCMC runs that reveal an error in gauley compared to in the Travis CI server and local runs. Essentially, reveals a bug with running MCMC despite using the same seed that results in different output.
-  3. `testRFPModelRunsWithSamples` -- Running a certain number of sampled runs with a non-simulated genome (`rfp.counts.by.codon.and.gene.GSE3789.wt.csv`, I believe) to reveal that there's some non-useful data being outputted, and some debugging may need to be done (hence the dated runs with simulated genomes and comparing them to non-simulated data).
+  2. `testRFPModelRunsWithSamples` -- Running a certain number of sampled runs with a non-simulated genome (`rfp.counts.by.codon.and.gene.GSE3789.wt.csv`, I believe) to reveal that there's some non-useful data being outputted, and some debugging may need to be done (hence the dated runs with simulated genomes and comparing them to non-simulated data).
 

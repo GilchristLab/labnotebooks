@@ -2819,9 +2819,27 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
         \item Make sure the user can specify which category to use of the multiple we have stored (TODO, but obvious when/where!)
         \item For the record, \textbf{I have fixed the August 9th bug that was originally in RFP}. ncodons are correctly calculated. This was fixed when I split \enquote{processSequence} in sequenceSummary.cpp with PA's version, which is \enquote{processPa}.
         \item Also went over the Gauley check bug with Dr. Gilchrist (it was not a compilation error, but a check error; avoid that terminology confusion in notes). It seems the R code checks spitting out a ton of notes is just a \enquote{possible} problem and may not affect the actual package. Recall: There still is some weird random number seeding discrepancy between Gauley and other machines that results in the literal value checking of testMCMCROC to fail. This is fine; remove the check for Gauley-only.
-        \item Meeting concluded with Dr. Gilchrist updating Gauley's version of R to 3.4. Will re-check the passage for bugs.
+        \item Meeting concluded with Dr. Gilchrist updating Gauley's version of R to 3.4. Will re-check the package for bugs.
     \end{itemize}
     \item Next step is simulating a genome and compare with Pop's data.
+\end{itemize}
+
+\labday{May 31, 2017}
+
+\begin{itemize}
+    \item Worked at home today; re-checked the package on Gauley and it now works correctly after Dr. Gilchrist updated R (including the old random number testMCMCROC error).
+    \item Over the past few days including today, starting to rewrite my labbook notes -- results can be seen in abridgedNotes.tex. Obsolete or erroneous information is cut out here.
+    \item In that vein, removed some old, cluttering folders -- the old MCMCTestLogs and AlexTesting folders' associated bugs have been long-solved.
+\end{itemize}
+
+\labday{June 1, 2017}
+
+\begin{itemize}
+    \item Purpose of reorganizing notes over the past few days is to find suitable data for re-simulation of a genome and thne further testing.
+    \item Need to improve documentation further -- right now I am looking at in particular how I had simulated the genome last time.
+    \item Two possible files were used as the origin of all the work done... But they are very similarly named.
+    \item I have a file named rfp.count.data.by.gene.codon.and.position.GSE63789.wt produced by process.rfp.counts.nb\_07.11.16 (as documented in the past), but this is not the same file as the old rfp.counts.by.codon.and.gene.GSE63789.wt file found in RibModelDev.
+    \item Also found, discussed, and solved a minor bug with testMCMCROC.R -- Sepsilon was being set even when there were no expression values. Simple fix by adding an if statement in parameterObject.R.
 \end{itemize}
 
 \end{document}

@@ -19,3 +19,6 @@ Wnotes.pdf
 
 # R stuff
 .Rhistory
+
+# Mac stuff
+*.DS_Store
