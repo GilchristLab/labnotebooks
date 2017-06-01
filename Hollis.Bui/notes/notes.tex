@@ -1289,17 +1289,17 @@ Technically, it is both code and output since it was run with Rstudio (which pri
 
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
-> for (i in 1:61)
-+ {mikeg: 06/30/16 --
-+ codon <- codonList[i]
-+ alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
-+ alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
-+ alpha.ci[i,] <- quantile(alphaTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
-+ lambdaPrimeList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 1, F)
-+ lambdaPrimeTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 1)
-+ lambdaPrime.ci[i,] <- quantile(lambdaPrimeTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
-+ waitingTimes[i] <- alphaList[i] * lambdaPrimeList[i]
-+ }
+for (i in 1:61)
+{
+    codon <- codonList[i]
+    alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
+    alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
+    alpha.ci[i,] <- quantile(alphaTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
+    lambdaPrimeList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 1, F)
+    lambdaPrimeTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 1)
+    lambdaPrime.ci[i,] <- quantile(lambdaPrimeTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
+    waitingTimes[i] <- alphaList[i] * lambdaPrimeList[i]
+}
 Error: could not find valid method
 \end{lstlisting}
 \end{minipage}

@@ -1122,17 +1122,17 @@ Technically, it is both code and output since it was run with Rstudio (which pri
 
 \noindent\begin{minipage}{\linewidth}
 \begin{lstlisting}
-> for (i in 1:61)
-+ {mikeg: 06/30/16 --
-+ codon <- codonList[i]
-+ alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
-+ alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
-+ alpha.ci[i,] <- quantile(alphaTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
-+ lambdaPrimeList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 1, F)
-+ lambdaPrimeTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 1)
-+ lambdaPrime.ci[i,] <- quantile(lambdaPrimeTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
-+ waitingTimes[i] <- alphaList[i] * lambdaPrimeList[i]
-+ }
+for (i in 1:61)
+{
+    codon <- codonList[i]
+    alphaList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 0, F)
+    alphaTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 0)
+    alpha.ci[i,] <- quantile(alphaTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
+    lambdaPrimeList[i] <- parameter$getCodonSpecificPosteriorMean(cat, samples * 0.5, codon, 1, F)
+    lambdaPrimeTrace <- trace$getCodonSpecificParameterTraceByMixtureElementForCodon(1, codon, 1)
+    lambdaPrime.ci[i,] <- quantile(lambdaPrimeTrace[(samples * 0.5):samples], probs = c(0.025,0.975))
+    waitingTimes[i] <- alphaList[i] * lambdaPrimeList[i]
+}
 Error: could not find valid method
 \end{lstlisting}
 \end{minipage}
@@ -1632,7 +1632,6 @@ libs  20.0Mb
     \item After an additional hour and fifteen minutes of work, I got something roughly like I wanted (plotting points, seeing a clear x = Cy correlation where C is an unknown factor).
     \item Unfortunately, I don't quite know how to draw a line that is essentially from the bottom left to the top right of the plot.
     \item Since I need to run it ASAP anyway and it's essentially a rough proof, I am keeping what I have and starting a run now; hopefully I can improve it later.
-    \item Talked to Alan about the new implementation of likelihood / loglikelihood.
     \item Naive run of Jeremy's data was finally started at 4pm.
 \end{itemize}
 

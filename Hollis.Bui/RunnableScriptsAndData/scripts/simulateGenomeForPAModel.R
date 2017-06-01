@@ -12,9 +12,9 @@ numMixtures <- 1
 mixDef <- "allUnique"
 
 geneAssignment <- rep(0, length(genome))
-parameter <- initializeParameterObject(genome, sphi_init, numMixtures, geneAssignment, model= "RFP", split.serine = TRUE,
+parameter <- initializeParameterObject(genome, sphi_init, numMixtures, geneAssignment, model= "PA", split.serine = TRUE,
                                        mixture.definition = mixDef)
-model <- initializeModelObject(parameter, "RFP")
+model <- initializeModelObject(parameter, "PA")
 
 parameter$initMutationSelectionCategories(c(alpha.file), 1, "Alpha")
 parameter$initMutationSelectionCategories(c(lambdaPrime.file), 1, "LambdaPrime")
