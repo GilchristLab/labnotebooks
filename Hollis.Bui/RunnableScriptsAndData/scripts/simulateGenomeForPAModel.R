@@ -2,9 +2,9 @@ library(ribModel)
 rm(list=ls())
 
 genome <- initializeGenomeObject(file.path("..", "JeremyData", "s288c.genome.fasta"))
-alpha.file <- file.path("..", "JeremyData", "RFPAlphaValues.csv")
-lambdaPrime.file <- file.path("..", "JeremyData", "RFPLambdaPrimeValues.csv")
-phi.file <- file.path("..", "JeremyData", "RFPPhiValues.csv")
+alpha.file <- file.path("..", "JeremyData", "JeremyRFPAlphaValues.csv")
+lambdaPrime.file <- file.path("..", "JeremyData", "JeremyRFPLambdaPrimeValues.csv")
+phi.file <- file.path("..", "JeremyData", "JeremyRFPPhiValues.csv")
 genome.out.file <- file.path("..", "HollisSimulatedGenomes", "HollisSimulatedGenomeNew.fasta")
 
 sphi_init <- c(2)

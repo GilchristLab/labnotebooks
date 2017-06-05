@@ -2073,7 +2073,7 @@ Afterwards, moved an old working R script to use this data for testing.
     Decided for the sake of running an overnight simulation to just copy Gabriel's C-side code anyway.
     \item TODO: Debug this. 
     This simulateGenome function is otherwise useless for most people -- they should not have to write C++ code to use it, and without it in R the R-side code would be redundant.
-    \lstinputlisting[language=R, firstline=2, caption="Script to simulate an RFP-based genome."]{../RunnableScriptsAndData/scripts/simulateRFP.R}
+    \lstinputlisting[language=R, firstline=2, caption="Script to simulate an RFP-based genome."]{../RunnableScriptsAndData/scripts/simulateGenomeForPAModel.R}
     \item Running simulateGenome (with RFP) in C++ works fine, but our implementation of writing RFP files does not preserve the number of codons -- this is intended, as only the RFP\_Counts is important.
     Thus, the resulting file -- \enquote{HollisSimulatedGenome.csv} -- has \enquote{NA} for each Codon\_Counts of a Codon.
     \item Chat with Cedric:
@@ -2840,6 +2840,17 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Two possible files were used as the origin of all the work done... But they are very similarly named.
     \item I have a file named rfp.count.data.by.gene.codon.and.position.GSE63789.wt produced by process.rfp.counts.nb\_07.11.16 (as documented in the past), but this is not the same file as the old rfp.counts.by.codon.and.gene.GSE63789.wt file found in RibModelDev.
     \item Also found, discussed, and solved a minor bug with testMCMCROC.R -- Sepsilon was being set even when there were no expression values. Simple fix by adding an if statement in parameterObject.R.
+\end{itemize}
+
+\labday{June 5, 2017}
+
+\begin{itemize}
+    \item TODO note: Switch statements are more efficient in the long-term than super-long else-if chains. Maybe unravel the restart file code and convert it form else ifs to switch/case statements (low immediate priority, but Kirolos had mentioned it was confusing).
+    \item Over the past few days, I've been trying to fix up and reorganize data to create another simulated genome.
+    \item PA format (csv) is GeneID, Position, Codon, RFPCountForCategor(ies).
+    \item rfp.counts... file format is ORF, RFP\_Counts, Codon\_Counts, Codon -- no position.
+    \item rfp.count, the file provided by Dr. Gilchrist's script, is GeneID, Codon, Position, rfp\_count.
+    \item Will re-format the processed code, perhpas run Mathematica to extract more relevant data with Dr. Gilchrist's original code (which I have in pdf format)
 \end{itemize}
 
 \end{document}
