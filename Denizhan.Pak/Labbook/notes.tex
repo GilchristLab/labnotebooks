@@ -314,10 +314,23 @@ do so I first turned the recursion from head to tail then converted the tail rec
 Speed tests revealed positive results threads running 10000 iterations of the function clocked in less than 1 second. This is good news considereing the MCMC should not require more than 5000 iterations per run. In addition I wrote scripts to analyze the log files of the function find where the accurracy was well enough to decrease the number of iterations for future optimization.
 \labday{June 5, 2017 Notes}
 \experiment{Time Breakdown}
+\begin{itemize}
     \item 10 - 11: Read through RFP and ROC code
     \item 11 - 1: Implemented probability of elongation and generalized gamma functions into PANSE Model
     \item 2 - 4: Tested and compiled implemented functions
     \item Total: 5 hours in lab, 1 hour learning, 4 hours working
+\end{itemize}
 \experiment{Testing newly implemented functions}
 Functions seem to work successfully, however there is redundancy in the implementations because they were implemented directly from the RFP write up. There will be many ways to streamline these implementations and condense smaller loops, additionally new data thesees need to implemented which can be filled dynamically to decrease the number of iterations required for a single run such as storing elongation probabilities for specific codon positions so that they do not to be recalulcated.
 Once the rest of the equations have been implemented and tested I will begin this method of optimization
+\labday{June 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12: Reworking implementations for PANSE code
+    \item 1 - 3: Running and Testing PA code
+    \item Total: 5 hours spent working
+\end{itemize}
+\experiment{Reworking Implementation}
+For my hand written pseudo code I had not accounted for the resulting complication of the implementation of the upper incomplete gamma function, there are many reduncancies in the pseudocode that need to be eliminated. To address this issue I reworked and tried to find shortcuts for the equations given
+\experiment{PA Testing}
+Once I hit a point where I did not know how to implement some of the functions in the reworked form I decided to comb thrugh the PA code to check for similarities and find patterns of implementation. While testing I found reading and functional errors in the PA code. I have read through the source code to figure out this problem to no avail. I will use R and Rcpp debugging tools to continue trying to fix this problem
