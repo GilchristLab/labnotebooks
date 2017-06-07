@@ -2850,7 +2850,29 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item PA format (csv) is GeneID, Position, Codon, RFPCountForCategor(ies).
     \item rfp.counts... file format is ORF, RFP\_Counts, Codon\_Counts, Codon -- no position.
     \item rfp.count, the file provided by Dr. Gilchrist's script, is GeneID, Codon, Position, rfp\_count.
-    \item Will re-format the processed code, perhpas run Mathematica to extract more relevant data with Dr. Gilchrist's original code (which I have in pdf format)
+    \item Will re-format the processed code, perhaps run Mathematica to extract more relevant data with Dr. Gilchrist's original code (which I have in pdf format)
+\end{itemize}
+
+\labday{June 6, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:00 - 1:30: Talked to Dr. Gilchrist to resolve notes feedback. Received the Mathematica code specified prior.
+    \item 1:30 - 4:00: Going to resolve the feedback about codon counts when read in as a non-natural number (see May 30 notes). Required changing multiple files as I changed a data type from unsigned to int. Also started editing functions to allow for RFPCategoryIndex to be accounted (i.e. long, short) with default just long ( = 0).
+    \item 4:00 - 6:00: Started thinking about how to implement RFP count category based calculations, i.e. long vs short (see May 30 notes as well).
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Renamed \enquote{RFPObserved} to \enquote{RFPValue} in the PANSE and PA model and parameter.cpp files. I had discussed this with Denizhan; we think that since we observe RFP on a per-position basis, and the RFPObserved variable actually stored the sum of the RFP values (so on a per-codon basis), this would be more accurate. Note that in my C++ code it was already renamed RFPObserved internally, just not externally in R as well.
+    \item Denizhan will edit the PANSE stuff himself while I edited the other files.
+    \item Nicely, the logLikelihood calculations take this RFPValue, a summation, so I don't have to directly change the calculations. Instead, all I had to do was slightly edit the summation of RFP values per-codon.
+    \item Renamed \enquote{categoryIndex} to \enquote{RFPCategoryIndex} to avoid confusion with AlphaPrime, LambdaPrime, etc.
+    \item I talked with Cedric about how to make it so that a user can specify which RFP category to use when they are doing calculations, i.e. logLikelihood.
+    \item Recall: I extended the RFP input (now named PA) so that it could include multiple RFP count categories like short and long rather than just long (the former default).
+    \item Cedric and I think that since a user would only run analysis on one column of RFP data at a time (NOTE: also recall that if a researcher wanted to aggregate RFP data somehow they would do that themselves and just make another RFP category, like long+short), we can have this initialized when a model is initialized.
+    \item In terms of implementation, this is partly R-side: edited initializeModelObject so that there is another optional argument, defaulted to 1, for RFP category that is used when the model is specified as PA or PANSE.
+    \item TODO: Now modify it in C++ (need to do this before package compiles again due to mass edits). As a comparison, look at ROCModel.h and how the two optional booleans were implemented in ROCModel.cpp. 
 \end{itemize}
 
 \end{document}

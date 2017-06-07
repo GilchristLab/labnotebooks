@@ -359,6 +359,23 @@
 	\item Condensed initParameterSet vector assignment loop using iterators and the push\_back method but now I'm noticing a segFault in runFONSEmodel.R which is strange because I wasn't getting that before. Will have to look into that next time by re-cloning the RibModelFramework repo and seeing if re-installing that fixes the issue or not.
 \end{itemize}
 
+%-----------------------------------------
+
+\labday{Tuesday, June 6 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Forked the RibModelFramework repo from Cedric's github to my own so that I can push without fear of losing work that I have done.
+	\item initFONSEParameterSet has three for loops that, i believe, can be condensed into one. Going to try and do that.
+	\item Successfully did the optimization and tested it.
+	\item learned a little more about ostringstreams thanks to Hollis. 
+	\item Goal for next time: Continue going through old code starting at initAllTraces.
+\end{itemize}
+
 %----------------------------------------------------------------------------------------
 
 \printbibliography
