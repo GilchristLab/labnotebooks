@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "mygamma.h"
+#include <pthread.h>
 #include <gsl/gsl_sf_gamma.h>
+
+#include "mygamma.h"
 
 /*Description: Creates a log file with cuurrent time and date as name*/
 FILE *makeLog(){
@@ -15,11 +17,12 @@ FILE *makeLog(){
     date = (struct tm *) malloc(sizeof(struct tm));
     now = time(NULL);
     date = localtime(&now);
-    sprintf(buf, "Log.%i.%i.%i-%i:%i", date->tm_mday,
+    sprintf(buf, "Log.%i.%i.%i-%i:%i:%i", date->tm_mday,
                                        date->tm_mon + 1,
                                        date->tm_year + 1900,
                                        date->tm_hour,
-                                       date->tm_min);
+                                       date->tm_min,
+                                       date->tm_sec);
     fname = buf;
     return fopen(buf, "w");
 }
@@ -29,7 +32,7 @@ double compare(double theirs, double mine, FILE *log, int iteration, double s, d
 
     accurracy = (mine - theirs) / theirs;
     if(log != NULL){
-        fprintf(log, "Iteration %i: \nInputs: s = %f x = %f\nTheir value: %f\nMy value: %f\nDifference: %f\nError: %f\n\n",
+        fprintf(log, "Iteration %i: \nInputs: s = %.20f x = %.20f\nTheir value: %.20f\nMy value: %.20f\nDifference: %.20f\nError: %.20f\n\n",
                 iteration, s, x, theirs, mine, mine - theirs, accurracy);
     }
         
@@ -38,7 +41,7 @@ double compare(double theirs, double mine, FILE *log, int iteration, double s, d
 
 int main(int argc, char **argv){
     FILE *log;
-    int size, seed, i;
+    int size, seed, i, j;
     double s, x, sum, acc;
 
     if(argc > 5 || (argc != 1 && argc % 2 == 0)){
@@ -60,7 +63,7 @@ int main(int argc, char **argv){
         }
     }
 
-    if(size < 1) size = 200;
+    if(size < 1) size = 100;
     if(seed == -1) seed = time(NULL);
 
     sum = 0;
@@ -68,15 +71,17 @@ int main(int argc, char **argv){
     log = makeLog();
     fprintf(log, "The sample size was %i, The seed was %i\n", size, seed);
 
-    for(i = 0; i < size; i++){
+    for(i = j = 0; i < size; i++){
         do{
-            x = (double)rand()/RAND_MAX + rand() % 10;
+            x = (double)rand()/RAND_MAX;
             s = (double)rand()/RAND_MAX*2.0-1.0;
-        } while(x == 0);
+        } while(x <= s);
         acc = compare(gsl_sf_gamma_inc(s, x), gamma_inc(s, x), log, i, s, x);
+        if(acc < 0) acc = 0.0 - acc;
         sum += acc;
     }
 
     acc = sum / size;
-    fprintf(log, "The average error is %f\n", acc); 
+    fprintf(log, "\nThe average error is %.20f\n", acc); 
+    printf("\nThe average error is %.20f\n", acc); 
 }
