@@ -2875,4 +2875,24 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item TODO: Now modify it in C++ (need to do this before package compiles again due to mass edits). As a comparison, look at ROCModel.h and how the two optional booleans were implemented in ROCModel.cpp. 
 \end{itemize}
 
+\labday{June 7, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 12:30 -- Helped Denizhan a bit with looking at R code before lunch.
+    \item 1:30 - 5:00 -- Looked at R code further; finished writing rfp.counts.category in C++, finished adding support for different RFP count category choices, resolved non-natural number codon count conversion to -1.
+    \item 5:00 - 6:00 -- While waiting for code to compile + pass checks, fixed various typos and minor integer to unsigned bugs.
+\end{itemize}
+
+\experiment{PA model in R}
+\begin{itemize}
+    \item Denizhan is experiencing some problem with finding a function defined in the Genome class when programming in R.
+    \item Loading my own script, I cannot even acquire the Genome class in R now. TODO: Ask Cedric.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Renamed \enquote{RFPCategoryIndex} to \enquote{RFPCountColumn} in the C++ code, since Cedric advocated that name as a slight improvement in clarity.
+\end{itemize}
+
 \end{document}
