@@ -2895,4 +2895,19 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Renamed \enquote{RFPCategoryIndex} to \enquote{RFPCountColumn} in the C++ code, since Cedric advocated that name as a slight improvement in clarity.
 \end{itemize}
 
+\labday{June 8, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:30 - 4:30 -- Talked with Cedric about various questions in the code; notably, fixed the R script to initializeGenomeObject as documented in days prior (still don't know how to create a new Genome object, but that's a different issue of us not knowing the initialization command).
+    \item 4:30 - 6:00 -- Cleaned up files, fixed some of the bugs discussed.
+\end{itemize}
+
+\experiment{TODOs}
+\begin{itemize}
+    \item The virtual function keywords in the child header files of the base header files are redundant. They were presumably inserted for programmer convenience in identifying which functions were sourced from a base header file. TODO: Remove this, add comments instead. Might save on memory too.
+    \item The \enquote{explicit} keyword that is occasionally used in the header file should probably follow common-sense convention. So whenever a C++ programmer could use a copy-initializer, don't prepend \enquote{explicit}; this means that the changed PAModel initialization shouldn't have \enquote{explicit} anymore.
+    \item Need to remember to push edits when I get home.
+\end{itemize}
+
 \end{document}
