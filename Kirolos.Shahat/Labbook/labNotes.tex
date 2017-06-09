@@ -387,10 +387,31 @@
 \experiment{Current Progress and Notes}
 \begin{itemize}
 	\item \$ is calling a method of an R object
-	\item dM = mutation, dOmega = selection with respect to FONSE
+	\item dM = mutation, dOmega = selection. This is with respect to FONSE
 	\item Incase I forget: One future goal is fix some of the read restart file methods into switch statements rather than if else. It is currently very unclean.
 	\item Goal for next time: Continue going through old code starting at the CSP functions
 
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Friday, June 9 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item The propose structures and functions are actually the 'predictions' that we are making, I believe.
+	\item Was looking through proposeCodonSpecificParameter and found a randNorm method. I found it in parameter.cpp but it was calling rnorm which I'm not sure I know what that is. Couldn't find it anywhere.  Will have to look into it soon.
+	\item So far what I'm seeing from the propose function is that it:
+	\begin{enumerate}
+		\item Loops for the total number of groupList, which I think is just the total number of different amino acids there are.
+		\item Then we get the number of codons by subtracting the start from the end location of the amino acids, because the cost scales with distance or how far the production has gone.
+		\item There's a vector called iidProposed, Identically independant distribution. This is basically saying that the underlying distribution is the same for all of them but it uses the randNorm function which seems to be randomly generating a different distribution for each iteration. So I'm assuming that it's constant in the sense that's it's across the board random. This is done for the total number of categories( mutation + selection ) all multiplied by the number of codons.
+	\end{enumerate}
+	\item Next time: Continue in the proposeCodon... and start at the covaryingNums variable declaration.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
