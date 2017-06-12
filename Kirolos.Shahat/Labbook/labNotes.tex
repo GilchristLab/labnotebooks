@@ -414,6 +414,24 @@
 	\item Next time: Continue in the proposeCodon... and start at the covaryingNums variable declaration.
 \end{itemize}
 
+%-----------------------------------------
+
+\labday{Monday, June 12 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code, starting at proposeCodonSpecificParameter in FONSEParameter.cpp
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item As stated previously, the initial for loop is initializing the iidProposed to a random distribution for each element between 0 and 1 for numCodons*(mutation+selection categories) elements total.
+	\item There were an un-optimized double for-loop chain that could be condensed in the proposeCodon... function and I optimized it and pushed it into my repo. Hoping to do a pull request soon to update the main branch.
+	\item I'm not super sure what the covarianceMatrix stuff is used for with respect to FONSE. Whenever I talk to Dr. Gilchrist next I want to ask him about that.
+	\item Looking at the eta analysis paper I believe that dM =\begin{math} \Delta \eta \end{math}, while dOmega = \begin{math}\Delta \omega \end{math} which I believe have already been calculated and are stored within the currentCodonSpecificParameter[dM or dOmega].
+	\item Based off of that last note: the covariance matrix is the summation term. The only thing I'm getting confused with is that I don't see any kind of difference, they are all sums. I'm assuming that it is done somewhere behind the scenes of what I currently am looking at. Should definitely make sure that I am deciphering this correctly but I think I'm getting close to a breakthrough of understanding the current code at least.
+	\item I asked Hollis a little bit about the dM variable and he says that he doesn't believe that it is the mutation.
+	\item Goal for next time: Try to continue comparing some of these methods with the equations in the eta analysis paper and continue to get an understanding of what is going on and try to ask Dr. Gilchrist for advice on what I can.
+\end{itemize}
 %----------------------------------------------------------------------------------------
 
 \printbibliography
