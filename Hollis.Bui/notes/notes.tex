@@ -2907,7 +2907,18 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \begin{itemize}
     \item The virtual function keywords in the child header files of the base header files are redundant. They were presumably inserted for programmer convenience in identifying which functions were sourced from a base header file. TODO: Remove this, add comments instead. Might save on memory too.
     \item The \enquote{explicit} keyword that is occasionally used in the header file should probably follow common-sense convention. So whenever a C++ programmer could use a copy-initializer, don't prepend \enquote{explicit}; this means that the changed PAModel initialization shouldn't have \enquote{explicit} anymore.
+    \item I'm still unsure of how to handle inheritance in sharing variables between just two models (PA, PANSE): the RFPCountColumn variable should be accessible in both, I think, instead of each different model defining the same thing.
     \item Need to remember to push edits when I get home.
+\end{itemize}
+
+\labday{June 9, 2017}
+
+\begin{itemize}
+    \item Pushed changes from yesterday (forgot to when I got home).
+    \item General note to self from yesterday's discussion: default arguments in C++ are \textbf{never} passed into R. So I have to pass these arguments into R every time (or create default arguments in R functions).
+    \item One idea re: sharing variables of PA, PANSE is to actually make PANSE inherit PA's functions and variables. This would make the virtual keywords in PA actually useful since it could be a full extension of PA. This would make the inheritancy Model -> PA -> PANSE.
+    \item Discussed this with Denizhan. Perhaps once PANSE is completely finished and tested we can actually switch inheritance to PANSE -> PA, but for now it's the other way around for convenience.
+    \item Spent an hour and a half fixing a problem with my IDE.
 \end{itemize}
 
 \end{document}
