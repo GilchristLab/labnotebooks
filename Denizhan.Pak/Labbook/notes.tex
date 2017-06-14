@@ -382,3 +382,14 @@ To get a better understanding of the use of the newly written functions I worked
 Tested PA model to better understand interaction between layers of the complete MCMC
 \experiment{Rewrite implementation}
 The implementations from the previous day showed errors and prevented merging. I rewrote the functions and checked their compilation and tested them. Further accurracy testing is still required and will be done. However the working functions have been merged. 
+\labday{June 14, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 11:30: Testing implemented probability functions
+    \item 12 - 3: Developing likelihood functions
+    \item Total: Hours spent working
+\end{itemize}
+\experiment{Testing}
+Preliminary tests show that the probability functions are working as expected even with optimization. Since further optimization is still needed further testing will follow.
+\experiment{Developing Likelihood Functions}
+The interface into the model from the MCMC uses the calculated likelihood rather than the probability. The functions as defined in the write up refer to the probability. I am working on converting them to likelihood functions. I have made headway but am not finished as of yet.
