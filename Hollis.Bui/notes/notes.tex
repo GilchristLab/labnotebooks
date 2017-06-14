@@ -2937,7 +2937,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 
 \labday{June 13, 2017}
 
-\experiment[Time Breakdown}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 10:30 - 1:00 -- Set up a testing branch for Rib Model Framework to debug simulateGenome() further.
     \item 2:30 - 3:00 -- Continued looking through notes. Minor style edits corrected (found them while looking through files debugging).
@@ -2961,6 +2961,26 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item This should be much easier than what I was preparing to do originally; looks like my script was over-complicated.
     \item The phi data that is read-in is mostly for ROC, not for RFP-based data. Artifact of a messy RibModelDev directory.
     \item Still, after comparing rates, we should compare the Psi.g rates from our model with ROC's log phi values (ask Cedric where to get these values; we should already have them for Baker's Yeast).
+\end{itemize}
+
+\labday{June 14, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:00 - 12:00 -- Renamed functions as discussed yesterday.
+    \item 3:00 - 6:00 -- Asked Cedric about the Phi data. He directed me to the 2015 paper's supplementary materials. Spent some time looking over the files while waiting for automated checking on renames to pass, fixing merge conflict.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Now, read/writePA is renamed read/writeRFPData.
+    \item For R-side scriping purposes, getRFPValue is now renamed, more accurately, getSumRFPCountForCodon.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item When installing the package without building it (such as when running it in R), the cleanup file is not executed, resulting in a file and a folder that should be removed. May have to think of a way to run cleanup when installing the package.
+    \item Denizhan's latest labnotebook commit created symbolic link errors when doing any git commands. TODO: Ask him about these links.
 \end{itemize}
 
 \end{document}
