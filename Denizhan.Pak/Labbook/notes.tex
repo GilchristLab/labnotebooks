@@ -20,12 +20,6 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-%\textwidth=16.5cm
-%mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
-% Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
-% was used as a bandage on an abundance of overfull hboxes. 
-% June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
-
 % For verbatim quotes
 \lstnewenvironment{verbquote}[1][]
   {\lstset{columns=fullflexible,
@@ -393,3 +387,15 @@ The implementations from the previous day showed errors and prevented merging. I
 Preliminary tests show that the probability functions are working as expected even with optimization. Since further optimization is still needed further testing will follow.
 \experiment{Developing Likelihood Functions}
 The interface into the model from the MCMC uses the calculated likelihood rather than the probability. The functions as defined in the write up refer to the probability. I am working on converting them to likelihood functions. I have made headway but am not finished as of yet.
+\labday{June 19, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:00 - 2:00: Testing Code
+    \item 3:30 - 5: Reading documentation
+    \item Total: 4.5 Hours in lab, 1.5 learning 3 working
+\end{itemize}
+\experiment{Testing}
+Have continued testing internal functions also worked on testing PA implementation and simulation with inputs. However need to talk to Dr. Gilchrist about acquiring datasets with Pausing Errors to get a better approximation of data.
+\experiment{Reading}
+Read through documentation of PA and PANSE Models, questions about the difference between use of "likelihood" and "probability" have surfaced, will ask these of Dr.Gilchrist when available.
+
