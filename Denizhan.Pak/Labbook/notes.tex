@@ -398,4 +398,15 @@ The interface into the model from the MCMC uses the calculated likelihood rather
 Have continued testing internal functions also worked on testing PA implementation and simulation with inputs. However need to talk to Dr. Gilchrist about acquiring datasets with Pausing Errors to get a better approximation of data.
 \experiment{Reading}
 Read through documentation of PA and PANSE Models, questions about the difference between use of "likelihood" and "probability" have surfaced, will ask these of Dr.Gilchrist when available.
+\labday{June 20, 2017 Notes}
+\begin{itemize}
+    \item 11 - 12: Reading and Research
+    \item 12 - 3: Optimization
+    \item Total: 4 Hours in lab 1 hour learning 3 hours working
+\end{itemize}
+\experiment{Research Optimization}
+While trying to understand the underlying implementation of the Model's interaction with the Genome object better, I started to comb through code related to the genome object. I then ended up looking at the code for the CodonTable object. There were a long series of if else statements, remembering a conversation I had earlier with Hollis on this topic, I did some reseach on efficiency, finding that switch statements can be optimized more easily by a compiler than if else statements, if the
+cases are at regular short intervals as they can be stored as jump tables.
+\experiment{CodonTable Optimization}
+I changed the implementation from layered if else statements to switch statements, I then worked on debugging he new implementation and testing it. I have committed and pushed the changes to my local repository before merging because further testing using actually genomic information is stll needed.
 
