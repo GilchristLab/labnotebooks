@@ -2983,4 +2983,34 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Denizhan's latest labnotebook commit created symbolic link errors when doing any git commands. TODO: Ask him about these links.
 \end{itemize}
 
+\labday{June 19, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:30 - 5:00 -- Discussed with Denizhan about some questions he had about genome simulation, R scripting, and the symbolic link problem. Looked over misc. notes about R scripting myself to get read to write the script.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item From the last time I talked with Dr. Gilchrist, I mentioned to him the bugs I had with simulating a genome for the PA model, and he suggested it might have because we had changed the structure of the read-in function to account for per-position and additional categories, while the simulation, unedited, only took the sum RFP count. While looking over the simulation functions with Denizhan, I confirmed this was indeed the cause of the bugs.
+    \item From rfp.model.pdf, simulating a genome does indeed only simulate the sum of the RFP count without worrying about position, so the current function is probably fine. Instead, I have to think of a way to extract this data and read it back in when running the MCMC.
+    \item The same document also defines how to simulate a genome for PANSE, which does need positions -- Denizhan and I will have to figure out how to code this later. For now, I suggested to him to ask Dr. Gilchrist if he had any data on-hand to easily test PANSE's new calculations, similar to what I'm doing with Pop's data and PA.
+    \item For fixing the simulation bug with the PA model, I am currently thinking of simply rewriting (aka copying) the old readRFP function from when it used the bugged calculations with number of codons. This function should be easier to change and use with just the sum of the RFP counts, rather than per-position codon counts.
+\end{itemize}
+
+\labday{June 21, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11:00 -- Fixed dumb git bug, rewrote notes from Monday.
+\end{itemize}
+
+\experiment{Misc Notes}
+\begin{itemize}
+    \item I spent an hour and a half trying to fix a bug with github and merges. Apparently, Denizhan's symbolic links had a tangible consequence -- because I pulled a version that had the symbolic link error, git would complain continuously that there were too many layers of symbolic links.
+    \item This basically resulted in a hidden change to my local version of the labbook directory that I could not overwrite but would be detected with trying to merge to the current version of the labbook repo on git that Denizhan later updated to fix the symbolic link error.
+    \item Thus, I had a merge conflict that could not be resolved; I fixed this by deleting and re-cloning the labbook repo, but I accidentally lost the notes from the past two days. I rewrote these notes and pushed them.
+    \item On a different note, it seems like I need to run the pdflatex command twice on my .tex files in this repo to get a working table of contents. Not sure why it lists a error with finding a latex function definition when I run the command once, but doesn't on the second time.
+\end{itemize}
+
 \end{document}

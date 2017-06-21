@@ -1722,7 +1722,7 @@ libs  20.0Mb
     Decided for the sake of running an overnight simulation to just copy Gabriel's C-side code anyway.
     \item TODO: Debug this. 
     This simulateGenome function is otherwise useless for most people -- they should not have to write C++ code to use it, and without it in R the R-side code would be redundant.
-    \lstinputlisting[language=R, firstline=2, caption="Script to simulate an RFP-based genome."]{../RunnableScriptsAndData/scripts/simulateRFP.R}
+    \lstinputlisting[language=R, firstline=2, caption="Script to simulate an RFP-based genome."]{../RunnableScriptsAndData/scripts/simulateGenomeForPAModel.R}
     \item Running simulateGenome (with RFP) in C++ works fine, but our implementation of writing RFP files does not preserve the number of codons -- this is intended, as only the RFP\_Counts is important.
     Thus, the resulting file -- \enquote{HollisSimulatedGenome.csv} -- has \enquote{NA} for each Codon\_Counts of a Codon.
     \item Chat with Cedric:
