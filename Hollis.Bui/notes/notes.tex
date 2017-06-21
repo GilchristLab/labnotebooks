@@ -2992,7 +2992,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 
 \experiment{RFP Structure}
 \begin{itemize}
-    \item From the last time I talked with Dr. Gilchrist, I mentioned to him the bugs I had with simulating a genome for the PA model, and he suggested it might have because we had changed the structure of the read-in function to account for per-position and additional categories, while the simulation, unedited, only took the sum RFP count. While looking over the simulation functions with Denizhan, I confirmed this was indeed the cause of the bugs.
+    \item From the last time I talked with Dr. Gilchrist, I mentioned to him the bugs I had with simulating a genome for the PA model, and he suggested it might have been because we had changed the structure of the read-in function to account for per-position and additional categories, while the simulation function, unedited, only calculated the sum RFP count. While looking over the simulation functions with Denizhan, I confirmed this was indeed the cause of the bugs.
     \item From rfp.model.pdf, simulating a genome does indeed only simulate the sum of the RFP count without worrying about position, so the current function is probably fine. Instead, I have to think of a way to extract this data and read it back in when running the MCMC.
     \item The same document also defines how to simulate a genome for PANSE, which does need positions -- Denizhan and I will have to figure out how to code this later. For now, I suggested to him to ask Dr. Gilchrist if he had any data on-hand to easily test PANSE's new calculations, similar to what I'm doing with Pop's data and PA.
     \item For fixing the simulation bug with the PA model, I am currently thinking of simply rewriting (aka copying) the old readRFP function from when it used the bugged calculations with number of codons. This function should be easier to change and use with just the sum of the RFP counts, rather than per-position codon counts.
@@ -3003,14 +3003,26 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 9:30 - 11:00 -- Fixed dumb git bug, rewrote notes from Monday.
+    \item 11:00 - 1:00 -- Found and squashed some minor typing bugs and inconsistencies; typos. Tasked Denizhan with helping me check if the simulateGenome functions worked in R like they did in C++ (known issue).
+    \item 2:00 - 5:00 -- Renamed RFPCategory, began re-adding simulated RFP data read/write functionality.
 \end{itemize}
 
 \experiment{Misc Notes}
 \begin{itemize}
     \item I spent an hour and a half trying to fix a bug with github and merges. Apparently, Denizhan's symbolic links had a tangible consequence -- because I pulled a version that had the symbolic link error, git would complain continuously that there were too many layers of symbolic links.
-    \item This basically resulted in a hidden change to my local version of the labbook directory that I could not overwrite but would be detected with trying to merge to the current version of the labbook repo on git that Denizhan later updated to fix the symbolic link error.
-    \item Thus, I had a merge conflict that could not be resolved; I fixed this by deleting and re-cloning the labbook repo, but I accidentally lost the notes from the past two days. I rewrote these notes and pushed them.
+    \item This basically resulted in a hidden change to my local version of the labbook directory that I could not overwrite but would be detected when trying to merge to the current version of the labbook repo on git that Denizhan later updated to fix the symbolic link error.
+    \item Thus, I had a merge conflict that could not be resolved; I fixed this by deleting and re-cloning the labbook repo, but I accidentally lost the notes from the past two days from carelessly losing my copy buffer. I rewrote these notes and pushed them.
     \item On a different note, it seems like I need to run the pdflatex command twice on my .tex files in this repo to get a working table of contents. Not sure why it lists a error with finding a latex function definition when I run the command once, but doesn't on the second time.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Decided to go ahead and re-add parts of the old read/writeRFP functions into the current code for simulated genomes.
+    \item Planned implentation: The current writeRFPData function, when its optional simulated boolean is set to true, branches into a fairly different way of writing the RFP data, adapted from the old writeRFP function.
+    \item Meanwhile, reuse the old readRFP functon as readSimulatedGenomeFromPAModel.
+    \item Also renamed RFPCategory to RFPCountColumn in the .cpp code.
+    \item Left off the day with writeRFP(simulated) written, almost done with readSimulatedGenomeFromPAModel. Still need to test all this of course.
+    \item Motivation for oding this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
 \end{itemize}
 
 \end{document}
