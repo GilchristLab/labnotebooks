@@ -399,6 +399,7 @@ Have continued testing internal functions also worked on testing PA implementati
 \experiment{Reading}
 Read through documentation of PA and PANSE Models, questions about the difference between use of "likelihood" and "probability" have surfaced, will ask these of Dr.Gilchrist when available.
 \labday{June 20, 2017 Notes}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 11 - 12: Reading and Research
     \item 12 - 3: Optimization
@@ -409,4 +410,14 @@ While trying to understand the underlying implementation of the Model's interact
 cases are at regular short intervals as they can be stored as jump tables.
 \experiment{CodonTable Optimization}
 I changed the implementation from layered if else statements to switch statements, I then worked on debugging he new implementation and testing it. I have committed and pushed the changes to my local repository before merging because further testing using actually genomic information is stll needed.
-
+\labday{June 20, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 2: Writing and testing for CovarianceMatrix
+    \item 3 - 5: Testing and working with SimulatedGenome
+    \item Total: 4 hours spent working
+\end{itemize}
+\experiment{CovarianceMatrix}
+This object was missing overloaded comparison functions using the Genome Object as a basis I wrote and tested the comparison functions for this object
+\experiment{SimulatedGenome Testing}
+To implement this function in PANSE I needed to understand how it works in PA but there is a bug nd it crashes on the R end. After talking to Hollis, I started to investigate further. To better understand the expected functionality I started working with the ROC equivalent of this function, I will continue testing and learning about the ROC implementation to fix the PA model and implement in PANSE.
