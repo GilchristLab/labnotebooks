@@ -95,106 +95,7 @@
 
 
 
-%\newexperiment{<abbrev>}[<short form>]{<long form>}
-%Here, <abbrev> is the abbreviation that can be given later to make LATEX
-%use the <long form> and <short form>. The short form is for index, table of
-%contents and running title, and giving it is optional. When using the abbre-
-%viation, specify it without prepending a backslash, i.e. \experiment{abbrev}.
-%Abbreviations may contain any char except the backslash, the tilde ( ̃), comma
 
-\newexperiment{NSE}{NSE SEMPPR}
-\newexperiment{ROC}{ROC SEMPPR}
-\newexperiment{RPF-ROC}[RPF-ROC]{Ribosome Profile Footprints: Pausing Model}
-\newexperiment{RPF-NSE}[RPF-NSE \& ROC]{Ribosome Profile Footprints: NSE \& Pausing Model}
-\newexperiment{FONSE}{FONSE SEMPPR}
-\newexperiment{DIMCMC}[DIMCMC]{Doubly Intractable MCMC}
-\newexperiment{Knight}{Student Learning, Jennifer Knight}
-\newexperiment{SELAC}{Main SELAC model}
-\newexperiment{Lab}{Lab Meeting}
-\newexperiment{LSAs}{LSAs}
-\newexperiment{Cedric}{Cedric Landerer}
-\newexperiment{Mehmet}{Mehmet Aydeniz}
-\newexperiment{SMBE Satellite Meeting on Protein Evolution in Denver}{SMBEDen}
-%\newexperiment{shorthand}{Description of the experiment}
-
-
-%COMMANDS
-%%% Sort using M-x 'sort-lines'
-\newcommand{\GTR}{GTR+$\Gamma$\xspace}
-\newcommand{\LogN}{\ensuremath{\text{LogN}}\xspace}
-\newcommand{\Lik}{\ensuremath{\text{\textbf{Lik}}}\xspace}
-\newcommand{\LLik}{\ensuremath{\mathcal{L}}\xspace}
-\newcommand{\Ne}{\ensuremath{{N_e}}\xspace}
-\newcommand{\Piihat}{\ensuremath{\hat{\pi}_i}\xspace}
-\newcommand{\Pii}{\ensuremath{\pi_{i}}\xspace}
-\newcommand{\Pijhat}{\ensuremath{\hat{\pi}_j}\xspace}
-\newcommand{\Pij}{\ensuremath{\pi_{j}}\xspace}
-\newcommand{\Pivechat}{\ensuremath{\hat{\Pivec}}\xspace}
-\newcommand{\Pivec}{\ensuremath{\Vec{\pi}}\xspace}
-%\newcommand{\Pr}{\ensuremath{\text{Pr}}\xspace}
-\newcommand{\Qmatrixa}{\ensuremath{\Qmatrix_a}\xspace}
-\newcommand{\Qmatrix}{\mathbf{Q}\xspace}
-\newcommand{\ROC}{\ensuremath{\text{ROC}}\xspace}
-\newcommand{\Var}{\operatorname{Var}}
-\newcommand{\var}{\Var}
-\newcommand{\Wi}{\ensuremath{{W_i}}\xspace}
-\newcommand{\Wj}{\ensuremath{{W_j}}\xspace}
-\newcommand{\acivec}{\ensuremath{a\left(\cveci\right)}\xspace}
-\newcommand{\acvecg}{\ensuremath{a\left(\vec{c}_{i,g}\right)}\xspace}
-\newcommand{\acvecj}{\ensuremath{a\left(\cvecj\right)}\xspace}
-\newcommand{\acvec}{\ensuremath{a\left(\Vec{c}\right)}\xspace}
-\newcommand{\aip}{\ensuremath{a_{i,p}}\xspace}
-\newcommand{\aivecg}{\ensuremath{{\avec}_{i,g}}\xspace}
-\newcommand{\aivec}{\aveci}
-\newcommand{\ajp}{\ensuremath{a_{j,p}}\xspace}
-\newcommand{\ajvecg}{\ensuremath{{\ajvec}_{,g}}\xspace}
-\newcommand{\ajvec}{\ensuremath{\Vec{a}_{j}}\xspace}
-\newcommand{\aj}{\ensuremath{a__j}\xspace}
-\newcommand{\alphac}{\ensuremath{\alpha_c}\xspace}
-\newcommand{\alphap}{\ensuremath{\alpha_p}\xspace}
-\newcommand{\alphavec}{\ensuremath{\Vec{\alpha}}\xspace}
-\newcommand{\alphav}{\ensuremath{\alpha_v}\xspace}
-\newcommand{\aobsvecg}{\ensuremath{{\avec}_{\text{obs},g}}\xspace}
-\newcommand{\aobsvec}{\ensuremath{\Vec{a}_{\text{obs}}}\xspace}
-\newcommand{\aobs}{\ensuremath{a_{\text{obs}}}\xspace}
-\newcommand{\aoptip}{\ensuremath{\aopt_{i,p}}\xspace}
-\newcommand{\aoptpg}{\ensuremath{\aopt_{p,g}}\xspace}
-\newcommand{\aoptp}{\ensuremath{\aopt_p}\xspace}
-\newcommand{\aoptvecg}{\ensuremath{{{\aoptvec}_g}}\xspace}
-\newcommand{\aoptvec}{\ensuremath{\Vec{a}^*}\xspace}
-\newcommand{\aopt}{\ensuremath{{a^*}}\xspace}
-\newcommand{\aveci}{\ensuremath{\Vec{a}_i}\xspace}
-\newcommand{\avecj}{\ensuremath{\Vec{a}_j}\xspace}
-\newcommand{\avec}{\ensuremath{\Vec{a}}\xspace}
-\newcommand{\avecopt}{\aoptvec}
-\newcommand{\celegans}{\emph{C.~elegans}\xspace}
-\newcommand{\cveci}{\ensuremath{\cvec_i}\xspace}
-\newcommand{\cvecj}{\ensuremath{\cvec_j}\xspace}
-\newcommand{\cvec}{\ensuremath{\Vec{c}}\xspace}
-\newcommand{\deltaT}{\ensuremath{\delta t}\xspace}
-\newcommand{\ecoli}{\emph{E.~coli}\xspace}
-\newcommand{\Lklu}{\emph{L.~kluyveri}\xspace}
-\newcommand{\bsubtilis}{\emph{B.~subtilis}\xspace}
-\newcommand{\fij}{\ensuremath{f_{i,j}}\xspace}
-\newcommand{\gen}{\ensuremath{\text{gen}}\xspace}
-\newcommand{\jmax}{\ensuremath{{j_{\max}}}\xspace}
-\newcommand{\kmax}{\ensuremath{{k_{\max}}}\xspace}
-\newcommand{\muij}{\ensuremath{\mu_{i,j}}\xspace}
-\newcommand{\phiROC}{\ensuremath{\phi_\ROC}\xspace}
-\newcommand{\phig}{\ensuremath{\phi_{g}}\xspace}
-\newcommand{\pij}{\ensuremath{p_{i,j}}\xspace}
-\newcommand{\qij}{\ensuremath{q_{i,j}}\xspace}
-\newcommand{\qji}{\ensuremath{q_{i,j}}\xspace}
-\newcommand{\rib}{\ensuremath{\text{rib}}\xspace}
-\newcommand{\cell}{\ensuremath{\text{cell}}\xspace}
-\newcommand{\sphi}{\ensuremath{s_\phi}\xspace}
-\newcommand{\scer}{\emph{S.~cerevisiae}\xspace}
-\newcommand{\setG}{\ensuremath{\mathbb{G}}\xspace}
-\newcommand{\setP}{\ensuremath{\mathbb{P}}\xspace}
-\newcommand{\setC}{\ensuremath{\mathbb{C}}\xspace}
-\newcommand{\setF}{\ensuremath{\mathbb{F}}\xspace}
-\renewcommand{\ng}{\ensuremath{{n_g}}\xspace}
-\newcommand{\researcher}{\subsubsection}
 %---------------------------------------------------------------------------------------
 
 \graphicspath{{./Figures//}} % double slash indicates search recursively within folder
@@ -431,6 +332,23 @@
 	\item Based off of that last note: the covariance matrix is the summation term. The only thing I'm getting confused with is that I don't see any kind of difference, they are all sums. I'm assuming that it is done somewhere behind the scenes of what I currently am looking at. Should definitely make sure that I am deciphering this correctly but I think I'm getting close to a breakthrough of understanding the current code at least.
 	\item I asked Hollis a little bit about the dM variable and he says that he doesn't believe that it is the mutation.
 	\item Goal for next time: Try to continue comparing some of these methods with the equations in the eta analysis paper and continue to get an understanding of what is going on and try to ask Dr. Gilchrist for advice on what I can.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, June 26 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Get back into the flow of things. I've been gone too long.
+	\item Start going through the R code and matching it with the C++ ones.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Went through genome::readFasta and reorganized it and made it a bit cleaner.
+	\item Goal for next time: Start going through genome::readObservedPhiValues
+	
+
 \end{itemize}
 %----------------------------------------------------------------------------------------
 
