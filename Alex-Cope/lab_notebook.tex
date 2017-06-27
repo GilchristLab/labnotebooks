@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[margin=1.0in]{geometry}
+\usepackage{outlines}
+\usepackage{enumitem}
 \usepackage{setspace}
 \usepackage{listings}
 \usepackage{color}
@@ -12,385 +14,44 @@
 \usepackage[final]{pdfpages}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{algpseudocode}
 %%%%%%%%%%%%%%% Section for new commands %%%%%%%%%%%%%%%%%%%
 \newcommand{\Loss}[2]{L\left(#1,#2\right)}
 
 %%%%%%%%%%%%%%% End %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\setenumerate[1]{label=\Roman*.}
+\setenumerate[2]{label=\Alph*.}
+\setenumerate[3]{label=\roman*.}
+\setenumerate[4]{label=\alph*.}
 \title{Lab Notebook}
 \author{Alex Cope}
 \date{August 2016}
 
-
-
 \begin{document}
 \maketitle
-\let\cleardoublepage\clearpage
 \tableofcontents
-\labday{Grant Writing notes}
-\experiment{NSF Proposals by David Smelser}
-\subexperiment{What does OSP do?}
-Review proposals for compliance w/ federal, state, etc policies/regulations
 
-Reviews all documents within proposal
 
-provides feedback
 
-Average NSF proposal is 60 pages
+\labday{GST Preliminary exam notes}
+\experiment{Topic: Protein Evolution}
+\subexperiment{Review on integrated view of protein evolution by Pal et. al \cite{pal2006review}}
+One of the strongest predictors of protein evolution rate is expression level. The higher the expression level, the slower the rate of evolution, which is sometime referred to the E-R anticorrelation. The importance of the protein (its dispensability) is a relatively poor predictor. 
+Many amino acid chages due to positive selection (contrast to expectations from neutral theory)
+
+\subexperiment{Review on determinants of rate of protein sequence evolution by Zhang and Yang \cite{zhang2015review}}
+Questions left to be answered:
+\begin{enumerate}
+\item Expression cost hypothesis of the E-R anticorrlation lacks definitive empirical evidence and main components of expression cost have not been specified
+\item Interdependency, relative contributions, adn combined explanatory power of multiple identified causes of E-R anticorrelation are unclear. Additionaly, what other causes exist?
+\item Apart from mistranslation, protein misfolding and misinteraction, other cellular and molecular errors, such as transcriptional error, splicing error, RNA editng error, translation initiation from upstream start codons and translational stop codon readthrough, have not been investigated for potential effects on protein evolutionary rate
+\item Distribution of fitness effects of mutations in a gene plays an important part in determining the rate of protein sequence evolution, but details have not been elucidated empirically, although work by Stiffler et. al. (Cell 2015) and Podgornaia et. al. (Science 2015) are examples of progress. Functional basis of fitness distribution is more difficult to identify.
+\item Cellular errors may by chance create new protein variants, it would be interesting to study whether these errors have important roles in the origin of new protein functions and adaptation
+\item Mechanisms underlying correlations between protein evolutionary rate and factors discussed in this review are unknown, requires integrative approach to understand interdependencies between factors (see review for references)
+\item How do these factors apply to noncoding RNAs
+\item Evolutionary rate of protein can change during course of evolution, but factors underlying these changes remain unknown
+\item Connecting differences of rates between proteins to differences in rates between protein regions. See references in reviews.
+\end{enumerate}
 
-https://osp.utk.edu/
-\subexperiment{Cayuse SP}
-Tells institution as whole what you're working on (especially concerned with intellectual property)
-Once sections complete and submitted, notifies Department and college the the proposal needs to be approved
-Should arrive in OSP bt  business days before submission date. 
-Wilhelm says it takes him over an hour
-
-\subexperiment{Single copy documents}
-List of all people you have worked with in your career, including on projects, papers, textbooks, etc.
-Always evolving document.
-Lifetime conflict with advisors.
-Post-doctoral sponsors no longer officially considered in conflict.
-Sometimes, you have to look into pubmed to find where people work.
-Wilhelm says this is changing so a conflict is only between senior author and first author.
-Can petition to have certain people not review proposal based on things like completely opposite views on the science involved.
-
-\subexperiment{Project summary}
-One page, no more than that
-Overview, statement of intellectual merit, statement on broader impact
-Write in 3rd person
-Should not be an abstract
-
-\subexperiment{Biosketches}
-Should change to best reflect products most closely related to project proposal
-
-Ex) If want funding for REU, maybe include papers that had undergraduate authors
-
-Have any further questions, contact David Smelser at dsmelser@utk.edu
-\labday{Mathematics and Statistics Notes}
- 
-
-\experiment{Chapter 7: Model Assessment and Selection}
-Taken from \textit{The Elements of Statistical Learning}, 2nd ed, Hastie et al.
-\subexperiment{7.2 Bias, Variance, and Model Complexity}
- 
-Let L(Y,$\hat{f}$(X)) be a loss function (can be squared error, absolute, etc), with X being a vector input, Y being a target vector, and $\hat{f}$(X) being estimated from some training set. Let $\mathcal{T}$ represent a training set. Then the test error is
-
-\begin{align*}
-Err_\mathcal{T} &= E\left[L\left(Y,\hat{f}(X)\right)|\mathcal{T}\right]
-\end{align*}
-
-which is the prediction error over an independent sample. Note that X and Y are drawn from their joint distribution. The expected test error is 
-
-\begin{align*}
-Err &= E\left[L\left(Y,\hat{f}(X)\right)\right] = E\left[Err_\mathcal{T}\right]
-\end{align*}
-
-Err is better for statistical analysis and most methods estimate this quantity. 
-\newline
-
-Training error:
-
-\begin{align*}
-\overline{err} &= \frac{1}{N}\sum_{i=1}^{N}\Loss{y_i}{\hat{f}(x_i)}
-\end{align*}
-
-
-As model complexity increases, training data is used more and adapts to more complicated information extracted from the model; however, this drives down the bias but increases the variance. Want to minimize expected test error. 
-
-Training error is not a good estimate of test error. In fact, a model with a training error of 0 is an overfit, meaning it will perform poorly when working with other data sets. 
-
-What if we are working with categorical data. The situation is very much the same. Let $\Loss{G}{\hat{G}(X)}$ (G = $\hat{G}$(X) = $argmax_k$ $\hat{p}_k$(X)) be a loss function, where G is a categorical response taking one of K values. Let $p_k(x)$ be the probability that G = k given the input X. A loss function in this case might be 0-1 loss or something more complex (see pg. 221).
-
-Training error for this type of data is 
-
-\begin{align*}
-\overline{err} = -\frac{2}{N}\sum_{i=1}^{N}log\hat{p}_{g_i}(x_i)
-\end{align*}
-
-The log-likelihood can serve as a loss-function for Poisson, gamma, exponential, and log-normal. From my understanding, this is essentially what ROC and similar models do when sampling gene expression values. Let $Pr_{\theta\left(X\right)}$(Y) be the density of Y, indexed by $\theta$(X), then
-
-\begin{align*}
-\Loss{Y}{\theta(X)} &= -2 \cdot logPr_{\theta\left(X\right)}(Y)
-\end{align*}
-
-\subexperiment{7.3 The Bias-Variance Decomposition} 
-Let Y = f(X) + $\epsilon$, where the average value of $\epsilon$ is 0 and the variance is equal to $\sigma_\epsilon^2$. Then with a regression $\hat{f}$(X) at point $x_0$ with squared error loss, the expected prediction error is 
-
-\begin{align*}
-Err(x_0) &= Irreducible Error + Bias^2 + Variance
-\end{align*}
-
-where the first term is the variance of the target around true mean f($x_0$), the second is the amount by which the estimate differs from the true mean, and the third is the expected squared deviation of $\hat{f}(x_0)$ around its mean. Generally, the more complex $\hat{f}$, the lower the squared bias but the higher the variance. 
-
-The biggest thing to take from this section is that as model complexity goes up, squared bias generally decreases, but variance increases. 
-
-
-\subexperiment{7.4 Optimism of the Training Error Rate}
-Typically, the training error is less than the true error because same data used to fit and assess the model. 
-
-Define the \textit{in-sample error} to be
-\begin{align*}
-Err_{in} &= \frac{1}{N}\sum_{i=1}^{N}E_{Y^0}\left[\Loss{Y_i^0}{\hat{f}(x_i)}|\mathcal{T}\right]
-\end{align*}
-
-$Y^0$ indicates N new responses for N training points. Let the \textit{optimism} and its corresponding average over training sets \textbf{y}, $\omega$, be
-\begin{align*}
-op \equiv Err_{in} -\overline{err} \\
-\omega \equiv E_{\textbf{y}}(op)
-\end{align*}
-which is usually a positive term since the training error is usually driven down by fitting/assessment approach. Usually can only estimate $\omega$. For many common loss functions (including squared error),
-
-\begin{align*}
-\omega &= \frac{2}{N}\sum_{i=1}^{N}Cov\left(\hat{y}_i,y_i\right)
-\end{align*}
-In summary, the expected value of the in-sample error is the sum of expected value of the training error over training sets \textbf{y} and $\omega$,
-\begin{align*}
- E_{\textbf{y}}(Err_{in}) &= E_{\textbf{y}}(\overline{err}) + \frac{2}{N}\sum_{i=1}^{N}Cov\left(\hat{y}_i,y_i\right)
-\end{align*}   
-
-If $\hat{y}_i$ is obtained via linear fit with d inputs, then,
-\begin{align*}
-\sum_{i=1}^{N}Cov\left(\hat{y}_i,y_i\right) &= d\sigma_{\epsilon}^{2} \\
-\rightarrow  E_{\textbf{y}}(Err_{in}) &= E_{\textbf{y}}(\overline{err}) + 2 \cdot \frac{d}{N}\sigma_{\epsilon}^{2}
-\end{align*}
-Optimism increases linearly with number of inputs, but decreases as training set increases in size. 
-
-\subexperiment{7.5 Estimates of In-Sample Prediction Error}
-Let d parameters be fit under squared error loss, then you get the $C_p$ statistic,
-\begin{align*}
-C_p &= \overline{err} + 2 \cdot \frac{d}{N}\hat{\sigma}_{\epsilon}^{2}
-\end{align*}
-
-Note: $\hat{\sigma}_{\epsilon}^{2}$ is estimate of the noise variance.
-\newline
-\newline
-\textbf{Akaike information criterion (AIC)}:\newline
-
-Used to estimate $Err_{in}$ when using log-likelihood loss function. 
-
-\begin{align*}
--2 \cdot E\left[logPr_{\hat{\theta}}(Y)\right] &\approx -\frac{2}{N} \cdot E\left[loglik\right] + 2 \cdot \frac{d}{N} \\
-\hat{\theta} &= MLE(\theta) \\
-loglik &= \sum_{i=1}^{N}logPr_{\hat{\theta}}(Y)
-\end{align*}
-
-where $Pr_{\theta}$(Y) is a family of densities for Y (one of which is the true density).
-
-When selecting a model via AIC, choose one that minimizes AIC. It is important to note that when using nonlinear models, d must be replaced with some measurement of model complexity. 
-
-In general, let $\mathcal{F}$ be a set of models $f_{\alpha}$(x), where $\alpha$ is a tuning parameter. Then,
-\begin{align*}
-AIC(\alpha) &= \overline{err}(\alpha) + 2 \cdot \frac{d(\alpha)}{N}\hat{\sigma}_{\epsilon}^2
-\end{align*}
-Basically, AIC estimates the test error curve, so you want to find the $\hat{\alpha}$ that minimizes it. 
-
-Book notes that if basis functions are chosen adaptively, this whole thing collapses. 
-\newline
-
-Example) You have p total inputs, but best fitting linear model takes $d<p$ inputs, optimism will exceed (2d/N)$\sigma_{\epsilon}^{2}$.
-
-\subexperiment{7.7 The Bayesian Approach and BIC}
-Like AIC, applicable where fitting occurs via maximizing log-likelihood. Generic form of BIC:
-
-\begin{align*}
-BIC &= -2 \cdot loglik + \left(log N\right) \cdot d
-\end{align*}
-
-Under a Gaussian model ($\sigma_{\epsilon}^2$ is known), $-2 \cdot loglik$ equals up to a constant $\sum_i^N(y_i -\hat{f}(x_i))/\sigma_{\epsilon}^2$. For a squared error loss, this is $N \cdot \overline{err}/\sigma_{\epsilon}^2$
-\begin{align*}
-\rightarrow BIC &= \frac{N}{\sigma_{\epsilon}^2}\left[\overline{err} + \left(log N\right) \cdot \frac{d}{N}\sigma_{\epsilon}^2\right] \\
-\rightarrow BIC &\propto AIC
-\end{align*}
-
-BIC tends to penalize complex models, but as $N \rightarrow \infty$, the probability BIC picks correct model goes to 1.
-
-
-
-\experiment{Chapter 6: Model Checking}
-\subexperiment{6.1 The place of model checking in applied Bayesian statistics}
-
-\textit{Sensitivity Analysis} - how much do posterior inferences change in our model versus other models
-
-\subexperiment{6.2 Do the inferences from the model make sense?}
-
-\underline{Checking model via external validation} \newline
-$\bullet$	Use model to make predictions, collect actual data, do they match up? \newline
-$\bullet$ Usually need to check model \textbf{before} getting new data
-
-\subexperiment{6.3 Posterior predictive checking}
-
-To measure discrepancy between models and data, define test quantity T(y,$\theta$). Think test statistic in frequentist hypothesis testing, which depends only on data. To measure lack of fit of data with respect to posterior predictive distribution can be measured as p-value of test quantity. In a Bayesian framework, the p-value is 
-
-\begin{align*}
-p_B &= Pr(T(y^{rep},\theta) \geq T(y,\theta)|y)\\
-&= \iint{I_{T(y^{rep},\theta) \geq T(y,\theta)}p(y^{rep}|\theta)p(\theta|y)dy^{rep}d\theta}
-\end{align*}
-
-which translates to the probability a set of replicated data could be more extreme than the observed (\textbf{how is this different from the frequentist's definition?}). A p-value can be calculated via simulations: drawing from joint posterior distribution, the p-value is simply the ration of
-
-\begin{align*}
-T(y^{rep s},\theta) \geq T(y,\theta^s)
-\end{align*}
-
-where the $y^{rep s}$ are drawn from the simulated values of $\theta^s$.
-
-\experiment{Chapter 7: Evaluating, comparing, and expanding models}
-
-\subexperiment{7.1 Measures of predictive accuracy}
-Measures of predictive accuracy should be guided by the application:
-$\bullet$ point prediction - single value reported as prediction of future observation (mean squared error)
-\newline
-$\bullet$ probabilistic prediction - report inferences about $\tilde{y}$ that takes into account full uncertainty over $\tilde{y}$
-\newline
-
-Log-likelihood, $\log{p(y|\theta)}$, is a probabilistic prediction. Proportional to the mean squared error if model is normal with constant variance. With large sample sizes, minimizing Kullback-Leibler information is the same as maximizing expected log-likelihood. Use log-likelihood because of its generality and because we are interested in summarizing the model fit to data (prior density is not relevant in computing predictive accuracy). 
-\newline
-\newline
-\underline{Ideal measure of model fit: predictive performance for new data (external validation).} 
-\newline
-
-Let:\newline
-$\bullet$ f be the true model \newline
-$\bullet$ y be the observed data \newline
-$\bullet$ $\tilde{y}$ be the future/alternative data
-
-Out-of-sample predictive fit for new data point $\tilde{y}_i$ is
-\begin{align*}
-\log{p_{post}(\tilde{y}_i)} &= \log{E_{post}(p(\tilde{y}_i|\theta))}\\
-&= \log{\int p(\tilde{y}_i|\theta)p_{post}(\theta)d\theta}
-\end{align*}
-where $p_{post}(\tilde{y}_i$ is the predictive density and $p_{post}(\theta)$ is the posterior. 
-
-Expected out-of-sample log-likelihood, since future data unknown:
-\begin{align*}
-E_f(\log{p_{post}(\tilde{y}_i)}) &= \int(\log{p_{post}(\tilde{y}_i)})f(\tilde{y}_i)d\tilde{y}
-\end{align*}
-
-Generally, $\theta$ is not known, so can't get $\log{p(y|\theta)}$. Want to summarize predictive accuracy with
-\begin{align*}
-\log{\prod p_{post}(y_i)} &= \sum_{i=1}^n \log{\int p(y_i|\theta)p_{post}(\theta)d\theta}
-\end{align*} 
-which is usually computed in practice by generating $\theta^s, s = 1,...,S$ from $p_{post}(\theta)$ and then
-\begin{align*}
-\sum_{i=1}^n \log{\left(\frac{1}{S} \sum_{s=1}^S p(y_i|\theta^s)\right)}
-\end{align*}
-
-\subexperiment{7.2 Information criteria and cross-validation}
-
-\textit{Information criteria} typically defined based on deviance = $-2\log{p(y|\hat{\theta})}$ 
-
-Interested in prediction accuracy for model validation and comparing models. \textbf{From pg. 170 of BDA: "When different models have the same number of parameters estimated in the same way, one might simply compare their best-fit log predictive densities directly,"...So in my current case, can I just compare the log-likelihoods of the different ROC results?}
-
-Can approximate out-of-sample predictive accuracy using existing data:
-
-1) \textit{Within-sample predictive accuracy} - Naive estimate of log-likelihood for new data is log-likelihood of existing data. In general, overestimate
-
-2) \textit{Adjusted within-sample predictive accuracy} - Corrections for bias in computed log-likelihood based on existing data and is approximately unbiased. Corrects bias by subtracting off biases produced via number of (effective) parameters being fit. Reasonable, but correct at best only in expectation
-
-3) Cross-validation
-
-
-Gelman et al recommend using WAIC as a measure of predictive performance, which is a more Bayesian approach than AIC or DIC. WAIC has the property that it averages over the posterior distribution, as opposed to conditioning on a point estimate. 
-
-\begin{align*}
-p_{WAIC} &= 2 \sum_{i=1}^n\left(\log{(E_{post}p(y_i|\theta))} - E_{post}(\log{p(y_i|\theta)})\right) \\
-computed\ p_{WAIC} &= 2 \sum_{i=1}^n\left(\log{\left(\frac{1}{S} \sum_{s=1}^S p(y_i|\theta^s)\right)} - \frac{1}{S}\sum_{s=1}^S\log{p(y_i|\theta^s)}\right)
-\end{align*}
-
-They also DO NOT recommend using BIC, as the goal of this criterion is to approximate the marginal probability density of the data p(y) under the model, which can then be used to estimate relative posterior probabilities. 
-
-
-\experiment{Review of Differential Equations, Blanchard et al}
-
-
-
-\labday{Computer Science Notes}
-
-
-\labday{Biology Notes}
-
-\experiment{\textit{The Origins of Genome Architecture}, Lynch}
-\subexperiment{Chapter: Genome Size and Organismal Complexity}
-Weak relationship between gene number and organismal complexity (ex. unicellular eukaryotes Paramecium has more genes than vertebrates), complexity of higher eukaryotes result of new ways of deploying genes.
-\newline
-\textbf{Question: Is this the result of selection for higher complexity (ie. new cell types) or did evolution of large size/multicellularity provoke non-adaptive changes in genome architecture, which then paved way for new cell functions? Lynch makes case for latter situation.}
-\newline
-
-\textit{The Selfish-DNA hypothesis}: \newline
-Noncoding deal largely is made up of selfish elements that spread in the genome until fitness cost is so large that further spread is prevented. Supported by presence of mobile elements in eukaryotes. Central challenge to hypothesis is explaining proliferation of noncoding regions that are not self-replicating (like splicesomal introns and small repetitive DNAs). 
-
-\textit{Bulk-DNA hypothesis}: \newline
-Total content of noncoding DNA result of natural selection and affects nuclear volume, cell size, and cell division rate. Main challenge is the nature of filler material (mainly mobile elements), which impose heavy mutational burden in eukaryotes.
-\newline
-No direct evidence that cell replication in prokaryotes is limited by DNA metabolism.
-Reasons to think otherwise include: (1) no correlation between cell division rate and genome size between/with-in prokaryotes, (2) during rapid growth phases, chromosomes are often present in nesterd series of replication stages, with some species harboring 10s to 100s of chromosomal copies at various stages of the life cycle, (3) in E.coli and other eubacteria, DNA replication forks progress 10-20 times faster than mRNA elognation rates, and (4) estimated cost of genome replication relative to cell's entire energy budget is less than 2\% - 5\%. 
-\newline
-Genome size evolution depends on two key factors: relative rates of mutational production of insertions/deletions and natural selections ability to eliminate these changes.
-
-Some evidence suggests mutational tendency to delete excess DNA is primary determinant of genome size (higher rates of deletion \= smaller genome). Work with C. elegans suggests a 15:4 insertion/deletion ratio raises questions about the previous evidence (maybe mutational deletions are not universally sufficient to prevent runaway genome growth).
-
-\textbf{The primary cost of excess DNA is its mutational liability, changing the structure of a gene or surrounding area increases chances gene will be rendered defective by later mutations}
-
-\textbf{Populations size determines efficiency of natural selection}
-
-\subexperiment{Chapter 4: Why Population Size Matters}
-\textbf{Key Point: The types of evolution that can occur within a species depends on population size}
-
-Non-neutral mutations can behave as if neutral in the context of small populations. This is because selection is overwhelmed by genetic drift.
-
-\textit{Wright-Fischer Model}
-\newline
-Populations consists of N diploid individuals. Each member contributes equally to and sychronously to infinite gamete pool, pairs of gametes drawn randomly to produce next generation. Ignore overlapping generations, spatial structure, effects of environment, etc.
-
-Diploid populations of N contains 2N gene copies. Initial frequency of allele is $p_0 = 1/(2N)$. Mutation will go either to fixation or removed from population. 
-
-
-
-
-
-\experiment{Mathematical Biology, Murray}
-\subexperiment{Chapter 1: Continuous Models for Single Species}
- 
-
-\labday{Signal Peptide Project - Progress as of 11-17-2016}
-\textbf{All graphs in the following sections are of $\Delta\eta$ values, which represent selection. Dotted lines in all graphs represent y=x.}
-\experiment{Three categories: No signal peptide, signal peptides, mature peptides (See Figure 1)}
-
-Treated mutation as shared between the categories. Gene expression was kept constant. Mixture Element 1 and Mixture Element 3 correspond to genes with no signal peptides and mature peptides. Mixture Element 2 is the signal peptide region. As can be seen, there is a strong linear correlation and slope of 0.93 between the genes with no signal peptides and mature peptides, which is expected. Ideally, this would be closer to 1. I wonder if the fact that genes with a signal peptide region are generally lower expression genes (mean $\Phi$ value of 0.95) is causing a slight drop in the estimates of $\Delta\eta$ values for codons in these genes. Relative to the signal peptide regions, there is a drop-off in correlation and the slopes are much different from 1 for both mature peptides and signal peptides. However, this could be because of increases in variation introduced by the small regions of signal peptides.
-\begin{figure}
-\fbox{\includegraphics[page=2,scale=0.6]{Ecoli_results/Nosp_sp_mp/Graphs/ecoli_mix_traces.pdf}}
-\caption{Three mixture model fit using \textit{E. coli} K12 MG1655 genome. Mixture Element 1 represents genes without a predicted signal peptide. Mixture Element 2 represents signal peptide regions. Mixture Element 3 represents the mature peptide regions.}
-\end{figure}
-\experiment{Three categories: Same as above, but simulated genome (See Figure 2)}
-My thought was that if the decreased correlation seen in Figure 1 between signal peptides and the other regions of the genome is because of increased variation, then signal peptides simulated under codon-specific parameters generated from the whole genome (minus the signal peptide regions) will produce similar results. Results for a fitting to a simulated genome are shown in Figure 2. This resulted in a slightly improved correlation between $\Delta\eta$ values for the three categories. The slopes for the comparisons to the $\Delta\eta$ values for signal peptides improve slightly (ie. get closer to 1). However, the slope of the comparison between $\Delta\eta$ values for the genes without a signal peptide and mature peptides decreases from 0.93 to 0.85.
-
-
-\experiment{Other model fittings}
-Description:\newline
-ROC() = Fit ROC-SEMPPR to the data provided \newline 
-NoSp = Gene with no signal peptide\newline
-SP = Signal Peptide \newline
-MP = Mature Peptide\newline
-"=" = Treat as same category \newline
-"!=" = Not treated as same category \newline
-"Together" = Just means treated as same category
-
-All cases in which regions are assumed to be different categories are set to share mutation bias terms.
-\newline
-1. ROC(MP) $\rightarrow \Phi$ (obtain gene expression values for genes with signal peptides) \newline
-2. ROC(NoSP = MP) and ROC(NoSP != MP)\newline
-3. ROC(NoSP = SP) and ROC(NoSP != SP)\newline
-4. ROC(MP = SP $|\Phi$) and ROC(MP != SP $|\Phi$) \newline
-5. ROC(Simulated MP = Simulated SP $|\Phi$) and ROC(Simulated MP != Simulated SP $|\Phi$) \newline
-6. ROC(First 31 codons of NoSP gene = Rest of Gene $|\Phi$) and ROC(First 31 codons of NoSP!= Rest of Gene $|\Phi$)
-
-
-
-\experiment{My thoughts and next steps}
-As expected, it looks like genes without signal peptides and mature peptides have very similar codon usage patterns and the strength of selection on these codons is generally the same. Overall, the positive correlations between $\Delta\eta$ values for actual signal peptides and the rest of the genome suggests to me that, in \textit{E. coli}, codon selection in signal peptides is fairly consistent with the rest of the genome. However, based on comparisons to simulated data and the 5' end of genes, it appears there are some differences in the strength of selection for certain codons, as evidence by greater variations from the line y = x.
-
-I think my next step will be to replicate the analysis described above using a set of filtered signal peptides. SignalP 4.0 returns a value that essentially measures a confidence value for whether or not the gene actually contains a signal peptide. It is possible some of the lower scoring signal peptides are not actually signal peptides, which could be throwing off some of the results. For now, I will choose a SignalP score of 0.75 (out of 1) as my cutoff, leaving me with 267 genes to work with. 
 
 
 \labday{Progress Tracker}
@@ -412,17 +73,17 @@ Mallory Ladd (in Bob's lab) asked me to write some scripts from her for a projec
 
 \experiment{8-26-2016}
 Finished up the scripts for Mallory and ran them for her. When I have a chance during the weekend, I will spend time learning how to use LaTeX, grading the short essays I assigned my students on the role of computation in unlocking biological systems, and finish preparing for lab on Monday.
-\newline
+
 
 Also, touched base with Steve regarding the protein clustering project he and I worked on during my rotation. He is collaborating on a similar project with Dr. Barerra over in BCMB and said he is planning on giving the project to an undergrad. After the undergrad has done some initial calculations, he said I'm welcome to help out on creating some "relatively low hanging" simulation code. Depending on how work is progressing with my other projects, I would like to help out on this where I can. 
 
 \subexperiment{Goals for next week}
 1. Compare gene expression results from ROC simulations with results from Li 2014.
-\newline
+
 2. Look at gene expression results for the genes with predicted signal peptides. See if the majority of them are low expression genes (ie. non-optimal codon usage could be largely due to mutation biases).
-\newline
+
 3. Begin thinking about how to handle house-keeping genes in current models.
-\newline
+
 4. Resume independent-study of Bayesian Data Analysis.
 
 
@@ -459,43 +120,10 @@ Mike noted that I need to understand where the sources of the data come from. Li
 \experiment{8-31-2016}
 Towards the end of the day, got the following error while attempting to fit ROC to a genome consisting of only genes containing signal peptides. When the the function to plot the CUB plot was called, I got a memory allocation issue with the following traceback:
 
-*** caught segfault ***
-address 0xfffffffffffffff8, cause 'memory not mapped'
-\newline
-Traceback:\newline
-1: .External(list(name = "CppMethod\_\_invoke\_notvoid", address = <pointer: 0x2cdce60>,     dll = list(name = "Rcpp", path = "/usr/lib/R/site-library/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x2df0a00>,         info = <pointer: 0x7f3a5ebf9860>), numParameters = -1L),     <pointer: 0x238f690>, <pointer: 0x23a9af0>, .pointer, ...)
-\newline
-2: genome\$getGenomeForGeneIndices(genes.in.mixture, simulated)
-\newline
-3: plot.Rcpp\_ROCModel(model, genome, samples = samples * 0.1, mixture = 1,     main = "E.coli Codon Usage Plot")\newline
-4: plot(model, genome, samples = samples * 0.1, mixture = 1, main = "E.coli Codon Usage Plot")
- \newline
- 
+
 I ran this on Gauley with the most up-to-date version of the RibModel. I moved this file over to my computer with a slightly old version and did not get this error. I sent Holis all the information I could in hopes that he could figure out what is going on.
 
 \experiment{9-1-2016}
-Based on my conversations with Mike, it seemed like if I wanted to continue a fitting, I could load Parameter and MCMC objects from previous runs. I have no problem doing this with just a MCMC object, but if I try to continue a fitting using a loaded Parameter object, I get another memory allocation issue with the following traceback:
-\newline
- *** caught segfault ***
-address (nil), cause 'memory not mapped'
-\newline
-Traceback:\newline
- 1: .External(list(name = "CppMethod\_\_invoke\_void", address = <pointer: 0x2715d50>,     dll = list(name = "Rcpp", path = "/usr/local/lib/R/site-library/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x28a8f20>,         info = <pointer: 0x7f02b49b4b40>), numParameters = -1L),     <pointer: 0x406d990>, <pointer: 0x32e5060>, .pointer, ...)
-\newline 
- 2: mcmc\$run(genome, model, ncores, divergence.iteration)
-\newline
- 3: runMCMC.Rcpp\_MCMCAlgorithm(mcmc, genome, model, 4)
-\newline
- 4: runMCMC(mcmc, genome, model, 4)
-\newline
- 5: system.time(runMCMC(mcmc, genome, model, 4))
-\newline
- 6: eval(expr, envir, enclos)
-\newline
- 7: eval(ei, envir)
-\newline
- 8: withVisible(eval(ei, envir))
-\newline
 
 Since I've been wanting to get into the code a little more, I figured trying to debug this myself wouldn't be a bad idea. Based on what I found, it seems like the writeParameterObject() function in R is intended to create a Parameter object that will be used \textbf{just} for future data analysis, not a starting point for a new run. Maybe that is what was intended, but I think this is bad software practice. If you have two objects of the same class, then they should work the same way.
 
@@ -712,27 +340,7 @@ Wanted to check to makes sure $\Delta\mathit{M}$ values were correlated between 
 
 
 Over break, collected data for \textit{C. bescii} as a comparison to the results in \textit{E. coli}. Signal peptides in \textit{C. bescii} showed similar behavior to those in \textit{E. coli}. Below is a comparison of the $\Delta\eta$ values for signal peptides and mature peptides in \textit{C. bescii}. Much like in \textit{E. coli}, selection is generally in the same direction, meaning highly selected for codons in one region are likely to be highly selected for in the mature peptides. It should be noted that in the signal peptide regions, the arginine codon CGG trace appears to trend towards inifinity. As a result, this one is excluded from many of the plots. 
-
-\begin{figure}[H]
-\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_mp_cat/Graphs/cbescii_dEta_dM_comp_plots.pdf}}
-\caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and mature peptides.}
-\end{figure}
-
-\begin{figure}[H]
-\fbox{\includegraphics[page=2,scale=0.5]{Cbescii_results/Nosp_w_sp_cat/Graphs/cbescii_dEta_dM_comp_plots.pdf}}
-\caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and signal peptides.}
-\end{figure}
-
-\begin{figure}[H]
-\fbox{\includegraphics[page=6,scale=0.6]{Cbescii_results/Nosp_w_sp_cat/Graphs/cbescii_nosp_w_sp_cat_traces.pdf}}
-\caption{Traces of $\Delta\eta$ values for signal peptides when fit with genes with no signal peptides as a separate category. Many of the traces do not look like they are mixing well. Also, the arginine codon (R) CGG looks unrealistically high. This may need to be run for more iterations.}
-\end{figure}
-
-\begin{figure}[H]
-\fbox{\includegraphics[page=1,scale=0.5]{Cbescii_results/Nosp_w_sp_cat/Graphs/delta_eta_comp_R_CGG_removed.pdf}}
-\caption{Comparison of $\Delta\eta$ values of genes with no signal peptides and signal peptides. Same as Figure 6, but arginine codon CGG removed.}
-\end{figure}
-
+\
 
 \experiment{1-10-2017}
 \subexperiment{$\phi$ Mixture Model}
@@ -957,49 +565,6 @@ Potential journals for signal peptide paper
 \subexperiment{Histogram of Phis by segment for \textit{E. coli}}
 \includepdf[pages=-]{Ecoli_results/Segments_expression/Histograms_phis_by_segment.pdf}
 
-\subexperiment{Histograms of $\Delta\eta$ and $\Delta\mathit{M}$ for \textit{C. thermocellum} 2 codon amino acids, grouped by 3rd codon}
-\includepdf[pages=-]{Ctherm_results/Full_genome/second_run/Graphs/dEta_dM_histograms_2_codon_aa.pdf}
-
-
-\subexperiment{Ribosomal Proteins for \textit{C. thermocellum}}
-Bars marked with red means at least one ribosomal protein was contained in this range. Black or green mean a ribosomal protein was not found.
-
-\includepdf{Ctherm_results/Full_genome/second_run/Graphs/ribo_prot_ctherm_dist.pdf}
-
-\subexperiment{MLE search for linear regression when errors in both variables}
-
-\begin{algorithmic}
-	\State $iterations \gets 1000000$
-	\State $start \gets 0$
-	\State $end \gets 2$
-	\State $step \gets 0.01$
-	\State $\beta \gets start$
-	\State $best.\beta \gets \beta$
-	\State $likelihood.max \gets -\infty$
-	\While {$\beta \leq end$}
-		\For {$i$ in range(1,iterations,step)}
-			\State $likelihood.current \gets 0$
-			\State $x^* \gets N(x,\sigma_x)$
-			\State $y^* \gets \beta \times x^*$
-			\State $likelihood.current \gets \log(Pr(x^*|x,\sigma_x)) + \log(Pr(y^*|y,\sigma_y)$
-			\If {$likelihood.current > likelihood.max$}
-				\State $best.\beta \gets \beta$
-				\State $likelihood.mac \gets likelihood.current$
-			\EndIf 
-		\EndFor
-		\State $\beta \gets \beta + 1$
-	\EndWhile 
-\end{algorithmic}
-
-\includepdf[pages=1]{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/Results_of_max_like_search.pdf}
-
-\includepdf{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/psp_sp_mle_slope.pdf}
-
-\includepdf[pages=1]{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/Results_of_max_like_search_smaller_range.pdf}
-
-\includepdf{Ecoli_results/Sp_pseudo_sp_cat/sphi_fixed_run/Graphs/psp_sp_mle_smaller_search_range.pdf}
-\end{document}
-
 
 \experiment{3-16-2017}
 
@@ -1007,4 +572,514 @@ Bars marked with red means at least one ribosomal protein was contained in this 
 Initial testing seems promising. Initialized all CSP parameters to 1000, which resulted in numerical errors in the $\phi$ estimates, which was reported by the code. Similarly, if CSP are started near the upper bound of floating point representation ($10^308$), numerical errors are achieved and reported. The code is able to report these warnings during the divergence steps. One interesting behavior about R is it does not allow gradual overflow, meaning anything greater than or equal to $10^308$ will be set as infinity, but gradual underflow is allowed, meaning you can go lower than $10^-308$. I'm concerned about how this will impact the software because C++ does allow for gradual overflow. 
 
 \subexperiment{Signal Peptide Project}
-Took a closer look at some of the $\Delta\eta$ confidence intervals for the signal peptides and pseudo-signal peptides. It looks like quite a few of them overlap with 0, which means we can't be certain which is the optimal codon. I don't think this changes the overall story, but I would rather eliminate any sources of possible doubt in our analysis.  
+Took a closer look at some of the $\Delta\eta$ confidence intervals for the signal peptides and pseudo-signal peptides. It looks like quite a few of them overlap with 0, which means we can't be certain which is the optimal codon. I don't think this changes the overall story, but I would rather eliminate any sources of possible doubt in our analysis. 
+
+\experiment{3-22-2017}
+\subexperiment{Gilchrist Lab Meeting}
+
+\textbf{Things to do:}
+\begin{itemize}
+	\item Register for SMBE (how to get reimbursement?)	
+	\item Start at true values as point of comparison for phi mixture
+	\item Start multiple runs for phi mixture, make sure they all converge  
+	\item Dealing with gradual overflow/underflow between C/C++
+	\item Histogram of simulated phi values, do we see a distinguishable hump?
+	\item pull out ribosomal genes for histogram and plot those for both empirical and estiamted phis in Ctherm.
+	\item For likelihoods, maximize $x^*$ for some a and b such that $y^* = bx^* + a$, is it better than some other set of a and b.
+\end{itemize} 
+
+\experiment{3-27-2017}
+\subexperiment{Hettich Lab Meeting}
+Discussed HUPO meeting Bob was at last week. 
+
+DiLu - new software for identification of high resolution of metabolomics data \newline
+
+\textbf{Single-Cell Mass Spectrometry for Discovery Proteomics: Quantifying Translational Cell Heterogeneity in the 16-Cell Frog (\textit{Xenopus}) Embryo}\newline
+
+Capillary electrophoresis (CE) has traditionally had poor dynamic range (3 log orders in this paper, our work is usually between 6 and 7). 
+
+For CE-$\mu$ ESI had surprisingly high charges (4-6)
+
+emPAI is a relative abundance metric.  
+
+\experiment{3-29-2017}
+Cedric implemented HMM, looks like it's working, but trying to speed it up. Trying to solve matrix exponentiation problem in a more computationally efficient manner. 
+
+
+\experiment{3-30-2017}
+
+Self-assessment following colloquium presentation
+\begin{itemize}
+\item During questions, don't provide sassy answers. Keep it professional.
+\item Make it more clear what the purpose of the research is, why people should care
+\item Thanked Mike and Bob. During formal presentation, should thank Dr. Gilchrist and Dr. Hettich
+\item Mentioned statistical significance by using likelihood ratio tests, but my audience was likely not familiar with this
+\item Don't pace so much and keep your eyes on the audience
+\end{itemize}
+
+\experiment{4-3-2017}
+Fixed problem with plotParameter.R module. Seemed to be always plotting the confidence intervals. Now fixed and needs to be pushed. Also eliminated "estim.Expression" parameter in plotModel.R
+
+Looked at mature peptides and signal peptide regions in \textit{E. coli} O157:H7. Results actually look generally cleaner than \textit{E. coli} K12. 
+
+
+\includepdf[pages=2]{Ecoli_O157_results/Mp_w_sp_cat/Graphs/ecoli_mp_w_sp_cat_traces.pdf}
+
+Checked out a signal peptide database found at http://www.signalpeptide.de. For \textit{E. coli} K12, there are 155 confirmed signal peptides, 9 indicated determined to be signal peptides by similarity, 8 indicated to be probable, and 327 potential signal peptides. 
+
+\experiment{4-5-2017}
+NIMBioS workshop on August 7th - August 11th.
+Check out Halpern and Bruno, 1998.
+Register for SMBE and make hotel reservations.
+\subexperiment{Gilchrist Lab Meeting}
+\textbf{To do:}
+\begin{itemize}
+\item Generate segment histograms for segments on the same graph. Potentially rescale $\Delta\eta$s  
+\item Re-do runs for segments, fix sphi to value estimated. 
+\item So look at other strains of \textit{E. coli} 
+\end{itemize}
+
+\subexperiment{Mike's Feedback on Colloquium Presentation}
+\begin{itemize}
+\item Overall very good
+\item Figures axes labels were too small. 
+\item We do have an idea. Don't say we don't. 
+\item What is going on with plateuing of $\Delta\eta$ values? If we have saturated information, then we struggle with identifiability
+\end{itemize}
+
+\experiment{4-10-2017}
+
+Things Mallory needs:
+\begin{itemize}
+\item Needs a list of MS1 peak lists with intensities
+\item Needs a separate output with scan number and file name to index with MS1 peaks
+\item For matrix, put file names at top instead of file index
+\item During processing, throw out any peaks also found in blank or control. Can do this post-processing wise. 
+\end{itemize}
+
+\textit{C. bescii} has an Arginine codon that never seems to converge for the $\Delta\eta$ parameter. Seems this codon never occurs in this region of the genome. How might this impact interpretations of these results. 
+
+\experiment{4-11-2017}
+Potential dates and times for first committee meeting.
+
+\begin{itemize}
+\item May 1, 9 - 10 am
+\item May 1, 10 - 11 am
+\item May 1, 11 am - 12 pm
+\item May 1, 12 - 1 pm
+\item May 1, 1 - 2 pm
+\item May 1, 2 - 3 pm
+\item May 8, 11 am - 12 pm
+\item May 8, 12 - 1 pm
+\end{itemize}
+
+\experiment{4-12-2017}
+After examining previous runs, arginine codons AGA and AGG consistently seem to be the ones that diverge the most from the $y = x$ line in runs looking at the front of genes vs the end of genes. tRNA copy numbers for these genes are as follows according to: \newline http://lowelab.ucsc.edu/GtRNAdb/Esch\_coli\_K12
+
+\begin{itemize}
+\item CGT - 4 
+\item CGC - 0
+\item CGG - 1
+\item CGA - 0
+\item AGG - 1
+\item AGA - 1
+\end{itemize}
+
+This is interesting because both CGC and CGA are preferred over their counterparts AGA and AGG, which both have a tRNA copy number of 1. 
+
+Noted that \textit{E. coli} O157:H7 (Sakai) strain had more linearly correlated relationship and was closer to $y = x$ than \textit{E. coli} K12 MG1655 strain. Interestingly, I found paper that found that \textit{E. coli} O157:H7 (Sakai strain) had a 2-fold enrichment of the AGA tRNA gene, which was one of the problematic ones in \textit{E. coli} K12 MG1655. With wobble, would this also make AGG more viable? Also, some organisms use AGA and AGG as a non-canonical stop codon. Is it possible that that \textit{E. coli} either does this (haven't found anything yet) or evolved from a bacteria that once used these as non-canonical stop codons? 
+
+To do list:
+\begin{itemize}
+\item Download Uniprot database. Figure out signal peptides
+\item 5-10 gram-positive bacteria and 5-10 gram-negative bacteria
+\end{itemize}
+
+
+Notes on Newton:
+Taking nodes from Newton less than 4 years old, going to make part of larger set of clusters. Improves access to computational resources. Will be taken down in June.
+
+
+\experiment{4-13-2017}
+
+Gram-positive bacteria
+\begin{itemize}
+\item \textit{C. thermocellum}
+\item \textit{S. aureus}
+\item \textit{S. sobrinus}
+\item \textit{B. clausii}
+\item \textit{M. tuberculosis}
+\item \textit{S. pneumoniae}
+\item \textit{S. coelicolor}
+\end{itemize}
+ 
+Gram-negative bacteria
+\begin{itemize}
+\item \textit{E. coli}
+\item \textit{C. bescii}
+\item \textit{M. luteus}
+\item \textit{V. cholera}
+\item \textit{P. aeruginosa}
+\end{itemize}
+
+\experiment{4-17-2017}
+
+Mallory and I discussed the potential of clustering metabolmics data based on MS1 and MS2 Peak intensity in fashion similar to MET-COFEA and MS-CLUSTER algorithms. If we are able to do so and perform analysis that shows this is a valid approach for metabolites, might be worth a paper. 
+
+
+
+
+\experiment{4-19-2017}
+
+\subexperiment{Gilchrist Lab Meeting}
+To Do:
+\begin{itemize}
+\item Time Tree, Tree of Life 
+\item Ben Fitzpatrick might be a good person to talk to
+\item Mike is meeting with Philip Myer, over in Ag. Campus interested in heratibility of microbes/metabolites in cattle on April 28th quantitative genetics and metabolomics of microbiome
+\item For later, find expression datasets for microbes we are interested in.
+
+\end{itemize}
+
+
+\experiment{4-21-2017}
+Look into opportunistic bacterial pathogens. These pathogens depend on certain environmental factors that allow these bacteria to become pathogens. Often times can be controlled by a more dominant bacteria in the environment that prevent dangerous bacteria from grabbing a foothold.
+
+Many fungi do not operate at 98.6 F, hence why we do not always have fungal infections.  
+
+\experiment{4-26-2017}
+
+Median times of divergence according to TimeTree.org
+\begin{itemize}
+\item E. coli to B. clausii - 3169 MYA
+\item E. coli to Cauldicellulosiruptor bescii - 3169 MYA
+\item E. coli to C. thermocellum - 3169 MYA
+\item E. coli. to M. luteus - 3169 MYA
+\item E. coli to M. tuberculosis - 3169 MYA
+\item E. coli to Pseudomonas aeruginosa - 1438.8 MYA
+\item E. coli to Staphylococcus aureus - 3169 MYA
+\item E. coli to Streptomyces coelicolor - 3169 MYA
+\item E. coli to Streptococcus pneumoniae - 3169 MYA
+\item E. coli to Streptococcus sobrinus - 3169 MYA
+\item E. coli to Vibrio cholerae - 842.2 MYA
+\item B. clausii to C. bescii - 2650 MYA
+\item B. clausii to C. thermocellum - 2650 MYA
+\item B. clausii to M. luteus - 3077 MYA
+\item B. clausii to M. turberculosis - 3077 MYA
+\item B. clausii to P. aeuruginosa - 3169 MYA
+\item B. clausii to S. aureus - 1558 MYA
+\item B. clausii to S. coelicolor - 3077 MYA
+\item B. clausii to S. pneumoniae - 1810 MYA
+\item B. clausii to S. sobrinus - 1810 MYA
+\item B. clausii to V. cholerae - 3169 MYA
+\item C. bescii to C. thermocellum - 1997 MYA
+\item C. bescii to M. luteus - 3077 MYA
+\item C. bescii to M. tuberculosis - 3077 MYA
+\item C. bescii to P. aeruginosa - 3169 MYA
+\item C. bescii to S. aureus - 2650 MYA
+\item C. bescii to S. coelicolor - 3077 MYA
+\item C. bescii to S. pneumoniae - 2650 MYA
+\item C. bescii to S. sobrinus - 2650 MYA
+\item C. bescii to V. cholerae - 3169 MYA
+\item C. thermocellum to M. luteus - 3077 MYA
+\item C. therm to M. tuberculosis - 3077 MYA
+\item C. therm to P. aeruginosa - 3169 MYA
+\item C. therm to S. aureus - 2650 MYA
+\item C. therm to S. coelicolor - 3077 MYA
+\item C. therm to S. pneumoniae - 2650 MYA
+\item C. therm to S. sobrinus - 2650 MYA
+\item C. therm to V. cholerae - 3190 MYA
+\item M. luteus to M. tuberculosis - 1645 MYA
+\item M. luteus to P. aeruginosa - 3169 MYA
+\item M. lutues to S. aureus - 3077 MYA
+\item M. luteus to S. coelicolor - 1645 MYA
+\item M. luteus to S. pneumoniae - 3077 MYA
+\item M. luteus to S. sobrinus - 3077 MYA
+\item M. luteus to V. cholerae - 3169 MYA
+\item M. tuberculosis to P. aeruginosa - 3169 MYA
+\item M. tuberculosis to S. aureus - 3077 MYA
+\item M. tuberculosis to S. coelicolor - 1278.1 MYA
+\item M. tuberculosis to S. pneumoniae - 3077 MYA
+\item M. tuberculosis to S. sobrinus - 3077 MYA
+\item M. tuberculosis to V. cholerae - 3169 MYA
+\item P. aeruginosa to S. aureus - 3169 MYA
+\item P. aeruginosa to S. coelicolor - 3169 MYA
+\item P. aeruginosa to S. pneumoniae - 3169 MYA
+\item P. aeruginosa to S. sobrinus - 3169 MYA
+\item P. aeruginosa to V. cholerae - 1438.8 MYA
+\item S. aureus to S. coelicolor - 3077 MYA
+\item S. aureus to S. pneumoniae - 1810 MYA
+\item S. aureus to S. sobrinus - 1810 MYA
+\item S. aureus to V. cholerae - 3169 MYA
+\item S. coelicolor to S. pneumoniae - 3077 MYA
+\item S. coelicolor to S. sobrinus - 3077 MYA
+\item S. coelicolor to V. cholerae - 3169 MYA
+\item S. pneumoniae to S. sobrinus - 0.797 MYA
+\item S. pneumoniae to V. cholerae - 3169 MYA
+\item S. sobrinus to V. cholerae - 3169 MYA
+\end{itemize}
+
+As a reference point, humans and chimps diverged about 6.4 MYA and mice (Mus musculus) and humans diverged about 88 MYA. 
+
+For some reason, ROC breaks in the initialization of the covariance matrix for M. luteus. 
+
+
+\subexperiment{Gilchrist lab meeting}
+Add segment analysis for other microbes. Note that pathogenic bacteria who are mainly host-driven (can only really thrive in context of host) have smaller effective population size, which will dampen the effects of selection. Might want to expand analysis to include more non-pathogenic microbes. Use errors-in-variables regression slopes, not regular regression slopes.
+
+
+\experiment{4-28-2017}
+
+\subexperiment{Meeting with Dr. Phillip Myer Animal Sciences}
+
+\textbf{Background} Interplay of factors such as diet management, host genetics, and GIT microbiome are key factors in the nutritional status of beef cattle. Current knowledge of the effects of GIT microbial population dynamics on host productivity is insufficient. Myer's research is focused on mechanisms explaining differences in feed efficiency in beef cattle, nutrition of grazing beef cattle and interactions with the ruminal and lower GIT microbial communities, and the establishment of the rumen microbiome and its effects on growing beef cattle. 
+
+Ruminants are mammals that can acquire nutrietns from plant-based food by fermenting it in a specialized stomach prior to digestion, mainly through microbial actions. The rumen is first chamber in the GIT of ruminants and serves as the primary site of microbial fermentation. 
+
+Wants to optimize feed efficiency. Feed less, gain more for cattle. Interested in how to optimize at the microbiome level in Tennessee. Cow gives birth, weened, ends up being sent to larger pasture area such as Nebraska. Here we are mainly birthing and growing cattle. To what degree do microbes affect the host, to what degree does the host affect the microbiome? Wants to think about just inheritability. Was considering a twin-study, but USDA was not a fan, so just drop it. What are the best microbes to optimize them while they are here in Tennessee. Basically, want to look at the heritability of the microbiome. Intake vs weight. Efficiency is broader impact, but heritability is Myer's main interest for this study. There are heritability measures, but the problem is he wants to treat the microbiome as a trait to inherit. Have access to tools for metabolomics, metagenomics, and (maybe) transcriptomics. Dr. Brynn Voy will be on this study as well. Will be untargeted metabolomics data. Will run rumen and serum metabolomics. Fatty acids might be of particular interest. There are plenty of physiological factors that we might be able to look at. Look into Turnbaugh who has done quite a bit of work on human microbiome heritability. In regards to cattle, Paul Weimer up at University of Wisconsin. For beef cattle, still largely in characterization phase (looking for genetic markers). Grant is due June 15th. Will need to be done way before that. 
+
+For metagenomics, will use traditional sequencing or amplicon sequencing (16s rRNA genes) for more targeted analysis. In Rumen, 0.02 or fewer sequences are unidentifiable, but 0.8 of bacteria are unculturable. Mike thinks we might be able to use CUB as a signature for differentiating between sequence sources. GreenGenes, Silva, NCBI's database, RDB (ribosomal database). 
+
+
+\experiment{5-3-2017}
+
+V. cholerae O1 El-Tor is genetically different from the classic strain, but can still live in water (does not necessarily have to be in human host to thrive).
+
+S. aureus NCTC 8325 is known for causing skin conditions.
+
+S. pneumoniae is apart of normal upper respiratory tract and can become pathogenic under the right conditions.
+
+M. tuberculosis is only known to thrive in humans and some evidence suggests different strains co-evolved with local human population.
+
+B. clausii is a soil bacteria.
+
+S. sobrinus is pathogenic to humans and can be found in cavities/plaque in the human mouth.
+
+S. coelicolor is a soil dwelling bacteria.
+
+C. bescii and C. thermocellum are both cellulolytic thermophiles. 
+
+P. aeruginosa can be found in various environments (soil, water, skin, and man-made environments). Is pathogenic. Not as virulent as other pathogenic bacteira. 
+
+Microcystis aeruginosa is freshwater cyanobacteria and is Gram-negative. 
+
+G/C content
+\begin{itemize}
+\item B. clausii - 44.8 - aerobic
+\item C. bescii - 35.2189 - anaerobic
+\item C. thermocellum - 39.1 - anaerobic
+\item E. coli - 50.8- facultative anaerobic 
+\item M. tuberculosis - 65.60 - aerobic 
+\item P. aeruginosa - 66.60 - facultative anaerobic
+\item S. coelicolor - 71.982 - aerobic 
+\item S. aureus - 32.9 - facultative anaerobic
+\item S. pneumoniae - 39.7 - facultative anaerobic
+\item S. sobrinus - 43.4 -  anaerobic
+\item V. cholerae - 47.4873 - facultative anaerobic
+\end{itemize}
+
+\experiment{5-10-2017}
+Email correspondence with Dr. Tessa Burch-Smith. Is interested in performing a meta-analysis of publicly-available microarray and RNA-Seq data. Specifically, they want to look at expression of different classes of cell-wall and reactive oxygen species-related genes on response to different treatments and use that as a guide to test our hypotheses. Meeting is tenatively scheduled for June 12th at 1pm.
+
+
+\subexperiment{Meeting with Annabel}
+At lower temperatures, find bigger protein clusters. Varying protein-lipid interaction term. At lower temperatures, as increase $J_{PL}$ smaller. Did not try to modify $J_{LL}$ interactions, Steve thought it best to keep these constants. Might also want to modify $J_{PP}$ interactions. Annabel would like to see this project to the end, despite her being way. Helped Rob with antigen-bonding projects. Project is now with multiple bonds.  
+
+
+\begin{itemize}
+\item investigate whether protein-lipid interaction energy affects phase separation of lipids at 300K.
+\item Varying protein-protein interaction energy and observe how this affects the system.
+\end{itemize}
+
+
+
+Annabel will be working with Dan Jacobson for two terms at ORNL (next spring and next summer). Also will be working out at Berkeley before that. 
+
+
+\experiment{5-17-2017}
+\subexperiment{Gilchrist Lab Meeting}
+Implemented likelihood profiling approach for getting confidnece intervals for errors-in-variables approach. Performed parametric bootstrap for both Pearson and Spearman correlation coefficient, but confidence intervals were both lower than the calculated metric, which seems wrong. Needto double check code and estimates used.
+
+MetSign author is not replying to emails. Need to use different software. Potentially MS-Cluster, recognizing this tool was developed for proteomics, not metabolomics. Will likely need another software for data pre-processing to filter out noise. 
+
+Work from the Wilke group might not be appropriate because from different isolate of \textit{E. coli}. Microarray data from the systems biology group seems appropriate. Has many experiments with K12 MG1655 strain under different conditions. Look into E. coli strain presented by Wilke group. How do results differ, if at all, from K12 MG1655 strain. 
+
+\experiment{5-24-2017}
+
+Wrapping up stuff with Mallory prior to ASMS
+
+First-order and second-order approximation stuff is on RibModelDev. Maybe work with undergrad on FONSE work.
+
+Take a look at site-dependent PNAS paper. If I find it interesting, send to Mike  
+
+Look into Qin paper
+
+\includepdf[pages=-]{Ecoli_results/codon_changes.pdf}
+
+\experiment{6-12-2017}
+\subexperiment{\textit{E. coli} gene expression in response to glucose starvation}
+See \cite{houser2015} for details.
+
+Focuses on \textit{E. coli} B REL606 in the stationary phase in response to glucose starvation. 
+
+Monitor both RNA and protein responses over course of two weeks. \textbf{Limit mRNA and protein production}, degrade proteins involved in energy-intensive processes, and maintain or increase the amount of proteins involved in energy production. 
+
+Also examine lipid and flux metabolic analysis. 
+
+mRNA counts normalized via DESeq relative to total pool of mRNA, tRNA, and ncRNA. Protein counts were likewise normalized via total protein counts. Used K-means clustering on mRNA and proteins shown to be changing significantly. Approx. 1900 transcripts/proteins after applying this filter. mRNAs were generally down-regulated, but proteins were more varied. After starved state was entered, transcription profiles remained relatively constant.  
+ 
+Absolute abundance values for proteins and RNA at 3 hour time point had Spearman correlation coefficient of 0.71 
+
+Hierachical clustering showed trends in down and up regulated RNA and proteins based on GO terms. RNA down-regulated included translation, cellular cell wall metabolic process, nitrogen compound biosynthetic process, aerobic respiration. and nitrogen compound biosynthetic process. RNA up-regulated was carbohydrate catabolic process. Down-regulated are likely for energy conservation. Protein down-regulated included translation, cellular cell wall macro,olecule metabolic process, locomotory behavior, RNA modification. DNA-dependent DNA replication, and cell cycle. Protein up-regualted included lipid modification, carbohydrate catabolic process, response to osmotic stress, glyceral metabolic process, iron ion transport.
+
+\subexperiment{The \textit{E. coli} molecular phenotype under different growth conditions}
+See \cite{caglar2017} for more details.
+
+Examines \textit{E. coli} B REL606 under 34 conditions. Consider both exponential and stationary phase cells. Alter concentrations of sodium and magnesium in growth media. Also examine different carbon sources: glucose, gluconate, lactate, and glycerol.
+
+Growth phase had the greatest impact on systematic difference in mRNA abundance based on hierachical clustering. Results for protein abundance suggests sodium levels and carbon source have greater impact on shaping protein abundances. 
+
+
+\experiment{6-14-2017}
+
+Kullback-Liebler distance is the distance between the true model and your model. Could they potentially formulate SELAC and other models so they are nested, allowing employment of a likelihood ratio test. 
+
+AICc under different conditions:
+\begin{itemize}
+\item number of sites
+\item number of sites times number of taxa
+\item number of taxa
+\end{itemize}
+Calculate AICc under all conditions, take one that fits best. 
+
+Common rule for AIC is ratio of number of parameters to number of datapoints of about 40. 
+
+Functionality in SELAC is currently a linear function. Reduce functionality by 3, then increase expression by 3, which is biologically unrealistic. Can we come up with another approach that might be based on the structure of the protein or physio-chemical properties of the individual amino acids. 
+
+PhyloBayes.org has software that implements Halpern and Bruno 1998 model. Check out if you find the time. 
+
+Hackathon for playing around with the Tree of Life August 8th through 11th. 
+
+Look at credibility intervals for ribosome protein expressions in \textit{C. bescii} and \textit{C. thermocellum}.
+
+\experiment{Signal Peptide Paper Outline}
+Working title: \textbf{Assessing Codon Usage Bias as a potential marker of Signal Peptides in \textit{Escherichia coli}}
+
+Authors: Alex Cope, Robert Hettich, Michael Gilchrist
+\begin{outline}[enumerate]
+\1 Introduction
+	\2 Why is protein secretion importance
+		\3 Many proteins important to biological processes are secreted
+			\4 Anti-bacterial resistance proteins ($\beta$-lactamase)
+			\4 Metabolism proteins (Maltose Binding Proteins, proteins in cellulolytic microbes - find specific examples)
+			\4 Need to understand mechanisms of protein secretion
+		\3 Pathways of protein secretion in Gram-negative bacteria
+			\4 General Secretory Pathway - evolutionarily conserved across domains of life, common feature is signal peptide
+			\4 Signal peptides have relatively consistent chemical properties, but some variation is possible (ex. effects of neutralizing N-terminus on secretion)
+			\4 Summarize work suggesting signal peptides in \textit{E. coli} have bias for translation inefficient codons
+			
+	\2 Relevance of Signal Peptide prediction and other localization prediction software
+		\3 MS can theoretically be used to measure the secretome
+		\3 Problems with experimental approach: 
+			\4 Low abundance proteins can be confused with noise
+			\4 Cell lysis...how do you distinguish between actual extracellular proteins and cytoplasmic proteins in the sample from cell lysis
+		\3 Use tools like SignalP and Psort to help distinguish between extracellular and cytoplasmic proteins in experimental results
+			\4 Tools are also subject to error. How can we improve them? 
+		
+\1 Main Question
+	\2 Does selection differ on the CUB of signal peptides in \textit{E. coli} compared to the rest of the genome? Is there selection for translation inefficient codons?
+	\2 If so, then CUB could be a viable marker of signal peptides, allowing us to improve signal peptide prediction
+\1 Methods
+	\2 Tools: SignalP and ROC-SEMPPR
+	\2 Describe how coding sequences are categorized (non-signal peptide gene, signal peptide, mature peptide)
+	\2 Describe generation of pseudo-signal peptide genes
+	\2 Describe how each coding sequence is segmented to analyze CUB and how it varies along a gene
+	\2 Estimate $\Delta\eta$ via ROC-SEMPPR for various regions
+\1 Results
+	\2 Expected results given signal peptides are under seleciton for translation inefficient codons: Negative correlation bewteen $\Delta\eta$ parameters for signal peptides and mature peptides
+	\2 Actual Results: Positive correlation between parameters
+	\2 Comparison of signal peptides to first 25 codons of pseudo-signal peptide genes
+	\2 See decline in slopes comparing $\Delta\eta$ estimates from 25 codons segment further down the genes to first 25 codon segment
+		\3 Can also present traces of $\Delta\eta$ values for each codon for each segment
+\1 Discussion
+	\2 Positive correlation means direction of selection in signal peptides is consistent with the rest of the genome
+	\2 CUB in signal peptides is most consistent with 5' ends of non-signal peptide genes, but still not the 1:1 ratio we were expecting...why?
+	\2 See general decrease in slope over the length of coding sequences, consistent with selection against nonsense errors
+	\2 Drop-off at end of slope trace is result of arginine codons AGA and AGG no longer being present
+		\3 These two codons vary from the $y = x$ line, do not know why yet
+		\3 AGG and AGA are non-canonical codons in mitochondria and some organisms...coincidence or suggest something biological about \textit{E. coli}?
+	\2 Address contradictions with experimental work
+		\3 Optimization of CUB can result in drops in expression (find references), which would explain experimental results
+		\3 Experimental work required researchers to use different sets of translation ineffient codons to get consistent results. 
+			\4 Only one of these sets was consistent with the bioinformatic analysis that jump started their research.
+\1 Conclusion
+	\2 Contrary to previous work, selection for CUB in signal peptides is consistent with rest of genome
+	\2 CUB is likely not a good marker for signal peptides
+	\2 Selection against nonsense errors likely one contributor to variation in CUB along genes in \textit{E. coli}, but others likely exist
+            
+\end{outline}
+
+\experiment{6-21-2017}
+\subexperiment{Comparing ROC-SEMPPR $\phi$ to RNA-Seq and Proteomics data from \cite{caglar2017}}
+
+In general, raw mRNA counts \textbf{do not} correlate well with $\phi$ estimates of ROC-SEMPPR.
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_raw_mrna.pdf}
+\caption{Comparison of raw RNA-Seq counts to ROC-SEMPPR $\phi$}
+\end{figure}
+
+
+By normalizing the RNA-Seq counts, correlations generally improve. I examined three normalization techniques:
+\begin{itemize}
+\item Reads Per Kilobases per Million Reads (RPKM) 
+\item Transcripts Per Million (TPM)
+\item size factors calculated by DeSeq2 (R package)
+\end{itemize}
+
+Let $r_g$ be the number of reads for gene $g \epsilon G$, $fl_g$ be the feature length - the number of nucleotides in a mappable region of a gene - and rl be the read length - the average number of nucleotides mapped per read. From my understanding $fl_g$ will be shorter than the length of the gene if dealing with things such as introns. Given that I am looking at a bacteria where introns are relatively rare, I just substituted in the length of the gene for $fl_g$.  
+\begin{align}
+RPKM_g &= \frac{r_g \times 10^9}{fl_g \times R} \\
+R & = \sum_{g \epsilon G} r_g \text{(total number of reads from sequence run)}\\
+TPM_g &= \frac{r_g \times rl \times 10^6}{fl_g \times T} \\
+T &= \sum_{g \epsilon G} \frac{r_g \times rl}{fl_g} \text{(proxy for number of transcript samples)}
+\end{align}
+ 
+The normalization approach used by \cite{caglar2017} uses DeSeq2, an R package. I need to further my understanding of this approach. Unlike RPKM and TPM, this tool can be used to normalize both RNA-Seq and Proteomics data. 
+
+From my general observations, normalized RNA-Seq data (regardless of normalization method) seems to best correlate with ROC-SEMPPR $\phi$ in early exponential phase, a general drop-off during the transition into stationary phase, and then an increase in the correlation during late-stationary phase. 
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_rpkm.pdf}
+\caption{Comparison of RNA-Seq counts normalized by RPKM to ROC-SEMPPR $\phi$ in early exponential phase}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=7,scale=0.6]{Ecoli_REL606/GSE94117_rpkm.pdf}
+\caption{Comparison of RNA-Seq counts normalized by RPKM to ROC-SEMPPR $\phi$ in stationary phase}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=9,scale=0.6]{Ecoli_REL606/GSE94117_rpkm.pdf}
+\caption{Comparison of RNA-Seq counts normalized by RPKM to ROC-SEMPPR $\phi$ in late stationary phase}
+\end{figure}
+
+Unlike RNA-Seq data, the ROC-SEMPPR $\phi$ estimates generally correlate better with protein abundance data (raw or normalized) and these correlations are more consistent across conditions. Normalization appears to have little to no impact on how well ROC-SEMPPR $\phi$ estimates correlate with the empirical data (see Figures 16 and 17). Under almost every condition, the Spearman rank coefficient is between 0.5 to 0.58. The one exception is when \textit{E. coli} is grown a high NaCl concentration environment, in which the correlation generally drops to 0.45-0.47. However, I know salt in samples can increase the noise in a mass spectrometry run, which might have affected the quantifications. Also, protein abundance data were relatively sparse to the RNA-Seq data.   
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_protein_raw_counts.pdf}
+\caption{Comparison of raw protein accounts to ROC-SEMPPR $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_norm_sf_protein.pdf}
+\caption{Comparison of normalized protein accounts to ROC-SEMPPR $\phi$}
+\end{figure}
+
+\bibliographystyle{acm}
+\bibliography{papers}{}
+\end{document}

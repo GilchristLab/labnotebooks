@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{caglar2017}
+{\sc Caglar, M., Houser, J., Barnhart, C., Boutz, D., Carrol, S., Dasgupta, A.,
+  Lenoir, W., Smith, B., Sridhara, V., Sydykova, D., Marx, D. V.~C., Marcotte,
+  E., Barrick, J., and Wilke, C.}
+\newblock The e. coli molecular phenotype under different growth conditions.
+\newblock {\em Scientific Reports 7}, 45303 (2017), 1--15.
+
+\bibitem{houser2015}
+{\sc Houser, J., Barnhart, C., Boutz, D., Carrol, S., Dasgupta, A., Michener,
+  J., Needham, B., Papoulas, O., Sridhara, V., Sydykova, D., Marx, C., Trent,
+  M., Barrick, J., Marcotte, E., and Wilke, C.}
+\newblock Controlled measurement and comparative analysis of cellular
+  components in e. coli reveals broad regulatory changes in response to glucose
+  starvation.
+\newblock {\em PLoS Computational Biology 11}, 8 (2015), 1--27.
+
+\bibitem{pal2006review}
+{\sc Pal, C., Papp, B., and Lercher, M.}
+\newblock An integrated view of protein evolution.
+\newblock {\em Nature Genetics 7\/} (2006), 337--348.
+
+\bibitem{zhang2015review}
+{\sc Zhang, J., and Yang, J.}
+\newblock Determinatns of the the rate of protein sequence evolution.
+\newblock {\em Nature Genetics 16\/} (2015), 409--420.
+
+\end{thebibliography}
