@@ -20,12 +20,6 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-%\textwidth=16.5cm
-%mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
-% Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
-% was used as a bandage on an abundance of overfull hboxes. 
-% June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
-
 % For verbatim quotes
 \lstnewenvironment{verbquote}[1][]
   {\lstset{columns=fullflexible,
@@ -72,7 +66,7 @@
 %%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
 
 
-\title{Notes for Undergraduate Research Work}
+\title{Abridged Notes for Undergraduate Research Work}
 \author{Hollis Bui}
 
 \begin{document}
@@ -125,7 +119,7 @@ To check current directory in R, type in and execute \enquote{getwd()}.
             \item Implement other unit testing first
         \end{itemize}
         \item Parameter -- In progress
-        \item Test RFP Parameter
+        \item Test PA Parameter
         \item Test Trace
         \item ...Per class basis
         \item Eventually, some R scripts to do a short run for each model: Talk to Cedric
@@ -229,10 +223,6 @@ Don’t redo calculations from scratch, but rather in series.
 Gilchrist thinks what is meant by Gene-Specific Parameters is to parallelize at the highest level, 
 i.e. at the gene or amino acid level.
 
-I should check the code; find where the OpenMP statements are, etc.
-
-Mostly something to ask other people about if I want to tackle the problem.
-
 \labday{May 26, 2016 Notes}
 
 \experiment{Parallelization}
@@ -252,7 +242,7 @@ we ended up parallelizing in the model class:
 calculateLogLikelihoodRatioPerGene, apparently doesn’t do much.
 Perhaps better to parallelize outside, with the big loop
 
-Run a ROC model, then RFP
+Run a ROC model, then PA
 
 I’m running a fasta file that is simulated, so I know that it is true
 
@@ -264,17 +254,6 @@ Dynamic Arrays -\textgreater Vectors
 
 \labday{May 31, 2016 Notes}
 
-\begin{itemize}
-    \item Start 1:21
-    \item break 3:19
-    \item back 3:24
-    \item break 4:55
-    \item return 5:02
-    \item end 7:02
-\end{itemize}
-
-2 + 1.5 + 2
-
 \experiment{Parallelization}
 
 Go ahead and replace dynamic arrays with vectors, first
@@ -284,23 +263,9 @@ without regards to parallelization.
 
 \labday{June 1, 2016 Notes}
 
-\begin{itemize}
-    \item Start 1:30
-    \item Break 3:30
-    \item Return 3:35
-    \item End 7:00
-\end{itemize}
-
-2 + 3.5
-
 \experiment{Parallelization}
 
 From yesterday:
-
-%\footnote{mikeg: June 18, 2016 - Please label your columns!
-% Otherwise, it is impossible to know for certain what the data below represents.
-%}
-% Resolved June 27, 2016 (Hollis): Will do in the future, fixed it here as well
 
 \begin{table}[H]
     \centering
@@ -372,22 +337,9 @@ Next step: Make a list of everything PANSE touches and unit test these things (f
 
 ALSO: Estimate and track how long, in reality, it takes to do each unit testing
 
-PARFP, PTRFP? Just calling it RFP might be misleading.
-
 \labday{June 2, 2016 Notes}
 
-\begin{itemize}
-    \item Start 1:01
-    \item Break 3:35
-    \item Return 3:50
-    \item End 6:58
-\end{itemize}
-
-Spent till 4 (3 hours) compiling notes and creating a git directory.
-
 \experiment{PANSE Implementation}
-
-Expecting to spend ~1 hour deciding on what PANSE will need (or, rather, what RFP will need).
 
 Talk with Gilchrist:
 
@@ -395,13 +347,13 @@ So data position feeds into:
 \begin{itemize}
     \item a) data on gene 
     \begin{itemize}
-        \item ab) to feed into ROC-RFP
+        \item ab) to feed into PA
     \end{itemize}
-    \item or b) PANSE-RFP
+    \item or b) PANSE
 \end{itemize}
 
 \experiment{Lareau Data}
-Which file type should I be reading in? RFP or Fasta?
+Which file type should I be reading in? PA or Fasta?
 
 For sample data for PANSE:
 
@@ -414,19 +366,11 @@ The Lareau material may have undergone more processing that the new Weinberg GSE
 
 \labday{June 3, 2016 Notes}
 
-\begin{itemize}
-    \item Start 1:35
-    \item Break 4:09
-    \item Return 4:14 
-\end{itemize}
-
 \experiment{Lareau Data}
 
 Decided to start reading the Lareau material. Began by looking directly at definition of data set
 (I chose untreated replicate 1) and then parse the data to get a smaller subset (file size otherwise
 is too large at 35MB)
-
-Took longer than expected... When files finally parsed, 5:45.
 
 Now have a data set of size 400 KB: those genes with 11 to 100 (inclusive) codons. 
 
@@ -494,7 +438,7 @@ Interestingly small size -- seems like old data set had that many genes of small
 Spent an hour afterward reading over labbook documentation and reformatting notes where needed.
 
 \labday{June 7, 2016 Notes}
-In the course of running an RFP Model, the following functions are called (and have yet to be
+In the course of running an PA Model, the following functions are called (and have yet to be
 unit tested).
 
 \experiment{TODOs}
@@ -509,7 +453,7 @@ unit tested).
         \item For the two above -- Find how to check delM and delEta of category (a vector of Mixture Definitions) -- Done
         \item Check many final changes at the end of this function -- Three remaining
     \end{itemize}
-    \item initRFPParameterSet -- RFP exclusive
+    \item initPAParameterSet -- PA exclusive
     \item getSelectionCategory -- general parameter -- Done
     \item InitializeSynthesisRate -- general parameter
     \begin{itemize}
@@ -518,8 +462,8 @@ unit tested).
         \item quickSort
         \item Parameter::randLogNorm
     \end{itemize}
-    \item setParameter -- RFP model exclusive
-    \item mcmc.run -- MCMC function on RFP(TODO later?)
+    \item setParameter -- PA model exclusive
+    \item mcmc.run -- MCMC function on PA(TODO later?)
 \end{itemize}
 
 \experiment{Unit Testing}
@@ -532,84 +476,11 @@ finishing the final two functions.
 May need to write a function to unit test with the categories variable itself, but
 all that happens otherwise is it pushes unto the vector of vector of vectors.
 
-Encountering a strange printing bug right before the end. While if statement works correctly,
-the final confirmation of initParameterSet isn't being printed.
-
-Example output:
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Parameter getMixtureAssignment --- Pass
-Parameter setMixtureAssignment --- Pass
-Parameter getMutationSelectionState --- Pass
-Parameter getNumParam --- Pass
-Parameter getNumMixtureElements --- Pass
-Parameter getStdDevSynthesisRate --- Pass
-Parameter setStdDevSynthesisRate --- Pass
-Parameter getCurrentStdDevSynthesisRateProposalWidth --- Pass
-Parameter getNumAcceptForStdDevSynthesisRate --- Pass
-Parameter getStdCspForIndex --- Pass
-Parameter getNumAcceptForCspForIndex --- Pass
-Parameter getNumMutationCategories --- Pass
-Parameter getNumSelectionCategories --- Pass
-Parameter getMutationCategory --- Pass
-Parameter getSelectionCategory --- Pass
-Parameter getMixtureElementsOfMutationCategory --- Pass
-Parameter getMixtureElementsOfSelectionCategory --- Pass
-Parameter getCategoryProbability --- Pass
-Parameter setCategoryProbability --- Pass
-Parameter getSynthesisRate --- Pass
-Parameter setSynthesisRate --- Pass
-Parameter getSynthesisRateProposalWidth --- Pass
-0
-Parameter initParameterSet --- Pass
-
-Process finished with exit code 0
-\end{lstlisting}
-\end{minipage}
-
-vs
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Parameter getMixtureAssignment --- Pass
-Parameter setMixtureAssignment --- Pass
-Parameter getMutationSelectionState --- Pass
-Parameter getNumParam --- Pass
-Parameter getNumMixtureElements --- Pass
-Parameter getStdDevSynthesisRate --- Pass
-Parameter setStdDevSynthesisRate --- Pass
-Parameter getCurrentStdDevSynthesisRateProposalWidth --- Pass
-Parameter getNumAcceptForStdDevSynthesisRate --- Pass
-Parameter getStdCspForIndex --- Pass
-Parameter getNumAcceptForCspForIndex --- Pass
-Parameter getNumMutationCategories --- Pass
-Parameter getNumSelectionCategories --- Pass
-Parameter getMutationCategory --- Pass
-Parameter getSelectionCategory --- Pass
-Parameter getMixtureElementsOfMutationCategory --- Pass
-Parameter getMixtureElementsOfSelectionCategory --- Pass
-Parameter getCategoryProbability --- Pass
-Parameter setCategoryProbability --- Pass
-Parameter getSynthesisRate --- Pass
-Parameter setSynthesisRate --- Pass
-Parameter getSynthesisRateProposalWidth --- Pass
-
-
-Process finished with exit code 0
-\end{lstlisting}
-\end{minipage}
-
 \labday{June 8, 2016 Notes}
 
 \experiment{Unit Testing}
-%\footnote{mikeg: June 18, 2016 - Please use the `itemize' or `enumerate' environment for lists.
-%  This helps keep things organized and easier to read.
-%}
-% Resolved June 27, 2016 (Hollis): Fixed this section, will keep in mind for the future.
 \begin{itemize}
-    \item Started by writing and testing a function for numAcceptForSynthesisRate.
-    \item Printing this statement seems to have fixed the odd print bug mentioned yesterday.
+    \item Wrote and tested a function for numAcceptForSynthesisRate.
     \item After doing that, I decided to write up on the documentation of Unit Testing I have done so far.
 \end{itemize}
 
@@ -649,7 +520,7 @@ Continued TODO:
 \experiment{TODOs}
 
 \begin{itemize}
-    \item initRFPParameterSet -- RFP exclusive
+    \item initPAParameterSet -- PA exclusive
     \item InitializeSynthesisRate -- general parameter
     \begin{itemize}
         \item calculateSCUO
@@ -657,8 +528,8 @@ Continued TODO:
         \item quickSort
         \item Parameter::randLogNorm
     \end{itemize}
-    \item setParameter -- RFP model exclusive
-    \item mcmc.run -- MCMC function on RFP(TODO later?)
+    \item setParameter -- PA model exclusive
+    \item mcmc.run -- MCMC function on PA(TODO later?)
 \end{itemize}
 
 Next goals: Do the internal functions for InitializeSynthesisRate related to quickSort.
@@ -666,8 +537,6 @@ Next goals: Do the internal functions for InitializeSynthesisRate related to qui
 Finish up InitializeSynthesisRate.
 
 \labday {June 9, 2016 Notes}
-
-Began by checking github; fixed semicolon error and confirmed package worked correctly.
 
 \experiment{TODOs}
 
@@ -692,14 +561,12 @@ To truly finish testing InitializeSynthesisRate, we would need:
     \end{itemize}
 \end{itemize}
 
-Ask Cedric if it'd be a good idea to just use std::sort instead of quickSort.
-
 The quick sort algorithms are very math-intensive, so Unit Testing them may be lower priority.
 
-For now, I am switching to unit testing RFP-exclusive functions.
+For now, I am switching to unit testing PA-exclusive functions.
 
 \begin{itemize}
-    \item initRFPParameterSet (in RFPParameter.cpp)
+    \item initPAParameterSet (in PAParameter.cpp)
     \begin{itemize}
         \item check currentCodonSpecificParameter
         \item check proposedCodonSpecificParameter
@@ -709,10 +576,10 @@ For now, I am switching to unit testing RFP-exclusive functions.
         \item check std\_csp -- Done
         \item check groupList -- Done
     \end{itemize}
-    \item setParameter (in RFPModel.cpp) -- may be untestable, ignore for now
+    \item setParameter (in PAModel.cpp) -- may be untestable, ignore for now
 \end{itemize}
 
-In the course of working on checking RFPParameter, wrote up Unit Testing for all
+In the course of working on checking PAParameter, wrote up Unit Testing for all
 Group List functions in Parameter.cpp
 
 May need a wrapper function for current\sep Codon\sep Specific\sep Parameter and 
@@ -723,7 +590,7 @@ Refocusing overall goals:
 \begin{enumerate}
     \item Unit Test up-to-date with Parameter
     \begin{itemize}
-        \item{initRFPParameterSet}
+        \item{initPAParameterSet}
         \begin{itemize}
             \item check currentCodonSpecificParameter -- stalled, ask Cedric
             \item check proposedCodonSpecificParameter -- stalled, ask Cedric
@@ -747,7 +614,7 @@ Refocusing overall goals:
                 \end{itemize}
             \end{itemize}
         \end{itemize}
-        \item mcmc::run -- MCMC function on RFP
+        \item mcmc::run -- MCMC function on PA
     \end{itemize}
     \item Write up pseudo-code with PANSE itself to prepare for it
     \item Create and test a function for reading in Lareau material (low priority)
@@ -756,7 +623,7 @@ Refocusing overall goals:
 
 TODO tomorrow:
 
-Ask about current/proposed CSP Parameter, quicksort vs std::sort, and how (if) to unit test
+Ask about current/proposed CSP Parameter, and how (if) to unit test
 the more computation-intensive functions.
 
 Finally replace cout statements in my own section of main.
@@ -766,19 +633,19 @@ Begin testing with MCMC run while waiting for others to arrive.
 \labday {June 10, 2016 Notes}
 
 There exists a hierarchy of functions to test before finally testing mcmc.run. Test the
-subitems first: (NOTE: Testing with RFPModel)
+subitems first: (NOTE: Testing with PAModel)
 \begin{itemize}
     \item mcmc::run
     \begin{itemize}
         \item mcmc::varyInitialConditions
         \begin{itemize}
-            \item model::proposeCodonSpecificParameter -- wrapper to RFPparameter
+            \item model::proposeCodonSpecificParameter -- wrapper to PAparameter
             \item model::\sep propose\sep Hyper\sep Parameters -- wrapper to
             parameter::\sep propose\sep Std\sep Dev\sep Synthesis\sep Rate
             \item model::proposeSynthesisRateValues -- wrapper to parameter
             \item model::getGroupListSize -- wrapper to parameter (done?)
             \item model::getGrouping -- wrapper to parameter (done?)
-            \item model::updateCodonSpecificParameter -- wrapper to RFPparameter
+            \item model::updateCodonSpecificParameter -- wrapper to PAparameter
             \item model::\sep update\sep All\sep Hyper\sep Parameter -- 
             calls update\sep Std\sep Dev\sep Synthesis\sep Rate -- Ask
             \begin{itemize}
@@ -796,15 +663,15 @@ subitems first: (NOTE: Testing with RFPModel)
         \end{itemize}
         \item model::\sep set\sep Num\sep Phi\sep Groupings -- 
         a wrapper to parameter::\sep set\sep Num\sep Observed\sep Phi\sep Sets (done?)
-        \item model::initTraces -- wrapper to RFPparameter initAllTraces
+        \item model::initTraces -- wrapper to PAparameter initAllTraces
         \item model::updateTracesWithInitialValues
         \begin{itemize}
             \item parameter::updateSynthesisRateTrace
             \item parameter::updateMixtureAssignmentTrace
-            \item RFPparameter::updateCodonSpecificParameterTrace
+            \item PAparameter::updateCodonSpecificParameterTrace
         \end{itemize}
         \item model::setLastInteration -- wrapper to parameter (done?)
-        \item model::writeRestartFile -- wrapper to RFPparameter writeEntireRestartFile
+        \item model::writeRestartFile -- wrapper to PAparameter writeEntireRestartFile
         \item model::printHyperParameters -- unneeded to test, just prints
         \item model::getNumMixtureElements -- wrapper to parameter (done?)
         \item mcmc::acceptRejectCodonSpecificParameter
@@ -813,7 +680,7 @@ subitems first: (NOTE: Testing with RFPModel)
             \item model::updateCodonSpecificParameterTrace
         \end{itemize}
         \item model::\sep adapt\sep Codon\sep Specific\sep Parameter\sep Proposal\sep Width 
-        -- wraps RFP\sep parameter
+        -- wraps PA\sep parameter
         \item mcmc::acceptRejectHyperParameter
         \begin{itemize}
             \item model::calculateLogLikelihodRatioForHyperParameters
@@ -858,16 +725,16 @@ New modified list stripping out some things that are more-or-less done
     \item mcmc::run
     \begin{itemize}
         \item mcmc::varyInitialConditions
-        \item model::initTraces -- wrapper to RFPparameter initAllTraces
+        \item model::initTraces -- wrapper to PAparameter initAllTraces
         \item model::updateTracesWithInitialValues
         \begin{itemize}
             \item parameter::updateMixtureAssignmentTrace
-            \item RFPparameter::updateCodonSpecificParameterTrace
+            \item PAparameter::updateCodonSpecificParameterTrace
         \end{itemize}
-        \item model::writeRestartFile -- wrapper to RFPparameter writeEntireRestartFile
+        \item model::writeRestartFile -- wrapper to PAparameter writeEntireRestartFile
         \begin{itemize}
             \item parameter::writeBasicRestartFile
-            \item writeRFPRestartFile
+            \item writePARestartFile
         \end{itemize}
         \item mcmc::acceptRejectCodonSpecificParameter
         \begin{itemize}
@@ -875,7 +742,7 @@ New modified list stripping out some things that are more-or-less done
             \item model::updateCodonSpecificParameterTrace
         \end{itemize}
         \item model::\sep adapt\sep Codon\sep Specific\sep Parameter\sep Proposal\sep Width --
-        wraps RFP\sep parameter. Uses traces.
+        wraps PA\sep parameter. Uses traces.
         \item mcmc::acceptRejectHyperParameter
         \begin{itemize}
             \item model::calculateLogLikelihodRatioForHyperParameters
@@ -909,14 +776,10 @@ Next step:
 Probably work with traces. Not sure how to proceed with unit testing
 the most complicated functions re: computation, nor with reading/writing files yet.
 
-\labday {June 11, 2016 Notes}
-Mostly read documentation. Worked from home, so no benefit of discussing implementation topics.
-Worked less than planned.
-
 \labday {June 13, 2016 Notes}
 Discussing Unit Testing with Cedric:
 
-OK'd changing quicksort (simple implementation) to std::sort.
+Changed quicksort (simple implementation) to std::sort.
 
 Instead of running the higher-level functions that are directly used, 
 probably better to stick to the simple functions and then test MCMC algorithm runs with
@@ -924,8 +787,6 @@ probably better to stick to the simple functions and then test MCMC algorithm ru
 
 For the intense calculations, for now ignore. The calculation unit tests will be summed up (in a
 general sense) by just doing MCMC algorithm runs.
-
-First, going to change std::sort.
 
 After that was done, decided to clean up some R-side unit testing in preparation of testing
 MCMC algorithm runs -- since in R you can set seed for entire C-side implementation.
@@ -975,18 +836,14 @@ some new calls without associated delete calls.
 Found a confirmed memory leak with my\_print. Started today by flushing output on
 both C and R side of code, as well as expanding unit testing for Utility.h.
 
-Spent an hour and a half on this.
-
-Came in late, could not ask Cedric questions.
-
 \experiment{Traces}
 Order of Trace functions to examine in a typical model run (via MCMC::run):
 \begin{itemize}
     \item model::initTraces(samples + 1, genome.getGenomeSize());
     \begin{itemize}
-        \item RFPparameter-\textgreater initAllTraces
+        \item PAparameter-\textgreater initAllTraces
         \begin{itemize}
-            \item traces.initializeRFPTrace (RFP-only)
+            \item traces.initializePATrace (PA-only)
             \begin{itemize}
                 \item initializeSharedTraces
                 \item initCodonSpecificParameterTrace (for both alp and lmPri)
@@ -1003,7 +860,7 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
         \begin{itemize}
             \item traces.updateMixtureAssignmentTrace
         \end{itemize}
-        \item RFPparameter::updateCodonSpecificParameterTrace
+        \item PAparameter::updateCodonSpecificParameterTrace
         \begin{itemize}
             \item traces.updateCodonSpecificParameterTraceForCodon (for alp and lmPri)
         \end{itemize}
@@ -1015,7 +872,7 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
         \item model::updateCodonSpecificParameterTrace
     \end{itemize}
     \item model::\sep adapt\sep Codon\sep Specific\sep Proposal\sep Width -- 
-    wrapper to RFP\sep parameter. Uses trace
+    wrapper to PA\sep parameter. Uses trace
     \item mcmc::acceptRejectHyperParameter
     \begin{itemize}
         \item model::calculateLoglIkelihoodRatioForHyperParameters
@@ -1037,20 +894,12 @@ Order of Trace functions to examine in a typical model run (via MCMC::run):
 
 This list is still incomplete, but we shall start implementing now for convenience.
 
-Need to keep examining functions... 
-
 Ended before checking model::updateTracesWithInitialValues
 
 \labday {June 15, 2016 Notes}
 
 Answers to Cedric questions:
 \begin{itemize}
-    \item In general, design of code is up to me. Seems good with whatever.
-    %\footnote{mikeg: June 18, 2016 - This seems like a poor idea and more guidance for code design should be provided given the fact that many folks work on this code.
-    %}
-    % Resolved June 27, 2016 (Hollis): Agree with mikeg. Since this comment Cedric has
-    % created a general formatting document, and I will merge my unofficial one that I
-    % had been working on with his once I discuss it.
     \item DevRScripts are super outdated. Be careful of what to use, i.e. a lot of functions
     are using old definitions and need additional arguments.
     \item Again, for overall unit testing:
@@ -1079,7 +928,7 @@ Afterward attempted to learn more about R in order to write scripts to test mode
 
 Testing Restart files:
 
-I think I will create a separate function for each type of file. Basic Parameter, RFP, ROC, etc.
+I think I will create a separate function for each type of file. Basic Parameter, PA, ROC, etc.
 
 These will be tested by first checking if both read and write work at the same time.
 
@@ -1103,12 +952,6 @@ work assignments until after my vacation period.
 \labday {June 16, 2016 Notes}
 
 \experiment{R Debugging}
-Began the day immediately encountering completely unknown errors attempting to run any
-R scripts that had worked the day before. Problem seems to be with MCMC\_run. As Cedric
-is not here today, will be much more difficult to check R-side scripts. At the same time,
-worry that any changes made today may mess up the project as a whole despite
-the Travis check declaring no errors. Will probably not push any changes made today
-unless I can debug this.
 
 Decided to clean up the mess of warnings spat out in order to find out how to debug:
 I changed the deprecated Rcpp::\sep load\sep Rcpp\sep Modules() function
@@ -1120,14 +963,8 @@ Then, I minorly edited the documentation files to clear up the more obvious erro
 \labday {June 17, 2016 Notes}
 
 \experiment{R Debugging}
-Continued working on fixing R documentation.
-
-Finishing at 6 after about 4 hours of work and research, I was able to reduce the warnings
+Continued working on fixing R documentation. I was able to reduce the warnings
 on my own machine to 4 Warnings and 2 Notes.
-
-The unknown errors and R studio crashing thing has been fixed, but I'm not sure how.
-I suspect it may have been errors in building/installing the package, but I checked out
-a fresh copy of all of the files.
 
 Goals for next work days: Restart file testing, model testing, PANSE pseudocode.
 
@@ -1139,14 +976,11 @@ so I can discuss any ideas I may have with Dr. Gilchrist once he returns.
 \experiment{R Debugging}
 
 \begin{itemize}
-\item 
-Last night (June 26) spent about two hours fixing a bug with the overall project:
+    \item Last night (June 26) spent about two hours fixing a bug with the overall project:
 there was an error with testhat due to changing (fixing) Parameter.cpp setup.
-\item
-Plan for today is to begin unit testing with R-side models while also rereading PANSE
+    \item Plan for today is to begin unit testing with R-side models while also rereading PANSE
 documentation and planning psuedocode.
-\item
-Found a bug in function to simplify code; fixed bug, started replacing this code
+    \item Found a bug in function to simplify code; fixed bug, started replacing this code
 in the existing R scripts for consistency. 
 Took an hour and a half.\footnote{mikeg: 06/30/16 -- You should state more clearly what this bug so that if you needed to go back and remember what you did, you'd be able to do so from your notes.
 You spent 1.5 hours fixing this bug, why not spend a few more minutes documenting the problem and fix?}
@@ -1156,8 +990,7 @@ That way I can go through them and comment them out if I feel they are resolved.
 \footnote{Hollis: 07/05/16 -- Acknowledged. 
 I don't know if you want me to un-comment-out the old footnotes, but I will not do this in the future.
 The bug mentioned was in R/parameterObject.R: two functions (getMixtureAssignmentEstimate and getExpressionEstimatesForMixture) did not apply the unlist function for a random of values, and it has been corrected now.}
-\item
-Fixed another bug with traces on the R-side whenever plotting is done.\footnote{mikeg: 06/30/16 -- Better than the above note, but could still use a little more detail.}
+    \item Fixed another bug with traces on the R-side whenever plotting is done.\footnote{mikeg: 06/30/16 -- Better than the above note, but could still use a little more detail.}
 \footnote{Hollis: 07/05/16 -- Acknowledged. 
 Bug was in R/plotParameterObject.R, where a function re-set the samples to 100 no matter what the actual argument was (now fixed).}
 \end{itemize}
@@ -1280,11 +1113,11 @@ However, the dimension error still exists; it must have been a separate issue I 
 Will have to ask Cedric again tomorrow.
 
 Possible next course of action: figure out why there is another invalid method
-in run\sep Simulated\sep RFP\sep Data\sep .\sep R in Rib\sep Model\sep Dev:
+in run\sep Simulated\sep PA\sep Data\sep .\sep R in Rib\sep Model\sep Dev:
 \footnote{mikeg: 06/30/16 -- same as footnote \ref{fn:lstError}}
 \footnote{Hollis: 07/01/16 -- See answer on \ref{fn:lstError}}
 \footnote{mikeg: 06/30/16 -- Is the lstlisting for code or output or both?}
-\footnote{Hollis: 07/01/16 -- This is the part of the code in runSimulatedRFPData.R that causes an error.
+\footnote{Hollis: 07/01/16 -- This is the part of the code in runSimulatedPAData.R that causes an error.
 Technically, it is both code and output since it was run with Rstudio (which prints and runs the code and then any outputs/errors as well).}
 
 \noindent\begin{minipage}{\linewidth}
@@ -1323,7 +1156,7 @@ Document them!
 }
 \footnote{Hollis: 07/05/16 -- See other footnote, \ref{fn:dimensionFix}.}
 
-Then fixed run\sep Simulated\sep RFP\sep Data.R: invalid method occurs calling:
+Then fixed run\sep Simulated\sep PA\sep Data.R: invalid method occurs calling:
 \enquote{alpha\sep Trace \sep \textless-\sep trace\sep 
 \$\sep get\sep Codon\sep Specific\sep Parameter\sep 
 Trace\sep By\sep Mixture\sep Element\sep For\sep Codon\sep (1\sep,\sep codon\sep,\sep 0)}
@@ -1333,9 +1166,6 @@ Fixed the error occurring early, which was another missing argument due to the s
 With this done, began setting up things on Gauley again:
 \begin{itemize}
     \item Created and updated the RibModel repos.
-    \begin{itemize}
-        \item TODO: Set up SSH key and passphrase
-    \end{itemize}
     \item Moved the pop et all data to my home directory on Gauley and locally.
 \end{itemize}
 
@@ -1394,37 +1224,22 @@ Goals:
 \end{itemize}
 
 \begin{itemize}
-    \item Started by noticing a operating system independent function for grabbing file locations.
-    Will talk to Cedric (who is not in today) to add this into mainline code.
-    \item Also need to ask him about running things remotely on Gauley.
-    Alan has been using the computer directly to run R studio and get plots etc., and it'd be inconvenient if we have to share in the future.
-    \item Since this is the case, I can probably shelf the github passphrase thing until a more
-appropriate time.
+    \item Found a operating system independent function for grabbing file locations.
     \item Changed occurrences of \verb+paste+ to \verb+paste0+ in the package's R code -- slightly
 more efficient implementation without separators.
-    \item Looks like the script I wrote works based on its modified file location. 
-    What remains is to have a concrete result to compare it to (currently don't know what to look for).
-    \item Started by reading the Pop 2014 paper.
+    \item Started reading the Pop 2014 paper.
 \end{itemize}
 
 Talked with Dr. Gilchrist further --
 
 \begin{itemize}
-    \item Again, we are working with RFP data rather than fasta data. Seems like all
-    the data I have available to me is for RFP rather than ROC-based.
-    \begin{itemize}
-        \item On that note, strongly consider talking to Cedric about renaming our models in
-        the code. The distinction between RFP ROC and "regular ROC" isn't very clear right now.
-    \end{itemize}
-    \item With this in mind, stopping work on the ROC model file I have been editing.
-    Nice as reference for future code but continuing to think of outputs in this form
-    detracts from my understanding of what we're doing in the big picture.
+    \item Stopping work on the ROC model file I have been editing for now.
     \item Instead, recall the supplemental material descriptions of what is in the Pop folder
     I have extracted. It will describe better what they get: in particular, look at Codon
     Translation Rates (codon.specific.translation.rates.table.xlsx) for rates.
     \item Recall that in the Pausing Time Definition, we \textbf{do} get pausing times.
     \item As mentioned before, these pausing times are the inverse of the translation rates.
-    \item The pausing time model (RFP) does get the Lambda and Alpha values.
+    \item The pausing time model (PA) does get the Lambda and Alpha values.
     \item The paper defines the estimated waiting time as alpha over lambda.
     \item So we can plot these estimated waiting times to 1 over the translation rates
     (or vice-versa) to determine if they all line up -- that the unknown factor times the
@@ -1432,111 +1247,40 @@ Talked with Dr. Gilchrist further --
     \item TODO: Document this way better than currently, once this has been implemented.
     \item TODO: Grab the data and feed it into our model for simulation: GSE63789\sep \_\sep counts\sep \_\sep wt\sep .\sep csv.
     \item Copy a script from Dev and combined with what we know about a working script
-    (again, scripts from Dev are old and liable to bugs) make a working RFP script.
+    (again, scripts from Dev are old and liable to bugs) make a working PA script.
     \item Note that we will not necessarily want to put this into testthat. Unit testing data
     and an entire model are quite different. Having a hand-testable and well-documented 
     script, however, will be beneficial.
-    \item Also for future-proofing and convenience, fix the symbolic links that were broken
-    upon copying with SCP the Pop folder.
-    \begin{itemize}
-        \item Immediate Google result yields that scp does not have a way to preserve symbolic
-        links. Must use rysnc.
-        \item DONE.
-    \end{itemize}
+    \item Note for future-proofing and convenience, symbolic links are broken when using SCP. Instead, must use rsync to preserve symbolic links, i.e. with the Pop folder.
 \end{itemize}
 
 \labday {July 1, 2016}
 
 \begin{itemize}
-    \item Began by talking to Cedric and Alan about Unit Testing MCMC first, just to make sure future changes to the mainline code doesn't result in bugs. 
-    \begin{itemize}
-        \item Cedric wants me to write this since Alan had made an alteration of dynamic arrays to vectors and he is now trying to debug something
-that was working the day before.
-        \item Spent about an hour talking to Alan about it and then working independently trying to figure out any potential problems.
-        \item Can't see anything wrong right now, scrapping ideas -- I had
-worked with dynamic array to vector conversion before with no results, after all.
-        \item Note that while I encountered slowdown in an initialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
-    \end{itemize}
-    \item Cedric gave the OK for renaming the \enquote{RFP} model.
-    Will probably think of a better name but not high priority.
-    \item Instead, decided to write the (should be fairly quick in terms of runtime) Unit Testing
-for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
-and on future testthat runs see if the output matches (specifically the Loglikelihood).
-    \begin{itemize}
-        \item My first iteration of this file is a fairly absurd but quick run: Use a seed to generate a file that contains the output of an MCMC loop.
-        \item Then use that same seed on subsequent runs of the testthat file to literally compare
-the outputs of a newly-generated MCMC loop and the one that had been created today.
-        \item Since it is the same seed being used, it should be an exact match.
-        \item Runs in about 3 seconds for ROC.
-    \end{itemize}
-    \item After that I minor edited the R-side documentation files and thus had to run roxygen
-again to re-generate proper documentation files.
-    \item Somehow, this led to unknown bugs in existing packages -- devtools, digest, testthat, and roxygen2 -- that led to me uninstalling and reinstalling packages for a frustrating hour.
-    \item During this mess I commented to Dr. Gilchrist on my progress on writing the RFP unit testing.
-    \item Cedric returned and I talked with him about the MCMC test. For now it works, but with caveats which can be found commented in Rib\sep Model\sep Framework\sep/\sep tests\sep /\sep testthat\sep /\sep test\sep MCMC\sep ROC\sep .\sep R. See below as well.
+    \item Switching to unit testing with testMCMCROC by Cedric request, as Alan had changed dynamic arrays to vectors and this will ease debugging.
+    \item Note that I had tested them before; inconclusive results.
+    \item While I encountered slowdown in an initialization step upon changing, Alan experienced outright NaN errors and program crashing on both C and R side code (and his tests the day before yielded 50\% better results in terms of speed).
+    \item Unit Testing for MCMC: Run a ROC MCMC simulation on a seed, get and save those results,
+and on future testthat runs see if the output matches (specifically the Loglikelihood). Runs in about 3 seconds for ROC.
+    \item Minor edits to the R-side documentation files, ran document() again. 
+    \item During this mess I commented to Dr. Gilchrist on my progress on writing the PA unit testing.
+    \item Finished file, works currently by literally comparing output files. Future implementation idea: Implement it comparing averaged logPosterior vector versus hard-coded value.
 \end{itemize}
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-# TODO: This file unit checks an entire outputting format, checking not only logLikelihood but also
-# other variables (good, if errors occur there) 
-# in a set formatted corpus (bad, this means future edits to the printing will result in testthat errors!)
-#
-# If no tampering is done to the correct variables,
-# a correct loglikelihood with the same seed should be equal, disregarding other variables.
-#
-# Thus, in the future, simply take the logLikelihood value and hard code it here, and compare via
-# mcmc\$getLogLikelihoodTrace(), which returns a vector. Get the average of these values
-# and compare it with the hard-coded average of logLikelihoodTrace.
-# This is currently not implemented due to laziness and mild helpfulness, and it is currently working.
-# Once it breaks, it should be converted.
-\end{lstlisting}
-\end{minipage}
 
 \labday {July 5, 2016}
 
 \begin{itemize}
-    \item Short work day today due to arriving late and driving from home.
-    \item Started writing a hotfix to Travis check failing when the newest bit of code is pushed to Cedric's main repository for RibModelFramework due to the new MCMCROC.R file testing MCMC functionality.
-    \begin{itemize}
-        \item Increasingly unsure of where this error is: directory and file traversal had worked before with unit testing (via testGenome.R).
-        \item Changing the format of the test to only check the log likelihoods does not seem to help either, so it may not be a file issue at all.
-        \item Fully confirmed it was a file issue by adding test\_that checks on if the files existed (they do).
-        \item Now thinking the Travis server may produce different seeds.
-        \item Will have to discuss a way to test this with Cedric further -- the last 13 lines of output that Travis produces for error checking does not change due to how testthat formats its output.
-    \end{itemize}
-    \item Also started replying to Dr. Gilchrist's footnotes written on June 30 -- Done.
+    \item Trying to debug Travis failure with testMCMCROC.R.
+    \item Changed test so it checks the last log likelihood versus a hardcoded value only, so it wasn't a file issue.
+    \item Suspect it may be due to different seeds being produced.
 \end{itemize}
 
 \labday {July 6, 2016}
 
 \begin{itemize}
-    \item To reiterate and confirm the error in the Travis check failing, I have now uploaded the raw output files to this directory -- They are named July5Travis.txt and July5Local.txt.
-    \item To put it shortly, the local build passes while the Travis server build does not.
-    \item Presents a significant problem -- will have to either deal with non-exact comparisons between outputs in future unit testing.
-    \item Returning to this problem -- Cedric recommended I temporarily remove the other testthat functions and then ran solely testMCMCROC.R.
-    \item Doing so and checking Travis again reveals that somehow, the Log likelihood returns NaN at iteration 10. Full log:
-
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-> library(testthat)
-> test_check("ribModel")
-Loading required package: ribModel
-Loading required package: Rcpp
-ERROR: Log likelihood is NaN, exiting at iteration 10
-[1] 0
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) --
-`knownLogLikelihood` not equal to `testLogLikelihood`.
-1/1 mismatches
-[1] -825482 - 0 == -825482
-testthat results ================================================================
-OK: 3 SKIPPED: 0 FAILED: 1
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#76) 
-Error: testthat unit tests failed
-\end{lstlisting}
-\end{minipage}
-    
-    \item In the meantime as I think about ideas on how to fix, started writing the Pop processing and testing.
+    \item Further attempts to debug testMCMCROC.R on Travis failing, while locally it passed.
+    \item Testing just the one file shows the log likelihood returns NaN on iteration 10.
+    \item While brainstorming ways to fix, started writing Pop processing and testing.
     \begin{itemize}
         \item First, need to convert the format of Pop raw data to something that can be read by our program.
         \item The formats are Name, Length, Sum\sep -\sep mRNA, Sum\sep -\sep FP, FP versus ORF, RFP\sep \_\sep Counts, Codon\sep \_\sep Counts, Codon -- ORF == Name, but rest are unknown.
@@ -1545,27 +1289,15 @@ Error: testthat unit tests failed
         \item I also need to figure out what the Codon is for each number -- perhaps they are in order from AAA to AAC to AAG to AAT to ACA... etc. as described in msb145524-sup-0020-SourceDatafig3.
     \end{itemize}
     \item Plan to meet Dr. Gilchrist around 9, 9:30 tomorrow to talk about the file for testing Pop data -- does it indeed even have codon information?
-    \item Talk some more about the MCMC unit test problem, if needed.
-    I should try to get some results in terms of asking Cedric and checking Gauley's run first.
 \end{itemize}
 
 \labday {July 7, 2016}
 
 \begin{itemize}
-    \item Came in late to the meeting, but got what I wanted to discuss out of the way.
     \item Clarified that the genomes are the same as in previous data sets, and can be cross-referenced to get codon information.
-    \item Until lunch, I tried to set up ssh into git from gauley and automating the process. Still very finicky for some reason, will try again some other day.
-    \item Continued trying to debug the MCMC unit test:
-    \begin{itemize}
-        \item Running and checking the package on gauley reveals that the Travis check error also applied. Log saved to notes as July7Gauley.txt.
-        \item Re-checking the package locally also shows same error.
-        Began re-converting code to when I had originally not seen the error.
-        \item After a bit of cross-referencing and remembering that I fetched files today, I have concluded that \textbf{Alan had forgotten to fix his latest pull request to Cedric's repo}. 
-        \item The changes to MCMCAlgorithm.cpp and Parameter.cpp that I noticed this morning were from Alan's implementation.
-        \item Before I had fetched these changes, my local machine was working fine since it still had the older implementation.
-        \item Alan had tried to change dynamic arrays to vectors and had warned us that his then-implementation of vectors had created NaN bugs, but both Cedric and I thought we had his latest changes where he said he had fixed these bugs.
-        \item Temporarily removed the MCMC unit test to allow Cedric a slightly cleaner merge of the two pull requests between me and Alan, who should be pushing vector fixes now.
-    \end{itemize}
+    \item Continued trying to debug the MCMC unit test.
+    \item In summary, it was caused by merge conflicts with Alan's work changing dynamic arrays to vectors (causing NaN bugs), which was not debugged before being accepted into the main repo -- pulling from the main repo had caused the bugs.
+    \item My local machine had not pulled from the main, bugged repo, so it ran fine, but other sources had to be pulled.
     \item Formally counted the sum of the FPs; confirmed that they equaled the amount recorded.
     \item Now that Cedric has re-merged all the branches and everything works on Travis, re-added testMCMCROC, which should also work on everything (and, in the future, avoid bad pull requests and prevent this from happening ever again).
     \item Began looking over folders to cross-reference genome positions; will continue tomorrow.
@@ -1574,55 +1306,9 @@ Error: testthat unit tests failed
 \labday {July 8, 2016}
 
 \begin{itemize}
-    \item Latest attempt to re-add testMCMCROC still fails. 
-    Relevant log snippet is posted below.
-    
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Running the tests in 'tests/testthat.R' failed.
-Last 13 lines of output:
-MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
-ERROR: Cannot set steps - value must be smaller than samples times thining (maxIterations)
-MCMCAlgorithm get/setStepsToAdapt --- Pass
-MCMCAlgorithm getLogLikelihoodTrace --- Pass
-File opened
-EOF reached
-Error in file(file, if (append) "a" else "w") : 
-cannot open the connection
-Calls: test_check ... force -> source_file -> eval -> eval -> sink -> file
-In addition: There were 16 warnings (use warnings() to see them)
-testthat results ================================================================
-OK: 72 SKIPPED: 0 FAILED: 0
-\end{lstlisting}
-\end{minipage}
-
-    \item The error that is explicitly listed is intentionally caused as part of unit testing, so it is not a problem.
-    \item Once again running on Mac succeeds.
-    \item Suspect that it may be an issue to writing (sinking) to a file that does not exist.
-    \item Running on Gauley replicated the \enquote{Last 13 lines of output}.
-    \item Upon removing the output redirection, the package ran locally and on Travis successfully.
-    \item Oddly, it did \textbf{not} run on Gauley, resulting in the second log snippet below.
-    
-\noindent\begin{minipage}{\linewidth}
-\begin{lstlisting}
-Running the tests in 'tests/testthat.R' failed.
-Last 13 lines of output:
-  
-Utility my_print --- Pass
-Testing my_printError, no argument.
-Testing my_printError, one argument: 0.
-Testing my_printError, multiple arguments: String, 0, 0.5.
-Utility my_printError --- Pass
-testthat results ================================================================
-OK: 121 SKIPPED: 0 FAILED: 1
-1. Failure: identical MCMC-ROC output same log likelihood (@testMCMCROC.R#84) 
-
-Error: testthat unit tests failed
-In addition: There were 14 warnings (use warnings() to see them)
-Execution halted
-\end{lstlisting}
-\end{minipage}
-    
+    \item Latest attempt to re-add testMCMCROC still fails.
+    \item The first issue was that it was trying to write (sink) to a file that did not exist -- removing output redirection let the package run locally and on Travis successfully.
+    \item Does not work currently on Gauley due to (as discovered later) Gauley using a buggy version of R -- logLikelihood is calculated differently despite using the same seed. 
     \item It also created a new NOTE; on my local machine, the installed package size is OK.
     
 \noindent\begin{minipage}{\linewidth}
@@ -1635,15 +1321,8 @@ libs  20.0Mb
 \end{minipage}
     
     \item Travis also produces a package size total of 16.9Mb, with a subdirectory \enquote{libs} that is 16.7Mb by itself.
-    \item \sout{While Travis passes, it does \textbf{not} show the usual R CMD check fail log. It instead produces:}
-
-\begin{verbquote}
-The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\"), \"\n\")"" exited with 0.
-\end{verbquote}
-    
-    \item \sout{Not sure why this occurs; will try to work on the RFP data testing first.}\footnote{Hollis: July 12, 2016 -- In retrospect, this seems to be normal behavior. The R CMD check fail log only displays if it fails, and otherwise this message is displayed by default.\label{fn:TravisError}}
     \item Continued scripting a way to cross-reference existing data with Pop data.
-    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
+    \item The existing data I have been referencing is \enquote{rfp\sep .\sep count\sep .\sep data\sep .\sep by\sep .\sep gene\sep .\sep codon\sep .\     sep and\sep .\sep position\sep .\sep GSE63789\sep .\sep wt\sep .\sep csv}, which is part of Pop's work.
     \item However, as now noted in the June 29 notes that list the locations of various data repositories, I do not know where this data is coming from; it is an old file from when I worked with Gabriel.
     \item Notably, because I don't know where it's from, I can't access the documentation on why the positions start arbitrarily and end arbitrarily; there are less positions with footprints recorded than the length of the gene listed in the main, documented Pop directory.
     \item Will have to ask Dr. Gilchrist on how to proceed; in meantime taking a break and then going to contribute to work hours by doing documentation.
@@ -1653,15 +1332,12 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
 \labday {July 11, 2016}
 
 \begin {itemize}
-    \item Mostly worked on minor updates to my work environment (updated packages, wrote out my hours, etc) while waiting to speak to Dr. Gilchrist today for more information on the RFP data.
     \item One major thing I worked on was setting up R Studio's server version to work properly.
     \item Cedric's version is able to work, mine is not.
-    \item \sout{Seems to be related to the bug with Travis mentioned the previous day.}\footnote{July 12, 2016 (Hollis): See previous footnote \ref{fn:TravisError}.}
     \item Asked Dr. Gilchrist about the RFP data: It was data he had processed before.
     \item It is now recorded in process\sep .\sep rfp\sep .\sep counts\sep .\sep nb\sep \_\sep 07\sep .\sep 11\sep .\sep 16\sep .\sep pdf, under gilchrist\sep -\sep notes\sep /\sep Pop\sep /\sep rfpSort.
     \item The source code itself, which requires Mathematica (now downloading) is similarly found there.
     \item Basically, may use that data file without worrying about the Pausing Time being thrown off compared to what is in the paper, which does not discard the last 100 positions.
-    \item Near the end, Cedric mentioned a bug I can fix while him and Dr. Gilchrist are out of the office Wednesday, Thursday, and Friday: under plotModelObject.R, line 57, the genome function getGenomeForGeneIndices does not work.
 \end{itemize}
 
 \labday {July 12, 2016}
@@ -1675,25 +1351,15 @@ The command "Rscript -e "cat(devtools::check_failures(path = \"\${RCHECK_DIR}\")
     \item The parallelization did not affect the loglikelihood returned.
     \item Asked Cedric to run it on his computer -- it also works on his computer correctly, like on my local machine.
     \item Still does not work on Gauley with Cedric's admin privileges either.
-    \item Talk with Dr. Gilchrist: Unit Testing should be architecture and mostly version-independent. 
-    So, maybe rework the code so that the script works.
-    \item Going to reexamine the data set that is put in and perhaps change it.
-    \item Trying to run the script again without Phi values set, and then without Phi values set and with only half as many entries, still does not change the difference in results between Gauley and locally.
-    \item In retrospect, the Travis message output seems to be the default message for a successful build. Ended up keeping the testMCMCROC.R files, with minor changes.
+    \item Discovered in the future this was an R-version related bug, and it is solved as of June 1, 2017.
     \item Another additional TODO: The R code is currently outdated in that it asks for Parameter as an argument when this is unneeded (Model holds Parameter); change code, minor change.
-    \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readRFP function demanded.
+    \item Began writing a script to convert the format of the file Dr. Gilchrist had processed into the same format as our readPA function demanded.
 \end{itemize}
-
-\labday {July 13, 2016}
-
-Spent an hour and thirty minutes finishing the script to format the data into the proper format.
-
-Afterwards, moved an old working R script to use this data for testing.
 
 \labday {July 14, 2016}
 
 \begin{itemize}
-    \item Examining the R script I am now modifying more closely, it may be Gabriel's old script that he had written to test the RFP model.
+    \item Examining the R script I am now modifying more closely, it may be Gabriel's old script that he had written to test the PA model.
     \item While testMCMCROC.R is working, I'd still like to have it redirect its stdout to a file for error checking purposes in the future.
     I will try to reimplement this once the newest addition is confirmed to not ruin Travis.
     \item Using a function to skip automated testing and moving these files to RibModelFramework, was able to find a satisfactory result based on the testing data.
@@ -1717,14 +1383,13 @@ Afterwards, moved an old working R script to use this data for testing.
         \item Run more iterations and keep timing benchmarks -- i.e. 1000, 10,000, etc.
         \item Use only 10\%, 20\% of the trace, etc.; the last few.
         \item This is because the initial bits have a starting point that greatly bias the graphs.
-        \item The important graphs to "prove" that it is run correctly are the RFP\sep \_\sep CSP\sep \_\sep Values and the correlation between Pop and RFP Model Pausing Time Rates.
+        \item The important graphs to "prove" that it is run correctly are the RFP\sep \_\sep CSP\sep \_\sep Values and the correlation between Pop and PA Model Pausing Time Rates.
         \item First, the CSP values should stabilize and oscillate only slightly once only the last bit of the trace is used.
         \item Then, the correlation should be high.
     \end{itemize}
     \item While I've removed parameter as an argument for the generic plot function, it remains a part of the FONSE plot function; need to tell Alan about this change so he can modify his scripts without seeing errors before I can do this.
     \item Updated documentation for the changes to the parameter argument that I have done.
-    \item Fixed Cedric's bug with getGenomeForGeneIndices -- seems to have been written with completely wrong code!
-    Simply adapted the C-side code for the R implementation.
+    \item Fixed Cedric's bug with getGenomeForGeneIndices -- seems to have been written with completely wrong code! Simply adapted the C-side code for the R implementation.
 \end{itemize}
 
 \labday {July 19, 2016}
@@ -1753,13 +1418,10 @@ Afterwards, moved an old working R script to use this data for testing.
         plot(loglik.trace[start:length(loglik.trace)], type="l", main=paste("logL:", logL), xlab="Sample", ylab="log(Likelihood)")
         //$ For latex syntax coloring fix only
     \end{lstlisting}
-    \item Also spent some time debugging why Travis was failing again when I added the output directory to .gitignore.
-    \item Source of the problem was that files cannot be written to a directory that does not exist, and git does not recognize empty directories (removing the output files did the same thing).
-    \item Fixed this bug by adding another .gitignore file in this output directory.
-    \item Bug still occurred. It seems Travis cannot create .csv files at all (but can create .pdf and .txt files). Re-added .csv files to finally fix the bug.
+    \item Debugged why Travis was failing again when I added the output directory to .gitignore.
+    \item Travis cannot create .csv files at all (but can create .pdf and .txt files), so empty .csv files are added to fix this bug. On git, files cannot be written to a directory that does not exist, and git does not recognize empty directories.
     \item Talk with Dr. Gilchrist (and later with Cedric):
     \begin{itemize}
-        \item Run on Newton or Gauley this time -- preferably Gauley first; learn how to use Newton.
         \item Newton has a short queue of about 2 hours and a medium queue of about 12 hours.
         \item Try multiple (at least two) runs -- if the traces start at different locations, do they end at the same place?
         \begin{itemize}
@@ -1800,8 +1462,6 @@ Afterwards, moved an old working R script to use this data for testing.
 \labday{July 21 Notes}
 
 \begin{itemize}
-    \item Still reorganizing notes and github repo management.
-    \item The repo commit history looks absolutely butchered, but a working version should be re-pulled soon.
     \item Dr. Gilchrist says it is more important to get runs going at all than it is to modify code, so we're going to do 20,000 runs with all AAs with the 1500 genes.
     \item The fixes and modifications to the script can be done concurrently with the runs rather than before.
     \item Unfortunately, that means the plots will still grab the full CSP trace range rather than a subset, since I have not programmed that functionality yet.
@@ -1812,8 +1472,6 @@ Afterwards, moved an old working R script to use this data for testing.
         \item Made a script to cross-reference these names with the full data to be printed at once.
         \item I have moved these results (rand1500.csv) to Gauley to begin testing (after confirming with the first script that there are only 1500 genes).
     \end{itemize}
-    \item Scripting took about 30 minutes.
-    \item Gauley: Had to install several packages (stringr, munsell, RColorBrewer) to run Rstudio on the R script that runs the RFP model.
     \item To open pdf files remotely via X-11 forwarding, need to call xdg-open. 
     While it works correctly eventually, spews out a ton of error messages in the process:
     \begin{lstlisting}
@@ -1881,7 +1539,6 @@ Afterwards, moved an old working R script to use this data for testing.
     TODO: Ask Cedric preferred style: let users write their own titles?
     Some titles were already hard-coded, so I kept hardcoding them.
     \item Added a main title for plotTraceObject.R before finishing the day up.
-    Program is still running on Gauley.
 \end{itemize}
 
 \labday{July 25 Notes}
@@ -1908,7 +1565,6 @@ Afterwards, moved an old working R script to use this data for testing.
         \item Unfortunately the code I ran this experiment with did not print titles (expected, as this was put in later) not the overall correlation of Pop data to results (unexpected -- bug commenting out code).
         \item More distressingly, the codon-specific parameters do not stabilize at 20,000. Will have to ask Dr. Gilchrist how to proceed (probably run with more than 20,000 samples).
     \end{itemize}
-    \item Before talking to Dr. Gilchrist, spent a significant amount of time (1.5 hours) talking to Cedric about the package and helping Walker with LaTeX and git.
     \item Gilchrist talk:
     \item Do a fitting of Phi values to those gotten from ROC
     \item Or just starting a search with values starting from ROC.
@@ -1920,8 +1576,7 @@ Afterwards, moved an old working R script to use this data for testing.
     Whatever we have gotten from ROC. 
     Should be in 2015 paper.
     \item Given Alpha, Lambda Prime, Phi, and a fasta file (presumably), use simulate\sep Genome to create a file that writes this simulated data to a .csv file or whatever.
-    \item Really should rename RFP model by now to RFPROC -- rename RFP\sep Model\sep ::\sep simulate\sep Genome() to RFPROC\sep Model\sep ::\sep simulate\sep RFPROC\sep Model() etc.
-    \item Fit RFPROCmodel and compare (c.f) estimated phi to true phi.
+    \item Fit PAmodel and compare (c.f) estimated phi to true phi.
     \item Compare under two cases:
     \begin{itemize}
         \item A, initial conditions equal true values
@@ -1935,15 +1590,15 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Hope is that both will converge to the right values. 
     \item Hollis's Truthing vs Jeremy's Truthing.
     \item Take his SimulatedGenome and do the same thing (so same process but ignore creating a simulated genome) -- SimulatedRFPData.csv in RibModelDev.
-    \item Fit it with RFPROC, and see if the initial thousand or so are comparable.
+    \item Fit it with PA, and see if the initial thousand or so are comparable.
     \item Sphi can be gotten by taking the Phi values (from ROC or otherwise) and taking the standard deviation of their log.
     \item Would give a slightly inflated but otherwise good estimation.
     \item So let's run these fits with 20,000; let's also run with a subset of the genome, say 1500 genes again.
     \item Consider revisiting the Pop data, and fixing the SCUO for Phi initial, or fix Sphi, or setting a prior of Sphi (conceivably attained from a ROC run).
     \item Overall TODO:
     \begin{itemize}
-        \item Run and fit RFPROC SimulatedRFPData.csv (Jeremy's) naive.
-        \item Simulate own genome, then run RFPROC model naive.
+        \item Run and fit PA SimulatedRFPData.csv (Jeremy's) naive.
+        \item Simulate own genome, then run PA model naive.
         \item Figure out how to modify/set the initial conditions, possibly implementing this.
         Passing values -- i.e. the true values in the directory.
         If you want to start your search at those values -- how do you do that?
@@ -1977,7 +1632,6 @@ Afterwards, moved an old working R script to use this data for testing.
     \item After an additional hour and fifteen minutes of work, I got something roughly like I wanted (plotting points, seeing a clear x = Cy correlation where C is an unknown factor).
     \item Unfortunately, I don't quite know how to draw a line that is essentially from the bottom left to the top right of the plot.
     \item Since I need to run it ASAP anyway and it's essentially a rough proof, I am keeping what I have and starting a run now; hopefully I can improve it later.
-    \item Talked to Alan about the new implementation of likelihood / loglikelihood.
     \item Naive run of Jeremy's data was finally started at 4pm.
 \end{itemize}
 
@@ -2033,11 +1687,6 @@ Afterwards, moved an old working R script to use this data for testing.
 
 \begin{itemize}
     \item Because of the difficulty and confusion from graphing these parameters and the fact that we don't want to re-invent the wheel, I took a pause from actually scripting to document some of these functions.
-    \item TODO: Ask Cedric if it's better to implement waiting time functions in R (like I've done already) or in C.
-    \begin{itemize}
-        \item Asked on July 29, 2016 -- My current implementation is fine.
-        I should consider renaming it to something better, but Cedric doesn't have any ideas currently either.
-    \end{itemize}
 \end{itemize}
 
 \labday {July 29, 2016}
@@ -2078,12 +1727,12 @@ Afterwards, moved an old working R script to use this data for testing.
     Thus, the resulting file -- \enquote{HollisSimulatedGenome.csv} -- has \enquote{NA} for each Codon\_Counts of a Codon.
     \item Chat with Cedric:
     \begin{itemize}
-        \item To implement getCSPEstimates for RFP (since this is currently unimplemented except in ROC), would have to change at least a bit of the code, confirming that it was more difficult than a quick fix.
-        \item RFP does not concern itself with AA's directly, but can work with the group list via getGroupList instead.
+        \item To implement getCSPEstimates for PA (since this is currently unimplemented except in ROC), would have to change at least a bit of the code, confirming that it was more difficult than a quick fix.
+        \item PA does not concern itself with AA's directly, but can work with the group list via getGroupList instead.
         \item Another implementation possibility: Implement an additional function variation of getting codon specific posterior means that will take in the whole vector of codons rather than one codon at a time.
         \item When getCSPEstimates was originally written, Cedric had known it would be (and it is, currently) extendible to FONSE.
-        However, it is not currently extendible to RFP.
-        \item This led to the TODO note about copying this function and adapting it to RFP, but now it may be simpler to make it generic as Dr. Gilchrist had suggested.
+        However, it is not currently extendible to PA.
+        \item This led to the TODO note about copying this function and adapting it to PA, but now it may be simpler to make it generic as Dr. Gilchrist had suggested.
         \item To do so, change it from the suffix Rcpp\sep \_\sep ROC\sep Parameter to simply Rcpp\sep \_\sep Parameter or move this function completely underneath its parent function and avoid another wrapper.
         \item Note that in R code, the current implementation reflects object orientation and inheritance.
         Thus, it's probably better to change it to simply Parameter rather than wiping out the parent wrapping.
@@ -2097,7 +1746,6 @@ Afterwards, moved an old working R script to use this data for testing.
 \labday{August 1, 2016}
 
 \begin{itemize}
-    \item Ran into problems reauthenticating into git, wasting some time fixing this.
     \item Began running with 20,000 samples the first simulated genome I had created last Friday, using 8 cores again on the same script.
     \item Again, while I have the data for now two different runs over 40,000 total samples, I need to implement graphing functions to display this.
     Started writing them today.
@@ -2106,9 +1754,7 @@ Afterwards, moved an old working R script to use this data for testing.
 \labday{August 2, 2016}
 
 \begin{itemize}
-    \item Checked on the simulation that used the first genome I simulated: it was still running.
     \item According to the log file of the second genome I simulated, the run should last about 25.6 hours.
-    Will have to wait for completion before I can do anything else with Gauley.
     \item Note: The run with Jeremy's simulated genome took only 20 hours.
     \item Continued trying to write functions to plot the data I have.
     \item Also sent over the simulateGenome script to Alan so he can help debug that function.
@@ -2128,8 +1774,7 @@ Afterwards, moved an old working R script to use this data for testing.
 \labday{August 3, 2016}
 
 \begin{itemize}
-    \item Yesterday's progress was stalled by a bug compiling the package: Need to update NAMESPACE.
-    \item Finished naively editing our current file. TODO: Make this more easily modifiable by allowing us to use roxygen2 rather than manual edits.
+    \item Progress was stalled by a bug compiling the package: Need to update NAMESPACE. Fixed by naively editing our current file. TODO: Make this more easily modifiable by allowing us to use roxygen2 rather than manual edits.
     \item Talk with Dr. Gilchirst:
     \begin{itemize}
         \item Should try to let us add AAs rather than one-at-a-time codons to modifying RFP etc groupList parameter.
@@ -2162,7 +1807,6 @@ Afterwards, moved an old working R script to use this data for testing.
 \labday{August 4, 2016}
 
 \begin{itemize}
-    \item Had to fix some quirks with LaTeX, and later merge conflicts with git's labnotebooks directory.
     \item Contiuing to write code to plot the data I've gotten:
     \item TODO: Ask about Psi vs Phi. 
     It sees like this script that I've been modifying, and possibly many more, use Psi instead of Phi when referring to synthesis rate.
@@ -2197,15 +1841,6 @@ Afterwards, moved an old working R script to use this data for testing.
     \item Seems to be a bug with my quick edit to the ploting script to script with my own simulated genomes.
 \end{itemize}
 
-\labday{August 7, 2016}
-
-\begin{itemize}
-    \item Mostly worked with checking R-side functions today.
-    \item Spent a lot of time looking up differences between R-side data structures, no real progress made however.
-    \item TODO: Continue debugging scripts on Monday.
-    Might have to bother Cedric at this point on how to write these scripts.
-\end{itemize}
-
 \labday{August 8, 2016}
 
 \begin{itemize}
@@ -2238,38 +1873,31 @@ Afterwards, moved an old working R script to use this data for testing.
 \begin{itemize}
     \item Talk with Dr. Gilchrist:
     \begin{itemize}
-        \item For R/initializeGenomeObject, default should be fasta.
-        In retrospect looking at the code, this is already the default.
+        \item R/initializeGenomeObject default is fasta.
         \item Check at what gene the reading in drops out at for HollisSimulatedGenome.csv
         \item Comparing printed RFP file to read-in RFP file: identical. Dead end.
         \item Check the restart file's genes!
-        \item RFPROC reading and writing RFP files may be completely wrong: We \textbf{need} the codon\_counts, but currently we do not preserve it.
+        \item PA reading and writing RFP files may be completely wrong: We \textbf{need} the codon\_counts, but currently we do not preserve it.
         \item Recall Pop et al data (originally): Name, Length, Sum mRNA, Sum FP, FP per Codon, which is a mess.
-        \item This data was simplified via Dr. Gilchrist's Mathematica script into the current RFPROC format.
-        \item RFPROC: Format should be ID, RFP Count, Codon Count, Codon (current format).
+        \item This data was simplified via Dr. Gilchrist's Mathematica script into the current PA format.
+        \item PA: Format should be ID, RFP Count, Codon Count, Codon (current format).
         \item The NAs for codon counts that are not preserved \textbf{should} be filled in 
         \item When using Simulate Genome, all that should change out of this format is the RFP Count (compared to what was read in originally)
         \item This is, of course, since we are just making fake data as a simulation.
         \item PANSE: Format will be ID, RFP Count, Position, Codon
-        \item For RFP Codon counts: Perhaps worry about ambiguous or non-observable positions.
-        To do this, should be fairly trivia: let Position be an integer, with -1 meaning that this data should be discarded while other values are valid.
-        \item New function: ProcessLareau: Should be pretty simple, let this be the default for now?
+        \item RFP Codon counts will take account of ambiguous or non-observable positions (designated by -1, discarded line).
+        \item New fuction to be created: processPA (defualt for both PA/RFPROC and PANSE models).
         \item TODO LATER: SimulatePANSE: just for each position, make RFP count number.
-        \item TODO: Later on do Process Pop (which would also call readFasta) to get the RFPROC format or the PANSE format.
+        \item TODO: Later on do Process Pop (which would also call readFasta) to get the PA format or the PANSE format.
         \item On average, 61 calculations per gene for RFPROC/PA, 400ish per gene for PANSE since it's a per-position basis rather than a summary.
-        \item FOR NOW, let's try and make the PANSE format the default and summarize it for RFP, rather than the current RFP being the default.
-        \item Make RFP\_count data to have both long and short categories and combined.
-        \item Gilchrist clarification: Don't make a combined category in C++ yourself.
-        If the researcher wanted to have a combined category, they would have made it one of the categories like long and short, so simply treat is as another category to process.
-        \item Make an integer defaulting to just calculating long category.
+        \item Make RFP\_count data to have multiple categories possible.
+        \item TODO: Make an integer defaulting to just calculating long category.
     \end{itemize}
     \item Modified an existing Perl script to now simply transform Lareau data to the new PANSE format.
     Script is now found in Runnable\sep Scripts\sep And\sep Data\sep /\sep scripts as \enquote{to\sep CSV\sep .\sep pl}.
     \item Also removed \enquote{plotRFPJeremy.R}, as it is redundant with \enquote{testJeremyRestart.R} (older version of same script function).
     \item PANSE format mentioned above was out-of-order.
     Format is geneID, position, codon, RFPcount[0] etc, as additional categories will be appended at the end.
-    \item TODO: Rename the RFP model to PAModel to be similar to PANSEModel.
-    Will also help solve confusion and needing to distinguish it as RFPROC.
     \item Next step is a longer process: Modify the function readPANSE (now readPA) to read in multiple different categories.
     \item First step is modifying the sequenceSummary data structure to allow for multiple categories: convert from vector to vector of vectors (one vector per RFP\_count category).
     \item Not committing current changes: Fails Unit Testing on Genome.cpp and reading in the new file format with the multiple category architecture (even though right now it's supposed to default to just one category).
@@ -2292,7 +1920,6 @@ Afterwards, moved an old working R script to use this data for testing.
     \begin{itemize}
         \item RFP\_count is the currently-unused-outside-of-testing structure that is intended to be used for the PANSE model.
         It is currently going to be adapted to use for both the PA and the PANSE models.
-        Also, I still haven't renamed the RFP model to the PA model yet.
         \item RFPObserved is the currently-used structure to record RFP data for the RFP model.
         Because the RFP model does not use a fasta file or anything else to record the number of codons, this may be incorrectly implemented.
     \end{itemize}
@@ -2411,7 +2038,6 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 \labday {August 18 - 19, 2016}
 
 \begin{itemize}
-    \item This labday set is merged because August 18 was mostly testing the package.
     \item Problem revealed: Currently, while the Lareau data has scrambled rfp\_counts for each codon for each gene, this is not supported.
     \item This means that if Gene A has the codon AAA defined, and then it is redefined later (when it should merely append to the existing data), it destroys the old data.
     \item First step is to add the ability to store the data position based: right now, data is read is purely on the order in which data is read.
@@ -2421,16 +2047,11 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 \labday {August 22 - 23, 2016}
 
 \begin{itemize}
-    \item August 22 -- sick day.
-    Filled out hours and updated to current repos.
-    \item August 23 -- Mostly a discussion day with Cedric on how to re-implement RFPModel (TODO: Still need to rename this to PAModel).
+    \item August 23 -- Mostly a discussion day with Cedric on how to re-implement PAModel
     \begin{itemize}
         \item TODO: Screenshot taken of board to be uploaded to notes here.
         The board currently has a summary of the data structures Cedric and I have figured out.
         \item Beginning of talk with Cedric: Confirmed that Gabriel (probably) messed up with Codon\_Count calculations, and thus would indeed require a major rework of RFPModel.
-        \begin{itemize}
-            \item Privately asked Gabriel about prior work, but he doesn't remember the justification he and Jeremy had made about this calculation.
-        \end{itemize}
         \item Current PA file read-in is largely deficient of information-storing structures to easily calculate log likelihoods.
         \item Core problem: While my new vector of vectors for RFP\_counts for different categories was a good start, we need to associate directly the codon (or, for convenience, the codon id as an unsigned integer) with the position and with the RFP\_counts from there.
         Currently, my vector of vectors does not track the codon, as I was intending to associate this data indirectly with the stored sequence string to re-find the codon internally each time.
@@ -2461,8 +2082,6 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
     \item TODO: Ask Cedric about SequenceSummary and the difference between codonArray and codonArrayParameter as required by the boolean forParamVector when using the function indexToCodon
     \item Current workload:
     \begin{itemize}
-        \item Clean up defunct notes
-        \item Continue cleaning up old, now defunct code to fit the plan
         \item NOTE (and note elsewhere and likewise fix defunct notes) that we don't need to read in the file twice anymore because the ingenious table design lets us extract the size of the gene from the number of rows of the table
         \item Currently code is a mess but works up to the point where it calls processPA: It reads in a PA file, ignores ambiguous positions still, but reads in the sequence correctly (and just the sequence, no internal storage of RFP data yet).
     \end{itemize}
@@ -2481,58 +2100,14 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 \labday{August 29, 2016}
 
 \begin{itemize}
-    \item Began creating new data structures.
-    \item While memory problems caused another small delay, finished creating and setting the data structures.
+    \item Created and set new data structures.
     \item TODO: Add helper functions to initialize, get, set, and in general check these data structures.
-\end{itemize}
-
-\labday{August 30 - 31, 2016}
-
-\begin{itemize}
-    \item August 30 -- Mostly was in the lab to discuss issues with other researchers.
-    Did not actively work on own project.
-    \item August 31 -- Recall: about half a month ago, Cedric asked me to fix getGenomeForGeneIndicesR, which was incorrectly implemented.
-    \begin{itemize}
-        \item I fixed the implementation, but did not have a chance to go back and unit test or error-check my changes.
-    \end{itemize}
-    \item Today Alex brought up a segmentation fault (memory error he was experiencing) after finally bringing all repositories up to date.
-    Summary of problems and testing:
-    \begin{itemize}
-        \item On Gauley with R studio (running Gauley locally rather than remotely):
-        \begin{lstlisting}
-        *** caught segfault ***
-        address 0xfffffffffffffff8, cause 'memory not mapped'
-
-        Traceback:
-         1: .External(list(name = "CppMethod__invoke_notvoid", address = <pointer: 0x2cdce60>,     dll = list(name = "Rcpp", path = "/usr/lib/R/site-library/Rcpp/libs/Rcpp.so",         dynamicLookup = TRUE, handle = <pointer: 0x2df0a00>,         info = <pointer: 0x7f3a5ebf9860>), numParameters = -1L),     <pointer: 0x238f690>, <pointer: 0x23a9af0>, .pointer, ...)
-          2: genome$getGenomeForGeneIndices(genes.in.mixture, simulated)
-           3: plot.Rcpp_ROCModel(model, genome, samples = samples * 0.1, mixture = 1,     main = "E.coli Codon Usage Plot")
-            4: plot(model, genome, samples = samples * 0.1, mixture = 1, main = "E.coli Codon Usage Plot")
-        //$ For latex syntax coloring fix only
-        \end{lstlisting}
-        \item For now, script and data file is located in \enquote{AlexTesting} folder under RunnableScriptsAndData, and can be run from scratch.
-        \item Locally on his own machine (Ubuntu 15.2), he does not encounter any problems.
-        \item This same script on my machine, however, runs into a memory problem as well:
-        \begin{lstlisting}
-          rsession(99676,0x7fff770b0000) malloc: *** mach_vm_map(size=4795577582035439616) failed (error code=3)
-          *** error: can't allocate region
-          *** set a breakpoint in malloc_error_break to debug
-          Error: std::bad_alloc
-        \end{lstlisting}
-        \item Furthermore, both memory issues with error messages may occasionally run to crash R studio without any error messages at all.
-        \item Currently, we suspect it is a machine or system-dependent bug.
-        \item TODO: Ask Alan to run this script on windows because, once again, Mac lacks the memory-breakdown tools that Windows does.
-        \item Also should reexamine the C++ code I wrote, just in case it is the problem.
-        However, this is less likely (since once again, Alex's machine runs this without memory problems).
-    \end{itemize}
 \end{itemize}
 
 \labday{September 2, 2016}
 
 \begin{itemize}
-    \item I want to prioritize looking at getGenomeForGeneIndices.
-    \item I haven't set up a separate development branch from my own repo, so while I could look up Cedric's main repo I cannot push any major edits.
-    \item Since Alex isn't in today either, I'm going to try and polish off the PA file reading and then finally push these changes to the main repository.
+    \item I'm going to try and polish off the PA file reading and then finally push these changes to the main repository.
     \item Finished adding helper functions for sumRFP\_count information.
     \item The unit tests for everything with RFP\_counts now works again after changing the data structure style of RFP\_counts, and RFP\_counts testing takes into account position (and is position-based from index 0 to index n).
     \item TODO: Test the helper functions for sumRFP\_count work.
@@ -2553,34 +2128,8 @@ panse gene 2: size 4: 0 2684354560 3549298901 4026533884
 \labday{September 12, 2016}
 
 \begin{itemize}
-    \item Sporadic work done over the last week.
-    Mostly discussion-related, nothing concrete to report.
-    \item Alex seems to have nailed down the error: getGenomeForGeneIndices takes a R-style vector (1-indexed) while it uses C++ code that is 0-indexed.
-    \item He should have fixed it, but Cedric as of today (September 11, 2016) is asking for help to check why this new function is failing the Unit Checks (I had thought that they didn't even check this function)
-    \item Checking this code with my fresh repo without committed changes (still a major TODO; school work has set me behind): I also get a failure in unit testing.
-    \begin{lstlisting}
-* checking tests ...
-  Running 'testthat.R'
- ERROR
-Running the tests in 'tests/testthat.R' failed.
-Last 13 lines of output:
-  Error in Genome::getGenomeForGeneIndices. An index specified is out of bounds for the genome!Returning empty Genome.Error in Genome::getGenomeForGeneIndices. An index specified is out of bounds for the genome!Returning empty Genome.MCMCAlgorithm is/setEstimateSynthesisRate --- Pass
-  MCMCAlgorithm is/setEstimateCodonSpecificParameter --- Pass
-  MCMCAlgorithm is/setEstimateHyperParameter --- Pass
-  MCMCAlgorithm is/setEstimateMixtureAssignment --- Pass
-  ERROR: Cannot set steps - value must be smaller than samples times thinning (maxIterations)
-  MCMCAlgorithm get/setStepsToAdapt --- Pass
-  MCMCAlgorithm getLogLikelihoodTrace --- Pass
-  Error in initializeMCMCObject(samples = samples, thinning = thinning,  : 
-    unused argument (thinning = thinning)
-  Calls: test_check ... source_file -> eval -> eval -> initializeMCMCObject
-  testthat results ================================================================
-  OK: 72 SKIPPED: 0 FAILED: 0
-  Execution halted
-    \end{lstlisting}
-    \item Later in the day Cedric mentioned that the readObservedPhiValues bug mysteriously resolved itself.
-    No idea what changed (nor does Cedric), but because of the mounting task load I'm shelfing that potential problem as well.
-    \item Ended day by confirming that read\sep PA fully works putting in positions and RFP\sep \_\sep counts.
+    \item Alex fixed a segfault: getGenomeForGeneIndices takes a R-style vector (1-indexed) while it uses C++ code that is 0-indexed (artifact from me copying C-style code over, not checking after implementing). Updated indices.
+    \item Confirmed that read\sep PA fully works putting in positions and RFP\sep \_\sep counts.
     \item Next TODO to finally push to main repo: test the newly implemented RFP data models, particularly a summation of each RFP\_count per index.
 \end{itemize}
 
@@ -2593,14 +2142,11 @@ Last 13 lines of output:
     \item Currently suspect that it's related to how I still haven't implemented unit testing for the smaller component getter/setter functions. This is my next step.
     \item Ended the day by writing the unit testing for the getter/setter functions, but the readPA weirdness still occurs.
     \item Looking things up, a simple == statement should check if C++ arrays are equivalent (or, more importantly, if they're not); not sure at the moment how to proceed debugging this.
-    \item In the meantime, finally pushed notes.
 \end{itemize}
 
 \labday{September 15, 2016}
 
 \begin{itemize}
-    \item Mostly checked up with Dr. Gilchrist on progress.
-    \item Very busy with classwork -- will take a break until after midterms.
     \item TODO: I should keep checking with these C++ arrays, especially since in terms of implementation they are as easy as vectors to use and they should be more efficient.
     \item Let's start with printing out each element of the arrays and make sure they're even properly constructed.
     \item Also want to see why it is that I \textbf{always} get a success even when I'm expecting a failure -- check on a smaller level with getter/setter functions.
@@ -2612,7 +2158,6 @@ Last 13 lines of output:
     \item Finally back to working after taking a break due to classwork -- quick recap of things to do:
     \begin{itemize}
         \item First, check C++ arrays and ensure they're working.
-        \item Then, finally push my changes -- very far behind in this instance of the package but should have no merge conflicts.
         \item New issue cropped up today as mentioned by Cedric: Investigate memory issues with R-side initialization of Parameter objects.
         \item It seems that the memory that is allocated is never properly deleted.
         \item We fixed some memory issues by changing copy constructors to pointers, so multiple instances should not be created -- still, need to see why it is that Parameter is never deleted when Model is deleted (despite Model calling delete Parameter).
@@ -2628,22 +2173,13 @@ Last 13 lines of output:
 \labday{October 12, 2016}
 
 \begin{itemize}
-    \item Getting back into work, hopefully consistently, now that school has lightened up a bit after Fall Break.
-    \item Starting with checking Unit Testing: Currently, we have four failures.
-    \begin{itemize}
-        \item First three failures are the result of renaming logLikelihoodTrace to logPosteriorTrace on only the R-side code (some of it) without editing the existing Unit Testing files nor the cpp files.
-        Renamed the two functions affected (get and set functions) to logPosteriorTrace.
-        \item The final failure is somewhere in the cpp code's unit testing for testParameter.
-        \item Error was in Testing.cpp.
-        Cedric had changed one of the hard-coded values in the function being tested (initParameterSet) and the Unit Testing hadn't been edited accordingly.
-    \end{itemize}
-    \item With this change pushed, the framework passes existing Unit Testing again.
+    \item Fixed three failures with checking Unit Testing: result of renaming logLikelihoodTrace to logPosteriorTrace on only the R-side code (some of it) without editing the existing Unit Testing files nor the cpp files.
+    Renamed the two functions affected (get and set functions) to logPosteriorTrace.
 \end{itemize}
 
 \labday{October 17, 2016}
 
 \begin{itemize}
-    \item Mostly reset my environment -- Cedric approved my change, and now I should plan the next steps.
     \item Talked with Dr. Gilchrist on October 13, 2016.
     \item Basically reviewed my progress on the PA-structure code.
     \item Ideally, the extension into PANSE should be based on existing RFP code that has been corrected.
@@ -2655,7 +2191,6 @@ Last 13 lines of output:
 
 \begin{itemize}
     \item Slowly removing RFPObserved functions and variables.
-    \item TODO: Figure out unified name for RFPCount (or RFP\_count).
     \item Work done as of today:
     \begin{itemize}
         \item Commented out RFPOBserved in Gene, SequenceSummary.
@@ -2669,36 +2204,19 @@ Last 13 lines of output:
     \item Standardized RFP\_count as RFPCount since other variable names with abbreviations, such as those with the abbreviation AA, are in this style (AAToAAIndex etc).
 \end{itemize}
 
-\labday{January 10, 2017}
-
-\begin{itemize}
-    \item Debugged a personal Mac issue with workflow speed: Newest update had messed up my SSH authentication, so I had to spend some time today just fixing this to return to usual work.
-\end{itemize}
-
-\labday{February - March 2017}
-
-\begin{itemize}
-    \item Let Cedric handle the Travis Hmisc error in the description.
-    \item Make the writing function a priority! -- Finish by March 9th.
-    \item Talked to Cedric later that day (March 1st) -- He knows about the Hmisc error but doesn't know how to fix it.
-\end{itemize}
-
 \labday{March 8th, 2017}
 
 \begin{itemize}
     \item Chose to add an array of strings describing the names of the RFP count categories to Genome.h.
     \item Implemented positionCodonID detection into the functions.
-    \item End of day result: Writing function 90\% completed writing function.
-    \item Will comment out testing for now, return later.
+    \item End of day result: Writing function 90\% completed. 
     \item Currently my position vector only stores the codon ID, while RFP counts store the sum of the RFP for each category (or sum of all).
-    \item Need to record RFP data for each position for each category -- I'm thinking another vector of vectors, outer vector being position and inner being a vector of RFP values.
 \end{itemize}
 
 \labday{March 9th, 2017}
 
 \begin{itemize}
     \item Notes on Gilchrist meeting:
-    \item OK'd spring break schedule: I will be away taking care of my health for Monday through Wednesday and return Thursday afternoon.
     \item TODO (after finishing writing function):
     \begin{itemize}
         \item Generate data.
@@ -2708,117 +2226,69 @@ Last 13 lines of output:
     \end{itemize}
 \end{itemize}
 
-\labday{March 16, 2017}
+\labday{March 16 - 17, 2017}
 
 \begin{itemize}
-    \item Back in the office, decided to help with debugging Travis and R CMD check since Cedric was also in.
-    \item Cedric will be gone tomorrow + next week, so I'll return to main work then.
-    \item Added Hmisc to travis.yml -- this fixes Hmisc on my Travis check, pushing to main now when Cedric's ready.
+    \item Added Hmisc to travis.yml -- this fixes Hmisc on Travis.
     \item Added acf to imports for NAMESPACE.
-    \item Used document() to update the documentation changes Cedric made.
-\end{itemize}
-
-\labday{March 17, 2017}
-
-\begin{itemize}
-    \item Finishing the writing function.
-    \item Goal: need to record, for each position, the RFP values for each category. All other info is optional or already stored elsewhere.
+    \item Writing function goal: need to record, for each position, the RFP values for each category. All other info is optional or already stored elsewhere.
 \end{itemize}
 
 \labday{May 16, 2017}
 
 \begin{itemize}
-    \item Returning to full-time work -- looks like I've missed a chance to submit a pull request on my work before the school semester had ended.
-    \item I have some backlogged local changes I need to debug ASAP.
-    \item There currently seems to be a bug in the writing function where I misdirect the writing output and overwrite the file I had originally read in.
-    \item Fixed it as well as updated the testGene.R file to account for a new parameter, categoryIndex, in the updated function for getRFPObserved.
     \item Pushed a change that added and tested getSingleRFPCount (used in writing the PA file), a helper function called testGenomePAHelper for testing the PA file genome creation, and finalized and tested the writePA function.
-    \item Spent some time resolving a ton of merge conflicts due to failure to update with the team during the semester.
     \item Requested a pull finally adding Hmisc, added c++ code for RFPCategoryName support, position-based storage of codon IDs, writePA, getSingleRFPCount.
 \end{itemize}
 
-\labday{May 17, 2017}
+\labday{May 18, 22, 23 -- 2017}
 
 \begin{itemize}
-    \item Will begin removing old code for readRFP format.
-    \item Currently debugging errors from updating R from 3.3 to 3.4 -- may be related to the updated RibModel package using openMP, even on Mac which doesn't have openMP support.
-\end{itemize}
-
-\labday{May 18, 2017}
-
-\begin{itemize}
-    \item openMP flags that were added by Cedric don't currently check OS, but there's a way to fix that -- TODO, investigate makevars.in and a configure file to detect system OS to enable/disable openMP.
+    \item Fixed openMP flags on OSX (Mac).
+    \item For Cran-compliancy, Cedric had added flags that resulted in out-of-box Mac installations to fail as it required openMP (worked on Windows, Linux, and CRAN itself as it worked on 2 of the 3 primary OS's).
+    \item Now there's a configure file that checks OS before creating a Makevars file to specify compilation with openMP or not, using autoconf.
+    \item See also: ARTP2, mvnfast (openMP in source files, but not OSX binary)
+    \item TODO: Add note in DESCRIPTION file to inform Mac users about lack of openMP and possible solutions -- symbolically link openMP-enabled compilers, etc.
     \item Finished fixing R installation errors -- had to individually reload packages between versions, rather than blindly moving installed files.
-    \item Decided to try and debug the Makevars issue between versions via using autoconf and configure.ac file.
 \end{itemize}
 
-\labday{May 22, 2017}
-
-Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation runs to test the RFP model again (TODO: Still need to rename it... Low priority).
-
-\begin{itemize}
-    \item Talked with Dr. Gilchrist and Brian about the openMP issue.
-    \begin{itemize}
-        \item Formerly, Cedric had the Makevars file attempt to use openMP if available -- this allowed the RibModel package to run out-of-the-box for all systems, but this code was not CRAN-compliant.
-        \item On May 14, Cedric made Makevars CRAN-compliant by adding code according to the CRAN manual for writing Makevars files enabling openMP.
-        \item This code works for Linux and Windows, but it does not work out-of-the-box for Mac.
-        \item I had begun writing fairly complicate autoconfigure files and Makevars alternatives that detects the system in R, while installing the package, and more, but this seemed extraneous (code based on ARTP2 package in CRAN).
-        \item Instead, asking Brian, it seems OK to leave the code like Cedric had -- it had passed on CRAN, after all. The basic idea is that it works on two of the three primary operating systems (Windows, Linux, but not Mac).
-        \item Mac users must instead download their own solution to the lack of openMP as needed, and we will include a note in the DESCRIPTION file to address this need and link to help.
-        \item For me and other researchers working on Mac, this can be easily accomplished by symbolically linking an openMP-enabled compiler on top of the under-supported Apple default.
-        \item I will also write a much simpler configure file to detect the operating system and inform the user of the lack of openMP support.
-        \item It should be noted that upon further investigation, CRAN allows the source files to have this openMP Makevars support, but it seems the binaries for OSX completely exclude this: see package mvnfast, which cannot be installed via source files but can via specific binaries.
-    \end{itemize}
-    \item Cedric's input is that the more complicated configure script is probably preferred, especially with the new information about the difference between the source and binary package of the other openMP example in CRAN.
-    \item For now, I am pushing the simpler configure file that informs the user, on package installation failure, that the cause is the lack of openMP -- users will be slightly more able to install openMP as needed compared to before (when there would be a missing compiler flag).
-\end{itemize}
+Agenda for May 22: Planning for tomorrow's simulation runs to test the RFP model again (TODO: Still need to rename it... Low priority).
 
 \labday{May 23, 2017}
 
 \begin{itemize}
-    \item Finished modifying the more complex configure script to account for OSX.
-    \item Now the Makevars file is dynamically created per package built to account for existence of openMP.
     \item While testing Makevars compatibility between systems, I tried to use both Gauley and Newton.
     \item Gauley seems to be having consistent issues with checking the update ribModel package. I will have to debug this later, for now I'll try to use Newton.
-    \item Also setting up SSH permissions and keys to more easily use Newton and Gauley -- Newton can now be accessed via SSH, and both can use my github directory permissions.
 \end{itemize}
 
 \labday{May 24, 2017}
 
 \begin{itemize}
-    \item Returning to fix up and test RFP model. TODO ASAP out of annoyance: rename it already, I've mentioned renaming it for months.
-    \item Note that Gauley still doesn't compile the package correctly; Newton, meanwhile, does.
-    \item Tasks done:
-    \begin{itemize}
-        \item Removed old readRFP and writeRFP functions completely (they were commented out before).
-        \item Fixed up some documentation around these areas of code.
-        \item Cleaned up testing folder and naming convention. No longer using .pa convention, but .csv instead for universal standard.
-        \item Removed desc folder since it is now in RibModelDev.
-    \end{itemize}
+    \item Currently, Gauley still doesn't compile package correctly, but Newton does.
+    \item Removed old read/writeRFP functions, fixed documentation around these areas of code, cleaned up testing folder and naming convention (.pa files renamed to standard .csv).
+    \item Moved desc folder from RibModelFramework to RibModelDev.
 \end{itemize}
 
 \labday{May 26, 2017}
 
 \begin{itemize}
     \item Renamed all instances of RFPModel, RFPParameter, and the like to PAModel, PAParameter, etc.
-    \item TODO: Ask Cedric the standard format to write something in the DESCRIPTION file strongly suggesting a user have access to OpenMP, even though it's not longer necessary.
     \item Added a case for reading in PA data: If a codon count is < 0, it is assumed to be a typo, and 0 is input instead.
 \end{itemize}
 
 \labday{May 30, 2017}
-
 \begin{itemize}
-    \item Asked Cedric about the DESCRIPTION file explicitly mentioning openMP -- the other openMP-enabled CRAN module I reference (ARTP2) for our own configure file does not mention it, so he thinks we can ignore it as well.
+    \item Asked Cedric about the DESCRIPTION file explicitly mentioning openMP -- the other openMP-enabled CRAN module I reference (ARTP2) for our own configure file does not mention it, so he thinks we can ignore it as well. 
     \item Gilchrist talk:
     \begin{itemize}
-        \item Likelihood of an RFP count: With a negative codon count value, don't modify the likelihood at all.
+        \item Likelihood of an RFP count: With a negative codon count value, don't modify the likelihood at all.     
         \item Rethink the \enquote{If a codon count is < 0, set to 0} idea from the May 26th notes. Instead, if an RFP count value is ambiguous or unknown, it can be set to -1 and ignored \textit{for just that category}. This is what is meant by it not affecting the Likelihood.
-        \item From Dr. Gilchrist's board: if x(arrow) = {x1, x2, x3} and x(arrow prime) = {-1, x2, x3}, then LogLikelihood (xarrow) = summation of the Loglikelihood of each xi (three of them), and LogLikehood (x arrow prime) = summation of the Loglikelihood of each valid xi (two of them).
+        \item From Dr. Gilchrist's board: if x(arrow) = {x1, x2, x3} and x(arrow prime) = {-1, x2, x3}, then LogLikelihood (xarrow) = summation of the Loglikelihood of each xi (three of them), and LogLikehood (x arrow prime) = summation of the Loglikelihood of each valid xi (two of them). 
         \item In terms of implementation, store the line after all (keeping the RFP count at -1) but when calculating Likelihood, ignore that -1 (for example, setting it to 0 for Likelihood only).
-        This would also make retaining data better when re-printing out information.
+        This would also make retaining data better when re-printing out information. 
         \item Make sure the user can specify which category to use of the multiple we have stored (TODO, but obvious when/where!)
         \item For the record, \textbf{I have fixed the August 9th bug that was originally in RFP}. ncodons are correctly calculated. This was fixed when I split \enquote{processSequence} in sequenceSummary.cpp with PA's version, which is \enquote{processPa}.
-        \item Also went over the Gauley check bug with Dr. Gilchrist (it was not a compilation error, but a check error; avoid that terminology confusion in notes). It seems the R code checks spitting out a ton of notes is just a \enquote{possible} problem and may not affect the actual package. Recall: There still is some weird random number seeding discrepancy between Gauley and other machines that results in the literal value checking of testMCMCROC to fail. This is fine; remove the check for Gauley-only.
+        \item Also went over the Gauley check bug with Dr. Gilchrist (it was not a compilation error, but a check error; avoid that terminology confusion in notes). It seems the R code checks spitting out a ton of notes is just a \enquote{possible} problem and may not affect the actual package. Recall: There still is some weird random number seeding discrepancy between Gauley and other machines that results in the literal value checking of testMCMCROC to fail. This is fine; remove the check for Gauley-only. 
         \item Meeting concluded with Dr. Gilchrist updating Gauley's version of R to 3.4. Will re-check the package for bugs.
     \end{itemize}
     \item Next step is simulating a genome and compare with Pop's data.
@@ -2830,199 +2300,6 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Worked at home today; re-checked the package on Gauley and it now works correctly after Dr. Gilchrist updated R (including the old random number testMCMCROC error).
     \item Over the past few days including today, starting to rewrite my labbook notes -- results can be seen in abridgedNotes.tex. Obsolete or erroneous information is cut out here.
     \item In that vein, removed some old, cluttering folders -- the old MCMCTestLogs and AlexTesting folders' associated bugs have been long-solved.
-\end{itemize}
-
-\labday{June 1, 2017}
-
-\begin{itemize}
-    \item Purpose of reorganizing notes over the past few days is to find suitable data for re-simulation of a genome and thne further testing.
-    \item Need to improve documentation further -- right now I am looking at in particular how I had simulated the genome last time.
-    \item Two possible files were used as the origin of all the work done... But they are very similarly named.
-    \item I have a file named rfp.count.data.by.gene.codon.and.position.GSE63789.wt produced by process.rfp.counts.nb\_07.11.16 (as documented in the past), but this is not the same file as the old rfp.counts.by.codon.and.gene.GSE63789.wt file found in RibModelDev.
-    \item Also found, discussed, and solved a minor bug with testMCMCROC.R -- Sepsilon was being set even when there were no expression values. Simple fix by adding an if statement in parameterObject.R.
-\end{itemize}
-
-\labday{June 5, 2017}
-
-\begin{itemize}
-    \item TODO note: Switch statements are more efficient in the long-term than super-long else-if chains. Maybe unravel the restart file code and convert it form else ifs to switch/case statements (low immediate priority, but Kirolos had mentioned it was confusing).
-    \item Over the past few days, I've been trying to fix up and reorganize data to create another simulated genome.
-    \item PA format (csv) is GeneID, Position, Codon, RFPCountForCategor(ies).
-    \item rfp.counts... file format is ORF, RFP\_Counts, Codon\_Counts, Codon -- no position.
-    \item rfp.count, the file provided by Dr. Gilchrist's script, is GeneID, Codon, Position, rfp\_count.
-    \item Will re-format the processed code, perhaps run Mathematica to extract more relevant data with Dr. Gilchrist's original code (which I have in pdf format)
-\end{itemize}
-
-\labday{June 6, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 1:00 - 1:30: Talked to Dr. Gilchrist to resolve notes feedback. Received the Mathematica code specified prior.
-    \item 1:30 - 4:00: Going to resolve the feedback about codon counts when read in as a non-natural number (see May 30 notes). Required changing multiple files as I changed a data type from unsigned to int. Also started editing functions to allow for RFPCategoryIndex to be accounted (i.e. long, short) with default just long ( = 0).
-    \item 4:00 - 6:00: Started thinking about how to implement RFP count category based calculations, i.e. long vs short (see May 30 notes as well).
-\end{itemize}
-
-\experiment{RFP Structure}
-\begin{itemize}
-    \item Renamed \enquote{RFPObserved} to \enquote{RFPValue} in the PANSE and PA model and parameter.cpp files. I had discussed this with Denizhan; we think that since we observe RFP on a per-position basis, and the RFPObserved variable actually stored the sum of the RFP values (so on a per-codon basis), this would be more accurate. Note that in my C++ code it was already renamed RFPObserved internally, just not externally in R as well.
-    \item Denizhan will edit the PANSE stuff himself while I edited the other files.
-    \item Nicely, the logLikelihood calculations take this RFPValue, a summation, so I don't have to directly change the calculations. Instead, all I had to do was slightly edit the summation of RFP values per-codon.
-    \item Renamed \enquote{categoryIndex} to \enquote{RFPCategoryIndex} to avoid confusion with AlphaPrime, LambdaPrime, etc.
-    \item I talked with Cedric about how to make it so that a user can specify which RFP category to use when they are doing calculations, i.e. logLikelihood.
-    \item Recall: I extended the RFP input (now named PA) so that it could include multiple RFP count categories like short and long rather than just long (the former default).
-    \item Cedric and I think that since a user would only run analysis on one column of RFP data at a time (NOTE: also recall that if a researcher wanted to aggregate RFP data somehow they would do that themselves and just make another RFP category, like long+short), we can have this initialized when a model is initialized.
-    \item In terms of implementation, this is partly R-side: edited initializeModelObject so that there is another optional argument, defaulted to 1, for RFP category that is used when the model is specified as PA or PANSE.
-    \item TODO: Now modify it in C++ (need to do this before package compiles again due to mass edits). As a comparison, look at ROCModel.h and how the two optional booleans were implemented in ROCModel.cpp. 
-\end{itemize}
-
-\labday{June 7, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 12:00 - 12:30 -- Helped Denizhan a bit with looking at R code before lunch.
-    \item 1:30 - 5:00 -- Looked at R code further; finished writing rfp.counts.category in C++, finished adding support for different RFP count category choices, resolved non-natural number codon count conversion to -1.
-    \item 5:00 - 6:00 -- While waiting for code to compile + pass checks, fixed various typos and minor integer to unsigned bugs.
-\end{itemize}
-
-\experiment{PA model in R}
-\begin{itemize}
-    \item Denizhan is experiencing some problem with finding a function defined in the Genome class when programming in R.
-    \item Loading my own script, I cannot even acquire the Genome class in R now. TODO: Ask Cedric.
-\end{itemize}
-
-\experiment{RFP Structure}
-\begin{itemize}
-    \item Renamed \enquote{RFPCategoryIndex} to \enquote{RFPCountColumn} in the C++ code, since Cedric advocated that name as a slight improvement in clarity.
-\end{itemize}
-
-\labday{June 8, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 2:30 - 4:30 -- Talked with Cedric about various questions in the code; notably, fixed the R script to initializeGenomeObject as documented in days prior (still don't know how to create a new Genome object, but that's a different issue of us not knowing the initialization command).
-    \item 4:30 - 6:00 -- Cleaned up files, fixed some of the bugs discussed.
-\end{itemize}
-
-\experiment{TODOs}
-\begin{itemize}
-    \item The virtual function keywords in the child header files of the base header files are redundant. They were presumably inserted for programmer convenience in identifying which functions were sourced from a base header file. TODO: Remove this, add comments instead. Might save on memory too.
-    \item The \enquote{explicit} keyword that is occasionally used in the header file should probably follow common-sense convention. So whenever a C++ programmer could use a copy-initializer, don't prepend \enquote{explicit}; this means that the changed PAModel initialization shouldn't have \enquote{explicit} anymore.
-    \item I'm still unsure of how to handle inheritance in sharing variables between just two models (PA, PANSE): the RFPCountColumn variable should be accessible in both, I think, instead of each different model defining the same thing.
-    \item Need to remember to push edits when I get home.
-\end{itemize}
-
-\labday{June 9, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 2:00 - 3:00 -- Cleaned up changes from yesterday, pushed changes. 
-    \item 3:00 - 5:00 -- Eventually fixed my IDE settings; I had overwritten my repository accidentally while comparing versions to find a working Simulate Genome function.
-\end{itemize}
-
-\begin{itemize}
-    \item Pushed changes from yesterday (forgot to when I got home).
-    \item General note to self from yesterday's discussion: default arguments in C++ are \textbf{never} passed into R. So I have to pass these arguments into R every time (or create default arguments in R functions).
-    \item One idea re: sharing variables of PA, PANSE is to actually make PANSE inherit PA's functions and variables. This would make the virtual keywords in PA actually useful since it could be a full extension of PA. This would make the inheritancy Model -> PA -> PANSE.
-    \item Discussed this with Denizhan. Perhaps once PANSE is completely finished and tested we can actually switch inheritance to PANSE -> PA, but for now it's the other way around for convenience.
-    \item Spent an hour and a half fixing a problem with my IDE.
-\end{itemize}
-
-\labday{June 12, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 1:30 - 2:00 -- Consolidated hours, pulled from repos and updated.
-    \item 2:00 - 4:30 -- Reviewing files, notes; some discussion with Denizhan.
-\end{itemize}
-
-\labday{June 13, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 10:30 - 1:00 -- Set up a testing branch for Rib Model Framework to debug simulateGenome() further.
-    \item 2:30 - 3:00 -- Continued looking through notes. Minor style edits corrected (found them while looking through files debugging).
-    \item 3:00 - 3:45 -- Talk with Dr. Gilchrist
-    \item 3:45 - 5:00 -- Wrapped up notes and planning, headed home a bit early.
-\end{itemize}
-
-\experiment{PA-format Genome Simulation}
-\begin{itemize}
-    \item Last few days spent checking how to simulate a genome on the C++ side only, since that was what worked successfully last time.
-    \item As of yet, bugging out -- not sure if it's because of input files or the function buggingout because of changes.
-\end{itemize}
-
-\experiment{Gilchrist Talk}
-\begin{itemize}
-    \item RPF (ribosome profile f...) is one of the names of the data formats we'll be working with. Keeping the name PA distinct from the file format, we should rename the read-in function for PA as \enquote{RFPData}.
-    \item Make \enquote{RFPValue} more explicit as well in terms of what it means. Maybe \enquote{SumRFPCountForGene} or something.
-    \item Hold off on simulating data for now; we can just compare Pop's data.
-    \item Idea: Get median of Alpha and Lambda and use each as a good estiamte of Alpha and Lambda values. Then we can use these to calculate expected waiting times as per rfp.model.pdf.
-    \item Reminder: Inverse of these values are Pop's translation rates. We can just graph these data points together (x-y) to see if there's a roughly 1-1 correspondence.
-    \item This should be much easier than what I was preparing to do originally; looks like my script was over-complicated.
-    \item The phi data that is read-in is mostly for ROC, not for RFP-based data. Artifact of a messy RibModelDev directory.
-    \item Still, after comparing rates, we should compare the Psi.g rates from our model with ROC's log phi values (ask Cedric where to get these values; we should already have them for Baker's Yeast).
-\end{itemize}
-
-\labday{June 14, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 9:00 - 12:00 -- Renamed functions as discussed yesterday.
-    \item 3:00 - 6:00 -- Asked Cedric about the Phi data. He directed me to the 2015 paper's supplementary materials. Spent some time looking over the files while waiting for automated checking on renames to pass, fixing merge conflict.
-\end{itemize}
-
-\experiment{RFP Structure}
-\begin{itemize}
-    \item Now, read/writePA is renamed read/writeRFPData.
-    \item For R-side scriping purposes, getRFPValue is now renamed, more accurately, getSumRFPCountForCodon.
-\end{itemize}
-
-\experiment{TODO}
-\begin{itemize}
-    \item When installing the package without building it (such as when running it in R), the cleanup file is not executed, resulting in a file and a folder that should be removed. May have to think of a way to run cleanup when installing the package.
-    \item Denizhan's latest labnotebook commit created symbolic link errors when doing any git commands. TODO: Ask him about these links.
-\end{itemize}
-
-\labday{June 19, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 2:30 - 5:00 -- Discussed with Denizhan about some questions he had about genome simulation, R scripting, and the symbolic link problem. Looked over misc. notes about R scripting myself to get read to write the script.
-\end{itemize}
-
-\experiment{RFP Structure}
-\begin{itemize}
-    \item From the last time I talked with Dr. Gilchrist, I mentioned to him the bugs I had with simulating a genome for the PA model, and he suggested it might have been because we had changed the structure of the read-in function to account for per-position and additional categories, while the simulation function, unedited, only calculated the sum RFP count. While looking over the simulation functions with Denizhan, I confirmed this was indeed the cause of the bugs.
-    \item From rfp.model.pdf, simulating a genome does indeed only simulate the sum of the RFP count without worrying about position, so the current function is probably fine. Instead, I have to think of a way to extract this data and read it back in when running the MCMC.
-    \item The same document also defines how to simulate a genome for PANSE, which does need positions -- Denizhan and I will have to figure out how to code this later. For now, I suggested to him to ask Dr. Gilchrist if he had any data on-hand to easily test PANSE's new calculations, similar to what I'm doing with Pop's data and PA.
-    \item For fixing the simulation bug with the PA model, I am currently thinking of simply rewriting (aka copying) the old readRFP function from when it used the bugged calculations with number of codons. This function should be easier to change and use with just the sum of the RFP counts, rather than per-position codon counts.
-\end{itemize}
-
-\labday{June 21, 2017}
-
-\experiment{Time Breakdown}
-\begin{itemize}
-    \item 9:30 - 11:00 -- Fixed dumb git bug, rewrote notes from Monday.
-    \item 11:00 - 1:00 -- Found and squashed some minor typing bugs and inconsistencies; typos. Tasked Denizhan with helping me check if the simulateGenome functions worked in R like they did in C++ (known issue).
-    \item 2:00 - 5:00 -- Renamed RFPCategory, began re-adding simulated RFP data read/write functionality.
-\end{itemize}
-
-\experiment{Misc Notes}
-\begin{itemize}
-    \item I spent an hour and a half trying to fix a bug with github and merges. Apparently, Denizhan's symbolic links had a tangible consequence -- because I pulled a version that had the symbolic link error, git would complain continuously that there were too many layers of symbolic links.
-    \item This basically resulted in a hidden change to my local version of the labbook directory that I could not overwrite but would be detected when trying to merge to the current version of the labbook repo on git that Denizhan later updated to fix the symbolic link error.
-    \item Thus, I had a merge conflict that could not be resolved; I fixed this by deleting and re-cloning the labbook repo, but I accidentally lost the notes from the past two days from carelessly losing my copy buffer. I rewrote these notes and pushed them.
-    \item On a different note, it seems like I need to run the pdflatex command twice on my .tex files in this repo to get a working table of contents. Not sure why it lists a error with finding a latex function definition when I run the command once, but doesn't on the second time.
-\end{itemize}
-
-\experiment{RFP Structure}
-\begin{itemize}
-    \item Decided to go ahead and re-add parts of the old read/writeRFP functions into the current code for simulated genomes.
-    \item Planned implentation: The current writeRFPData function, when its optional simulated boolean is set to true, branches into a fairly different way of writing the RFP data, adapted from the old writeRFP function.
-    \item Meanwhile, reuse the old readRFP functon as readSimulatedGenomeFromPAModel.
-    \item Also renamed RFPCategory to RFPCountColumn in the .cpp code.
-    \item Left off the day with writeRFP(simulated) written, almost done with readSimulatedGenomeFromPAModel. Still need to test all this of course.
-    \item Motivation for oding this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
 \end{itemize}
 
 \end{document}

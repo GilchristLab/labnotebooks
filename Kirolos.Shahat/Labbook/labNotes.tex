@@ -1,0 +1,357 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Daily Laboratory Book
+% LaTeX Template 
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Frank Kuster (http://www.ctan.org/tex-archive/macros/latex/contrib/labbook/)
+%
+% Important note:
+% This template requires the labbook.cls file to be in the same directory as the
+% .tex file. The labbook.cls file provides the necessary structure to create the
+% lab book.
+%  %%mikeg: Since labbook is installed shouldn't need to do this
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing lab book content.
+%
+% HOW TO USE THIS TEMPLATE 
+% Each day in the lab consists of three main things:
+%
+% 1. LABDAY: The first thing to put is the \labday{} command with a date in 
+% curly brackets, this will make a new page and put the date in big letters 
+% at the top.
+%
+% 2. EXPERIMENT: Next you need to specify what experiment(s) you are 
+% working on with an \experiment{} command with the experiment shorthand 
+% in the curly brackets. The experiment shorthand is defined in the 
+% 'DEFINITION OF EXPERIMENTS' section below, this means you can 
+% say \experiment{pcr} and the actual text written to the PDF will be what 
+% you set the 'pcr' experiment to be. If the experiment is a one off, you can 
+% just write it in the bracket without creating a shorthand. Note: if you don't 
+% want to have an experiment, just leave this out and it won't be printed.
+%
+% 3. CONTENT: Following the experiment is the content, i.e. what progress 
+% you made on the experiment that day.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,index=totoc,hyperref,openany]{labbook} % 'openany' here removes the gap page between days, erase it to restore this gap; 'oneside' can also be added to remove the shift that odd pages have to the right for easier reading
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[ 
+%  backref=page, %incompatible with biblatex
+  pdfpagelabels=true,
+  plainpages=false,
+  colorlinks=true,
+  bookmarks=true,
+  pdfview=FitB]{hyperref} % Required for the hyperlinks within the PDF
+  
+\usepackage{booktabs} % Required for the top and bottom rules in the table
+\usepackage{float} % Required for specifying the exact location of a figure or table
+\usepackage{graphicx} % Required for including images
+
+%%Customizations by mikeg
+\usepackage{marginnote}%provides ability to put notes in the margin using \marginnote{} coommand
+\usepackage{ifthen}
+\usepackage{amsmath,amssymb}
+\usepackage{xspace}
+\usepackage{listings} %provides lstlisting environment for typesetting code
+\usepackage[natbib=true,backref=page]{biblatex} %alternative to natbib
+
+\bibliography{/home/mikeg/BiBTeX/bibliography.full}
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+%\patchcmd{\scr@startchapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+%remove numbering of experiments
+%\renewcommand*\theexperiment{}
+%\renewcommand*\thesubexperiment{}
+\makeatother 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Command to make the lines in the title page
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Use Roman numerals for page numbers
+\title{
+\begin{center}
+\HRule \\[0.4cm]
+{\Huge \bfseries Research Journal \\[0.4cm] % Degree
+\HRule \\[1.5cm]}
+\end{center}
+}
+\author{\LARGE Kirolos A. Shahat \\ \Large kshahat@vols.utk.edu \\[2cm]} % Your name and email address
+\date{Beginning 19 May 2017} % Beginning date
+
+
+
+
+%---------------------------------------------------------------------------------------
+
+\graphicspath{{./Figures//}} % double slash indicates search recursively within folder
+%%Figures will be organized in subfolders by year/month
+\DeclareGraphicsExtensions{.pdf, .png, .jpg} %prevent the need for using file extensions
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\tableofcontents
+
+\mainmatter % Use Arabic numerals for page numbers
+
+%----------------------------------------------------------------------------------------
+%	LAB BOOK CONTENTS
+%----------------------------------------------------------------------------------------
+
+% Blank template to use for new days:
+
+%\labday{Day, Date Month \Year}
+
+%\experiment{}
+
+%Text
+
+%-----------------------------------------
+
+%\experiment{}
+
+%\begin{figure}[H] % Example of including images
+%\begin{center}
+%\includegraphics[width=0.5\linewidth]{example_figure}
+%\end{center}
+%\caption{Example figure.}
+%\label{fig:example_figure}
+%\end{figure}
+
+%Text
+
+%----------------------------------------------------------------------------------------
+
+
+
+\labday{Friday, May 19 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Get LaTeX up and running to begin taking notes
+	\item Study 2007 article and use it to begin learning terminology and understand key concepts
+	\item Study Jeremy Rogers' and Alan Dixon's previous notes and see how they began their research
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Beginning to understand layout and format of LaTeX files.
+	\item Terminology:
+	\begin{enumerate}
+		\item Codon - Sequence of three nucleotides that together form a unit of genetic code in a DNA or RNA molecule.
+		\item Codon Usage Bias (CUB) - Nonuniform usage of particular synonymous codons within a genetic sequence. 
+		\item Genome - The genetic material of an organism. 
+		\item Stochastic Model - A model that allows for random variation of one or more inputs over time. 
+		\item Stochastic Evolutionary Model of a Protein's Production Rate (SEMPPR) - A way to link CUB and the average protein production rate mechanistically. Essentially the model makes inferences about the production rate of a gene based on its elevation on the fitness landscape of protein production costs. 
+		\item Polypeptide - Linear amino-acid chain which forms most, or all, of a protein.
+		\item Genetic Fitness (n) - The reproductive success of a genotype.
+		\item Gene - Represented as a vector of Codons.
+	\end{enumerate}
+	\item Concepts:
+	\begin{enumerate}
+		\item A major cost of a nonsense error is the amount of energy invested into assembling the incomplete polypeptide. 
+		\item Selection on codon usage against nonsense errors should increase with codon position along a sequence because the cost is related to the length. This leads to the prediction of increasing codon bias with codon position.
+		\item Adaptation of a codon sequence, within SEMPPR, refers to the state of its expected cost of producing a protein relative to the minimal possible cost.
+		\item The resulting output from SEMPPR is a posterior probability distribution for the protein production rate of a gene based on its observed codon sequence.
+		\item Incomplete proteins are the result of nonsense errors. The cost of these nonsense errors is a function of their expected number and the length of the incomplete proteins. 
+	\end{enumerate}
+	\item Notes for next time
+	\begin{enumerate}
+		\item Figure out math and vector notation for LaTeX.
+		\item Continue studying 2007 article
+		\item Attempt to get to Jeremy and Alan's labbooks
+	\end{enumerate}
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, May 22 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Short review of what I learned on May 19th 2017
+	\item Figure out how to get mathematical notation in LaTeX documents
+	\item After speaking with Hollis, he suggested that I look at the existing FONSE code and cross reference that code with given articles and refer to the layout of the ROC model for implementation so that is where I'll focus my time now and address questions when needed in order of relative importance.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+
+	\item Terminology:
+	\begin{enumerate}
+		\item Elongation - The stepwise addition of amino acids to the growing protein chain.
+	\end{enumerate}
+	
+	\item Questions:
+	\begin{enumerate}
+		\item Not sure what the variables bias\_csp or mutation\_prior\_sd are in the FONSEParameter. mutation\_prior\_sd is the likelihood that there is a mutation where it is defaulted to 0.35.  I believe that the bias\_csp is the codon bias based on current position.	
+		\item Unsure how those values are getting updated or where they show up in the \begin{math} \eta (\vec{c}) \end{math} equations.
+	\end{enumerate}
+
+	\item Current Notes:
+	\begin{enumerate}
+		\item Running runFONSEmodel.R and saving the output into a file to understand what is going on
+		\item Beginning scan of FONSEParameter.h and FONSEParameter.cpp and trying to document where I can from current understanding
+		\item Currently looking through the constructors in FONSEParameter.cpp and following the methods that are being called. Currently in initFromRestartFile.
+		\item rep(x, y) returns a vector of size y with all elements as value x in R
+		\item sd = standard deviation, csp = codon specific parameter.
+	\end{enumerate}
+
+	\item Notes for next time:
+	\begin{enumerate}
+		\item Ask Dr. Gilchrist what the variables in the FONSE equations represent so that I can understand how to get them/decipher them in code.
+		\item Continue trying to decipher the FONSEParameter code and relating them to articles/equations. Mostly get help with initvalues methods and from there it shouldn't be too difficult to follow.
+	\end{enumerate}
+
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Wednesday, May 24 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue running runFONSEmodel.R and saving the output to file
+	\item Continue scanning through FONSEParameter.h and FONSEParameter.cpp and documenting where I can from current understanding
+	\item If time allows, get the meanings of the variables from Dr. Gilchrist 
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Ran through about 930 iterations of runFONSEmodel.R and stopped it. I have the outputs from that program to follow.
+	\item Currently tracing through the FONSEParameter.cpp and it's leading me to initBaseValuesFromFile method so I am checking it out and documenting where I can.
+	\item Spoke with Dr. Gilchrist and he confirmed that I should be going through the C++ code and trying to understand it. He also gave me an understanding of what the variables represent so that I can understand some of the math in the code when I come across it.
+	\item Going through the init methods in FONSEParameter.cpp and I found that sequenceSummary is implemented using maps to emulate enumerators. I haven't seen what all it is being used for but I think enumerators are constant time when maps are log(n) time to find an element. I think it be a nice speedup if it was changed over. Just a thought for later, potentially.
+	\item I'm adding comments and I'm noticing that the code is pretty cluttered, my impulse is to start cleaning it and making it more legible but I'm refraining from doing so for now...
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Friday, May 26 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through init methods in FONSEParameter.cpp and FONSEParameter.h
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Currently in initFONSEValuesFromFile in FONSEParameter.cpp. I see a print statement that just says "here" so I'm going to assume this method is not working properly for some reason, might be because eof is not doing anything differently? It's essentially breaking through the structure of the loop.
+	\item Finished going through initFONSEValuesFromFile. I condensed two for loops into one at the end of that method. I documented what I did and left the previous code in case someone needs the previous code.
+	\item Going through writeBasicRestartFile in Parameter.cpp. It's pretty well written, my only confusing is why a ostringstream is used, doesn't seem needed to me. Just seems to be extra memory because it's just copied to a string at the end. Can cut out the string and ostringstream and just write to the file directly and save on memory.
+	\item Went through writeFONSERestartFile, nothing too strange there.
+	\item Going through initParameterSet in Parameter.cpp
+	\item Indexing vectors in R start at element 1 not 0 (Mathematicians....)
+	\item STANDALONE represents not being run by R
+	\item Condensed initParameterSet vector assignment loop using iterators and the push\_back method but now I'm noticing a segFault in runFONSEmodel.R which is strange because I wasn't getting that before. Will have to look into that next time by re-cloning the RibModelFramework repo and seeing if re-installing that fixes the issue or not.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Tuesday, June 6 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Forked the RibModelFramework repo from Cedric's github to my own so that I can push without fear of losing work that I have done.
+	\item initFONSEParameterSet has three for loops that, i believe, can be condensed into one. Going to try and do that.
+	\item Successfully did the optimization and tested it.
+	\item learned a little more about ostringstreams thanks to Hollis. 
+	\item Goal for next time: Continue going through old code starting at initAllTraces.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Wednesday, June 7 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item \$ is calling a method of an R object
+	\item dM = mutation, dOmega = selection. This is with respect to FONSE
+	\item Incase I forget: One future goal is fix some of the read restart file methods into switch statements rather than if else. It is currently very unclean.
+	\item Goal for next time: Continue going through old code starting at the CSP functions
+
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Friday, June 9 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item The propose structures and functions are actually the 'predictions' that we are making, I believe.
+	\item Was looking through proposeCodonSpecificParameter and found a randNorm method. I found it in parameter.cpp but it was calling rnorm which I'm not sure I know what that is. Couldn't find it anywhere.  Will have to look into it soon.
+	\item So far what I'm seeing from the propose function is that it:
+	\begin{enumerate}
+		\item Loops for the total number of groupList, which I think is just the total number of different amino acids there are.
+		\item Then we get the number of codons by subtracting the start from the end location of the amino acids, because the cost scales with distance or how far the production has gone.
+		\item There's a vector called iidProposed, Identically independant distribution. This is basically saying that the underlying distribution is the same for all of them but it uses the randNorm function which seems to be randomly generating a different distribution for each iteration. So I'm assuming that it's constant in the sense that's it's across the board random. This is done for the total number of categories( mutation + selection ) all multiplied by the number of codons.
+	\end{enumerate}
+	\item Next time: Continue in the proposeCodon... and start at the covaryingNums variable declaration.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, June 12 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through old code, starting at proposeCodonSpecificParameter in FONSEParameter.cpp
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item As stated previously, the initial for loop is initializing the iidProposed to a random distribution for each element between 0 and 1 for numCodons*(mutation+selection categories) elements total.
+	\item There were an un-optimized double for-loop chain that could be condensed in the proposeCodon... function and I optimized it and pushed it into my repo. Hoping to do a pull request soon to update the main branch.
+	\item I'm not super sure what the covarianceMatrix stuff is used for with respect to FONSE. Whenever I talk to Dr. Gilchrist next I want to ask him about that.
+	\item Looking at the eta analysis paper I believe that dM =\begin{math} \Delta \eta \end{math}, while dOmega = \begin{math}\Delta \omega \end{math} which I believe have already been calculated and are stored within the currentCodonSpecificParameter[dM or dOmega].
+	\item Based off of that last note: the covariance matrix is the summation term. The only thing I'm getting confused with is that I don't see any kind of difference, they are all sums. I'm assuming that it is done somewhere behind the scenes of what I currently am looking at. Should definitely make sure that I am deciphering this correctly but I think I'm getting close to a breakthrough of understanding the current code at least.
+	\item I asked Hollis a little bit about the dM variable and he says that he doesn't believe that it is the mutation.
+	\item Goal for next time: Try to continue comparing some of these methods with the equations in the eta analysis paper and continue to get an understanding of what is going on and try to ask Dr. Gilchrist for advice on what I can.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, June 26 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Get back into the flow of things. I've been gone too long.
+	\item Start going through the R code and matching it with the C++ ones.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Went through genome::readFasta and reorganized it and made it a bit cleaner.
+	\item Goal for next time: Start going through genome::readObservedPhiValues
+	
+
+\end{itemize}
+%----------------------------------------------------------------------------------------
+
+\printbibliography
+
+\end{document}

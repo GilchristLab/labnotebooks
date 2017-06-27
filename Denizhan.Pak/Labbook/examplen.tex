@@ -1,0 +1,101 @@
+%%
+%% This is file `examplen.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% labbook.dtx  (with options: `examplen')
+%% 
+%% Copyright (C) 2002 Frank Küster.
+%% 
+%% All rights reserved.
+\ProvidesFile{examplen.tex}%
+            [2003/05/20 v1.1 LaTeX2e labbook document class]
+
+\documentclass[idxtotoc,hyperref]{labbook}
+
+
+\usepackage[%
+  backref=page,%
+  pdfpagelabels=true,%
+  plainpages=false,%
+  colorlinks=true,%
+  bookmarks=true,%
+  pdfview=FitB]{hyperref}
+
+\input{boilerplates}
+
+
+\newexperiment{prep_S-peptide}{Preparation of RNase A S-peptide}
+\newsubexperiment{subtilisin}[subtilisin digest]{Digestion with
+  Subtilisin}
+
+\newexperiment{prep?some1th&^ing}{Preparation of purified something}
+
+\newexperiment{lyoph-A}{Lyophilization of A}
+\newexperiment{lyoph-B}{Lyophilization of B}
+
+\begin{document}
+
+\frontmatter
+\title{Laboratory Journal from 2003-04-22 to \dots}
+\author{Jane Eager}
+\maketitle
+
+\printindex
+\tableofcontents
+
+\mainmatter
+
+\labday{Tuesday, April 22, 2003}
+
+\experiment{prep_S-peptide}
+\subexperiment{subtilisin}
+
+\Xsometext\par
+\Xsometext\par
+\Xsometext\par
+\Xsometext\par
+\begin{figure}[htbp]
+  \centering
+  \sdsgel
+  \caption{Some very interesting SDS gel}
+  \label{fig:digest-sds}
+\end{figure}
+
+\experiment{Expression of Hagridin in \textit{E. coli}}
+
+\subexperiment[Transformation with HagIV plasmid]{Transformation of
+  hogwarts-auxotrophic \textit{E. coli} with the HagIV
+  plasmid}
+
+\Xothertext\Xothertext
+
+\labday{Wednesday, April 23, 2003}
+
+\experiment{prep_S-peptide}
+
+\subexperiment[subtilisin]{Digestion using the new batch of
+  Subtilisin}
+
+\experiment{prep?some1th&^ing}
+
+\experiment{Preparation of A}
+
+A was prepared according to the protocol in Muller \textit{et al.} and
+was temporarily stored in the freezer.
+
+\labday{Thursday, April 24, 2003}
+
+\experiment{Preparation of B}
+
+B was prepared according to the protocol by Smith and Fox.
+
+
+\experiment[Lyophilization of A and B,lyoph-A, lyoph-B ]{Lyophilization
+  of A and B}
+
+\end{document}
+\endinput
+%%
+%% End of file `examplen.tex'.

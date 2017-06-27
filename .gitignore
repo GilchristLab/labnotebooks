@@ -4,6 +4,7 @@
 Lab_Notes.pdf
 
 # Hollis's labnotes pdf 
+abridgedNotes.pdf
 notes.pdf 
 
 # Walker's lanotes pdf
@@ -18,3 +19,6 @@ Wnotes.pdf
 
 # R stuff
 .Rhistory
+
+# Mac stuff
+*.DS_Store

@@ -1,0 +1,68 @@
+\documentclass[12 pt]{article}
+
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\title{June 2015 Work Log}
+
+\author{Jeremy Rogers \\
+	\texttt{jroger44@vols.utk.edu}}
+
+\date{June, 2015}
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\section{Goals for the Month}
+	\begin{enumerate}
+		\item Gain ownership of Logan's github repository
+		\item Finish running the NSE first order approximation model on all test genomes
+		\item Profile the test genomes
+		\item Read and understand the Murray et al. paper on doubly intractable MCMC.
+		\item Get access to Preston's repository, and begin looking through the code.
+		\item Clean up my log repository
+	\end{enumerate}
+	\section{Progress/Notes}
+	\subsection{Gain ownership of the cubmisc github repository}
+	\begin{enumerate}
+		\item In order to gain ownership of a github repository, the current owner has to initiate the process. So I'll need to get in contact with Logan.
+	\end{enumerate}
+	
+	\subsection{Finish running the NSE first order approximation}
+	\begin{enumerate}
+	\item This is in progress. I've run the REU13 yeast, Preston's Yeast, and Logan's yeast. Now I need to run it on the other included genomes.
+	\item Afternoon of June 1: I have begun to run the simulation with 6000 samples on the Brewers' Yeast. Now that we have a good idea of how well the simulation fits things, we'll see how it looks on an actual genome.
+	\end{enumerate}
+	
+	\subsection{Profile the test genomes}
+	\begin{enumerate}
+		\item This is also in progress, although it may take a while to get done, since I'll have to run things numerous times.
+	\end{enumerate}
+	
+	\subsection{Read and understand the DIMCMC paper}
+	\begin{enumerate}
+		\item I have read over the paper a couple of times, but it's a pretty heavy paper, and it might take me a while to digest it fully.
+	\end{enumerate}
+	
+	\subsection{Get access to Preston's repository}
+	\begin{enumerate}
+		\item Dr. Gilchrist has informed me that he will get me access soon.
+		\item Update: I now have access to the repository, and I've been looking through the code. It's actually really well documented, so this shouldn't be too bad.
+		\item June 2: Preston's code is very well documented, and the code itself is clean. That's a pleasant surprise. There are numerous compiler warnings that I'd like to get rid of though.
+		\item June 2: I've gotten rid of all of the compiler warnings in the library source and the data simulation, except for one that would require some logic modification. I'll go back and fix it once I'm sure it's working before that change. I also need to fix some compiler warnings in the eta simulation code.
+		\item All of the compiler warnings are now fixed. There was also a bug that I found at line 259 of \texttt{seqfuns\_CES.c}. The line read
+		\begin{verbatim}
+			xi += (A1 + A2 * (i)) * (*(sigma_vec - 1) - *(sigma_vec++));
+		\end{verbatim}
+		The problem with this is that this is undefined behavior. There is no sequence point between the \texttt{sigma\_vec - 1} and the \texttt{sigma\_vec++}. This means that there is no guarantee that the subtraction will take place before the increment happens. In fact, I would guess that if I looked at the assembly code, that the increment would happen first, simply because it has to move something into memory. Anyways, I changed this to 
+		\begin{verbatim}
+			xi += (A1 + A2 * (i)) * (*(sigma_vec - 1) - *(sigma_vec));
+			sigma_vec++;
+		\end{verbatim}
+		So now the increment will happen after the statement guaranteed. There are comments later in the code about \texttt{sigma} doing weird things, so maybe that will fix some of them.
+	\end{enumerate}
+	
+	\subsection{Clean up my log repository}
+	\begin{enumerate}
+		\item My repository has been cleaned significantly, thanks to some scripts that I wrote. Now, I have separate repositories for logs, source files, and graphs. The logs directory only contains \texttt{.pdf}s, and the source directory only contains \texttt{.tex} files. All auxiliary files are now stored locally on my machine so that they don't clutter up the repository anymore. 
+	\end{enumerate}
+\end{document}
