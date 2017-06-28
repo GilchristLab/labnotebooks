@@ -452,6 +452,7 @@ ROC model is working well for both and c++, PA simulate genome is having erors o
 \experiment{Compilation Problems}
 While debugging R end of simulate genome PA ran into compiltion problems, needs further fixing
 \labday{June 27, 2017 Notes}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 2 - 3: Reading about Cmake and Rcpp compilation
     \item 3 - 5: Fixing Compilation problems
@@ -461,3 +462,11 @@ While debugging R end of simulate genome PA ran into compiltion problems, needs 
 When a an R package is built the zip maintains the original files, which is then compiled during installation to create a shared object file, which is stored locally for reference by R. There was a problem with this object file, the problem seemed to stem from Cmake incorrectly compiling according to a version copatabillity issue, which I have not discovered yet.
 \experiment{Fixing Compilation}
 To get back to testing I removed the Cmake related files in the RibModel and deleted cached information maintained by R about using Cmake, once compiled with g++ the package started to work again
+\labday{June 28, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Debugging ReadRFP
+    \item 1:30 - 4: Debugging ReadRFP
+\end{itemize}
+\experiment{Debugging ReadRFPData}
+The method readRFP in Gene.cpp is showing errors, there is a vector which is going over bounds, initially I though it was a simple naming problem but looking further Although the inital core dump has been solved there is a second issue that needs to be addressed, I found that problem goes further down the code. I will continue investigating.
