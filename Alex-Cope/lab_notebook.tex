@@ -53,6 +53,10 @@ Questions left to be answered:
 \end{enumerate}
 
 
+\subexperiment{Potential Aims for Preliminary Exam}
+\begin{itemize}
+\item Research has shown the rate of protein evolution is negatively correlated with gene expression levels in many species. For these studies, mRNA abudnance is usually the measure is of gene expression used; however, it is known that mRNA abundance data and actual protein abundances are only partially correlated. Previous research has also shown that the correlation between protein abudnance and rate is weaker than mRNA abundance and rate. It is unclear if this suggests something biological or reflects differences in proteomic and transcriptomic data. If this is genuine, this would suggest post-translational regulation acts as a buffer against evolutionary rates.
+\end{itemize}
 
 \labday{Progress Tracker}
 \experiment{8-25-2016}
@@ -1025,7 +1029,7 @@ Authors: Alex Cope, Robert Hettich, Michael Gilchrist
 In general, raw mRNA counts \textbf{do not} correlate well with $\phi$ estimates of ROC-SEMPPR.
 \begin{figure}[H]
 \centering
-\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_raw_mrna.pdf}
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_mrna_raw.pdf}
 \caption{Comparison of raw RNA-Seq counts to ROC-SEMPPR $\phi$}
 \end{figure}
 
@@ -1066,12 +1070,42 @@ From my general observations, normalized RNA-Seq data (regardless of normalizati
 \caption{Comparison of RNA-Seq counts normalized by RPKM to ROC-SEMPPR $\phi$ in late stationary phase}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_mrna_raw.pdf}
+\caption{Histogram of correlations comparing $\phi$ to raw mrna abundance data}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_mrna_rpkm.pdf}
+\caption{Histogram of correlations comparing $\phi$ to normalized mrna abundance data via RPKM.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_mrna_tpm.pdf}
+\caption{Histogram of correlations comparing $\phi$ to normalized mrna abundance via TPM.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_mrna_sf_norm.pdf}
+\caption{Histogram of correlations comparing $\phi$ to normalized mrna abundance data via DeSeq2.}
+\end{figure}
+
 Unlike RNA-Seq data, the ROC-SEMPPR $\phi$ estimates generally correlate better with protein abundance data (raw or normalized) and these correlations are more consistent across conditions. Normalization appears to have little to no impact on how well ROC-SEMPPR $\phi$ estimates correlate with the empirical data (see Figures 16 and 17). Under almost every condition, the Spearman rank coefficient is between 0.5 to 0.58. The one exception is when \textit{E. coli} is grown a high NaCl concentration environment, in which the correlation generally drops to 0.45-0.47. However, I know salt in samples can increase the noise in a mass spectrometry run, which might have affected the quantifications. Also, protein abundance data were relatively sparse to the RNA-Seq data.   
 
 \begin{figure}[H]
 \centering
-\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_protein_raw_counts.pdf}
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_protein_raw.pdf}
 \caption{Comparison of raw protein accounts to ROC-SEMPPR $\phi$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_protein_raw.pdf}
+\caption{Histogram of correlations comparing $\phi$ to raw protein abundance data}
 \end{figure}
 
 \begin{figure}[H]
@@ -1079,6 +1113,13 @@ Unlike RNA-Seq data, the ROC-SEMPPR $\phi$ estimates generally correlate better 
 \includegraphics[page=1,scale=0.6]{Ecoli_REL606/GSE94117_norm_sf_protein.pdf}
 \caption{Comparison of normalized protein accounts to ROC-SEMPPR $\phi$}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[page=1,scale=0.6]{Ecoli_REL606/correlation_ppr_protein_sf_norm.pdf}
+\caption{Histogram of correlations comparing $\phi$ to normalized protein abundance data via DeSeq2. Normalization gives slight improvement, although this is not as dramatic as compared to normalization of mRNA abundance data.}
+\end{figure}
+
 
 \bibliographystyle{acm}
 \bibliography{papers}{}
