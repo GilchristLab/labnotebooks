@@ -467,6 +467,17 @@ To get back to testing I removed the Cmake related files in the RibModel and del
 \begin{itemize}
     \item 11 - 12:30: Debugging ReadRFP
     \item 1:30 - 4: Debugging ReadRFP
+    \item Total 4 hours spent working
 \end{itemize}
 \experiment{Debugging ReadRFPData}
 The method readRFP in Gene.cpp is showing errors, there is a vector which is going over bounds, initially I though it was a simple naming problem but looking further Although the inital core dump has been solved there is a second issue that needs to be addressed, I found that problem goes further down the code. I will continue investigating.
+\labday{June 29, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Debugging readRFP
+    \item 12:30 - 1:30: Reading Documentation for Genome and gene
+    \item 1:30 - 3 Debugging read RFP
+    \item Total: 4 hours spent in lab 3 hours working, 1 hour reading
+\end{itemize}
+\experiment{Debugging ReadRF}
+After continuing my investigation I found that the problem is somewhere in the setPASequence function inside the Gene class. I read into the implementation of the clas and explored its functions, the error is in the stoing of the string named "seq" which stores the gene sequence, there is an unbounded memory access problem, that will still need to be explored. 
