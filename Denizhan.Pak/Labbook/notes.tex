@@ -281,9 +281,11 @@ I have begun developing the testing application. Under Dr. Gilchrist sugestion I
     \item 1 - 3: Tested and edited gamma function for accurracy
     \item Total: 4 Hours spent in Lab working.
 \experiment{Benchmark Upper Incomplete Gamma}
-As discussed earlier worked on benchmarking my implementation of the Gamma Function. From the list above I have completed steps 2 and 3. After editing the code changing the number f iterations and adding a special case calculation the continued fraction is seeming to be as accurrate as the GSL implmenetation. The log files for the accurrcacy tests can be found in the Log_files directory.
+As discussed earlier worked on benchmarking my implementation of the Gamma Function. From the list above I have completed steps 2 and 3. After editing the code changing the number f iterations and adding a special case calculation the continued fraction is seeming to be as accurrate as the GSL implmenetation. The log files for the accurrcacy tests can be found in the Log\_files directory.
 I have more benchmarking to do although preliminarily the implementation seems to be fast enough, I will edit the testing function that has been developed to be multithreaded to allow for timing comparisons between both implementations. Depending on the results of this testing I will work on optimizing my implementation for increased speed efficiency. 
 For the accurracy testing I used random number generation with the value for the $a$ being evenly distributed between $1 \land -1$. This is based on observations in the pdf of RFP that the $a$ value will be $1 - \alpha$ and from known $\alpha$ value observations it is between $0 \land 2$ meaning the resulting $a$ will be between $1 \land -1$. The value for $x$ is more arbitrary. It is set to a randomly distributed double between $0 \land 11$ this is because depending on $a$ most values for $x > 10$ will result in a return of $0$. I will test a working MCMC to understand a better value for $x$. Additionall I have provided a further reding on accurracy of a continued fraction in the further reading section.
+\end{itemize}
+
 \labday{June 1, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
