@@ -481,3 +481,16 @@ The method readRFP in Gene.cpp is showing errors, there is a vector which is goi
 \end{itemize}
 \experiment{Debugging ReadRF}
 After continuing my investigation I found that the problem is somewhere in the setPASequence function inside the Gene class. I read into the implementation of the clas and explored its functions, the error is in the stoing of the string named "seq" which stores the gene sequence, there is an unbounded memory access problem, that will still need to be explored. 
+\labday{June 30, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12: Finish ReadRFP Debug
+    \item 12 - :1:30: Help Hollis Debug Testing
+    \item 2 - 2:30: Debugging genome comparison
+\end{itemize}
+\experiment{Finsh ReadRFP}
+The problem was with input file, TODO Note: Add error checking when reading through input files, problem was solved after talking to Hollis
+\eperiment{Help Hollis}
+There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
+\experiment{Genome Comparison}
+While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
