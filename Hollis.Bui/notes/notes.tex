@@ -2956,7 +2956,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item RPF (ribosome profile f...) is one of the names of the data formats we'll be working with. Keeping the name PA distinct from the file format, we should rename the read-in function for PA as \enquote{RFPData}.
     \item Make \enquote{RFPValue} more explicit as well in terms of what it means. Maybe \enquote{SumRFPCountForGene} or something.
     \item Hold off on simulating data for now; we can just compare Pop's data.
-    \item Idea: Get median of Alpha and Lambda and use each as a good estiamte of Alpha and Lambda values. Then we can use these to calculate expected waiting times as per rfp.model.pdf.
+    \item Idea: Get median of Alpha and Lambda and use each as a good estimate of Alpha and Lambda values. Then we can use these to calculate expected waiting times as per rfp.model.pdf.
     \item Reminder: Inverse of these values are Pop's translation rates. We can just graph these data points together (x-y) to see if there's a roughly 1-1 correspondence.
     \item This should be much easier than what I was preparing to do originally; looks like my script was over-complicated.
     \item The phi data that is read-in is mostly for ROC, not for RFP-based data. Artifact of a messy RibModelDev directory.
@@ -3022,7 +3022,30 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Meanwhile, reuse the old readRFP functon as readSimulatedGenomeFromPAModel.
     \item Also renamed RFPCategory to RFPCountColumn in the .cpp code.
     \item Left off the day with writeRFP(simulated) written, almost done with readSimulatedGenomeFromPAModel. Still need to test all this of course.
-    \item Motivation for oding this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
+    \item Motivation for doing this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
+\end{itemize}
+
+\labday{June 22, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:00 - 5:00 -- Looked over some stuff with Denizhan on simulating genomes, preparing him for the process to run models.
+\end{itemize}
+
+\labday{June 30, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 1:40 -- Finished up most of readSimulatedGenomeFromPAModel and writeRFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Again, the differences between simulated data and non-simulated data are annoying.
+    \item In the PA Model, summed RFPs are generated without regard to position, so the current readSimulatedGenomeFromPAModel format cleanly gets the GeneID,Codon,Codon\_Count,RFPCount (for only a single category; intended).
+    \item TODO is to make the header dynamic (so instead of RFPCount, it says long or short) as an RFPCount category. This will be the same single category specified on model creation.
+    \item Bigger problem is ensuring (unit-testing) that the read and write of simulated data is correct. Probably easiest to compare the stored number of codons per codon is equal and their sumRFPCouns are equal. Still a fairly lengthy project and Denizhan was looking for some work (and this advances his own work with simulating PANSE later), so I described the problem to him as a potential TODO.
+    \item Pushed a change where the functions are implemented, but untested. Looking at output files at a glance shows that they are working correctly, but need to test in practice with unit testing techniques.
 \end{itemize}
 
 \end{document}
