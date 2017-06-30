@@ -347,8 +347,26 @@
 \begin{itemize}
 	\item Went through genome::readFasta and reorganized it and made it a bit cleaner.
 	\item Goal for next time: Start going through genome::readObservedPhiValues
-	
+\end{itemize}
 
+%-----------------------------------------
+
+\labday{Friday, June 30 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue running through runFONSEmodel.R with initializeParameterObject function call
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Steps in runFONSEmodel.R
+	\begin{enumerate}
+		\item init a genome object
+		\item init a FONSE parameter object, goes to initParameter set in parameter.cpp and then initFONSEparameterset and then calculates SCUO(syn. codon usage order)
+		\item init MCMC object does nothing special
+		\item runMCMC which calls run and then run calls varyinitialconditions in MCMCAlgorithm.cpp, that is where I will pick up next time.
+		
+	\end{enumerate}
 \end{itemize}
 %----------------------------------------------------------------------------------------
 
