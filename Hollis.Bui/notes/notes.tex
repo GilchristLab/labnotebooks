@@ -3037,6 +3037,8 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 9:30 - 1:40 -- Finished up most of readSimulatedGenomeFromPAModel and writeRFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
+    \item 1:40 - 3:30 -- Talk with Dr. Gilchrist.
+    \item 3:30 - 4:30 -- Began looking at R script to apply changes.
 \end{itemize}
 
 \experiment{RFP Structure}
@@ -3046,6 +3048,20 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item TODO is to make the header dynamic (so instead of RFPCount, it says long or short) as an RFPCount category. This will be the same single category specified on model creation.
     \item Bigger problem is ensuring (unit-testing) that the read and write of simulated data is correct. Probably easiest to compare the stored number of codons per codon is equal and their sumRFPCouns are equal. Still a fairly lengthy project and Denizhan was looking for some work (and this advances his own work with simulating PANSE later), so I described the problem to him as a potential TODO.
     \item Pushed a change where the functions are implemented, but untested. Looking at output files at a glance shows that they are working correctly, but need to test in practice with unit testing techniques.
+\end{itemize}
+
+\experiment{Talk with Dr. Gilchrist}
+\begin{itemize}
+    \item Unfortunately a lot of the instructions were missed. I need to keep the phi in mind, but my test run on Sunday just used the code leftover from before (mystery phi source from Jeremy's old files).
+    \item TODO: use 009670-6.tsv from the 2015 Gilchrist Paper as a source for s.phi to be compared with Psi. Recall: When we initialize the genome and request files, Phi is one of the files requested in the script I hacked up.
+    \item \textbf{Need} to be better about recording this information. Sunday's notes were lost as well during the great github disaster.
+\end{itemize}
+
+\labday{July 6, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:30 - 3:00 -- Talked with Denizhan about his tasks, reviewed material from past few days.
 \end{itemize}
 
 \end{document}
