@@ -496,5 +496,14 @@ The problem was with input file, TODO Note: Add error checking when reading thro
 There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
 \experiment{Genome Comparison}
 While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
+\labday{July 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 2: Create a visual chart mapping relationships between Gene, Genome and Sequence Summary
+    \item 2 - 3: Start writing function for comparing to Genomes with using position data
+    \item Totol: 3 hours spent in lab, 2 hours learning 1 hour working
+\end{itemize}
+\experiment{Comparison Function}
+As discussed last week working on a comparison function for testing purposes, because comparison uses position but the PA model does not store this information. To do this I am writing a double looped function that iterates through every gene in the genome and then compares the sumRFPCounts and total codon counts for each.
 
 \end{document}
