@@ -297,7 +297,7 @@ For the accurracy testing I used random number generation with the value for the
 \experiment{Benchmarking}
 I continued the benchmarking. During testing I notice a complication upon further investigation I found that the tested gamma function only matches gsl standard with in 7 - 8 decimal places. After learning this I conducted more tests to improve accurracy by increasing depth of the recursive fraction. There were memory issues caused by the overstacking of recursive calls. To improve efficiency and solve this problem I decided to turn the recursive function into an iterative one. To
 do so I first turned the recursion from head to tail then converted the tail recursion to iteration. Accurracy has improved because we can do more iterations with the lower cost. There still seems to be deviation from the GSL standard however when comparing to the a 22 decimal accurrate calulcator meant to approximate the gamma function it seems to preform comparatively better than GSL implementation. To fursther investigate this I will develop a Python script to collect and compare data using the online calculator.
-\end{document}
+
 \labday{June 2, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -428,7 +428,7 @@ To implement this function in PANSE I needed to understand how it works in PA bu
 \begin{itemize}
     \item 11 - 3: Testing ROC Simulated Genome
     \item Total: 4 hours in lab 3 hours working 1 hour learning
-\end{itemze}
+\end{itemize}
 \experiment{Working with ROC}
 I ran multiple test to acquire different data sets, found some unoptimized sections optimized followed by debugging. Will continue to optimize and learn tomorrow.
 \labday{June 23, 2017 Notes}
@@ -492,7 +492,9 @@ After continuing my investigation I found that the problem is somewhere in the s
 \end{itemize}
 \experiment{Finsh ReadRFP}
 The problem was with input file, TODO Note: Add error checking when reading through input files, problem was solved after talking to Hollis
-\eperiment{Help Hollis}
+\experiment{Help Hollis}
 There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
 \experiment{Genome Comparison}
 While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
+
+\end{document}
