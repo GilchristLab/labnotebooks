@@ -3062,6 +3062,36 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 1:30 - 3:00 -- Talked with Denizhan about his tasks, reviewed material from past few days.
+    \item 4:00 - 6:00 -- Setup for R scripting. Moved files to this directory for more transparency. Folder named June2017PAModelPop, found in RunnableScriptsAndData.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item The .tsv file may need to be processed. Check if R supports reading .tsv files, otherwise write a script to organize the data in a readable format.
+    \item Ended the day still a bit confused on how to do some of the R scripting to get data columns. Continuing to read documentation tomorrow.
+\end{itemize}
+
+\labday{July 7, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:00 -- Looked up R documentation for scripting the Pop data. Lots of discussion with Denizhan on how to proceed with testing simulated genome.
+    \item 1:00 - 2:30 -- Talk with Dr. Gilchrist.
+    \item 2:30 - 5:00 -- Sorted notes and began scripting to preprocess data for actual R scripting.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Found the command to read a table in .tsv format.
+\end{itemize}
+
+\experiment{Talk with Dr. Gilchrist}
+\begin{itemize}
+    \item Among other notes and TODOs, rename in PA/PANSEParameter initMutationSelectionCategories to initAlphaLambdaCategories.
+    \item TODO: Ask Cedric if it'd be ok to rename mixtureDefinition's delM and delEta variables to something broader like category1 and category2.
+    \item I should be using the initializeSynthesisRate (by list) function after using readPhiValues to read in the .tsv file.
+    \item Unfortunately this function does not account for .tsv format (instead assumes .csv format). Will have to remove the handy R function to read .tsv and instead pre-process.
+    \item TODO As well is to, instead of using the Pop data file I had before, just sample 500 genes, and maybe just a subset of the codons too (say, 20). More scripting but this has been written before.
 \end{itemize}
 
 \end{document}
