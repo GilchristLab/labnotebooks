@@ -505,5 +505,26 @@ While testing two genomes are checked to be equal however there is a problem bec
 \end{itemize}
 \experiment{Comparison Function}
 As discussed last week working on a comparison function for testing purposes, because comparison uses position but the PA model does not store this information. To do this I am writing a double looped function that iterates through every gene in the genome and then compares the sumRFPCounts and total codon counts for each.
-
+\labday{July 7, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12:30 Write new comparison function for testing Genome objects
+    \item 1:30 - 3: Dealing with compilation and dependency issues
+    \item 3 - 3:30: Testing new comparison function
+    \item 3:30 - 4:30: Discussing with Dr. Gilchrist
+    \item 4:30 - 5 Finish testing new comparison function
+    \item Total: 6 hours in lab, 3.5 hours working, 2.5 hour learning
+\end{itemize}
+\experiment{New Comparison Function}
+Hollis had asked me to run the simulation function of the PA model on the R end, to this require reading and writing data. However we were unsure whether the read and write data functions were working probably. The issue was they were reading and writing but the datasets didn't account for position so the comparisons were innapplicable because the positions were being compared. TO fix this problem I wrote a new comparison function in Testing.cpp "testEqualityGenome." Upon compilation
+of this function I had an issue that had occurred previously involving R-side compilation on version 3.2, after Addressing this issue I tested theis function and the read and write functions all seems well.
+\experiment{Discussion with Dr. Gilchrist}
+We discussed the questions I had asked about the relationship of probability and likelihood in the paper and the difference between PA and PANSE models in simulation dependent on the use of position data. In addition to answering questions Dr. Gilchrist and I focused on a TODO list as follows:
+\begin{itemize}
+    \item Finish testing new equality function
+    \item Use Pop data to create and compare simulations of varying gene and codon counts looking for discussed features.
+    \item Once Developed better understanding of simulation generalize prinicpals using write up implement PANSE simulation
+    \item Test PANSE simulation by looking at Pop data and checking for abnormal relationships between outputs such as error rate and elongation rate
+\end{itemize}
+I have finished the first task on the list so far
 \end{document}
