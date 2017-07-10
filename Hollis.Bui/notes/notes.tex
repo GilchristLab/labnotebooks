@@ -3019,7 +3019,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \begin{itemize}
     \item Decided to go ahead and re-add parts of the old read/writeRFP functions into the current code for simulated genomes.
     \item Planned implentation: The current writeRFPData function, when its optional simulated boolean is set to true, branches into a fairly different way of writing the RFP data, adapted from the old writeRFP function.
-    \item Meanwhile, reuse the old readRFP functon as readSimulatedGenomeFromPAModel.
+    \item Meanwhile, reuse the old read\sep RFP functon as read\sep Simulated\sep Genome\sep From\sep PA\sep Model.
     \item Also renamed RFPCategory to RFPCountColumn in the .cpp code.
     \item Left off the day with writeRFP(simulated) written, almost done with readSimulatedGenomeFromPAModel. Still need to test all this of course.
     \item Motivation for doing this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
@@ -3032,11 +3032,18 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item 2:00 - 5:00 -- Looked over some stuff with Denizhan on simulating genomes, preparing him for the process to run models.
 \end{itemize}
 
+\labday{June 29, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:00 - 4:00 -- Have hours recorded here for some reason in a notepad document. I think I worked on writing the read/write RFP functions? Will not put down hours just in case I was wrong. -- Hollis, July 10, 2017.
+\end{itemize}
+
 \labday{June 30, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
-    \item 9:30 - 1:40 -- Finished up most of readSimulatedGenomeFromPAModel and writeRFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
+    \item 9:30 - 1:40 -- Finished up most of read\sep Simulated\sep Genome\sep From\sep PA\sep Model and write\sep RFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
     \item 1:40 - 3:30 -- Talk with Dr. Gilchrist.
     \item 3:30 - 4:30 -- Began looking at R script to apply changes.
 \end{itemize}
@@ -3044,7 +3051,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{RFP Structure}
 \begin{itemize}
     \item Again, the differences between simulated data and non-simulated data are annoying.
-    \item In the PA Model, summed RFPs are generated without regard to position, so the current readSimulatedGenomeFromPAModel format cleanly gets the GeneID,Codon,Codon\_Count,RFPCount (for only a single category; intended).
+    \item In the PA Model, summed RFPs are generated without regard to position, so the current read\sep Simulated\sep Genome\sep From\sep PA\sep Model format cleanly gets the Gene\sep ID,Codon,Codon\sep \_\sep Count,RFP\sep Count (for only a single category; intended).
     \item TODO is to make the header dynamic (so instead of RFPCount, it says long or short) as an RFPCount category. This will be the same single category specified on model creation.
     \item Bigger problem is ensuring (unit-testing) that the read and write of simulated data is correct. Probably easiest to compare the stored number of codons per codon is equal and their sumRFPCouns are equal. Still a fairly lengthy project and Denizhan was looking for some work (and this advances his own work with simulating PANSE later), so I described the problem to him as a potential TODO.
     \item Pushed a change where the functions are implemented, but untested. Looking at output files at a glance shows that they are working correctly, but need to test in practice with unit testing techniques.
@@ -3091,7 +3098,37 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item TODO: Ask Cedric if it'd be ok to rename mixtureDefinition's delM and delEta variables to something broader like category1 and category2.
     \item I should be using the initializeSynthesisRate (by list) function after using readPhiValues to read in the .tsv file.
     \item Unfortunately this function does not account for .tsv format (instead assumes .csv format). Will have to remove the handy R function to read .tsv and instead pre-process.
-    \item TODO As well is to, instead of using the Pop data file I had before, just sample 500 genes, and maybe just a subset of the codons too (say, 20). More scripting but this has been written before.
+    \item TODO: instead of using the Pop data file I had before, just sample 500 genes, and maybe just a subset of the codons too (say, 20). More scripting but this has been written before.
+\end{itemize}
+
+\labday{July 9, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:00 - 4:00 -- Worked from home, scripted a quick reordering of the .tsv file after recovering old scripts.
+    \item 4:00 - 6:00 -- Recompiling the package leads to errors; suspect it's related to Denizhan's changes on Friday adding Cmake stuff. Spent time debugging.
+\end{itemize}
+
+\labday{July 10, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:00 - 1:00 -- Reviewed Denizhan's changes from Friday and did some style changes and corrections.
+    \item 1:45 - 2:10 -- Compiled hours for timesheet.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Renamed a helper function (testEqualityGenome) to testGenomeSimulatedPAEqualityHelper. I think that while this name is long, it's descriptive (and only used in unit testing anyway); I think we will also need a variant of this function when we test equality of PANSE, anyway.
+\end{itemize}
+
+\experiment{Misc. Package Maintenance}
+\begin{itemize}
+    \item Fixed some of the .Rbuildignore and .gitignore problems from Cmake (including extraneous files).
+    \item While reviewing package contents, re-discovered the testPAModel.R function I wrote a while back for automated testing of the then-called RFPModel!
+    \item This file had actually been disabled because Gauley had failed to generate the same results, so to ensure the package checks passed on all systems (Gauley was the only holdout), I had commented out the automated testing pass.
+    \item It may be much simpler to re-enable this now that Gauley should work and let me see if the PAModel works according to known codon translation rates.
+    \item Now going to spend some time updating this to new standards (such as adding in equality checks); scripting to change .csv file to PA format again.
 \end{itemize}
 
 \end{document}
