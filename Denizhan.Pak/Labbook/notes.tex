@@ -527,4 +527,18 @@ We discussed the questions I had asked about the relationship of probability and
     \item Test PANSE simulation by looking at Pop data and checking for abnormal relationships between outputs such as error rate and elongation rate
 \end{itemize}
 I have finished the first task on the list so far
+\labday{July 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:30: Fixing PA model object bug
+    \item 12:30 - 1:30: Fixing simulate Genome bug
+    \item 1:30 - 3: Create new simulations with simulated genome
+    \item Total: 4.5 Hours spent in lab, 3 hours working, 1.5 hours learning
+\end{itemize}
+\experiment{Fixing PA Model Object}
+To simulate the genome it necessary to create three unique objects, a Genome, a Parameter and a Model. The Model takes a Paramter object which maintains information about the Genome and uses this to simulate a Genome from the data. However there was a bug in the instantiantion of the Model object on the R end, after discussing with Hollis and looing through the code this issue has been solved and sent to main branch.
+\experiment{Fixing Simulate Genome Bug}
+There was a bug in the end of simulating a genome using the PA model, this bug has now been solved and the main branch has been updated, this also required a update in the README file which has been added.
+\experiment{Simulate Genome}
+I have created a simulated genome file in rfp format, using a variety of specifications which is in the Log files, I will continue to create more and analyze the differences as discussed with Dr. Gilchrist to get a better intuition of the simulateGenome function.
 \end{document}
