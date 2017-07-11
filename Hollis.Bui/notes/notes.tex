@@ -3115,11 +3115,13 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \begin{itemize}
     \item 11:00 - 1:00 -- Reviewed Denizhan's changes from Friday and did some style changes and corrections.
     \item 1:45 - 2:10 -- Compiled hours for timesheet.
+    \item 2:10 - 4:30 -- Talked with Denizhan some more about simulateGenome for the PAModel working for R; scripting for file processing.
 \end{itemize}
 
 \experiment{RFP Structure}
 \begin{itemize}
-    \item Renamed a helper function (testEqualityGenome) to testGenomeSimulatedPAEqualityHelper. I think that while this name is long, it's descriptive (and only used in unit testing anyway); I think we will also need a variant of this function when we test equality of PANSE, anyway.
+    \item Renamed a helper function (testEqualityGenome) to testGenomeSimulatedPAEqualityHelper. I think that while this name is long, it's descriptive (and only used in unit testing anyway); I think we will also need a variant of this function when we test equality of PANSE.
+    \item Asked Cedric about some of the naming decisions. A lot of it is based on inheritance from ROC Model, so the code works for now but with inherited names. TODO: Ask Dr. Gilchrist for ideas on renaming, if he thinks it's even necessary. Probably not?
 \end{itemize}
 
 \experiment{Misc. Package Maintenance}
@@ -3129,6 +3131,20 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item This file had actually been disabled because Gauley had failed to generate the same results, so to ensure the package checks passed on all systems (Gauley was the only holdout), I had commented out the automated testing pass.
     \item It may be much simpler to re-enable this now that Gauley should work and let me see if the PAModel works according to known codon translation rates.
     \item Now going to spend some time updating this to new standards (such as adding in equality checks); scripting to change .csv file to PA format again.
+\end{itemize}
+
+\labday{July 11, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:45 - 2:30 -- Looked over old testPAModel.R code; talked to Alex about how to include Phi information into the parameter object in R.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Shelving testPAModel.R stuff for now. I think it might be better to get the original script working that Dr. Gilchrist requested.
+    \item Bright side is that the same scripting code used to create those files can be modified to create the 500-gene sample for the script.
+    \item Alex also pointed to a simpler to way insert Phi data into the model: use Sphi\_init after all, which should work if I read it into a table for the Parameter initialization.
 \end{itemize}
 
 \end{document}

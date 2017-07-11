@@ -13,7 +13,7 @@ library(ribModel)
   # Test with true Pop data
   fileName = file.path("TestingIn", "PopPAData.csv")
   fileTable = file.path("TestingIn", "codonTranslationRates.csv")
-  filePhiValues = file.path("TestingIn", "JeremyRFPPhiValues.csv")
+  filePhiValues = file.path("TestingIn", "phiValues009670-6.tsv")
   #fileTrueAlphaValues = file.path("TestingIn", "JeremyRFPAlphaValues.csv")
   #fileTrueLambdaPrimeValues = file.path("TestingIn", "JeremyRFPLambdaPrimeValues.csv")
   
@@ -26,7 +26,7 @@ library(ribModel)
     expect_equal(file.exists(fileTable), T)
   })
   
-  test_that("file exists: JeremyRFPPhiValues.csv", {
+  test_that("file exists: phiValues009670-6.tsv", {
     expect_equal(file.exists(filePhiValues), T)
   })
   
@@ -40,7 +40,7 @@ library(ribModel)
   
   genome <- initializeGenomeObject(file = fileName, fasta = FALSE)
   
-  sphi_init <- c(2)
+  sphi_init <- c(2) # pass the vector once read as a tab-separated table
   numMixtures <- 1
   mixDef <- "allUnique"
   geneAssignment <- c(rep(1, length(genome))) 
@@ -205,7 +205,8 @@ library(ribModel)
   # TODO: Make this better/cleaner.
   
   # Phi
-  X <- read.csv(filePhiValues)
+  #X <- read.csv(filePhiValues)
+  X <- read.table(file = filePhiValues, sep = '\t', header = TRUE)
   X <- X[order(X[,2]) , ]
   XM <- matrix(c(X[,1], X[,2]), ncol = 2, byrow = FALSE)
   # Vector of doubles
