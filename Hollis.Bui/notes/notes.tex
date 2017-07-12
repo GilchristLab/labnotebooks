@@ -3138,6 +3138,8 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 12:45 - 2:30 -- Looked over old testPAModel.R code; talked to Alex about how to include Phi information into the parameter object in R.
+    \item 2:30 - 3:20 -- Talk with Dr. Gilchrist; cleared up difference between phi and psi and how it will affect the framework in the future, and reviewed current progress and TODOs.
+    \item 3:20 - 4:50 -- Discussed some of the future changes to be made to the framework with Denizhan. Looked over the documentation to see how phi (psi) is handled when read in and initialized.
 \end{itemize}
 
 \experiment{R Scripting}
@@ -3145,6 +3147,19 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Shelving testPAModel.R stuff for now. I think it might be better to get the original script working that Dr. Gilchrist requested.
     \item Bright side is that the same scripting code used to create those files can be modified to create the 500-gene sample for the script.
     \item Alex also pointed to a simpler to way insert Phi data into the model: use Sphi\_init after all, which should work if I read it into a table for the Parameter initialization.
+    \item Need to remember to \enquote{align} the phi values and which geneID it was related to with the same geneID order of the rfpCount file.
+\end{itemize}
+
+\labday{July 12, 2017}
+\begin{itemize}
+    \item 12:45 - 1:45 -- Talked with Cedric about how to use Phi initialization; wrote up notes and push a change to save progress.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Cedric pointed out that Sphi\_init is actually the standard deviation of Phi, which isn't what I should be trying to modify.
+    \item Instead, there's a different variable in the initialization of the parameter object, initial.expression.values, that I can input the phi values into.
+    \item I will be using the mean of the phi values in the .tsv file.
 \end{itemize}
 
 \end{document}

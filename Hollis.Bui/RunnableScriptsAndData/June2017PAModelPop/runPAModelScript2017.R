@@ -1,4 +1,4 @@
-#library(testthat)
+library(testthat)
 library(ribModel)
 
 #test_that("PA Model testing simulated versus actual accuracy", {
@@ -40,7 +40,10 @@ library(ribModel)
   
   genome <- initializeGenomeObject(file = fileName, fasta = FALSE)
   
-  sphi_init <- c(2) # pass the vector once read as a tab-separated table
+  # pass the vector once read as a tab-separated table
+  initial.expression.values <- read.table(file = filePhiValues, sep = '\t', header = TRUE)
+  initial.expression.mean <- initial.expression.values[,2]
+  sphi_init <- c(2)
   numMixtures <- 1
   mixDef <- "allUnique"
   geneAssignment <- c(rep(1, length(genome))) 
