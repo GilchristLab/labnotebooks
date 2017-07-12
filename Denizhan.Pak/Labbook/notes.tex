@@ -541,4 +541,33 @@ To simulate the genome it necessary to create three unique objects, a Genome, a 
 There was a bug in the end of simulating a genome using the PA model, this bug has now been solved and the main branch has been updated, this also required a update in the README file which has been added.
 \experiment{Simulate Genome}
 I have created a simulated genome file in rfp format, using a variety of specifications which is in the Log files, I will continue to create more and analyze the differences as discussed with Dr. Gilchrist to get a better intuition of the simulateGenome function.
+\labday{July 11, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1 - 2: Read and wrote simulated Genomes to better understand simulateGenome function
+    \item 2 - 4:30: Write script to test and automate process of making sub datasets for genes and codons in rfp format.
+    \item 4:30 - 5: make new sub datasets
+    \item Total: 4 Hours in lab, 1 hour learning 3 hours working
+\end{itemize}
+\experiment{Simulate Genome Function}
+Simulated Genome and examined function. Tried different sets to build intuition
+\experiment{Dataset Script}
+I wrote python script that can take an rfp data set randomly select an arbitrary number of genes and codons and create a subdataset set from the random selection.
+It can be used to test speed and benchmarking on a single dataset, as well as help me develop a better understanding for simulated genome by trying different specific information.
+\experiment{Tomorrow}
+Will fit the PANSE model to the PopPAData, and benchmark based on the run times. Once completed will move on to simulating a Genome through PANSE model on Pop data
+\labday{July 12, 2017 Notes}
+\experment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11: Writing script to approximate Gene data
+    \item 11 - 1:15: Learning MCMC and model interfacing
+    \item 2:30 - 4:45: Fitting PANSE Model to Pop data
+    \item Total: 6 hours in lab, 2 hours working, 4 hours learning
+\end{itemize}
+\experiment{Gene Data Script}
+Wrote a python script that can be used to approximate ribosomal footprinting probability for any given Codon. Although, this script will not be used till PANSE model has been fitted and will need further editing. 
+\experiment{MCMC Model Interfacing}
+Learned that the MCMC takes a model object and simply acquires required paramters tests parameters to match them to LogLikelihood for codon per gene, which over itertion reaches same distribution as data set.
+\experiment{Started Fitting PANSE Model to Pop Data}
+Currently editing functions because implementation requires some rewriting to properly interface with mcmcalgorithm
 \end{document}
