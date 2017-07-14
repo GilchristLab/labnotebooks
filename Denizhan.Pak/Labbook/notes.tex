@@ -579,4 +579,16 @@ Currently editing functions because implementation requires some rewriting to pr
 \end{itemize}
 \experiment{Fitting PANSE to MCMC}
 After some varibale adjustments and commenting code for future reference, we have a working likelihood function per codon per gene, will finish up fitting tomorrow by editing some functions in Parameter and finishing the loglikelihood per gene function
+\labday{July 14, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 11: Fitting PANSE to MCMC
+    \item 11 - 4: Testing and Debugging MCMC
+    \item Total: 7 hours spent in lab 1 hour learning, 6 hours working
+\end{itemize}
+\experiment{Fitting PANSE}
+Changed structure of likelihood caluclation to account for position rather than total codon count as needed for Nonsense errors.
+\experiment{Testing and Debugging}
+After Adjusting the model, I ran the MCMC on the R end this lead to seg faults, to solve this I ran tests on the c++ end. However, there is an error on the c++ end as well, it seems that there is a division by zero error in the categoryProbabilities calculation. Initially Hollis and I though it was a problem with incorrect initialization of num categories, however, after further investigation this seems to not be the case will need to look further into the problem, before I can test the MCMC
+on PANSE.
 \end{document}
