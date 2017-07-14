@@ -2,7 +2,7 @@
 # inputs are 1) PopNames.out and 2) phiValues009670-6.tsv
 # Script will make a hash table comparing PopNames.out with the phi values' names, 
 # saving the phi mean if the name matches.
-# output should be to geneIDPhiMean.csv, in format geneID,phiMean
+# output should be to geneIDPhiMean.csv, in format GeneID,phiMean
 
 $namefile = "../PopNames.out";
 $datafile = "../phiValues009670-6.tsv";
@@ -18,7 +18,7 @@ while (chomp($line = <NAMES>)){
     $smallerPhiList{$line}{name} = $line;
 }
 
-print OUT "geneID,phiMean\n";
+print OUT "GeneID,phiMean\n";
 
 foreach $line (<DATA>){
     @data = split(/\t/, $line);
