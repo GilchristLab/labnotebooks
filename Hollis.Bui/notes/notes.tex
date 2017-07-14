@@ -3151,6 +3151,8 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \end{itemize}
 
 \labday{July 12, 2017}
+
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 12:45 - 1:45 -- Talked with Cedric about how to use Phi initialization; wrote up notes and push a change to save progress.
     \item 2:00 - 5:00 -- Spent time processing the Phi data via Perl scripting; time split between reading documentation and writing/testing scripting code results. Because the phi data included different geneIDs than used in Pop's data, I had to isolate only the valid geneIDs and get those phi values. Perl scripting is done and results can be found in Runnable\sep Scripts\sep And\sep Data\sep /\sep June\sep 2017\sep PA\sep Model\sep Pop\sep /\sep testing\sep In\sep /\sep gene\sep ID\sep Phi\sep Mean\sep .\sep csv.
@@ -3165,6 +3167,21 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Also need to get only a random subset of this data. The geneIDPhiMean.csv file has 2600 genes, missing about 40 from Pop's number of genes.
     \item Of course, once those random geneIDs are minimized, I'll also have to get the same subset for the rfpCount file.
     \item Only once I cut out most of these genes can I run my actual R script plotting data.
+\end{itemize}
+
+\labday{June 13, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:00 - 5:00 -- Shorter day spent trying to script the Pop data, randomize it, etc. discussion with Denizhan about the Genome model again.
+\end{itemize}
+
+\labday{June 14, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 2:00 -- Finally nailed down the bugs with randomizing data. Now have a file, PopPADataRand500.csv, which contains the subset of PopPAData that contains only gene data from a set of 500 genes (listed in randNames.out).
+    \item 2:00 - -- Also had to re-organize the randGeneIDPhiMean.csv file, which had originally randomized the geneIDPhiMean.csv file, but in a random order unlike the subset of PopPAData. Did this by simply alphabetically ordering both files keyed on GeneID.
 \end{itemize}
 
 \end{document}
