@@ -3181,7 +3181,28 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 12:00 - 2:00 -- Finally nailed down the bugs with randomizing data. Now have a file, PopPADataRand500.csv, which contains the subset of PopPAData that contains only gene data from a set of 500 genes (listed in randNames.out).
-    \item 2:00 - -- Also had to re-organize the randGeneIDPhiMean.csv file, which had originally randomized the geneIDPhiMean.csv file, but in a random order unlike the subset of PopPAData. Did this by simply alphabetically ordering both files keyed on GeneID.
+    \item 2:00 - 4:30 -- Also had to re-organize the randGeneIDPhiMean.csv file, which had originally randomized the geneIDPhiMean.csv file, but in a random order unlike the subset of PopPAData. Did this by simply alphabetically ordering both files keyed on GeneID.
+\end{itemize}
+
+\labday{June 17, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 1:30 -- Discussion with Denizhan and Cedric; compiled Dr. Gilchrist's email from Friday into Latex for convenience.
+    \item 1:30 - 5:30 -- Started writing, updating, testing the R script with the new files for initializing Phi and Pop's data.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Cedric says that the std\_csp vector that we use for PA and PANSE model is deprecated; we should be using a 2-by-2 covariance matrix, similar to what ROC does. Far-flung TODO for now.
+\end{itemize}
+
+\labday{June 18, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:00 - 10:00 -- Working from home, rebuilt packages and began MCMC with my R script on 1000 genes.
+    \item 1:30 - -- Finally remembered to push notes.
 \end{itemize}
 
 \end{document}

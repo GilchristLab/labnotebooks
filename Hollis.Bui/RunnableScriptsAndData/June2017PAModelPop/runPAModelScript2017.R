@@ -11,14 +11,14 @@ library(ribModel)
   #####################
 
   # Test with true Pop data
-  fileName = file.path("TestingIn", "PopPAData.csv")
+  fileName = file.path("TestingIn", "orderedPopPADataRand500.csv")
   fileTable = file.path("TestingIn", "codonTranslationRates.csv")
-  filePhiValues = file.path("TestingIn", "phiValues009670-6.tsv")
+  filePhiValues = file.path("TestingIn", "orderedRandGeneIDPhiMean.csv")
   #fileTrueAlphaValues = file.path("TestingIn", "JeremyRFPAlphaValues.csv")
   #fileTrueLambdaPrimeValues = file.path("TestingIn", "JeremyRFPLambdaPrimeValues.csv")
   
   # Ensure the input files exist.
-  test_that("file exists: PopPAData.csv", {
+  test_that("file exists: orderedPopPADataRand500.csv", {
     expect_equal(file.exists(fileName), T)
   })
   
@@ -26,7 +26,7 @@ library(ribModel)
     expect_equal(file.exists(fileTable), T)
   })
   
-  test_that("file exists: phiValues009670-6.tsv", {
+  test_that("file exists: orderedRandGeneIDPhiMean.csv", {
     expect_equal(file.exists(filePhiValues), T)
   })
   
@@ -40,26 +40,27 @@ library(ribModel)
   
   genome <- initializeGenomeObject(file = fileName, fasta = FALSE)
   
-  # pass the vector once read as a tab-separated table
-  initial.expression.values <- read.table(file = filePhiValues, sep = '\t', header = TRUE)
-  initial.expression.mean <- initial.expression.values[,2]
+  phiValues <- read.table(file = filePhiValues, sep = ',', header = TRUE)
+  phiMean <- phiValues[,2]
   sphi_init <- c(2)
   numMixtures <- 1
   mixDef <- "allUnique"
-  geneAssignment <- c(rep(1, length(genome))) 
-  parameter <- initializeParameterObject(genome, sphi_init, numMixtures, geneAssignment, model= "PA", split.serine = TRUE, mixture.definition = mixDef)
+  geneAssignment <- c(rep(1, length(genome)))
+  
+  parameter <- initializeParameterObject(genome=genome, sphi=sphi_init, num.mixtures=numMixtures, gene.assignment=geneAssignment, initial.expression.values=phiMean, model="PA", split.serine=TRUE, mixture.definition=mixDef)
   #parameter <- initializeParameterObject(model="RFP", restart.file="30restartFile.rst")
   
-  samples <- 10000
+  samples <- 1000
   thinning <- 10
   adaptiveWidth <- 10
   mcmc <- initializeMCMCObject(samples = samples, thinning = thinning, adaptive.width = adaptiveWidth, 
                                est.expression=TRUE, est.csp=TRUE, est.hyper=TRUE)
   
-  model <- initializeModelObject(parameter, "PA")
+  model <- initializeModelObject(parameter=parameter, model="PA", rfp.count.column=1)
   setRestartSettings(mcmc, "restartJeremyFile.rst", adaptiveWidth, TRUE)
   
-  outFile = file.path("TestingOut", "testPAModelLog10000.txt")
+  logFileString <- paste0("runPAModelScript2017Log", samples)
+  outFile = file.path("TestingOut", logFileString)
   
   sink(outFile)
   system.time(
@@ -73,11 +74,11 @@ library(ribModel)
   
   # plots different aspects of trace
   trace <- parameter$getTraceObject()
-  writeParameterObject(parameter, file = file.path("TestingOut", "PAMOdelObject.Rdat"))
-  writeMCMCObject(mcmc, file = file.path("TestingOut", "MCMCPAModel.Rdat"))
+  writeParameterObject(parameter, file = file.path("TestingOut", "PAModelObject2017.Rdat"))
+  writeMCMCObject(mcmc, file = file.path("TestingOut", "MCMCPAModel2017.Rdat"))
   
   
-  pdf(file.path("TestingOut", "PA_Model_allUnique_startCSP_startPhi_adaptSphi_true.pdf"))
+  pdf(file.path("TestingOut", "PA_Model2017_allUnique_startCSP_startPhi_adaptSphi_true.pdf"))
   plot(mcmc, main = "MCMC Trace") #plots the whole loglikelihood trace
   
   
@@ -107,7 +108,7 @@ library(ribModel)
   ### Output File 2: CSP Traces ###
   #################################
   
-  pdf(file.path("TestingOut", "CSP_Values_PA_Model.pdf"), width = 11, height = 20)
+  pdf(file.path("TestingOut", "CSP_Values_PA_Model2017.pdf"), width = 11, height = 20)
   #plot(trace, what = "Expression", geneIndex = 905) #used to make sure gene stabalized, not really needed now
   plot(trace, what = "Alpha", mixture = 1)
   plot(trace, what = "LambdaPrime", mixture = 1)

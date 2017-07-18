@@ -1,0 +1,111 @@
+\documentclass[12pt,hyperref]{labbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage[]{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{csquotes}
+\usepackage{xspace}
+\usepackage[normalem]{ulem} % For strikeout text
+\usepackage{pdfpages} % allows inclusion of PDF files
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+%\textwidth=16.5cm
+%mikeg: June 18, 2016 - Why is this being set? It should be set by geometry package
+% Resolved June 27, 2016 (Hollis): After attempting to comment out, realized this function
+% was used as a bandage on an abundance of overfull hboxes. 
+% June 28, 2016 (Hollis): Added in the custom \sep command to fix hboxes.
+
+% For verbatim quotes
+\lstnewenvironment{verbquote}[1][]
+  {\lstset{columns=fullflexible,
+           basicstyle=\ttfamily,
+           xleftmargin=2em,
+           xrightmargin=2em,
+           breaklines,
+           breakindent=0pt,
+           #1}}% \begin{verbquote}[..]
+  {}% \end{verbquote}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+\newcommand{\sep}{\discretionary{}{}{}} % Used to help with text separation, hboxes.
+\newcommand{\LLik}{\ell}
+
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% BEGIN LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother 
+
+%%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+In the past we've run into this problem when we exponentiate large
+negative LLik values, such as when we need to do a summation of the
+probability of the set of possible outcomes.
+
+For example, imagine $p_i = \exp[\LLik_i]/(\sum_j \exp[\LLik_j])$. If
+the $\LLik$ values are all $< -312$, exponentiating these terms will lead to
+0s and the sum of these 0s will also be 0.
+
+This is a numerical issue, not a fundamental problem with the model.
+The best solution for this is to define
+
+\begin{equation}
+\LLik_{\max} = \max(\vec{\LLik})
+\end{equation}
+
+and then rescale $\LLik$ terms by subtracting off $\LLik_{\max}$. Let
+$\LLik_i^\prime$ represent the rescaled terms, such that $\LLik_i^\prime
+= \LLik_i - \LLik_{\max}$.  They key result is that one of these terms
+$\LLik_i^\prime$ term will always evaluate to 1 when exponentiated and
+the rest will always evaluate to $< 1$ when exponentiated.
+
+Why does this work?  Well,  subtracting a constant term from all the
+exponents is equvalent to dividing all of them by $\exp[\LLik_{\max}]$ and
+if we apply this division to both the numerator and denominator terms of
+$p_i$, its value will be unchanged (but evaluatable). That is,
+
+$p_i = \exp[\LLik_i]/(\sum_j \exp[\LLik_j])
+    = \exp[\LLik_i^\prime]/(\sum_j \exp[\LLik_j^\prime])
+$
+
+I hope this helps.
+
+Dr. Gilchrist
+
+\end{document}

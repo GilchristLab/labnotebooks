@@ -1,36 +1,46 @@
 
 # inputs are 1) PopPADataRand500.csv and 2) randGeneIDPhiMean.csv
-# Script will read in both files and then, using the same ordering as the first file,
-# print out the matching phi mean lines in order to match up each gene with each other.
-# output should be to orderedRandGeneIDPhiMean.csv, in format GeneID,phiMean
+# Script will read in both files then print them back out in alphabetical order.
+# output should be to 1) orderedPopPADataRand500.csv and 2) orderedRandGeneIDPhiMean.csv
 
 $PopFile = "../PopPADataRand500.csv";
-$PhiMeanFile = "../randGeneIDPhiMean.csv";
 $PopOutFile = "../orderedPopPADataRand500.csv";
-$PhiMeanOutFile = "../orderedRandGeneIDPhiMean.csv";
-
 open(POP, $PopFile);
-open(PHIMEAN, $PhiMeanFile);
 open(OUTPOP, ">", $PopOutFile); # Open for output
-open(OUTPHIMEAN, ">", $PhiMeanOutFile); # Open for output
 
 @genes = ();
 
-while (chomp($line = <PHIMEAN>)){
+while (chomp($line = <POP>)){
     push(@genes, $line);
 }
 
-print OUTPHIMEAN sort(@genes);
+@sorted_genes = sort(@genes);
+
+for $gene (@sorted_genes){
+    print OUTPOP "$gene\n";
+}
+
+close $PopFile;
+close $PopOutFile;
+
+##############################
+
+$PhiMeanFile = "../randGeneIDPhiMean.csv";
+$PhiMeanOutFile = "../orderedRandGeneIDPhiMean.csv";
+open(PHIMEAN, $PhiMeanFile);
+open(OUTPHIMEAN, ">", $PhiMeanOutFile); # Open for output
 
 @genes2 = ();
 
-while (chomp($line = <POP>)){
+while (chomp($line = <PHIMEAN>)){
     push(@genes2, $line);
 }
 
-print OUTPOP sort(@genes2);
+@sorted_genes = sort(@genes2);
 
-close $PopFile;
+for $gene (@sorted_genes){
+    print OUTPHIMEAN "$gene\n";
+}
+
 close $PhiMeanFile;
-close $PopOutFile;
 close $PhiMeanOutFile;
