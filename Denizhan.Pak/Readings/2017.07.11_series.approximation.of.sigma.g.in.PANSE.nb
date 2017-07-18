@@ -1,0 +1,547 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20236,        539]
+NotebookOptionsPosition[     18461,        478]
+NotebookOutlinePosition[     19434,        511]
+CellTagsIndexPosition[     19220,        503]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "Note that NSE waiting time v and \[Nu] (nu) are related as ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", " ", "=", " ", 
+    RowBox[{"1", "/", "nu"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "Text",
+ CellChangeTimes->{{3.708790723316985*^9, 3.708790762290597*^9}, {
+  3.7087914669685287`*^9, 3.708791498441532*^9}}],
+
+Cell["\<\
+
+Taylor series of Probability of elongation at a position as defined in \
+rfp.model.tex\
+\>", "Text",
+ CellChangeTimes->{{3.708790923962736*^9, 3.708790937875785*^9}, {
+  3.708791025492651*^9, 3.708791047357267*^9}, {3.708791083029758*^9, 
+  3.7087910966931334`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"i", ",", " ", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Series", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Exp", "[", 
+            RowBox[{"\[Lambda]", "/", "nu"}], "]"}], " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"\[Lambda]", "/", "nu"}], ")"}], "\[Alpha]"], 
+           RowBox[{"Gamma", "[", 
+            RowBox[{
+             RowBox[{"1", "-", " ", "\[Alpha]"}], ",", " ", 
+             RowBox[{"\[Lambda]", "/", "nu"}]}], "]"}]}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"nu", ",", " ", "0", ",", "i"}], "}"}]}], "]"}], "//", 
+        "PowerExpand"}], ",", " ", 
+       RowBox[{"Assumptions", "\[Rule]", 
+        RowBox[{"Element", "[", 
+         RowBox[{
+          RowBox[{"nu", "|", " ", "\[Lambda]", "|", " ", "\[Alpha]"}], ",", 
+          " ", "Reals"}], "]"}]}]}], "]"}]}], "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", " ", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.708790193445698*^9, 3.7087903209836283`*^9}, {
+  3.708790360609084*^9, 3.7087904229126883`*^9}, {3.708790492017675*^9, 
+  3.708790547586214*^9}, {3.7087905932831707`*^9, 3.7087905943223543`*^9}, {
+  3.708791515222795*^9, 3.708791515230115*^9}, {3.708791569883297*^9, 
+  3.708791576698045*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+        "\[Alpha]", " ", 
+        RowBox[{"Floor", "[", 
+         FractionBox[
+          RowBox[{"\[Pi]", "+", 
+           RowBox[{"Arg", "[", "nu", "]"}], "-", 
+           RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+          RowBox[{"2", " ", "\[Pi]"}]], "]"}]}]], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{"1", "-", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "2"],
+          SeriesData[$CellContext`nu, 0, {}, 0, 2, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 0, {
+         1, -$CellContext`\[Alpha]/$CellContext`\[Lambda]}, 0, 2, 1],
+        Editable->False], ")"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+        "\[Alpha]", " ", 
+        RowBox[{"Floor", "[", 
+         FractionBox[
+          RowBox[{"\[Pi]", "+", 
+           RowBox[{"Arg", "[", "nu", "]"}], "-", 
+           RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+          RowBox[{"2", " ", "\[Pi]"}]], "]"}]}]], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{"1", "-", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"], "+", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", "\[Alpha]"}], ")"}], " ", 
+           SuperscriptBox["nu", "2"]}], 
+          SuperscriptBox["\[Lambda]", "2"]], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "3"],
+          SeriesData[$CellContext`nu, 0, {}, 0, 3, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 0, {
+         1, -$CellContext`\[Alpha]/$CellContext`\[Lambda], $CellContext`\
+\[Alpha] (1 + $CellContext`\[Alpha]) $CellContext`\[Lambda]^(-2)}, 0, 3, 1],
+        Editable->False], ")"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", 
+     RowBox[{
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+        "\[Alpha]", " ", 
+        RowBox[{"Floor", "[", 
+         FractionBox[
+          RowBox[{"\[Pi]", "+", 
+           RowBox[{"Arg", "[", "nu", "]"}], "-", 
+           RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+          RowBox[{"2", " ", "\[Pi]"}]], "]"}]}]], " ", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{"1", "-", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"], "+", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", "\[Alpha]"}], ")"}], " ", 
+           SuperscriptBox["nu", "2"]}], 
+          SuperscriptBox["\[Lambda]", "2"]], "-", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", "\[Alpha]"}], ")"}], " ", 
+           RowBox[{"(", 
+            RowBox[{"2", "+", "\[Alpha]"}], ")"}], " ", 
+           SuperscriptBox["nu", "3"]}], 
+          SuperscriptBox["\[Lambda]", "3"]], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "4"],
+          SeriesData[$CellContext`nu, 0, {}, 0, 4, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 0, {
+         1, -$CellContext`\[Alpha]/$CellContext`\[Lambda], $CellContext`\
+\[Alpha] (
+           1 + $CellContext`\[Alpha]) $CellContext`\[Lambda]^(-2), \
+-$CellContext`\[Alpha] (1 + $CellContext`\[Alpha]) (
+           2 + $CellContext`\[Alpha]) $CellContext`\[Lambda]^(-3)}, 0, 4, 1],
+        Editable->False], ")"}]}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7087915369307404`*^9, 3.7087915779947567`*^9}]
+}, Open  ]],
+
+Cell["Taylor series off log of value", "Text",
+ CellChangeTimes->{{3.70879094209969*^9, 3.708790949747779*^9}, {
+  3.708791515483159*^9, 3.708791522328554*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"i", ",", " ", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Series", "[", 
+         RowBox[{
+          RowBox[{"Log", "[", 
+           RowBox[{
+            RowBox[{"Exp", "[", 
+             RowBox[{"\[Lambda]", "/", "nu"}], "]"}], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"\[Lambda]", "/", "nu"}], ")"}], "\[Alpha]"], 
+            RowBox[{"Gamma", "[", 
+             RowBox[{
+              RowBox[{"1", "-", " ", "\[Alpha]"}], ",", " ", 
+              RowBox[{"\[Lambda]", "/", "nu"}]}], "]"}]}], "]"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"nu", ",", " ", "0", ",", "i"}], "}"}]}], "]"}], "//", 
+        "PowerExpand"}], ",", " ", 
+       RowBox[{"Assumptions", "\[Rule]", 
+        RowBox[{"Element", "[", 
+         RowBox[{
+          RowBox[{"nu", "|", " ", "\[Lambda]", "|", " ", "\[Alpha]"}], ",", 
+          " ", "Reals"}], "]"}]}]}], "]"}]}], "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", " ", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7087908281156073`*^9, 3.708790868596661*^9}, {
+  3.708790902533799*^9, 3.708790906756868*^9}, {3.708791515488039*^9, 
+  3.708791515493662*^9}, {3.7087915841388283`*^9, 3.708791591258185*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+       "\[Alpha]", " ", 
+       RowBox[{"Floor", "[", 
+        FractionBox[
+         RowBox[{"\[Pi]", "+", 
+          RowBox[{"Arg", "[", "nu", "]"}], "-", 
+          RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+         RowBox[{"2", " ", "\[Pi]"}]], "]"}]}], "+", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"]}], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "2"],
+          SeriesData[$CellContext`nu, 0, {}, 1, 2, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 
+         0, {-$CellContext`\[Alpha]/$CellContext`\[Lambda]}, 1, 2, 1],
+        Editable->False], ")"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+       "\[Alpha]", " ", 
+       RowBox[{"Floor", "[", 
+        FractionBox[
+         RowBox[{"\[Pi]", "+", 
+          RowBox[{"Arg", "[", "nu", "]"}], "-", 
+          RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+         RowBox[{"2", " ", "\[Pi]"}]], "]"}]}], "+", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"]}], "+", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{"2", "+", "\[Alpha]"}], ")"}], " ", 
+           SuperscriptBox["nu", "2"]}], 
+          RowBox[{"2", " ", 
+           SuperscriptBox["\[Lambda]", "2"]}]], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "3"],
+          SeriesData[$CellContext`nu, 0, {}, 1, 3, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 
+         0, {-$CellContext`\[Alpha]/$CellContext`\[Lambda], 
+          Rational[1, 2] $CellContext`\[Alpha] (
+           2 + $CellContext`\[Alpha]) $CellContext`\[Lambda]^(-2)}, 1, 3, 1],
+        Editable->False], ")"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "\[ImaginaryI]", " ", "\[Pi]", " ", 
+       "\[Alpha]", " ", 
+       RowBox[{"Floor", "[", 
+        FractionBox[
+         RowBox[{"\[Pi]", "+", 
+          RowBox[{"Arg", "[", "nu", "]"}], "-", 
+          RowBox[{"Arg", "[", "\[Lambda]", "]"}]}], 
+         RowBox[{"2", " ", "\[Pi]"}]], "]"}]}], "+", 
+      RowBox[{"(", 
+       InterpretationBox[
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[Alpha]", " ", "nu"}], "\[Lambda]"]}], "+", 
+         FractionBox[
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{"2", "+", "\[Alpha]"}], ")"}], " ", 
+           SuperscriptBox["nu", "2"]}], 
+          RowBox[{"2", " ", 
+           SuperscriptBox["\[Lambda]", "2"]}]], "-", 
+         FractionBox[
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"\[Alpha]", " ", 
+             RowBox[{"(", 
+              RowBox[{"6", "+", 
+               RowBox[{"\[Alpha]", " ", 
+                RowBox[{"(", 
+                 RowBox[{"6", "+", "\[Alpha]"}], ")"}]}]}], ")"}]}], ")"}], 
+           " ", 
+           SuperscriptBox["nu", "3"]}], 
+          RowBox[{"3", " ", 
+           SuperscriptBox["\[Lambda]", "3"]}]], "+", 
+         InterpretationBox[
+          SuperscriptBox[
+           RowBox[{"O", "[", "nu", "]"}], "4"],
+          SeriesData[$CellContext`nu, 0, {}, 1, 4, 1],
+          Editable->False]}],
+        SeriesData[$CellContext`nu, 
+         0, {-$CellContext`\[Alpha]/$CellContext`\[Lambda], 
+          Rational[1, 2] $CellContext`\[Alpha] (
+           2 + $CellContext`\[Alpha]) $CellContext`\[Lambda]^(-2), 
+          Rational[-1, 3] $CellContext`\[Alpha] (
+           6 + $CellContext`\[Alpha] (
+             6 + $CellContext`\[Alpha])) $CellContext`\[Lambda]^(-3)}, 1, 4, 
+         1],
+        Editable->False], ")"}]}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7087915431459227`*^9, 3.708791592390799*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Element"}]], "Input",
+ CellChangeTimes->{{3.708791550803521*^9, 3.708791552169326*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Element\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"x\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"dom\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\\) or \\!\\(\\*RowBox[{StyleBox[\\\"x\\\", \
+\\\"TI\\\"], StyleBox[\\\"\[Element]\\\", \\\"TR\\\"], StyleBox[\\\"dom\\\", \
+\\\"TI\\\"]}]\\) asserts that \\!\\(\\*StyleBox[\\\"x\\\", \\\"TI\\\"]\\) is \
+an element of the domain \\!\\(\\*StyleBox[\\\"dom\\\", \\\"TI\\\"]\\). \
+\\n\\!\\(\\*RowBox[{\\\"Element\\\", \\\"[\\\", RowBox[{StyleBox[\\\"x\\\", \
+\\\"TI\\\"], \\\",\\\", StyleBox[\\\"reg\\\", \\\"TI\\\"]}], \\\"]\\\"}]\\) \
+or \\!\\(\\*RowBox[{StyleBox[\\\"x\\\", \\\"TI\\\"], \\\"\[Element]\\\", \
+StyleBox[\\\"reg\\\", \\\"TI\\\"]}]\\) asserts that \\!\\(\\*StyleBox[\\\"x\\\
+\", \\\"TI\\\"]\\) is an element of the region \\!\\(\\*StyleBox[\\\"reg\\\", \
+\\\"TI\\\"]\\).\\n\\!\\(\\*RowBox[{\\\"Element\\\", \\\"[\\\", \
+RowBox[{RowBox[{SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], \
+StyleBox[\\\"1\\\", \\\"TR\\\"]], \\\"|\\\", SubscriptBox[StyleBox[\\\"x\\\", \
+\\\"TI\\\"], StyleBox[\\\"2\\\", \\\"TR\\\"]], \\\"|\\\", StyleBox[\\\"\
+\[Ellipsis]\\\", \\\"TR\\\"]}], \\\",\\\", StyleBox[\\\"dom\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\\) asserts that all the \
+\\!\\(\\*SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], StyleBox[\\\"i\\\", \\\
+\"TI\\\"]]\\) are elements of \\!\\(\\*StyleBox[\\\"dom\\\", \\\"TI\\\"]\\). \
+\\n\\!\\(\\*RowBox[{\\\"Element\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"patt\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"dom\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\\) asserts that any expression matching the \
+pattern \\!\\(\\*StyleBox[\\\"patt\\\", \\\"TI\\\"]\\) is an element of \
+\\!\\(\\*StyleBox[\\\"dom\\\", \\\"TI\\\"]\\). \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Element"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7087915525695877`*^9},
+ CellTags->"Info193708777152-1895896"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Arg"}]], "Input",
+ CellChangeTimes->{{3.708790552349132*^9, 3.708790556824677*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Arg\\\", \\\"[\\\", StyleBox[\\\"z\\\", \
+\\\"TI\\\"], \\\"]\\\"}]\\) gives the argument of the complex number \
+\\!\\(\\*StyleBox[\\\"z\\\", \\\"TI\\\"]\\). \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Arg"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.708790557257471*^9},
+ CellTags->"Info123708776157-1895896"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Simplify"}]], "Input",
+ CellChangeTimes->{{3.708790366025485*^9, 3.708790367971046*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Simplify\\\", \\\"[\\\", \
+StyleBox[\\\"expr\\\", \\\"TI\\\"], \\\"]\\\"}]\\) performs a sequence of \
+algebraic and other transformations on \\!\\(\\*StyleBox[\\\"expr\\\", \\\"TI\
+\\\"]\\) and returns the simplest form it finds. \
+\\n\\!\\(\\*RowBox[{\\\"Simplify\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"expr\\\", \\\"TI\\\"], \\\",\\\", \
+StyleBox[\\\"assum\\\", \\\"TI\\\"]}], \\\"]\\\"}]\\) does simplification \
+using assumptions. \"\>", "MSG"], "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Simplify"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.708790368677012*^9},
+ CellTags->"Info73708775968-1895896"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Series"}]], "Input",
+ CellChangeTimes->{{3.7087902999844427`*^9, 3.708790301018671*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"Series\\\", \\\"[\\\", RowBox[{StyleBox[\
+\\\"f\\\", \\\"TI\\\"], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{StyleBox[\\\"x\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], StyleBox[\\\"0\\\", \
+\\\"TR\\\"]], \\\",\\\", StyleBox[\\\"n\\\", \\\"TI\\\"]}], \\\"}\\\"}]}], \\\
+\"]\\\"}]\\) generates a power series expansion for \\!\\(\\*StyleBox[\\\"f\\\
+\", \\\"TI\\\"]\\) about the point \\!\\(\\*RowBox[{StyleBox[\\\"x\\\", \
+\\\"TI\\\"], \\\"=\\\", SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], \
+StyleBox[\\\"0\\\", \\\"TR\\\"]]}]\\) to order \
+\\!\\(\\*SuperscriptBox[RowBox[{\\\"(\\\", RowBox[{StyleBox[\\\"x\\\", \\\"TI\
+\\\"], \\\"-\\\", SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], \
+StyleBox[\\\"0\\\", \\\"TR\\\"]]}], \\\")\\\"}], StyleBox[\\\"n\\\", \\\"TI\\\
+\"]]\\). \\n\\!\\(\\*RowBox[{\\\"Series\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"f\\\", \\\"TI\\\"], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{StyleBox[\\\"x\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"x\\\", \\\"TI\\\"], StyleBox[\\\"0\\\", \
+\\\"TR\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"n\\\", \\\"TI\\\"], \
+StyleBox[\\\"x\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"y\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"y\\\", \\\"TI\\\"], StyleBox[\\\"0\\\", \
+\\\"TR\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"n\\\", \\\"TI\\\"], \
+StyleBox[\\\"y\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", StyleBox[\\\"\
+\[Ellipsis]\\\", \\\"TR\\\"]}], \\\"]\\\"}]\\) successively finds series \
+expansions with respect to \\!\\(\\*StyleBox[\\\"x\\\", \\\"TI\\\"]\\), then \
+\\!\\(\\*StyleBox[\\\"y\\\", \\\"TI\\\"]\\), etc. \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Series"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.708790301619046*^9},
+ CellTags->"Info33708775901-1895896"]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{554, Automatic}, {Automatic, 190}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info193708777152-1895896"->{
+  Cell[12683, 353, 2019, 33, 128, "Print",
+   CellTags->"Info193708777152-1895896"]},
+ "Info123708776157-1895896"->{
+  Cell[14854, 395, 492, 12, 43, "Print",
+   CellTags->"Info123708776157-1895896"]},
+ "Info73708775968-1895896"->{
+  Cell[15503, 416, 771, 16, 84, "Print",
+   CellTags->"Info73708775968-1895896"]},
+ "Info33708775901-1895896"->{
+  Cell[16431, 441, 2014, 34, 108, "Print",
+   CellTags->"Info33708775901-1895896"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info193708777152-1895896", 18768, 488},
+ {"Info123708776157-1895896", 18885, 491},
+ {"Info73708775968-1895896", 18999, 494},
+ {"Info33708775901-1895896", 19112, 497}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 350, 9, 31, "Text"],
+Cell[911, 31, 277, 7, 50, "Text"],
+Cell[CellGroupData[{
+Cell[1213, 42, 1410, 34, 86, "Input"],
+Cell[2626, 78, 4072, 106, 153, "Output"]
+}, Open  ]],
+Cell[6713, 187, 160, 2, 31, "Text"],
+Cell[CellGroupData[{
+Cell[6898, 193, 1356, 33, 86, "Input"],
+Cell[8257, 228, 4270, 116, 248, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12564, 349, 116, 2, 32, "Input"],
+Cell[12683, 353, 2019, 33, 128, "Print",
+ CellTags->"Info193708777152-1895896"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14739, 391, 112, 2, 32, "Input"],
+Cell[14854, 395, 492, 12, 43, "Print",
+ CellTags->"Info123708776157-1895896"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15383, 412, 117, 2, 32, "Input"],
+Cell[15503, 416, 771, 16, 84, "Print",
+ CellTags->"Info73708775968-1895896"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16311, 437, 117, 2, 32, "Input"],
+Cell[16431, 441, 2014, 34, 108, "Print",
+ CellTags->"Info33708775901-1895896"]
+}, Open  ]]
+}
+]
+*)
+

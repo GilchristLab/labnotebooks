@@ -591,7 +591,7 @@ Changed structure of likelihood caluclation to account for position rather than 
 \experiment{Testing and Debugging}
 After Adjusting the model, I ran the MCMC on the R end this lead to seg faults, to solve this I ran tests on the c++ end. However, there is an error on the c++ end as well, it seems that there is a division by zero error in the categoryProbabilities calculation. Initially Hollis and I though it was a problem with incorrect initialization of num categories, however, after further investigation this seems to not be the case will need to look further into the problem, before I can test the MCMC
 on PANSE.
-\labday{July 17, 2017 Nootes}
+\labday{July 17, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 9 - 12: Reading Through Code
@@ -605,4 +605,19 @@ Continue bug hunt from yesterday by tracing MCMC found root problem was in an er
 Compilation with Sequence Summary object in Model does not work on R end need to adjust the structure of Genomelikilihood function to accomadate for this
 \experiment{Run MCMC}
 MCMC is still very slow but data seems good at initial runs. Will need to continue testing to confirm.
+\labday{July 18, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Running MCMC models on C end
+    \item 1 - 3: Making Models work on R end
+    \item 4 - 5:30: Writing scripts for data manipulation
+    \item Total: 6.5 hours spent in lab, 2 hours learning, 4.5 hours working
+\end{itemize}
+\experiment{MCMC Models in C}
+To get a better feel for the relationship between the PANSE and PA model I ran MCMC's using an assummed non-existant error rate where phi and psi are equal. This experiments are consistent with expectations meaning that the likelihood function is seemingly correct.
+\experiment{PANSE in R}
+Discussed with Hollis about the benefits of running the models in R for the purposes of restarts and easier compilations. Additionally it is important to know that the model is being translated correctly. There were initially some compilation problems due to the way Open Compilation flags are implemented. To address this I temporarily commented this out and have added a TODO item. Aside from this there were dependency issues which were fixed. After Talking to Hollis I fixed some of
+the problems in the R testing script. However for the R testing script to work the data has to be properly formatted.
+\experiment{Writing Scripts}
+I have started writing and am still working on a Python script meant to clean up data files and adjust them to make them RFP readable. Once this is done I can run the Test scripts discussed earlier and determine if PANSE works on the R end. Once this has been addressed I will start accounting for nonsense errors and check to see if the data is still consistent.
 \end{document}
