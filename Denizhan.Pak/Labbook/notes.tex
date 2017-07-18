@@ -591,4 +591,18 @@ Changed structure of likelihood caluclation to account for position rather than 
 \experiment{Testing and Debugging}
 After Adjusting the model, I ran the MCMC on the R end this lead to seg faults, to solve this I ran tests on the c++ end. However, there is an error on the c++ end as well, it seems that there is a division by zero error in the categoryProbabilities calculation. Initially Hollis and I though it was a problem with incorrect initialization of num categories, however, after further investigation this seems to not be the case will need to look further into the problem, before I can test the MCMC
 on PANSE.
+\labday{July 17, 2017 Nootes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 12: Reading Through Code
+    \item 12 - 1: Fit model to MCMC
+    \item 1 - 5: Run MCMC's
+    \item Total: 8 hours in lab 5 hours working 3 hours learning
+\end{itemize}
+\experiment{Read through code}
+Continue bug hunt from yesterday by tracing MCMC found root problem was in an eror in a data set. Talked to Dr. Gilchrist, will add a check for this bug
+\experiment{Fit Model to MCMC}
+Compilation with Sequence Summary object in Model does not work on R end need to adjust the structure of Genomelikilihood function to accomadate for this
+\experiment{Run MCMC}
+MCMC is still very slow but data seems good at initial runs. Will need to continue testing to confirm.
 \end{document}
