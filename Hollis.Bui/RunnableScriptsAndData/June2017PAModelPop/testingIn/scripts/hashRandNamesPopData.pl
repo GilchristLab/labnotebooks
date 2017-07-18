@@ -4,9 +4,9 @@
 # saving the line from PopPAData.csv if the geneID matches.
 # output should be to PopPADataRand500.csv, in format GeneID,Position,Codon,rfpCount
 
-$namefile = "../randNames.out";
-$datafile = "../PopPAData.csv";
-$outfile = "../PopPADataRand500.csv";
+$namefile = "../preprocessedFiles/randNames.out";
+$datafile = "../preprocessedFiles/PopPAData.csv";
+$outfile = "../preprocessedFiles/PopPADataRand500.csv";
 
 open(NAMES, $namefile);
 open(DATA, $datafile);

@@ -1,8 +1,8 @@
 # input should be geneIDPhiMean.csv, in format GeneID,phiMean.
 # output should be to randGeneIDPhiMean.csv, in the same format but only as a subset.
 
-$datafile = "../geneIDPhiMean.csv";
-$outfile = "../randGeneIDPhiMean.csv";
+$datafile = "../preprocessedFiles/geneIDPhiMean.csv";
+$outfile = "../preprocessedFiles/randGeneIDPhiMean.csv";
 
 open(DATA, $datafile);
 open(OUT, ">", $outfile); # Open for output

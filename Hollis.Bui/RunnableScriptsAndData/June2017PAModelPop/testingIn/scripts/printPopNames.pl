@@ -2,8 +2,8 @@
 #input should be format GeneID,Position,Codon,rfpcount, from PopPAData.csv
 #output will be to PopNames.out
 
-$datafile = "../PopPAData.csv";
-$outfile = "../PopNames.out";
+$datafile = "../preprocessedFiles/PopPAData.csv";
+$outfile = "../preprocessedFiles/PopNames.out";
 
 open(DATA, $datafile);
 open(OUT, ">", $outfile); # Open for output

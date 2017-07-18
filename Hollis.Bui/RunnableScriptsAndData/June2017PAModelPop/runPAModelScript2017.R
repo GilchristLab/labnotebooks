@@ -57,7 +57,7 @@ library(ribModel)
                                est.expression=TRUE, est.csp=TRUE, est.hyper=TRUE)
   
   model <- initializeModelObject(parameter=parameter, model="PA", rfp.count.column=1)
-  setRestartSettings(mcmc, "restartJeremyFile.rst", adaptiveWidth, TRUE)
+  setRestartSettings(mcmc, "restartPAModelScript2017File.rst", adaptiveWidth, TRUE)
   
   logFileString <- paste0("runPAModelScript2017Log", samples)
   outFile = file.path("TestingOut", logFileString)

@@ -3,7 +3,7 @@
 # Script will read in both files then print them back out in alphabetical order.
 # output should be to 1) orderedPopPADataRand500.csv and 2) orderedRandGeneIDPhiMean.csv
 
-$PopFile = "../PopPADataRand500.csv";
+$PopFile = "../preprocessedFiles/PopPADataRand500.csv";
 $PopOutFile = "../orderedPopPADataRand500.csv";
 open(POP, $PopFile);
 open(OUTPOP, ">", $PopOutFile); # Open for output
@@ -25,7 +25,7 @@ close $PopOutFile;
 
 ##############################
 
-$PhiMeanFile = "../randGeneIDPhiMean.csv";
+$PhiMeanFile = "../preprocessedFiles/randGeneIDPhiMean.csv";
 $PhiMeanOutFile = "../orderedRandGeneIDPhiMean.csv";
 open(PHIMEAN, $PhiMeanFile);
 open(OUTPHIMEAN, ">", $PhiMeanOutFile); # Open for output

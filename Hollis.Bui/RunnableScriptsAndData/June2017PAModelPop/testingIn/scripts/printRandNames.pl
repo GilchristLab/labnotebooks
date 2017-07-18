@@ -2,8 +2,8 @@
 #input should be format GeneID,phiMean from randGeneIDPhiMean.csv.
 #output will be to randNames.out, as line-by-line geneIDs.
 
-$datafile = "../randGeneIDPhiMean.csv";
-$outfile = "../randNames.out";
+$datafile = "../preprocessedFiles/randGeneIDPhiMean.csv";
+$outfile = "../preprocessedFiles/randNames.out";
 
 open(DATA, $datafile);
 open(OUT, ">", $outfile); # Open for output

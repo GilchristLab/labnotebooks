@@ -4,9 +4,9 @@
 # saving the phi mean if the name matches.
 # output should be to geneIDPhiMean.csv, in format GeneID,phiMean
 
-$namefile = "../PopNames.out";
-$datafile = "../phiValues009670-6.tsv";
-$outfile = "../geneIDPhiMean.csv";
+$namefile = "../preprocessedFiles/PopNames.out";
+$datafile = "../preprocessedFiles/phiValues009670-6.tsv";
+$outfile = "../preprocessedFiles/geneIDPhiMean.csv";
 
 open(NAMES, $namefile);
 open(DATA, $datafile);
