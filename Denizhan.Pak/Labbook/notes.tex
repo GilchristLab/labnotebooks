@@ -281,9 +281,11 @@ I have begun developing the testing application. Under Dr. Gilchrist sugestion I
     \item 1 - 3: Tested and edited gamma function for accurracy
     \item Total: 4 Hours spent in Lab working.
 \experiment{Benchmark Upper Incomplete Gamma}
-As discussed earlier worked on benchmarking my implementation of the Gamma Function. From the list above I have completed steps 2 and 3. After editing the code changing the number f iterations and adding a special case calculation the continued fraction is seeming to be as accurrate as the GSL implmenetation. The log files for the accurrcacy tests can be found in the Log_files directory.
+As discussed earlier worked on benchmarking my implementation of the Gamma Function. From the list above I have completed steps 2 and 3. After editing the code changing the number f iterations and adding a special case calculation the continued fraction is seeming to be as accurrate as the GSL implmenetation. The log files for the accurrcacy tests can be found in the Log\_files directory.
 I have more benchmarking to do although preliminarily the implementation seems to be fast enough, I will edit the testing function that has been developed to be multithreaded to allow for timing comparisons between both implementations. Depending on the results of this testing I will work on optimizing my implementation for increased speed efficiency. 
 For the accurracy testing I used random number generation with the value for the $a$ being evenly distributed between $1 \land -1$. This is based on observations in the pdf of RFP that the $a$ value will be $1 - \alpha$ and from known $\alpha$ value observations it is between $0 \land 2$ meaning the resulting $a$ will be between $1 \land -1$. The value for $x$ is more arbitrary. It is set to a randomly distributed double between $0 \land 11$ this is because depending on $a$ most values for $x > 10$ will result in a return of $0$. I will test a working MCMC to understand a better value for $x$. Additionall I have provided a further reding on accurracy of a continued fraction in the further reading section.
+\end{itemize}
+
 \labday{June 1, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -295,7 +297,7 @@ For the accurracy testing I used random number generation with the value for the
 \experiment{Benchmarking}
 I continued the benchmarking. During testing I notice a complication upon further investigation I found that the tested gamma function only matches gsl standard with in 7 - 8 decimal places. After learning this I conducted more tests to improve accurracy by increasing depth of the recursive fraction. There were memory issues caused by the overstacking of recursive calls. To improve efficiency and solve this problem I decided to turn the recursive function into an iterative one. To
 do so I first turned the recursion from head to tail then converted the tail recursion to iteration. Accurracy has improved because we can do more iterations with the lower cost. There still seems to be deviation from the GSL standard however when comparing to the a 22 decimal accurrate calulcator meant to approximate the gamma function it seems to preform comparatively better than GSL implementation. To fursther investigate this I will develop a Python script to collect and compare data using the online calculator.
-\end{document}
+
 \labday{June 2, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -426,7 +428,7 @@ To implement this function in PANSE I needed to understand how it works in PA bu
 \begin{itemize}
     \item 11 - 3: Testing ROC Simulated Genome
     \item Total: 4 hours in lab 3 hours working 1 hour learning
-\end{itemze}
+\end{itemize}
 \experiment{Working with ROC}
 I ran multiple test to acquire different data sets, found some unoptimized sections optimized followed by debugging. Will continue to optimize and learn tomorrow.
 \labday{June 23, 2017 Notes}
@@ -452,6 +454,7 @@ ROC model is working well for both and c++, PA simulate genome is having erors o
 \experiment{Compilation Problems}
 While debugging R end of simulate genome PA ran into compiltion problems, needs further fixing
 \labday{June 27, 2017 Notes}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 2 - 3: Reading about Cmake and Rcpp compilation
     \item 3 - 5: Fixing Compilation problems
@@ -461,3 +464,145 @@ While debugging R end of simulate genome PA ran into compiltion problems, needs 
 When a an R package is built the zip maintains the original files, which is then compiled during installation to create a shared object file, which is stored locally for reference by R. There was a problem with this object file, the problem seemed to stem from Cmake incorrectly compiling according to a version copatabillity issue, which I have not discovered yet.
 \experiment{Fixing Compilation}
 To get back to testing I removed the Cmake related files in the RibModel and deleted cached information maintained by R about using Cmake, once compiled with g++ the package started to work again
+\labday{June 28, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Debugging ReadRFP
+    \item 1:30 - 4: Debugging ReadRFP
+    \item Total 4 hours spent working
+\end{itemize}
+\experiment{Debugging ReadRFPData}
+The method readRFP in Gene.cpp is showing errors, there is a vector which is going over bounds, initially I though it was a simple naming problem but looking further Although the inital core dump has been solved there is a second issue that needs to be addressed, I found that problem goes further down the code. I will continue investigating.
+\labday{June 29, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Debugging readRFP
+    \item 12:30 - 1:30: Reading Documentation for Genome and gene
+    \item 1:30 - 3 Debugging read RFP
+    \item Total: 4 hours spent in lab 3 hours working, 1 hour reading
+\end{itemize}
+\experiment{Debugging ReadRF}
+After continuing my investigation I found that the problem is somewhere in the setPASequence function inside the Gene class. I read into the implementation of the clas and explored its functions, the error is in the stoing of the string named "seq" which stores the gene sequence, there is an unbounded memory access problem, that will still need to be explored. 
+\labday{June 30, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12: Finish ReadRFP Debug
+    \item 12 - :1:30: Help Hollis Debug Testing
+    \item 2 - 2:30: Debugging genome comparison
+\end{itemize}
+\experiment{Finsh ReadRFP}
+The problem was with input file, TODO Note: Add error checking when reading through input files, problem was solved after talking to Hollis
+\experiment{Help Hollis}
+There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
+\experiment{Genome Comparison}
+While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
+\labday{July 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 2: Create a visual chart mapping relationships between Gene, Genome and Sequence Summary
+    \item 2 - 3: Start writing function for comparing to Genomes with using position data
+    \item Totol: 3 hours spent in lab, 2 hours learning 1 hour working
+\end{itemize}
+\experiment{Comparison Function}
+As discussed last week working on a comparison function for testing purposes, because comparison uses position but the PA model does not store this information. To do this I am writing a double looped function that iterates through every gene in the genome and then compares the sumRFPCounts and total codon counts for each.
+\labday{July 7, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12:30 Write new comparison function for testing Genome objects
+    \item 1:30 - 3: Dealing with compilation and dependency issues
+    \item 3 - 3:30: Testing new comparison function
+    \item 3:30 - 4:30: Discussing with Dr. Gilchrist
+    \item 4:30 - 5 Finish testing new comparison function
+    \item Total: 6 hours in lab, 3.5 hours working, 2.5 hour learning
+\end{itemize}
+\experiment{New Comparison Function}
+Hollis had asked me to run the simulation function of the PA model on the R end, to this require reading and writing data. However we were unsure whether the read and write data functions were working probably. The issue was they were reading and writing but the datasets didn't account for position so the comparisons were innapplicable because the positions were being compared. TO fix this problem I wrote a new comparison function in Testing.cpp "testEqualityGenome." Upon compilation
+of this function I had an issue that had occurred previously involving R-side compilation on version 3.2, after Addressing this issue I tested theis function and the read and write functions all seems well.
+\experiment{Discussion with Dr. Gilchrist}
+We discussed the questions I had asked about the relationship of probability and likelihood in the paper and the difference between PA and PANSE models in simulation dependent on the use of position data. In addition to answering questions Dr. Gilchrist and I focused on a TODO list as follows:
+\begin{itemize}
+    \item Finish testing new equality function
+    \item Use Pop data to create and compare simulations of varying gene and codon counts looking for discussed features.
+    \item Once Developed better understanding of simulation generalize prinicpals using write up implement PANSE simulation
+    \item Test PANSE simulation by looking at Pop data and checking for abnormal relationships between outputs such as error rate and elongation rate
+\end{itemize}
+I have finished the first task on the list so far
+\labday{July 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:30: Fixing PA model object bug
+    \item 12:30 - 1:30: Fixing simulate Genome bug
+    \item 1:30 - 3: Create new simulations with simulated genome
+    \item Total: 4.5 Hours spent in lab, 3 hours working, 1.5 hours learning
+\end{itemize}
+\experiment{Fixing PA Model Object}
+To simulate the genome it necessary to create three unique objects, a Genome, a Parameter and a Model. The Model takes a Paramter object which maintains information about the Genome and uses this to simulate a Genome from the data. However there was a bug in the instantiantion of the Model object on the R end, after discussing with Hollis and looing through the code this issue has been solved and sent to main branch.
+\experiment{Fixing Simulate Genome Bug}
+There was a bug in the end of simulating a genome using the PA model, this bug has now been solved and the main branch has been updated, this also required a update in the README file which has been added.
+\experiment{Simulate Genome}
+I have created a simulated genome file in rfp format, using a variety of specifications which is in the Log files, I will continue to create more and analyze the differences as discussed with Dr. Gilchrist to get a better intuition of the simulateGenome function.
+\labday{July 11, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1 - 2: Read and wrote simulated Genomes to better understand simulateGenome function
+    \item 2 - 4:30: Write script to test and automate process of making sub datasets for genes and codons in rfp format.
+    \item 4:30 - 5: make new sub datasets
+    \item Total: 4 Hours in lab, 1 hour learning 3 hours working
+\end{itemize}
+\experiment{Simulate Genome Function}
+Simulated Genome and examined function. Tried different sets to build intuition
+\experiment{Dataset Script}
+I wrote python script that can take an rfp data set randomly select an arbitrary number of genes and codons and create a subdataset set from the random selection.
+It can be used to test speed and benchmarking on a single dataset, as well as help me develop a better understanding for simulated genome by trying different specific information.
+\experiment{Tomorrow}
+Will fit the PANSE model to the PopPAData, and benchmark based on the run times. Once completed will move on to simulating a Genome through PANSE model on Pop data
+\labday{July 12, 2017 Notes}
+\experment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11: Writing script to approximate Gene data
+    \item 11 - 1:15: Learning MCMC and model interfacing
+    \item 2:30 - 4:45: Fitting PANSE Model to Pop data
+    \item Total: 6 hours in lab, 2 hours working, 4 hours learning
+\end{itemize}
+\experiment{Gene Data Script}
+Wrote a python script that can be used to approximate ribosomal footprinting probability for any given Codon. Although, this script will not be used till PANSE model has been fitted and will need further editing. 
+\experiment{MCMC Model Interfacing}
+Learned that the MCMC takes a model object and simply acquires required paramters tests parameters to match them to LogLikelihood for codon per gene, which over itertion reaches same distribution as data set.
+\experiment{Started Fitting PANSE Model to Pop Data}
+Currently editing functions because implementation requires some rewriting to properly interface with mcmcalgorithm
+\labday{July 13, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 3: Reading through Model, Parameter and MCMC code
+    \item 4 - 6: Fitting PANSE to MCMC
+    \item Total 6 hours in lab, 2 working 4 learning
+\end{itemize}
+\experiment{Fitting PANSE to MCMC}
+After some varibale adjustments and commenting code for future reference, we have a working likelihood function per codon per gene, will finish up fitting tomorrow by editing some functions in Parameter and finishing the loglikelihood per gene function
+\labday{July 14, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 11: Fitting PANSE to MCMC
+    \item 11 - 4: Testing and Debugging MCMC
+    \item Total: 7 hours spent in lab 1 hour learning, 6 hours working
+\end{itemize}
+\experiment{Fitting PANSE}
+Changed structure of likelihood caluclation to account for position rather than total codon count as needed for Nonsense errors.
+\experiment{Testing and Debugging}
+After Adjusting the model, I ran the MCMC on the R end this lead to seg faults, to solve this I ran tests on the c++ end. However, there is an error on the c++ end as well, it seems that there is a division by zero error in the categoryProbabilities calculation. Initially Hollis and I though it was a problem with incorrect initialization of num categories, however, after further investigation this seems to not be the case will need to look further into the problem, before I can test the MCMC
+on PANSE.
+\labday{July 17, 2017 Nootes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 12: Reading Through Code
+    \item 12 - 1: Fit model to MCMC
+    \item 1 - 5: Run MCMC's
+    \item Total: 8 hours in lab 5 hours working 3 hours learning
+\end{itemize}
+\experiment{Read through code}
+Continue bug hunt from yesterday by tracing MCMC found root problem was in an eror in a data set. Talked to Dr. Gilchrist, will add a check for this bug
+\experiment{Fit Model to MCMC}
+Compilation with Sequence Summary object in Model does not work on R end need to adjust the structure of Genomelikilihood function to accomadate for this
+\experiment{Run MCMC}
+MCMC is still very slow but data seems good at initial runs. Will need to continue testing to confirm.
+\end{document}

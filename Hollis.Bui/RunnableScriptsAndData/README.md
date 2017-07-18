@@ -23,3 +23,4 @@
     1. `7-27-16-JeremyCorrelation` -- Output from running an MCMC script with 20,000 samples, 10 thinning, 10 adaptive width, and using the input files from `JeremyData` with Jeremy's simulated genome.
     2. `testRFPModelRunsWithSamples` -- Running a certain number of sampled runs with a non-simulated genome (`rfp.counts.by.codon.and.gene.GSE3789.wt.csv`, I believe) to reveal that there's some non-useful data being outputted, and some debugging may need to be done (hence the dated runs with simulated genomes and comparing them to non-simulated data).
 
+5. `June2017PAModelPop` -- Self-contained directory to run the script `runPAModelScript2017.R`. Includes input and output files.
