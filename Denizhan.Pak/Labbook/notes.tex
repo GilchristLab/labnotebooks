@@ -620,4 +620,15 @@ Discussed with Hollis about the benefits of running the models in R for the purp
 the problems in the R testing script. However for the R testing script to work the data has to be properly formatted.
 \experiment{Writing Scripts}
 I have started writing and am still working on a Python script meant to clean up data files and adjust them to make them RFP readable. Once this is done I can run the Test scripts discussed earlier and determine if PANSE works on the R end. Once this has been addressed I will start accounting for nonsense errors and check to see if the data is still consistent.
+\labday{July 19, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30 and 1:30 -3: Add R Functionality to PANSE Model
+    \item 3 - 6: Run MCMC and Write Script to combine phi data and PopData
+    \item Total: 6 Hours in Lab, 2 hours learning 4 hours working
+\end{itemize}
+\experiment{Adding R Functionality}
+Now that PANSE can be run as a working model, I had to add the object to the RCPP wrappers, this included reading through R code and duplicating usage from PANSE
+\experiment{New Script}
+Wrote a python script that will iterate throuh expected values for phiData and copy Genes from RFP data only if they have associated phi values because not all genes do. Will further edit this script so as to make it able to randomly select genes and codons randomly in selected sample sizes.
 \end{document}
