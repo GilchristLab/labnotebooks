@@ -59,7 +59,7 @@ library(ribModel)
   model <- initializeModelObject(parameter=parameter, model="PA", rfp.count.column=1)
   setRestartSettings(mcmc, "restartPAModelScript2017File.rst", adaptiveWidth, TRUE)
   
-  logFileString <- paste0("runPAModelScript2017Log", samples)
+  logFileString <- paste0("runPAModelScript2017Log", samples, ".txt")
   outFile = file.path("TestingOut", logFileString)
   
   sink(outFile)
@@ -120,7 +120,7 @@ library(ribModel)
   ### Output File 3 ###
   #####################
   
-  pdf(file.path("TestingOut", "PAModelConfidenceIntervalsForAlphaAndLambdaPrime.pdf"))
+  pdf(file.path("TestingOut", "PAModel2017ConfidenceIntervalsForAlphaAndLambdaPrime.pdf"))
 
   #eventually this will need loop over all categories if there are multiple mixtures
   cat <- 1
@@ -210,26 +210,26 @@ library(ribModel)
   
   # Phi
   #X <- read.csv(filePhiValues)
-  X <- read.table(file = filePhiValues, sep = '\t', header = TRUE)
-  X <- X[order(X[,2]) , ]
-  XM <- matrix(c(X[,1], X[,2]), ncol = 2, byrow = FALSE)
-  # Vector of doubles
-  fX <- XM[,2]
-  
-  estimValues <- numeric(length(genome))
-  for (geneIndex in 1:length(genome))
-  {
-    estimValues[geneIndex] <- tail(trace$getSynthesisRateTraceForGene(geneIndex), n=1)
-  }
-  
-  Y <- data.frame(estimValues)
-  colnames(Y) <- c("PA Model Rates")
-  # Vector of doubles
-  fY <- Y[order(Y[,1]) , ]
-  
-  plot(NULL, NULL, log = "xy", xlim=range(fX, na.rm = T), ylim=range(fY), 
-       main = "PA Model Estimated Phi Values vs True Values", xlab = "True Values", ylab = "PA Model RFP Rates")
-  upper.panel.plot(x = fX, y = fY)
+  # X <- read.table(file = filePhiValues, sep = '\t', header = TRUE)
+  # X <- X[order(X[,2]) , ]
+  # XM <- matrix(c(X[,1], X[,2]), ncol = 2, byrow = FALSE)
+  # # Vector of doubles
+  # fX <- XM[,2]
+  # 
+  # estimValues <- numeric(length(genome))
+  # for (geneIndex in 1:length(genome))
+  # {
+  #   estimValues[geneIndex] <- tail(trace$getSynthesisRateTraceForGene(geneIndex), n=1)
+  # }
+  # 
+  # Y <- data.frame(estimValues)
+  # colnames(Y) <- c("PA Model Rates")
+  # # Vector of doubles
+  # fY <- Y[order(Y[,1]) , ]
+  # 
+  # plot(NULL, NULL, log = "xy", xlim=range(fX, na.rm = T), ylim=range(fY), 
+  #      main = "PA Model Estimated Phi Values vs True Values", xlab = "True Values", ylab = "PA Model RFP Rates")
+  # upper.panel.plot(x = fX, y = fY)
   
   # # Alpha
   # X <- read.csv(fileTrueAlphaValues)
@@ -258,7 +258,7 @@ library(ribModel)
   
   # plot(parameter, what = "Mutation", samples = samples)
   
-  dev.off()
+  # dev.off()
   
   #################
   ### CSV Files ###
@@ -266,15 +266,16 @@ library(ribModel)
   # Will write csv files based off posterior for alpha, lambda prime, and psi
   m <- matrix(c(codonList[-c(62,63,64)], alphaList), ncol = 2, byrow = FALSE)
   colnames(m) <- c("Codon", "Alpha")
-  write.csv(m, file.path("TestingOut", "PAModelAlphaValues.csv"), quote = F, row.names = F)
+  write.csv(m, file.path("TestingOut", "PAModel2017AlphaValues.csv"), quote = F, sep = ",", row.names = F)
   
   
   m <- matrix(c(codonList[-c(62,63,64)], lambdaPrimeList), ncol = 2, byrow = FALSE)
   colnames(m) <- c("Codon", "LambdaPrime")
-  write.table(m, file.path("TestingOut", "PAModelLambdaPrimeValues.csv"), quote = F, row.names = F)
+  write.table(m, file.path("TestingOut", "PAModel2017LambdaPrimeValues.csv"), quote = F, sep = ",", row.names = F)
   
   
-  m <- matrix(c(ids, psiList, psiList), ncol = 3, byrow = FALSE)
-  colnames(m) <- c("Gene", "PsiValue", "PsiValue")
-  write.table(m, file.path("TestingOut", "PAModelPsiValues.csv"), quote = F, row.names = F)
+  # TODO: Make a third column here for Phi values, probably.
+  m <- matrix(c(ids, psiList), ncol = 2, byrow = FALSE)
+  colnames(m) <- c("Gene", "PsiValue")
+  write.table(m, file.path("TestingOut", "PAModel2017PsiValues.csv"), quote = F, sep = ",", row.names = F)
 #})

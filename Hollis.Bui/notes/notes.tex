@@ -3202,7 +3202,33 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 9:00 - 10:00 -- Working from home, rebuilt packages and began MCMC with my R script on 1000 genes.
-    \item 1:30 - -- Finally remembered to push notes.
+    \item 1:30 - 3:30 -- Finally remembered to push notes. The MCMC on 1000 sample, 500 genes completed successfully. Talked with Denizhan about how to run his own R script, and also updated README.md on confusing Perl scripts.
+    \item 3:30 - 5:00 -- runPAModelScript2017.R seems to have most of the old code still working, but currently running into an issue where the Alpha and LambdaPrime values yield infinity. Will check more later.
+\end{itemize}
+
+\labday{June 19, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:30 - 3:00 -- Continuing debugging of my R script.
+    \item 3:00 - 5:00 -- Switched to looking at C++ code to see when things are changed.
+    \item 5:00 - 6:00 -- Talked with Denizhan about possible TODOs for the project overall.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item After running a couple of other 1000-sample, 500 gene runs, still having trouble seeing why both alpha and lambda values are zero.
+    \item Going to start looking back into the C code to see if the calculations are off from weird input values.
+    \item The initial.expression.values (whether I have Dr. Gilchrist's phi values or not initialized) do not affect how alpha/lambda go to infinity.
+    \item Also cannot see the trace plots at all for these values.
+    \item I can, however, access the synthesisRatePosteriorMean, so the model isn't completely broken.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item I \textbf{need} to talk to Cedric for help on debugging this infinite return value on my codon-specific (Alpha and LambdaPrime) values. Finished day not finding a solution.
+    \item Denizhan and I may also want to talk about the models' destructors and necessity of copy constructors (rule of three in c++).
+    \item Mentioned to Denizhan a long-term goal is automated testing on validity of the models -- see testMCMCROC.R, an old file that currently checks just the logPosterior to see if it's accurate with a set seed and hardcoded values known to be true. Ideally we expand this further, and make a version for each model. Far-off idea.
 \end{itemize}
 
 \end{document}
