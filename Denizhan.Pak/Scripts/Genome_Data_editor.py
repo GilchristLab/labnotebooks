@@ -14,10 +14,16 @@ class Position:
         self.gene = gen
         self.rfpcount = rfp
 
+if len(sys.argv) < 3:
+    print "Usage: python Genome_Data_Editor.py csv_rfp_dat csv_phi_values [NumGenes] [NumCodons]"
+    exit(0)
+
 data = open(sys.argv[1], 'rb')
-if len(sys.argv) > 2:
+phis = open(sys.argv[2], 'rb')
+
+if len(sys.argv) > 3:
     numGenes = int(sys.argv[2])
-    if len(sys.argv) > 3:
+    if len(sys.argv) > 4:
         numCodons = int(sys.argv[3])
     else:
         numCodons = -1
@@ -26,11 +32,14 @@ else:
     numCodons = -1
 
 dataReader = csv.reader(data, delimiter = ",")
+phiReader = csv.reader(data, delimiter = ",")
 genes = set()
 codons = set()
 l = []
 gs = dict()
 i = 0
+
+
 for row in dataReader:
     if row[0] not in genes:
         g = Gene(row[0])
