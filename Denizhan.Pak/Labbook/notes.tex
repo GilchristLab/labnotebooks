@@ -496,5 +496,152 @@ The problem was with input file, TODO Note: Add error checking when reading thro
 There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
 \experiment{Genome Comparison}
 While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
-
+\labday{July 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 2: Create a visual chart mapping relationships between Gene, Genome and Sequence Summary
+    \item 2 - 3: Start writing function for comparing to Genomes with using position data
+    \item Totol: 3 hours spent in lab, 2 hours learning 1 hour working
+\end{itemize}
+\experiment{Comparison Function}
+As discussed last week working on a comparison function for testing purposes, because comparison uses position but the PA model does not store this information. To do this I am writing a double looped function that iterates through every gene in the genome and then compares the sumRFPCounts and total codon counts for each.
+\labday{July 7, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12:30 Write new comparison function for testing Genome objects
+    \item 1:30 - 3: Dealing with compilation and dependency issues
+    \item 3 - 3:30: Testing new comparison function
+    \item 3:30 - 4:30: Discussing with Dr. Gilchrist
+    \item 4:30 - 5 Finish testing new comparison function
+    \item Total: 6 hours in lab, 3.5 hours working, 2.5 hour learning
+\end{itemize}
+\experiment{New Comparison Function}
+Hollis had asked me to run the simulation function of the PA model on the R end, to this require reading and writing data. However we were unsure whether the read and write data functions were working probably. The issue was they were reading and writing but the datasets didn't account for position so the comparisons were innapplicable because the positions were being compared. TO fix this problem I wrote a new comparison function in Testing.cpp "testEqualityGenome." Upon compilation
+of this function I had an issue that had occurred previously involving R-side compilation on version 3.2, after Addressing this issue I tested theis function and the read and write functions all seems well.
+\experiment{Discussion with Dr. Gilchrist}
+We discussed the questions I had asked about the relationship of probability and likelihood in the paper and the difference between PA and PANSE models in simulation dependent on the use of position data. In addition to answering questions Dr. Gilchrist and I focused on a TODO list as follows:
+\begin{itemize}
+    \item Finish testing new equality function
+    \item Use Pop data to create and compare simulations of varying gene and codon counts looking for discussed features.
+    \item Once Developed better understanding of simulation generalize prinicpals using write up implement PANSE simulation
+    \item Test PANSE simulation by looking at Pop data and checking for abnormal relationships between outputs such as error rate and elongation rate
+\end{itemize}
+I have finished the first task on the list so far
+\labday{July 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:30: Fixing PA model object bug
+    \item 12:30 - 1:30: Fixing simulate Genome bug
+    \item 1:30 - 3: Create new simulations with simulated genome
+    \item Total: 4.5 Hours spent in lab, 3 hours working, 1.5 hours learning
+\end{itemize}
+\experiment{Fixing PA Model Object}
+To simulate the genome it necessary to create three unique objects, a Genome, a Parameter and a Model. The Model takes a Paramter object which maintains information about the Genome and uses this to simulate a Genome from the data. However there was a bug in the instantiantion of the Model object on the R end, after discussing with Hollis and looing through the code this issue has been solved and sent to main branch.
+\experiment{Fixing Simulate Genome Bug}
+There was a bug in the end of simulating a genome using the PA model, this bug has now been solved and the main branch has been updated, this also required a update in the README file which has been added.
+\experiment{Simulate Genome}
+I have created a simulated genome file in rfp format, using a variety of specifications which is in the Log files, I will continue to create more and analyze the differences as discussed with Dr. Gilchrist to get a better intuition of the simulateGenome function.
+\labday{July 11, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1 - 2: Read and wrote simulated Genomes to better understand simulateGenome function
+    \item 2 - 4:30: Write script to test and automate process of making sub datasets for genes and codons in rfp format.
+    \item 4:30 - 5: make new sub datasets
+    \item Total: 4 Hours in lab, 1 hour learning 3 hours working
+\end{itemize}
+\experiment{Simulate Genome Function}
+Simulated Genome and examined function. Tried different sets to build intuition
+\experiment{Dataset Script}
+I wrote python script that can take an rfp data set randomly select an arbitrary number of genes and codons and create a subdataset set from the random selection.
+It can be used to test speed and benchmarking on a single dataset, as well as help me develop a better understanding for simulated genome by trying different specific information.
+\experiment{Tomorrow}
+Will fit the PANSE model to the PopPAData, and benchmark based on the run times. Once completed will move on to simulating a Genome through PANSE model on Pop data
+\labday{July 12, 2017 Notes}
+\experment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11: Writing script to approximate Gene data
+    \item 11 - 1:15: Learning MCMC and model interfacing
+    \item 2:30 - 4:45: Fitting PANSE Model to Pop data
+    \item Total: 6 hours in lab, 2 hours working, 4 hours learning
+\end{itemize}
+\experiment{Gene Data Script}
+Wrote a python script that can be used to approximate ribosomal footprinting probability for any given Codon. Although, this script will not be used till PANSE model has been fitted and will need further editing. 
+\experiment{MCMC Model Interfacing}
+Learned that the MCMC takes a model object and simply acquires required paramters tests parameters to match them to LogLikelihood for codon per gene, which over itertion reaches same distribution as data set.
+\experiment{Started Fitting PANSE Model to Pop Data}
+Currently editing functions because implementation requires some rewriting to properly interface with mcmcalgorithm
+\labday{July 13, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 3: Reading through Model, Parameter and MCMC code
+    \item 4 - 6: Fitting PANSE to MCMC
+    \item Total 6 hours in lab, 2 working 4 learning
+\end{itemize}
+\experiment{Fitting PANSE to MCMC}
+After some varibale adjustments and commenting code for future reference, we have a working likelihood function per codon per gene, will finish up fitting tomorrow by editing some functions in Parameter and finishing the loglikelihood per gene function
+\labday{July 14, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 11: Fitting PANSE to MCMC
+    \item 11 - 4: Testing and Debugging MCMC
+    \item Total: 7 hours spent in lab 1 hour learning, 6 hours working
+\end{itemize}
+\experiment{Fitting PANSE}
+Changed structure of likelihood caluclation to account for position rather than total codon count as needed for Nonsense errors.
+\experiment{Testing and Debugging}
+After Adjusting the model, I ran the MCMC on the R end this lead to seg faults, to solve this I ran tests on the c++ end. However, there is an error on the c++ end as well, it seems that there is a division by zero error in the categoryProbabilities calculation. Initially Hollis and I though it was a problem with incorrect initialization of num categories, however, after further investigation this seems to not be the case will need to look further into the problem, before I can test the MCMC
+on PANSE.
+\labday{July 17, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 12: Reading Through Code
+    \item 12 - 1: Fit model to MCMC
+    \item 1 - 5: Run MCMC's
+    \item Total: 8 hours in lab 5 hours working 3 hours learning
+\end{itemize}
+\experiment{Read through code}
+Continue bug hunt from yesterday by tracing MCMC found root problem was in an eror in a data set. Talked to Dr. Gilchrist, will add a check for this bug
+\experiment{Fit Model to MCMC}
+Compilation with Sequence Summary object in Model does not work on R end need to adjust the structure of Genomelikilihood function to accomadate for this
+\experiment{Run MCMC}
+MCMC is still very slow but data seems good at initial runs. Will need to continue testing to confirm.
+\labday{July 18, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Running MCMC models on C end
+    \item 1 - 3: Making Models work on R end
+    \item 4 - 5:30: Writing scripts for data manipulation
+    \item Total: 6.5 hours spent in lab, 2 hours learning, 4.5 hours working
+\end{itemize}
+\experiment{MCMC Models in C}
+To get a better feel for the relationship between the PANSE and PA model I ran MCMC's using an assummed non-existant error rate where phi and psi are equal. This experiments are consistent with expectations meaning that the likelihood function is seemingly correct.
+\experiment{PANSE in R}
+Discussed with Hollis about the benefits of running the models in R for the purposes of restarts and easier compilations. Additionally it is important to know that the model is being translated correctly. There were initially some compilation problems due to the way Open Compilation flags are implemented. To address this I temporarily commented this out and have added a TODO item. Aside from this there were dependency issues which were fixed. After Talking to Hollis I fixed some of
+the problems in the R testing script. However for the R testing script to work the data has to be properly formatted.
+\experiment{Writing Scripts}
+I have started writing and am still working on a Python script meant to clean up data files and adjust them to make them RFP readable. Once this is done I can run the Test scripts discussed earlier and determine if PANSE works on the R end. Once this has been addressed I will start accounting for nonsense errors and check to see if the data is still consistent.
+\labday{July 19, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30 and 1:30 -3: Add R Functionality to PANSE Model
+    \item 3 - 6: Run MCMC and Write Script to combine phi data and PopData
+    \item Total: 6 Hours in Lab, 2 hours learning 4 hours working
+\end{itemize}
+\experiment{Adding R Functionality}
+Now that PANSE can be run as a working model, I had to add the object to the RCPP wrappers, this included reading through R code and duplicating usage from PANSE
+\experiment{New Script}
+Wrote a python script that will iterate throuh expected values for phiData and copy Genes from RFP data only if they have associated phi values because not all genes do. Will further edit this script so as to make it able to randomly select genes and codons randomly in selected sample sizes.
+\labday{July 20, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 12:30: Looking at Hollis' notes on readRFPData in Genome
+    \item 12:30 - 2:30: Finished writing and debugging Python Script from yesterday
+    \item 2:30 - 4:30: Reading Mathematica Notebook from Dr. Gilchrist
+    \item Total: 4.5 Hours in lab, 2.5 hours learning, 2 hours working
+\end{itemize}
+\experiment{Python Script}
+Selects RFP data with matching accurrate phi data and can randomly sample base on optional arguments. Can be found in the scripts folder in this
+in this directory.
+\experiment{Mathematica Notebook}
+The probability of elongation is extensive and resource intensive. Dr. Gilchrist has provided me with ways of calculating this function in a series. The notebook can be found in the reading directort. Need to look into run time complexity of arg function to determine if it is a better implementation than the continued fractions which is in place.
 \end{document}

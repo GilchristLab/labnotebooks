@@ -6,6 +6,8 @@ Lab_Notes.pdf
 # Hollis's labnotes pdf 
 abridgedNotes.pdf
 notes.pdf 
+gilchristEmail.pdf
+Hollis.Bui/RunnableScriptsAndData/June2017PAModelPop/restartFiles*
 
 # Walker's lanotes pdf
 Wnotes.pdf 
@@ -19,6 +21,7 @@ Wnotes.pdf
 
 # R stuff
 .Rhistory
+*.Rdat
 
 # Mac stuff
 *.DS_Store

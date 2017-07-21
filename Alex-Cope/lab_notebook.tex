@@ -1121,6 +1121,48 @@ Unlike RNA-Seq data, the ROC-SEMPPR $\phi$ estimates generally correlate better 
 \end{figure}
 
 
+\experiment{6-29-2017}
+Added confidence intervals to GC-content versus ribosomal protein average $\phi$ values for various bacteria. 
+
+\includepdf{gc_ribo_w_ci.pdf}
+
+\experiment{7-5-2017}
+Revisited how mutation bias parameter estimates vary between runs. What I found was even though they were correlated, the $\Delta\mathit{M}$ values estimated from the mature peptide regions were different when they were shared with the genes without signal peptides 
+
+This gave me concern about sharing these estimates between the regions. I allowed these estimates to be unique between the regions. When fitting the data to the genes without signal peptides to the mature peptides, the relationship between the $\Delta\mathit{M}$ estimates was not along the $y = x$ line
+
+
+\experiment{7-12-2017}
+\subexperiment{Interesting take aways from SMBE 2017}
+\begin{itemize}
+\item Lack of mass spectrometry and proteomics/metabolomics data. How can information from these fields be lead to better understanding of evolution?
+\item Claus Wilke presented some recent work contradicting his own previous work on influenze virus. Regions of hemagglutinin previously identified to be under positive selection with computational model contradicted experimental work. However, more recent work showed the computational results were spurious signals resulting from cell passaging, which empiricists working on the virus were well aware of had been going on. Wilke's big point: computational scientists need to understand the biology of the system. 
+\item Jeremy Bloom argues for the advantages of informing quantitative models of protein evolution using experimental data. Null models based on experimental data are sometimes more informative than null models based on neutral evolution (like Goldman and Yang). Experiments to collect this data are getting easier.
+\item Proteins with a conformational switcg evolve more slowly than those with a single native state, but both evolve slower than intrinsically disordered proteins, meaning the relationship between number of distinct conformations and degree of selective constraints on a protein structure is nonlinear
+\item Similar to J. Bloom, C. Weber argues that empirical models that incorporate of rate of evolution of different regions of protein leads to mroe realism in models of protein evolution
+\item Errors in sequence alignments can bias dN/dS and indel estimates. Can use Pair-HMM from paHMM-tree to get better estimates (see Bogusz et al, Syst Bio 2017). Indels are more likely to occur at beginning and ends of sequences
+\item Work by H. Ochman found that closely related species have similar microbiomes, despite potential differences in diet. Humans have depleted phylotypes in gut microbiome. Some bacteria co-diversify with host, others do not.
+\item E. Davenport found that the bacteria centralized in networks representation of microbiome are not necessarily the ones that correlate best with disease
+\item M. Lynch notes that multicellular eukaryotes see a positive correlation between genome size and mutation rates. Across all domains of life, genome-wide mutation and indel rates (from protein coding genes) negtaively correlate with $N_e$. Error rates are magnified in polymerases involved in fewer nucleotide transactions, usually used only in times of stress. Nearly universal selection pressure to GC, but mechanism is still unknown. Errors are much more frequent at transcription level
+\item P. Shah argues that evolved strains from Lenski long term evolution of E. coli evolved in terms of mRNA abundance, but differences are also buffered by changes in transition rate. Codon specific ribosome densities are relatively unchanged across lineages
+\item B. Gibson shows that mutation accumulation rate varies by factor of roughly 4000 across different bacterial lineages. However, mutation rate per generation and accumulation rate show little correlation, but data is sparse. 
+\item O. Tenaillon argues that genetic draft plays a large role in evolution, citing the Lenski experiment as an example of significant genetic draft.
+\item J. Zhang notes a 2016 Science paper (Li et al.) that desribed a highly-repeatable method for estimating fitness landscapes (Results correlate well with conventional methods). Negative epistasis are more prevalent than positive epistasis. In yeast, relative fitnesses and epistasis change proprotionally to changes in environment. Seems to be linear relationship.    
+\end{itemize}
+
+Note on the relationship between mRNA concentration, protein concentration, and $\phi$
+\begin{align*}
+\text{[P]} &= \frac{\text[mRNA] * k}{d} \\
+k &= \text{translation efficiency (can be estimated from ribosome  footprinting)} \\
+d &= \text{degradation rate of protein}\\
+\phi &\propto \text{[mRNA]} * k = \text{[P]} * d 
+\end{align*}
+
+\experiment{7-18-2017}
+\includepdf[pages=-]{Cbescii_results/cbescii_expression_plots.pdf}
+
+Results above show protein abundance measurements for C. bescii taken from Bob's lab and $\phi$ estimates from ROC-SEMPPR. In all cases (control and mutant) the Spearman correlation coefficient is approximately -0.23. The negative correlation suggests ROC-SEMPPR is not accurately identifying the high and low expression genes.
+
 \bibliographystyle{acm}
 \bibliography{papers}{}
 \end{document}

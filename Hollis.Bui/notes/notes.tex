@@ -3019,7 +3019,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
 \begin{itemize}
     \item Decided to go ahead and re-add parts of the old read/writeRFP functions into the current code for simulated genomes.
     \item Planned implentation: The current writeRFPData function, when its optional simulated boolean is set to true, branches into a fairly different way of writing the RFP data, adapted from the old writeRFP function.
-    \item Meanwhile, reuse the old readRFP functon as readSimulatedGenomeFromPAModel.
+    \item Meanwhile, reuse the old read\sep RFP functon as read\sep Simulated\sep Genome\sep From\sep PA\sep Model.
     \item Also renamed RFPCategory to RFPCountColumn in the .cpp code.
     \item Left off the day with writeRFP(simulated) written, almost done with readSimulatedGenomeFromPAModel. Still need to test all this of course.
     \item Motivation for doing this is to get one step closer to having simulation re-fixed for Denizhan to then be able to modify for PANSE and then let him be busy writing that function.
@@ -3032,20 +3032,203 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item 2:00 - 5:00 -- Looked over some stuff with Denizhan on simulating genomes, preparing him for the process to run models.
 \end{itemize}
 
+\labday{June 29, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:00 - 4:00 -- Have hours recorded here for some reason in a notepad document. I think I worked on writing the read/write RFP functions? Will not put down hours just in case I was wrong. -- Hollis, July 10, 2017.
+\end{itemize}
+
 \labday{June 30, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
-    \item 9:30 - 1:40 -- Finished up most of readSimulatedGenomeFromPAModel and writeRFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
+    \item 9:30 - 1:40 -- Finished up most of read\sep Simulated\sep Genome\sep From\sep PA\sep Model and write\sep RFP (simulated). Still need to test them. Requires some design decisions; tasked to Denizhan.
+    \item 1:40 - 3:30 -- Talk with Dr. Gilchrist.
+    \item 3:30 - 4:30 -- Began looking at R script to apply changes.
 \end{itemize}
 
 \experiment{RFP Structure}
 \begin{itemize}
     \item Again, the differences between simulated data and non-simulated data are annoying.
-    \item In the PA Model, summed RFPs are generated without regard to position, so the current readSimulatedGenomeFromPAModel format cleanly gets the GeneID,Codon,Codon\_Count,RFPCount (for only a single category; intended).
+    \item In the PA Model, summed RFPs are generated without regard to position, so the current read\sep Simulated\sep Genome\sep From\sep PA\sep Model format cleanly gets the Gene\sep ID\sep ,\sep Codon\sep ,\sep Codon\sep \_\sep Count\sep ,\sep RFP\sep Count (for only a single category; intended).
     \item TODO is to make the header dynamic (so instead of RFPCount, it says long or short) as an RFPCount category. This will be the same single category specified on model creation.
     \item Bigger problem is ensuring (unit-testing) that the read and write of simulated data is correct. Probably easiest to compare the stored number of codons per codon is equal and their sumRFPCouns are equal. Still a fairly lengthy project and Denizhan was looking for some work (and this advances his own work with simulating PANSE later), so I described the problem to him as a potential TODO.
     \item Pushed a change where the functions are implemented, but untested. Looking at output files at a glance shows that they are working correctly, but need to test in practice with unit testing techniques.
+\end{itemize}
+
+\experiment{Talk with Dr. Gilchrist}
+\begin{itemize}
+    \item Unfortunately a lot of the instructions were missed. I need to keep the phi in mind, but my test run on Sunday just used the code leftover from before (mystery phi source from Jeremy's old files).
+    \item TODO: use 009670-6.tsv from the 2015 Gilchrist Paper as a source for s.phi to be compared with Psi. Recall: When we initialize the genome and request files, Phi is one of the files requested in the script I hacked up.
+    \item \textbf{Need} to be better about recording this information. Sunday's notes were lost as well during the great github disaster.
+\end{itemize}
+
+\labday{July 6, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:30 - 3:00 -- Talked with Denizhan about his tasks, reviewed material from past few days.
+    \item 4:00 - 6:00 -- Setup for R scripting. Moved files to this directory for more transparency. Folder named June2017PAModelPop, found in RunnableScriptsAndData.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item The .tsv file may need to be processed. Check if R supports reading .tsv files, otherwise write a script to organize the data in a readable format.
+    \item Ended the day still a bit confused on how to do some of the R scripting to get data columns. Continuing to read documentation tomorrow.
+\end{itemize}
+
+\labday{July 7, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:00 -- Looked up R documentation for scripting the Pop data. Lots of discussion with Denizhan on how to proceed with testing simulated genome.
+    \item 1:00 - 2:30 -- Talk with Dr. Gilchrist.
+    \item 2:30 - 5:00 -- Sorted notes and began scripting to preprocess data for actual R scripting.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Found the command to read a table in .tsv format.
+\end{itemize}
+
+\experiment{Talk with Dr. Gilchrist}
+\begin{itemize}
+    \item Among other notes and TODOs, rename in PA/PANSEParameter initMutationSelectionCategories to initAlphaLambdaCategories.
+    \item TODO: Ask Cedric if it'd be ok to rename mixtureDefinition's delM and delEta variables to something broader like category1 and category2.
+    \item I should be using the initializeSynthesisRate (by list) function after using readPhiValues to read in the .tsv file.
+    \item Unfortunately this function does not account for .tsv format (instead assumes .csv format). Will have to remove the handy R function to read .tsv and instead pre-process.
+    \item TODO: instead of using the Pop data file I had before, just sample 500 genes, and maybe just a subset of the codons too (say, 20). More scripting but this has been written before.
+\end{itemize}
+
+\labday{July 9, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:00 - 4:00 -- Worked from home, scripted a quick reordering of the .tsv file after recovering old scripts.
+    \item 4:00 - 6:00 -- Recompiling the package leads to errors; suspect it's related to Denizhan's changes on Friday adding Cmake stuff. Spent time debugging.
+\end{itemize}
+
+\labday{July 10, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:00 - 1:00 -- Reviewed Denizhan's changes from Friday and did some style changes and corrections.
+    \item 1:45 - 2:10 -- Compiled hours for timesheet.
+    \item 2:10 - 4:30 -- Talked with Denizhan some more about simulateGenome for the PAModel working for R; scripting for file processing.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Renamed a helper function (testEqualityGenome) to testGenomeSimulatedPAEqualityHelper. I think that while this name is long, it's descriptive (and only used in unit testing anyway); I think we will also need a variant of this function when we test equality of PANSE.
+    \item Asked Cedric about some of the naming decisions. A lot of it is based on inheritance from ROC Model, so the code works for now but with inherited names. TODO: Ask Dr. Gilchrist for ideas on renaming, if he thinks it's even necessary. Probably not?
+\end{itemize}
+
+\experiment{Misc. Package Maintenance}
+\begin{itemize}
+    \item Fixed some of the .Rbuildignore and .gitignore problems from Cmake (including extraneous files).
+    \item While reviewing package contents, re-discovered the testPAModel.R function I wrote a while back for automated testing of the then-called RFPModel!
+    \item This file had actually been disabled because Gauley had failed to generate the same results, so to ensure the package checks passed on all systems (Gauley was the only holdout), I had commented out the automated testing pass.
+    \item It may be much simpler to re-enable this now that Gauley should work and let me see if the PAModel works according to known codon translation rates.
+    \item Now going to spend some time updating this to new standards (such as adding in equality checks); scripting to change .csv file to PA format again.
+\end{itemize}
+
+\labday{July 11, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:45 - 2:30 -- Looked over old testPAModel.R code; talked to Alex about how to include Phi information into the parameter object in R.
+    \item 2:30 - 3:20 -- Talk with Dr. Gilchrist; cleared up difference between phi and psi and how it will affect the framework in the future, and reviewed current progress and TODOs.
+    \item 3:20 - 4:50 -- Discussed some of the future changes to be made to the framework with Denizhan. Looked over the documentation to see how phi (psi) is handled when read in and initialized.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Shelving testPAModel.R stuff for now. I think it might be better to get the original R script working that Dr. Gilchrist requested.
+    \item Bright side is that the same Perl scripting code used to create those files can be modified to create the 500-gene sample for the script.
+    \item Alex also pointed to a simpler to way insert Phi data into the model: use Sphi\_init after all, which should work if I read it into a table for the Parameter initialization.
+    \item Need to remember to \enquote{align} the phi values and which geneID it was related to with the same geneID order of the rfpCount file.
+\end{itemize}
+
+\labday{July 12, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:45 - 1:45 -- Talked with Cedric about how to use Phi initialization; wrote up notes and push a change to save progress.
+    \item 2:00 - 5:00 -- Spent time processing the Phi data via Perl scripting; time split between reading documentation and writing/testing scripting code results. Because the phi data included different geneIDs than used in Pop's data, I had to isolate only the valid geneIDs and get those phi values. Perl scripting is done and results can be found in Runnable\sep Scripts\sep And\sep Data\sep /\sep June\sep 2017\sep PA\sep Model\sep Pop\sep /\sep testing\sep In\sep /\sep gene\sep ID\sep Phi\sep Mean\sep .\sep csv.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item Cedric pointed out that Sphi\_init is actually the standard deviation of Phi, which isn't what I should be trying to modify.
+    \item Instead, there's a different variable in the initialization of the parameter object, initial.expression.values, that I can input the phi values into.
+    \item I will be using the mean of the phi values in the .tsv file.
+    \item TODO tomorrow is to now use this .csv file I created with just the second column of data as the phi initialization.
+    \item Also need to get only a random subset of this data. The geneIDPhiMean.csv file has 2600 genes, missing about 40 from Pop's number of genes.
+    \item Of course, once those random geneIDs are minimized, I'll also have to get the same subset for the rfpCount file.
+    \item Only once I cut out most of these genes can I run my actual R script plotting data.
+\end{itemize}
+
+\labday{June 13, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 2:00 - 5:00 -- Shorter day spent trying to script the Pop data, randomize it, etc. discussion with Denizhan about the Genome model again.
+\end{itemize}
+
+\labday{June 14, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 2:00 -- Finally nailed down the bugs with randomizing data. Now have a file, PopPADataRand500.csv, which contains the subset of PopPAData that contains only gene data from a set of 500 genes (listed in randNames.out).
+    \item 2:00 - 4:30 -- Also had to re-organize the randGeneIDPhiMean.csv file, which had originally randomized the geneIDPhiMean.csv file, but in a random order unlike the subset of PopPAData. Did this by simply alphabetically ordering both files keyed on GeneID.
+\end{itemize}
+
+\labday{June 17, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 1:30 -- Discussion with Denizhan and Cedric; compiled Dr. Gilchrist's email from Friday into Latex for convenience.
+    \item 1:30 - 5:30 -- Started writing, updating, testing the R script with the new files for initializing Phi and Pop's data.
+\end{itemize}
+
+\experiment{RFP Structure}
+\begin{itemize}
+    \item Cedric says that the std\_csp vector that we use for PA and PANSE model is deprecated; we should be using a 2-by-2 covariance matrix, similar to what ROC does. Far-flung TODO for now.
+\end{itemize}
+
+\labday{June 18, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:00 - 10:00 -- Working from home, rebuilt packages and began MCMC with my R script on 1000 genes.
+    \item 1:30 - 3:30 -- Finally remembered to push notes. The MCMC on 1000 sample, 500 genes completed successfully. Talked with Denizhan about how to run his own R script, and also updated README.md on confusing Perl scripts.
+    \item 3:30 - 5:00 -- runPAModelScript2017.R seems to have most of the old code still working, but currently running into an issue where the Alpha and LambdaPrime values yield infinity. Will check more later.
+\end{itemize}
+
+\labday{June 19, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1:30 - 3:00 -- Continuing debugging of my R script.
+    \item 3:00 - 5:00 -- Switched to looking at C++ code to see when things are changed.
+    \item 5:00 - 6:00 -- Talked with Denizhan about possible TODOs for the project overall.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item After running a couple of other 1000-sample, 500 gene runs, still having trouble seeing why both alpha and lambda values are zero.
+    \item Going to start looking back into the C code to see if the calculations are off from weird input values.
+    \item The initial.expression.values (whether I have Dr. Gilchrist's phi values or not initialized) do not affect how alpha/lambda go to infinity.
+    \item Also cannot see the trace plots at all for these values.
+    \item I can, however, access the synthesisRatePosteriorMean, so the model isn't completely broken.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item I \textbf{need} to talk to Cedric for help on debugging this infinite return value on my codon-specific (Alpha and LambdaPrime) values. Finished day not finding a solution.
+    \item Denizhan and I may also want to talk about the models' destructors and necessity of copy constructors (rule of three in c++).
+    \item Mentioned to Denizhan a long-term goal is automated testing on validity of the models -- see testMCMCROC.R, an old file that currently checks just the logPosterior to see if it's accurate with a set seed and hardcoded values known to be true. Ideally we expand this further, and make a version for each model. Far-off idea.
 \end{itemize}
 
 \end{document}

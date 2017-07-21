@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+%\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\title{}
+\author{}
+\date{}
+
+\pdfinfo{%
+  /Title    ()
+  /Author   ()
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+
+\begin{document}
+In the past we've run into this problem when we exponentiate large
+negative LLik values, such as when we need to do a summation of the
+probability of the set of possible outcomes.
+
+For example, imagine $p_i = \exp[\LLik_i]/(\sum_j \exp[\LLik_j])$. If
+the $\LLik$ values are all < -312, exponentiating these terms will lead to
+0s and the sum of these 0s will also be 0.
+
+This is a numerical issue, not a fundamental problem with the model.
+The best solution for this is to define
+
+        $\LLik_\max = \max(\vec{\LLik})$
+
+and then rescale $\LLik$ terms by subtracting off $\LLik_\max$. Let
+$\LLik_i^\prime$ represent the rescaled terms, such that $\LLik_i^\prime
+= \LLik_i - \LLik_\max$.  They key result is that one of these terms
+$\LLik_i&^\prime$ term will always evaluate to 1 when exponentiated and
+the rest will always evaluate to $< 1$ when exponentiated.
+
+Why does this work?  Well,  subtracting a constant term from all the
+exponents is equvalent to dividing all of them by $\exp[\LLik_max]$ and
+if we apply this division to both the numerator and denominator terms of
+$p_i$, its value will be unchanged (but evaluatable). That is,
+
+$p_i = \exp[\LLik_i]/(\sum_j \exp[\LLik_j])
+     = \exp[\LLik_i^\prime]/(\sum_j \exp[\LLik_j^\prime])
+$
+
+\end{document}

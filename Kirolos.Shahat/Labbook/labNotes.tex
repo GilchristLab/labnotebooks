@@ -368,7 +368,57 @@
 		
 	\end{enumerate}
 \end{itemize}
+
+%-----------------------------------------
+
+\labday{Monday, July 10 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue going through MCMC code
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item (x-mean)/sd = standard score
+	\item got to calculateLogLikelihoodRatioPerGroupingPerCategory method in FONSEModel.cpp, start there next time.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Tuesday, July 11 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Begin analysis of calculateLogLikelihoodRatioPerGroupingPerCategory method in FONSEModel.cpp
+	\item Talk to Dr. Gilchrist if both of us have time.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item Essentially the calculateLogLikelihoodRatioPerGroupingPerCategory method just does variable assignments and then calls calculateLogLikelihoodRatioPerAA which does the calculations. Will begin analysis.  Note: Selection gets updated from getParameterForCategory by reference.
+	\item calculateLogLikelihoodRatioPerAA begins by getting the index of the smallest selection. getCodonPositions seems to be a recursive definition and is called within a loop. I can definitely see why this program is computationally loaded. 
+	\item Didn't get to meet with Dr. Gilchrist, he didn't show up and I have to leave to do reading before class. Try to meet with him tomorrow as well as continuing to go through calculateLogLikelihoodRatioPerAA beginning at the second for loop in the function.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Thursday, July 13 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Continue analysis of calculateLogLikelihoodRatioPerAA method in FONSEModel.cpp
+	\item Talk to Dr. Gilchrist if both of us have time.
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+\begin{itemize}
+	\item calculating the loglikelihood requires that we first get the start and stop location for the specific grouping, getting the position per aa location, iterating through those positions, and then calling calculateLogCodonProbabilityVector. This is seems like a rabbit hole but I feel like I'm getting close to the base.
+	\item calculateLogCodonProbabilityVector has equations in the comments and one thing that is confusing about it is that the left hand side has a log while the right hand side does not. 
+	\item Spoke with Dr. Gilchrist, he explained the logarithmic approach used and why it works, some probability and it's relation to likelihood, and clarified some of my goals.
+	\item Asked me to figure out how much I will be able to show up in the fall and to figure that own within the next couple of weeks.
+	\item Goal for next time: Continue going through code in calculateLogCodonProbabilityVector.
+\end{itemize}
 %----------------------------------------------------------------------------------------
+
+
 
 \printbibliography
 
