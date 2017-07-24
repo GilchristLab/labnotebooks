@@ -1,0 +1,10 @@
+\glossaryentry{v1.0> =General:>first public release}{5}
+\glossaryentry{v1.1> =General:>added lists in optional argument, which required reemplementing some of the old stuff}{5}
+\glossaryentry{v1.1> =General:>removed hardwired KOMA option openany}{5}
+\glossaryentry{v1.0a> =General:>don't load hyperref automatically, only execute compatibility definitions if it \emph  {is} loaded}{6}
+\glossaryentry{v1.0a> =General:>removed wrong index closing for subexperiments}{14}
+\glossaryentry{v1.1a> =General:>Let footnote numbering be reset every day}{15}
+\glossaryentry{v1.0a> =General:>don't load hyperref automatically, only execute compatibility definitions if it \emph  {is} loaded}{23}
+\glossaryentry{v1.1a> =General:>Set footnote to 0 at the beginning of the appendix and backmatter}{24}
+\glossaryentry{v1.0a> =General:>don't load hyperref automatically, only execute compatibility definitions if it \emph  {is} loaded}{25}
+\glossaryentry{v1.0a> =General:>fix subfigure bug}{25}
