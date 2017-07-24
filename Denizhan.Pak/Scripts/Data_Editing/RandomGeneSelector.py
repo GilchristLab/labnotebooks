@@ -75,7 +75,7 @@ if numGenes == -1 or numGenes >= len(genes_rfp):
 genes = random.sample(genes_rfp, numGenes)
 
 #New File names
-rfpfile = "rfp_file_" + str(numpositions) + "positions_" + str(numGenes)+ "genes.csv"
+rfpfile = "rfp_file_" + str(numPositions) + "positions_" + str(numGenes)+ "genes.csv"
 phifile = "phi_file_" + str(numPositions) + "positions_" + str(numGenes)+ "genes.csv"
 
 #Write RFP file
