@@ -3169,14 +3169,14 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Only once I cut out most of these genes can I run my actual R script plotting data.
 \end{itemize}
 
-\labday{June 13, 2017}
+\labday{July 13, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 2:00 - 5:00 -- Shorter day spent trying to script the Pop data, randomize it, etc. discussion with Denizhan about the Genome model again.
 \end{itemize}
 
-\labday{June 14, 2017}
+\labday{July 14, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -3184,7 +3184,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item 2:00 - 4:30 -- Also had to re-organize the randGeneIDPhiMean.csv file, which had originally randomized the geneIDPhiMean.csv file, but in a random order unlike the subset of PopPAData. Did this by simply alphabetically ordering both files keyed on GeneID.
 \end{itemize}
 
-\labday{June 17, 2017}
+\labday{July 17, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -3197,7 +3197,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item Cedric says that the std\_csp vector that we use for PA and PANSE model is deprecated; we should be using a 2-by-2 covariance matrix, similar to what ROC does. Far-flung TODO for now.
 \end{itemize}
 
-\labday{June 18, 2017}
+\labday{July 18, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -3206,7 +3206,7 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item 3:30 - 5:00 -- runPAModelScript2017.R seems to have most of the old code still working, but currently running into an issue where the Alpha and LambdaPrime values yield infinity. Will check more later.
 \end{itemize}
 
-\labday{June 19, 2017}
+\labday{July 19, 2017}
 
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -3229,6 +3229,78 @@ Agenda for today: Finalizing openMP issue, planning for tomorrow's simulation ru
     \item I \textbf{need} to talk to Cedric for help on debugging this infinite return value on my codon-specific (Alpha and LambdaPrime) values. Finished day not finding a solution.
     \item Denizhan and I may also want to talk about the models' destructors and necessity of copy constructors (rule of three in c++).
     \item Mentioned to Denizhan a long-term goal is automated testing on validity of the models -- see testMCMCROC.R, an old file that currently checks just the logPosterior to see if it's accurate with a set seed and hardcoded values known to be true. Ideally we expand this further, and make a version for each model. Far-off idea.
+\end{itemize}
+
+\labday{July 20, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:00 - 5:00 -- Working from home, made another notes file from some of the Gilchrist meeting notes.
+\end{itemize}
+
+\labday{July 21, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 2:00 -- Helped Denizhan debug some of his issues with the R script. Pushed a change to the main repo after fixing merge conflict. 
+    \item 2:00 - 4:00 -- Exposed setGroupList() to R; now we can isolate certain codons when running MCMC instead of manually changing scripts.
+    \item 4:00 - 5:00 -- Gilchrist meeting.
+    \item 5:00 - 6:15 -- Wrote up notes after meeting with Dr. Gilchrist.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item Floats: There are some Float data types in C++ instead of Doubles. Cedric said they were there to save space since we would not need the precision when outputting data (but we do want this precision interally as Doubles). Need to commentate this and follow this same idea for any remaining variables to avoid confusion.
+    \item Rule-Of-Three (C++) -- several comments everywhere in each .cpp file. Cedric says it's not a bad idea to have copy assignments/copy constructors and follow Rule of Three. Note that we mostly pass pointers to avoid the copy constructor (example: Parameter is a pointer). This does mean that Model needs a constructor to destroy the parameter object when it is destroyed.
+    \item Note: According to /url{https://stackoverflow.com/questions/14184341/c-constructor-destructor-inheritance}, we don't need to reference Model.cpp's constructor/destructor in subclasses.
+    \item TODO: Test framework still works after I try to delete Parameter in a given Model object upon calling the destructor. Do this AFTER the runs with Dr. Gilchrist.
+\end{itemize}
+
+\labday{July 22, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:00 - 12:30 -- Working at home: Running the entire genome still yields infinity values for Alpha and Lambda Prime. Results are in the June2017PAModelPop directory under OutputFullDataPop. Spent a couple of hours looking at C++ code some more.
+    \item 2:00 - 5:00 -- Started writing and compiling further notes and TODOs for the project after I leave for future researchers' benefit.
+\end{itemize}
+
+\experiment{R Scripting}
+I am attempting to run my script with the full genome (~4600 genes) and 1000 samples.
+
+\labday{July 23, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:45 - 1:00 -- Spent about an hour trying to get Gauley to remotely run my R script. Also getting infinity on that machine.
+    \item 1:00 - 4:00 -- Further note-writing and compilation of TODOs.
+\end{itemize}
+
+\experiment{TODO}
+\begin{itemize}
+    \item Consider setting up Newton to run the R script. Gauley seemed a bit slow still.
+\end{itemize}
+
+\labday{July 24, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 2:00 -- Spent some time explaining how my model testing is going with Denizhan. He suggested to run the script with just one gene this time, too. Began writing this version of the script.
+    \item 2:00 - 5:00 -- Compiled lab hours, further discussion on thing to do with the PANSE model moving forward. Explained the conversion of phi to psi to Denizhan.
+\end{itemize}
+
+\experiment{R Scripting}
+Now considering running a version of the script that does not include initialized psi (phi) values but with the full genome. Might also "fix" the infinity error.
+
+\labday{July 25, 2017}
+\begin{itemize}
+    \item 1:00 - 3:00 -- Went over some time-saving techniques with Denizhan on workflow (Travis.ci setup, github sshing, ssh setup with remotes such as Gauley).
+    \item 3:00 - -- Even more attempts to debug the script.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item I'm beginning to suspect that the infinity output may be due to a non-input error.
+    \item Besides the C++ code, I should check the R code to see if I'm even outputting "valid" function arguments or whatever. Maybe I am printing non-existent values which default to infinity?
 \end{itemize}
 
 \end{document}
