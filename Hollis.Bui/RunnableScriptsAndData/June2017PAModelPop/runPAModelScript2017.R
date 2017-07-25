@@ -1,21 +1,21 @@
 library(testthat)
 library(ribModel)
 
-#test_that("PA Model testing simulated versus actual accuracy", {
-  # Skip unless manually run or changed
-  #if (F)
-#    skip("PA Model testing is optional.")
-  
   #####################
   ### Initial Setup ###
   #####################
 
-  # Test with true Pop data
-  fileName = file.path("TestingIn", "orderedPopPADataRand500.csv")
-  fileTable = file.path("TestingIn", "codonTranslationRates.csv")
-  filePhiValues = file.path("TestingIn", "orderedRandGeneIDPhiMean.csv")
-  #fileTrueAlphaValues = file.path("TestingIn", "JeremyRFPAlphaValues.csv")
-  #fileTrueLambdaPrimeValues = file.path("TestingIn", "JeremyRFPLambdaPrimeValues.csv")
+  # Define input and output directories here.
+  testingIn = "TestingIn"
+  testingOut = "TestingOut"
+
+  # Define: Pop Data subset, true Pop codon translation rates, Gilchrist Phi means
+  fileName = file.path(testingIn, "orderedPopPADataRand500.csv")
+  fileTable = file.path(testingIn, "codonTranslationRates.csv")
+  filePhiValues = file.path(testingIn, "orderedRandGeneIDPhiMean.csv")
+  
+  #fileTrueAlphaValues = file.path(testingIn, "JeremyRFPAlphaValues.csv")
+  #fileTrueLambdaPrimeValues = file.path(testingIn, "JeremyRFPLambdaPrimeValues.csv")
   
   # Ensure the input files exist.
   test_that("file exists: orderedPopPADataRand500.csv", {
@@ -40,7 +40,7 @@ library(ribModel)
   
   genome <- initializeGenomeObject(file = fileName, fasta = FALSE)
   
-  phiValues <- read.table(file = filePhiValues, sep = ',', header = TRUE)
+  phiValues <- read.csv(file = filePhiValues, header = TRUE)
   phiMean <- phiValues[,2]
   sphi_init <- c(2)
   numMixtures <- 1
@@ -49,18 +49,20 @@ library(ribModel)
   
   parameter <- initializeParameterObject(genome=genome, sphi=sphi_init, num.mixtures=numMixtures, gene.assignment=geneAssignment, initial.expression.values=phiMean, model="PA", split.serine=TRUE, mixture.definition=mixDef)
   #parameter <- initializeParameterObject(model="RFP", restart.file="30restartFile.rst")
-  
+
   samples <- 1000
   thinning <- 10
-  adaptiveWidth <- 10
+  adaptiveWidth <- 10 # Gilchrist comment -- seems large
   mcmc <- initializeMCMCObject(samples = samples, thinning = thinning, adaptive.width = adaptiveWidth, 
                                est.expression=TRUE, est.csp=TRUE, est.hyper=TRUE)
   
   model <- initializeModelObject(parameter=parameter, model="PA", rfp.count.column=1)
-  setRestartSettings(mcmc, "restartPAModelScript2017File.rst", adaptiveWidth, TRUE)
+  
+  restartFileString = file.path(testingOut, "restartFiles", "restartPAModelScript2017File")
+  setRestartSettings(mcmc, restartFileString, adaptiveWidth, TRUE)
   
   logFileString <- paste0("runPAModelScript2017Log", samples, ".txt")
-  outFile = file.path("TestingOut", logFileString)
+  outFile = file.path(testingOut, logFileString)
   
   sink(outFile)
   system.time(
@@ -74,11 +76,11 @@ library(ribModel)
   
   # plots different aspects of trace
   trace <- parameter$getTraceObject()
-  writeParameterObject(parameter, file = file.path("TestingOut", "PAModelObject2017.Rdat"))
-  writeMCMCObject(mcmc, file = file.path("TestingOut", "MCMCPAModel2017.Rdat"))
+  writeParameterObject(parameter, file = file.path(testingOut, "PAModelObject2017.Rdat"))
+  writeMCMCObject(mcmc, file = file.path(testingOut, "MCMCPAModel2017.Rdat"))
   
   
-  pdf(file.path("TestingOut", "PA_Model2017_allUnique_startCSP_startPhi_adaptSphi_true.pdf"))
+  pdf(file.path(testingOut, "PA_Model2017_allUnique_startCSP_startPhi_adaptSphi_true.pdf"))
   plot(mcmc, main = "MCMC Trace") #plots the whole loglikelihood trace
   
   
@@ -108,7 +110,7 @@ library(ribModel)
   ### Output File 2: CSP Traces ###
   #################################
   
-  pdf(file.path("TestingOut", "CSP_Values_PA_Model2017.pdf"), width = 11, height = 20)
+  pdf(file.path(testingOut, "CSP_Values_PA_Model2017.pdf"), width = 11, height = 20)
   #plot(trace, what = "Expression", geneIndex = 905) #used to make sure gene stabalized, not really needed now
   plot(trace, what = "Alpha", mixture = 1)
   plot(trace, what = "LambdaPrime", mixture = 1)
@@ -120,7 +122,7 @@ library(ribModel)
   ### Output File 3 ###
   #####################
   
-  pdf(file.path("TestingOut", "PAModel2017ConfidenceIntervalsForAlphaAndLambdaPrime.pdf"))
+  pdf(file.path(testingOut, "PAModel2017ConfidenceIntervalsForAlphaAndLambdaPrime.pdf"))
 
   #eventually this will need loop over all categories if there are multiple mixtures
   cat <- 1
@@ -266,16 +268,16 @@ library(ribModel)
   # Will write csv files based off posterior for alpha, lambda prime, and psi
   m <- matrix(c(codonList[-c(62,63,64)], alphaList), ncol = 2, byrow = FALSE)
   colnames(m) <- c("Codon", "Alpha")
-  write.csv(m, file.path("TestingOut", "PAModel2017AlphaValues.csv"), quote = F, sep = ",", row.names = F)
+  write.csv(m, file.path(testingOut, "PAModel2017AlphaValues.csv"), quote = F, row.names = F)
   
   
   m <- matrix(c(codonList[-c(62,63,64)], lambdaPrimeList), ncol = 2, byrow = FALSE)
   colnames(m) <- c("Codon", "LambdaPrime")
-  write.table(m, file.path("TestingOut", "PAModel2017LambdaPrimeValues.csv"), quote = F, sep = ",", row.names = F)
+  write.csv(m, file.path(testingOut, "PAModel2017LambdaPrimeValues.csv"), quote = F, row.names = F)
   
   
   # TODO: Make a third column here for Phi values, probably.
   m <- matrix(c(ids, psiList), ncol = 2, byrow = FALSE)
   colnames(m) <- c("Gene", "PsiValue")
-  write.table(m, file.path("TestingOut", "PAModel2017PsiValues.csv"), quote = F, sep = ",", row.names = F)
+  write.csv(m, file.path(testingOut, "PAModel2017PsiValues.csv"), quote = F, row.names = F)
 #})
