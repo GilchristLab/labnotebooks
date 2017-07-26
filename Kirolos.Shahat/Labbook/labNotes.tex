@@ -365,7 +365,6 @@
 		\item init a FONSE parameter object, goes to initParameter set in parameter.cpp and then initFONSEparameterset and then calculates SCUO(syn. codon usage order)
 		\item init MCMC object does nothing special
 		\item runMCMC which calls run and then run calls varyinitialconditions in MCMCAlgorithm.cpp, that is where I will pick up next time.
-		
 	\end{enumerate}
 \end{itemize}
 
@@ -415,6 +414,33 @@
 	\item Spoke with Dr. Gilchrist, he explained the logarithmic approach used and why it works, some probability and it's relation to likelihood, and clarified some of my goals.
 	\item Asked me to figure out how much I will be able to show up in the fall and to figure that own within the next couple of weeks.
 	\item Goal for next time: Continue going through code in calculateLogCodonProbabilityVector.
+\end{itemize}
+
+%-----------------------------------------
+
+\labday{Wednesday, July 26 2017}
+\experiment{Goals for today}
+\begin{itemize}
+	\item Go through calculateLogCodonProbabilityVector
+\end{itemize}
+
+\experiment{Current Progress and Notes}
+
+\begin{itemize}
+	\item For some reason the calculation in this method is mostly going into calculating the denominator which is being subtracted off of the original calculation to get the codon probability. Not sure I fully get that but that's fine. The method updates the codonProb vector with the proper values.
+
+	\item Returning to calculateLogLikelihoodRatioPerAA, the sum of the codon probabilities is the loglikelihood.
+
+	\item Returning to calculateLogLikelihoodRatioPerGroupingPerCategory, calculateLogLikelihoodRatioPerAA is called twice, once for the likelihood and another for the proposed likelihood. After going through all of the genes, the acceptance ratio is the difference of the likelihood from the proposed likelihood.
+
+	\item Going back to acceptRejectCodonSpecificParameter in MCMCAlgorithm.cpp, the method updates posterior, likelihoodTrace and posteriorTrace with elements from the acceptanceRatioForAllMixtures vector but it seems that it is currently just updating them with '0.0'. I'm assuming that in further iterations this vector changes to where it's not always '0.0' but we shall see.
+
+	\item Going back to the run method in MCMCAlgorithm.cpp, the method sometimes calls adaptCodonSpecificParameterProposalWidth from Parameter.cpp which is very math heavy. Will begin analysis of this method.
+
+	\item Spoke with Dr. Gilchrist and he suggested that my goal be shifted to explaining the parameters that are given and then focus on fitting simulated and real genome data and comparing them to the values that I am supposed to be getting to see if the model is doing well. That will be my goal for the remainder of my time. He also suggested that documentation of the current code for future ease of understanding would be very good and beneficial.
+
+	\item Goal for next time: generate simulated data will be the main goal but afterwards I will continue to do the tasks given to me by Dr. Gilchrist.
+
 \end{itemize}
 %----------------------------------------------------------------------------------------
 
