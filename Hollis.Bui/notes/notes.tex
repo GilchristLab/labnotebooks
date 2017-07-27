@@ -3292,15 +3292,50 @@ I am attempting to run my script with the full genome (~4600 genes) and 1000 sam
 Now considering running a version of the script that does not include initialized psi (phi) values but with the full genome. Might also "fix" the infinity error.
 
 \labday{July 25, 2017}
+
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 1:00 - 3:00 -- Went over some time-saving techniques with Denizhan on workflow (Travis.ci setup, github sshing, ssh setup with remotes such as Gauley).
-    \item 3:00 - -- Even more attempts to debug the script.
+    \item 3:00 - 5:30 -- Even more attempts to debug the script. Created another subset of the PopPAData that uses only one gene (a single one) and tested it in R to no new results.
 \end{itemize}
 
 \experiment{R Scripting}
 \begin{itemize}
     \item I'm beginning to suspect that the infinity output may be due to a non-input error.
     \item Besides the C++ code, I should check the R code to see if I'm even outputting "valid" function arguments or whatever. Maybe I am printing non-existent values which default to infinity?
+    \item Denizhan also suggested I try running my script with just one gene from Pop's data to see if the error is caused over time. I tried this to no new results (1000 samples, no phi initialization).
+\end{itemize}
+
+\labday{July 26, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:00 - 11:00; 12:00 - 2:00 -- Slog of looking over results some more, this time based on a C++ run of the MCMC. Still results in finding infinity values.
+    \item 2:00 - 5:00 -- Switched over to writing more notes, TODOs, and minor clarifications of the C++ code where needed.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item In main.cpp, we can run a C++ -based run of the MCMC, getting the same results but lacking R-specific plotting functionality.
+    \item Running this with the one-gene subset from Pop's data (and no phi initialization).
+    \item Switched over to writing up more TODOs on the project looking ahead for Denizhan. Today I focused more on the C-side of the code. Pushed a couple of these changes.
+\end{itemize}
+
+\labday{July 27, 2017}
+
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12:00 - 2:40 -- Fixed a minor bug in my branch of the repo from forgetting to rename an R-specific variable that was affected by a C-specific variable rename. Misc. similar documenation and code cleanup.
+    \item 2:40 - 5:00 -- Talk with Dr. Gilchrist on debugging, later attempts to debug.
+    \item 5:00 - 6:00 -- In the midst of writing notes, discussed with Denizhan his progress on PA(NSE) and how his script works yet mine doesn't -- he's running PANSE with Psi=Phi so it should be equivalent to PA. Wrote notes, pushed labbook.
+\end{itemize}
+
+\experiment{R Scripting}
+\begin{itemize}
+    \item More thoughts on debugging:
+    \item Denizhan suggested it might have been a recent change I made to my own branch (not pushed) where I cast doubles to floats, which might affect the conversion (note: we already do this conversion, just without explicit casting). Rerunning the script on one gene did not change anything.
+    \item Denizhan also sent me his script on PANSE which did get Alpha and Lambda Prime values. Might be useful to use the same input since, if working correctly, PANSE = PA for now.
+    \item  Dr. Gilchrist suggested I output the literal numeric trace for Alpha and Lambda to nail down the initial value and when it diverges to infinity. Both start at 1.0 for codon "AGT". Of course, since they diverge to infinity, this is why it's impossible to plot these traces.
 \end{itemize}
 
 \end{document}
