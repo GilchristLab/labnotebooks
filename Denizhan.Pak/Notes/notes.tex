@@ -686,4 +686,32 @@ Have written pseudo code for the main loops will continue to look for efficiency
 Noticed a flaw in my randomized Simulated genome selection script, the likelihood of rfp observed was heavier for earlier positions rewrote function to fix this.
 \experiment{Phi-Psi Functions}
 Due to their use in likelihood calulcation and in the simulate genome function as discussed with Hollis, I am implementing conversion functions between the two values
+\labday{July 26, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:30 - 12: Reading Results from last MCMC Run
+    \item 12 - 1: Writing Phi2Psi Functions
+    \item 2 - 4: Editing PANSE Function for variation in output
+    \item Total: 3.5 Hours in lab, 0.5 hours learning 3 hours working
+\end{itemize}
+\experiment{Last MCMC Run}
+Parameter values and codon translation rates seem accurrate but phi values are very small. Might be cause by the issue of scaling as discussed by Dr.Gilchrist, added output to the MCMC run to determine if this is the problem. 
+\experiment{Phi2Psi}
+Functions are working however for efficiency, I have started adjust the parameter set to maintain phi and psi information this requires changing much of the parameter code and adding more getter and setter functions. Once this has been done the phi2psi functions will be much simpler to use.
+\experiment{Editing PANSE Functions}
+In addition to adding for the phi2psi translations also adjusted output so as to check phi, lambda and alpha values per gene to make sure they are consistent with Pop data set
+\labday{July 27, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12: Looking at last MCMC log files
+    \item 12 - 3: Writing out implementation of Hyper parameters
+    \item 3 - 6: Working on adjusting data scripts
+    \item Total: 6 hours spent in lab 2, hour learning, 4 hours working
+\end{itemize}
+\experiment{MCMC Logs}
+There seems to be an issue with the log posterior values, this is probably caused by the dataset because log posteriors were working in he last mcmc runs. 
+\experiment{Implementing nonsense error parameter}
+Since the NSE parameter will be estimated by the MCMC it needs to be implementedas a hyper parameter. To do this I have looking at all functions that call hyper paramters and listing them out for the purpose of adding the NSE calulcations to them. I have decided to store the values as a vector of vectors of doubles, going from the mixture to the gene, to the actualy nonsense error wait times.
+\experiment{Adjusting Data Script}
+To make a working data set for the mcmc for tonight I need to implement a better random position assignment function the issue is that because of the uniform distribution there are too many positions where all ribosomes that were found on a codon in a gene end upat the same position, I have been working on a way to address this issue. So far to no avail instead I will run the mcmc on real data.
 \end{document}
