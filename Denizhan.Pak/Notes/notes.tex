@@ -726,4 +726,17 @@ To make a working data set for the mcmc for tonight I need to implement a better
 Took paper notes on this discussion. Hollis has provided in his notes a list of TODOs to continue to work on including debugging the current issue with the PA model.
 \experiment{Parameter Estimation within PANSE}
 I have now added all necessary functions for estimating NSE wait times. I will need to test and debug once working I can push the code to main branch.
+\labday{August 7, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:00 - 10: Rereading labnotes
+    \item 10 - 2: Running MCMCs and comparing results
+    \item 2 - 3: Testing c++ end of Log calculations
+    \item 3 - 5: Reading and examining difference in normal and lognormal distribution
+    \item Total 8 hours in lab 3 hours learning, 5 hours working
+\end{itemize}
+\experiment{MCMC Runs}
+To test code and make sure model is working I ran MCMCs on my computer because Gauley R must be updated, although the values were consistent there a trend to 0 for codon specific parameter calculations. Tested the C++ end to find source of problem. 
+\experiment{Normal vs Log Normal Distribution}
+A Log normal distribution is assymetric and a normal distribution is not. This causes a issue because there is a high weight on 0 in the lo normal distribution which is used for Codon Specific Parameter calulcation. After discussing with Cedric it seems an offset is needed when proposing alpha and lambda values the same way it is for phi values. This would allow us the mcmc to diversify its proposals which seems to be the issue.
 \end{document}
