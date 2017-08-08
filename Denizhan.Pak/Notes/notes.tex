@@ -738,5 +738,17 @@ I have now added all necessary functions for estimating NSE wait times. I will n
 \experiment{MCMC Runs}
 To test code and make sure model is working I ran MCMCs on my computer because Gauley R must be updated, although the values were consistent there a trend to 0 for codon specific parameter calculations. Tested the C++ end to find source of problem. 
 \experiment{Normal vs Log Normal Distribution}
-A Log normal distribution is assymetric and a normal distribution is not. This causes a issue because there is a high weight on 0 in the lo normal distribution which is used for Codon Specific Parameter calulcation. After discussing with Cedric it seems an offset is needed when proposing alpha and lambda values the same way it is for phi values. This would allow us the mcmc to diversify its proposals which seems to be the issue.
+A Log normal distribution is assymetric and a normal distribution is not. This causes a issue because there is a high weight on 0 in the lo normal distribution which is used for Codon Specific Parameter (CSP) calulcation. After discussing with Cedric it seems an offset is needed when proposing alpha and lambda values the same way it is for phi values. This would allow us the mcmc to diversify its proposals which seems to be the issue.
+\labday{August 8, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11:30: Adjusting offset for CSP calulation
+    \item 12 - 3:30: Investing NAN problem in log likelihood calulcations
+    \item 4 - 4:30: Reading on lgamma definitions evaluated at 0
+    \item Total 6 hours in lab, 5.5 hours working, 0.5 hours learning
+\end{itemize}
+\experiment{NAN Issue}
+After adjusting csp values it still seems there is a problem lambda goes to infinity and alpha goes to 0 very quickly. This causes a nan value at evolutation of logLikelihood.
+To investigate the problem I ran many MCMCs with a variety of outputs to find that the offset fix has not worked to solve the issue. However, the problem is non deterministic and seems randomly generated so the issue is likely in the proposals. 
+Potentially this could be the issue PA was having as well. I need to look into the MCMC and find how the parameters are proposed and why they are going to their respective values.
 \end{document}
