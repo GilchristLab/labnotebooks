@@ -88,6 +88,7 @@
 	\item Mutation Bias: The variation between codon sequences caused by genetic mutations.
 	\item Nonsense Error: An error in protein synthesis, when a stop codon is found prematurely, and the resulting protein is not what was initially expected.
 	\item Pausing Time Model: A biological model to acquire information about protein translation. A freeze frame in which translation is stopped and the ribosome remains still. Locations of ribosomes can be analyzed. Ribosomes will spend more time on parts of mRNA that is less efficient to code and based on probabillity we can calculate which sets of codons are more innefficient based on the frequency of ribosomes that are attached to them.
+    \item Grouping: Refers to the list of possible amino acids
 \end{itemize}
 
 \experiment{The Code Base}
@@ -761,5 +762,19 @@ Potentially this could be the issue PA was having as well. I need to look into t
 \experiment{Alpha Lambda Proposals}
 No resolution still investiating. I think the problem is still in the asymmetry of the Log Normal Distribution but I will need to keep looking through the code to find where the issue is coming from.
 \experiment{Alpha and Lambda Storage}
-Dr. ilchrist suggested I run MCMCs with real alpha and lambda data so as to see if there are any fundamental problems with the model rather than just the proposals. However, there is currently no function to use real csp values. As this would not only help me debug but also help me benchmark and test I am trying to figure out how to implement these functions by reading how they are stored in the model
+Dr. Gilchrist suggested I run MCMCs with real alpha and lambda data so as to see if there are any fundamental problems with the model rather than just the proposals. However, there is currently no function to use real csp values. As this would not only help me debug but also help me benchmark and test I am trying to figure out how to implement these functions by reading how they are stored in the model
+\labday{August 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 11: Read Code for alpha lambda storage
+    \item 11: 2:30: Implement and test read alpha
+    \item 3 - 5: Implement and test read lambda
+    \item Total 6.5 hours in lab, all working
+\end{itemize}
+\experiment{Alpha and Lambda Storage}
+I have added notes in the general section above to use as a reference for understanding the storage of codon specific paramters which are hidden under a few layers of indirection.
+\experiment{ReadAlpha}
+Alpha values can now be given when initializing a parameter object and replace proposals by the MCMC
+\experiment{Read Lambda}
+Lambda values can be read however there is currently a bug with storage of these values which requires further investigation
 \end{document}
