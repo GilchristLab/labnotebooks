@@ -58,9 +58,16 @@ for g in genes:
                 gene.rfp_counts[index] += rfp
                 codon.rfpcount -= rfp
 
-for g in genes:
-    i = 0
-    gene = genes[g]
-    for pos in gene.positions:
-        print gene.id + ", " + str(i) + ", " + str(pos.codon) + ", " + str(gene.rfp_counts[i])
-        i += 1
+if len(sys.argv) > 2:
+    fname = sys.argv[2]
+else:
+    fname = "simRFPdata.csv"
+
+with open(fname, "w") as output:
+    output.write("GeneID,Position,Codon,rfpCount\n")
+    for g in genes:
+        i = 0
+        gene = genes[g]
+        for pos in gene.positions:
+            output.write(gene.id + ", " + str(i) + ", " + str(pos.codon) + ", " + str(gene.rfp_counts[i]) + "\n")
+            i += 1

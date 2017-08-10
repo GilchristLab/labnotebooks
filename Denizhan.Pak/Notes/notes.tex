@@ -751,4 +751,15 @@ A Log normal distribution is assymetric and a normal distribution is not. This c
 After adjusting csp values it still seems there is a problem lambda goes to infinity and alpha goes to 0 very quickly. This causes a nan value at evolutation of logLikelihood.
 To investigate the problem I ran many MCMCs with a variety of outputs to find that the offset fix has not worked to solve the issue. However, the problem is non deterministic and seems randomly generated so the issue is likely in the proposals. 
 Potentially this could be the issue PA was having as well. I need to look into the MCMC and find how the parameters are proposed and why they are going to their respective values.
+\labday{August 9, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10:30 - 12:30: Investigating Lambda and Alpha proposals
+    \item 3 - 5: Reading code for Alpha and Lambda Storage
+    \item Total: 4 hours in lab, all working
+\end{itemize}
+\experiment{Alpha Lambda Proposals}
+No resolution still investiating. I think the problem is still in the asymmetry of the Log Normal Distribution but I will need to keep looking through the code to find where the issue is coming from.
+\experiment{Alpha and Lambda Storage}
+Dr. ilchrist suggested I run MCMCs with real alpha and lambda data so as to see if there are any fundamental problems with the model rather than just the proposals. However, there is currently no function to use real csp values. As this would not only help me debug but also help me benchmark and test I am trying to figure out how to implement these functions by reading how they are stored in the model
 \end{document}
