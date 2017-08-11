@@ -777,4 +777,13 @@ I have added notes in the general section above to use as a reference for unders
 Alpha values can now be given when initializing a parameter object and replace proposals by the MCMC
 \experiment{Read Lambda}
 Lambda values can be read however there is currently a bug with storage of these values which requires further investigation
+\labday{August 11, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 1:30: Debug CSP Initialization functions
+    \item 2 - 3: Testing Initialization Functions
+    \item Total 5 hours in lab all working
+\end{itemize}
+\experiment{CSP Initialization Functions}
+There are two seperate functions to initialize lambda and alpha values, they need to combine into a single function to replace the already exisiting mutation selection initialization function which causes a segmentation fault. Now CSP functions can be initialized given values. An R wrapper for this needs to be created after which I can run the MCMC model to check for further issues while I keep investigating the problems with Alpha and Lambda  proposals.
 \end{document}
