@@ -786,4 +786,17 @@ Lambda values can be read however there is currently a bug with storage of these
 \end{itemize}
 \experiment{CSP Initialization Functions}
 There are two seperate functions to initialize lambda and alpha values, they need to combine into a single function to replace the already exisiting mutation selection initialization function which causes a segmentation fault. Now CSP functions can be initialized given values. An R wrapper for this needs to be created after which I can run the MCMC model to check for further issues while I keep investigating the problems with Alpha and Lambda  proposals.
+\labday{August 14, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 1:30: Writing and debugging read Alpha and LambdaPrime functions
+    \item 2 - 3: Exposing read functions to R
+    \item 3:30 - 5: Plotting and running MCMC with real Alpha and Lambda values on PANSE model.
+    \item 5 - 5:30: Running and Plotting MCMC with real alpha and Lambda on PA model
+    \item Total: 6.5 hours in lab all working
+\end{itemize}
+\experiment{MCMC Runs}
+I was initially getting inconsistent values for log likelihood and log posterior probability however this was an issue of plot tracing and has been fixed. The nan problem is no longer occurring supporting the hyposthesis that the problem is cause by the proposals of alpha and lambda prime.
+Additionally the log likelihood and posterior probabiltiy values are orders of magnitude higher than they should be. I initially though this might cause the proposal issue however the PA model which also was having problems with alpha and lambda proposals, has seemingly more correct calulcations for those values implying that the issue of probability and likelihood calulcation is an unrelated issue that should be adressed seperately.
+Dr. Gilchrist and Cedric have suggested checking the reverse jump probability and account for the log scale, which will be my next course of action. Once that has been resolved. I can address the issue of probability calculations.
 \end{document}
