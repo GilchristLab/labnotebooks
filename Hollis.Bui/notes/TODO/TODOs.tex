@@ -1,0 +1,108 @@
+\documentclass[letter,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[noend]{algpseudocode}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    breaklinks=true,
+}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\sep}{\discretionary{}{}{}} % Used to help with text separation, hboxes.
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+%opening
+\title{Various Compiled TODOs and Notes}
+
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Resources}
+
+\subsection{Gilchrist Lab Materials}
+\begin{itemize}
+    \item Style guide: \url{https://github.com/clandere/RibModelDev/blob/master/desc/ribModel_specs.pdf}
+    \item RFP Model pdf: \url{https://github.com/clandere/RibModelDev/blob/master/desc/rfp.model.pdf}
+    \item Ensure these are the up-to-date PDFs: run \enquote{pdflatex} on the .tex files in the same repo.
+    \item Gilchrist and Wagner paper (2006):
+    \begin{itemize}
+        \item \url{http://www.sciencedirect.com/science/article/pii/S0022519305003395}
+    \end{itemize}
+    \item Gilchrist, Chen, Shah, Landerer, Zaretzki paper (2015):
+    \begin{itemize}
+        \item \url{https://academic.oup.com/gbe/article-lookup/doi/10.1093/gbe/evv087}
+        \item \url{http://biorxiv.org/content/early/2015/04/17/009670}
+    \end{itemize}
+\end{itemize}
+
+\subsection{External Sources}
+\begin{itemize}
+    \item General info about Yeast gene nomenclature:
+    \begin{itemize}
+        \item \url{http://www.yeastgenome.org/help/community/nomenclature-conventions}
+    \end{itemize}
+    \item Weinberg Data paper link: \url{http://biorxiv.org/content/early/2015/07/06/021501}.
+    \item Lareau Data paper link: \url{https://elifesciences.org/content/3/e01257}.
+    \item Pop Data paper link: \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4300493/}.
+\end{itemize}
+
+\section{Short-Term Requirements}
+
+\section{Maintenance-based Requirements (do as needed)}
+
+\subsection{Unit Testing}
+\begin{itemize}
+    \item In general, each new function added to the framework should have unit testing done on it (as most new functions are likely to be simple).
+    \begin{itemize}
+        \item In particular, new functions to Utility.h, SequenceSummary.cpp, Gene.cpp, or Genome.cpp will likely belong here.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Commenting}
+\begin{itemize}
+    \item There should be a documentation block above each function in C++. This still needs to be done for many functions in C++. Focus especially on the arguments, the outputs, and how each function connects to each other. Note if it is exposed to RCPP, and what function \enquote{wraps} each other as they are progressively called.
+    \item Similarly, some details need to be filled out in the R code. Ensure that the document() command is run so that \enquote{roxygen2} can properly fill out the documents.
+\end{itemize}
+
+\section{Long-Term Suggestions}
+
+
+\section{R Code}
+
+\end{document}
+

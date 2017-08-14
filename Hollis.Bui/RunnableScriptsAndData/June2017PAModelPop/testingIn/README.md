@@ -13,5 +13,7 @@ Contents:
 1. `codonTranslationRates.csv`: Raw codon translation rates from Pop's published work.
 2. `orderedPopPADataRand500.csv`: `PopPADataRand500` ordered alphabetically to match easily with `orderedRandGeneIDPhiMean.csv`, produced by alphabetizeTwoFiles.pl`.
 3. `orderedRandGeneIDPhiMean.csv`: `randGeneIDPhiMean.csv` ordered alphabetically to match easily with `orderedPopPADataRand500.csv`, produced by `alphabetizeTwoFiles.pl`.
-4. `scripts`: Contains the scripts mentioned above to generate some preprocessedFiles.
+4. `PopPADataOneGene.csv`: Generated from `printOneGene.pl` and `PopPADataSubset.csv`, this prints the first gene from the latter file.
+5. `scripts`: Contains the scripts mentioned above to generate some preprocessedFiles.
+6. `fullDataFiles`: Contains `PopSubset.out` (generated from `printPopSubset.pl` and geneIDPhiMean.csv`) and PopPADataSubset.csv (generated from `hashPopDataSubset.pl` and `PopPAData.csv`) to create a proper "full" data file of Pop data that associates with Dr. Gilchrist's phi values.
 

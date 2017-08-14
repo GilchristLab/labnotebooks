@@ -3,11 +3,8 @@
 # Alan's labnotes pdf
 Lab_Notes.pdf
 
-# Hollis's labnotes pdf 
-abridgedNotes.pdf
-notes.pdf 
-gilchristEmail.pdf
-Hollis.Bui/RunnableScriptsAndData/June2017PAModelPop/restartFiles
+#Denizhan Pak
+notes.pdf
 
 # Walker's lanotes pdf
 Wnotes.pdf 
@@ -21,6 +18,7 @@ Wnotes.pdf
 
 # R stuff
 .Rhistory
+*.Rdat
 
 # Mac stuff
 *.DS_Store
