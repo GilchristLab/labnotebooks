@@ -799,4 +799,23 @@ There are two seperate functions to initialize lambda and alpha values, they nee
 I was initially getting inconsistent values for log likelihood and log posterior probability however this was an issue of plot tracing and has been fixed. The nan problem is no longer occurring supporting the hyposthesis that the problem is cause by the proposals of alpha and lambda prime.
 Additionally the log likelihood and posterior probabiltiy values are orders of magnitude higher than they should be. I initially though this might cause the proposal issue however the PA model which also was having problems with alpha and lambda proposals, has seemingly more correct calulcations for those values implying that the issue of probability and likelihood calulcation is an unrelated issue that should be adressed seperately.
 Dr. Gilchrist and Cedric have suggested checking the reverse jump probability and account for the log scale, which will be my next course of action. Once that has been resolved. I can address the issue of probability calculations.
+\labday{August 16, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:30 - 12:30: Checking results of real alpha and lambda runs of PANSE Model
+    \item 12:30 - 3:30:Finding errors in alpha and lambda proposals
+    \item Total 4 hours in lab all working.
+\end{itemize}
+\experiment{Errors in alpha and lambda proposals}
+The proposals are structured as follows:
+\begin{itemize}
+    \item During MCMC Run if Codon Specific Paramters are to be estimated
+    \item The values are preposed from a positive log normal by model/paramter
+    \item these are sent to accept/reject in MCMC
+    \item MCMC checks if decides based on exponential whether the loglikelihood of these to except or reject
+    \item All values are updated if accepted or rewritten with previous value if rejected
+\end{itemize}
+There is a problem with the process in the return from the log likelihoods back to the MCMC the MCMC is expecting certain values to be returned
+however the propossal function does not update the referenced vector paramter as needed, causing alpha to go to 0 and lambda to to $\inf$. In addition to this the reverse jump probability is not accounted for either. I must figure how to return the necessary values and how to adjust
+the reverse jump probability.
 \end{document}
