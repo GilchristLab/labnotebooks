@@ -826,5 +826,14 @@ the reverse jump probability.
     \item Total: 5.5 hours in lab all working
 \end{itemize}
 \experiment{Fixinf CSP proposals}
-I have change some of the code, after running a couple MCMCs the ood news is that phi predictions are now much more accurate, and alpha no longer drops to 1. However Lambda Prime and alpha now both got to infinity. I am unsure why this is happening I think there is another calulcation where reverse jump needs to be accounted for. I will correct the issue when I find the function that needs to be fixed.
+I have change some of the code, after running a couple MCMCs the good news is that phi predictions are now much more accurate, and alpha no longer drops to 0. However Lambda Prime and alpha now both got to infinity. I am unsure why this is happening I think there is another calulcation where reverse jump needs to be accounted for. I will correct the issue when I find the function that needs to be fixed.
+\labday{August 21, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 11: Testing MCMCs
+    \item 3 - 4: Reading Log data
+    \item Total 3 hours in lab spent working.
+\end{itemize}
+\experiment{MCMC Output}
+Alpha and lambda are being proposed at values that are not NaN. This means there is a bigger issue in the MCMCAlgorithm. I will need to keep looking for the cause by tracing alpha and lambda through a run of the MCMC which I will do on the c++ end.
 \end{document}
