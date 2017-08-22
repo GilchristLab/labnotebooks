@@ -836,4 +836,13 @@ I have change some of the code, after running a couple MCMCs the good news is th
 \end{itemize}
 \experiment{MCMC Output}
 Alpha and lambda are being proposed at values that are not NaN. This means there is a bigger issue in the MCMCAlgorithm. I will need to keep looking for the cause by tracing alpha and lambda through a run of the MCMC which I will do on the c++ end.
+\labda{August 22, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Fixing Alpha and Lambda Proposals
+    \item 12:30 - 2: Running MCMCs
+    \item 2:30 - 5: Checking for issues/debuging
+\end{itemize}
+\experiment{Proposal Issue continued}
+Alpha and lambda are now being proposed as real values however the jumps are very large and are still being accepted. This means the std_csp is growing fast which means that too many early samples are being accepted. To resolve this issue i must trace std_csp and find a flaw in the likelihood calulcations of both PANSE and PA
 \end{document}
