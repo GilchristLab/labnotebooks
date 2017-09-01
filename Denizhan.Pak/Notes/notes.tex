@@ -845,4 +845,16 @@ Alpha and lambda are being proposed at values that are not NaN. This means there
 \end{itemize}
 \experiment{Proposal Issue continued}
 Alpha and lambda are now being proposed as real values however the jumps are very large and are still being accepted. This means the std_csp is growing fast which means that too many early samples are being accepted. To resolve this issue i must trace std_csp and find a flaw in the likelihood calulcations of both PANSE and PA
+\labday{August 1, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Testing adaptive width changes
+    \item Total 2 hours working
+\end{itemize}
+\experiment{Adaptive Width Adjustment}
+When the MCMC acceptance rate is too high or two low the standard deviation for the random alpha lambda proposals are adapted.
+lowered if the rate is too low and increased if rate is too high. Since the range of values being generated was so large it made sense that
+the issue was the adaptive width was being increased frequently. I fixed that value, and checked the results. The range of CSP proposals has
+decreased however the values are not close to what they should be. The issue most likely must stem from the loglikelihood calculation per gene.
+I will have to redo the math for both the PA and PANSE model and test to see if I can fix this issue for a fixed width for proposals.
 \end{document}
