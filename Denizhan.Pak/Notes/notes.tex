@@ -13,6 +13,7 @@
 \usepackage{xspace}
 \usepackage[normalem]{ulem} % For strikeout text
 \usepackage{pdfpages} % allows inclusion of PDF files
+\usepackage{underscore} %allows for underscores in txt
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -558,7 +559,7 @@ It can be used to test speed and benchmarking on a single dataset, as well as he
 \experiment{Tomorrow}
 Will fit the PANSE model to the PopPAData, and benchmark based on the run times. Once completed will move on to simulating a Genome through PANSE model on Pop data
 \labday{July 12, 2017 Notes}
-\experment{Time Breakdown}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 9:30 - 11: Writing script to approximate Gene data
     \item 11 - 1:15: Learning MCMC and model interfacing
@@ -836,7 +837,7 @@ I have change some of the code, after running a couple MCMCs the good news is th
 \end{itemize}
 \experiment{MCMC Output}
 Alpha and lambda are being proposed at values that are not NaN. This means there is a bigger issue in the MCMCAlgorithm. I will need to keep looking for the cause by tracing alpha and lambda through a run of the MCMC which I will do on the c++ end.
-\labda{August 22, 2017 Notes}
+\labday{August 22, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 11 - 12:30: Fixing Alpha and Lambda Proposals
