@@ -858,4 +858,13 @@ lowered if the rate is too low and increased if rate is too high. Since the rang
 the issue was the adaptive width was being increased frequently. I fixed that value, and checked the results. The range of CSP proposals has
 decreased however the values are not close to what they should be. The issue most likely must stem from the loglikelihood calculation per gene.
 I will have to redo the math for both the PA and PANSE model and test to see if I can fix this issue for a fixed width for proposals.
+\labday{September 5, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11:30: Double Checking Math behind Likelihood calulcation
+    \item Total 2 hours
+\end{itemize}
+\experiment{Likelihood Math}
+The math according to the rfp write up is correct however there is still a major problem with the lambda prime and alpha calulations.
+To better understand the problem I will test with a small sample and print every proposed value and trace the pattern.
 \end{document}
