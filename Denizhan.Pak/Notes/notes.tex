@@ -867,4 +867,15 @@ I will have to redo the math for both the PA and PANSE model and test to see if 
 \experiment{Likelihood Math}
 The math according to the rfp write up is correct however there is still a major problem with the lambda prime and alpha calulations.
 To better understand the problem I will test with a small sample and print every proposed value and trace the pattern.
+\labday{September 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Running MCMC with fixed alpha and lambda values
+    \item 11 - 1: Checking code for likelihood calulcations
+    \item Total: 2 Hours in lab
+\end{itemize}
+\experiment{Likelihood Calculations}
+I fixed the alpha and lambda values to check for other errors in the code.
+The phi values are not on the order they should be this makes me think there is another issue with the PANSE Model that needs to be addressed.
+To fix this issue I have added print statements throughout the MCMC model to keep track of the expected value and find where it deviates.
 \end{document}
