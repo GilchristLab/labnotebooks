@@ -13,6 +13,7 @@
 \usepackage{xspace}
 \usepackage[normalem]{ulem} % For strikeout text
 \usepackage{pdfpages} % allows inclusion of PDF files
+\usepackage{underscore} %allows for underscores in txt
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -558,7 +559,7 @@ It can be used to test speed and benchmarking on a single dataset, as well as he
 \experiment{Tomorrow}
 Will fit the PANSE model to the PopPAData, and benchmark based on the run times. Once completed will move on to simulating a Genome through PANSE model on Pop data
 \labday{July 12, 2017 Notes}
-\experment{Time Breakdown}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 9:30 - 11: Writing script to approximate Gene data
     \item 11 - 1:15: Learning MCMC and model interfacing
@@ -799,4 +800,82 @@ There are two seperate functions to initialize lambda and alpha values, they nee
 I was initially getting inconsistent values for log likelihood and log posterior probability however this was an issue of plot tracing and has been fixed. The nan problem is no longer occurring supporting the hyposthesis that the problem is cause by the proposals of alpha and lambda prime.
 Additionally the log likelihood and posterior probabiltiy values are orders of magnitude higher than they should be. I initially though this might cause the proposal issue however the PA model which also was having problems with alpha and lambda proposals, has seemingly more correct calulcations for those values implying that the issue of probability and likelihood calulcation is an unrelated issue that should be adressed seperately.
 Dr. Gilchrist and Cedric have suggested checking the reverse jump probability and account for the log scale, which will be my next course of action. Once that has been resolved. I can address the issue of probability calculations.
+\labday{August 16, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:30 - 12:30: Checking results of real alpha and lambda runs of PANSE Model
+    \item 12:30 - 3:30:Finding errors in alpha and lambda proposals
+    \item Total 4 hours in lab all working.
+\end{itemize}
+\experiment{Errors in alpha and lambda proposals}
+The proposals are structured as follows:
+\begin{itemize}
+    \item During MCMC Run if Codon Specific Paramters are to be estimated
+    \item The values are preposed from a positive log normal by model/paramter
+    \item these are sent to accept/reject in MCMC
+    \item MCMC checks if decides based on exponential whether the loglikelihood of these to except or reject
+    \item All values are updated if accepted or rewritten with previous value if rejected
+\end{itemize}
+There is a problem with the process in the return from the log likelihoods back to the MCMC the MCMC is expecting certain values to be returned
+however the propossal function does not update the referenced vector paramter as needed, causing alpha to go to 0 and lambda to to $\inf$. In addition to this the reverse jump probability is not accounted for either. I must figure how to return the necessary values and how to adjust
+the reverse jump probability.
+\labday{August 17, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1:45: Reading ROC code
+    \item 2:15 - 5: Fixing proposals in PA and PANSE
+    \item Total: 5.5 hours in lab all working
+\end{itemize}
+\experiment{Fixinf CSP proposals}
+I have change some of the code, after running a couple MCMCs the good news is that phi predictions are now much more accurate, and alpha no longer drops to 0. However Lambda Prime and alpha now both got to infinity. I am unsure why this is happening I think there is another calulcation where reverse jump needs to be accounted for. I will correct the issue when I find the function that needs to be fixed.
+\labday{August 21, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9 - 11: Testing MCMCs
+    \item 3 - 4: Reading Log data
+    \item Total 3 hours in lab spent working.
+\end{itemize}
+\experiment{MCMC Output}
+Alpha and lambda are being proposed at values that are not NaN. This means there is a bigger issue in the MCMCAlgorithm. I will need to keep looking for the cause by tracing alpha and lambda through a run of the MCMC which I will do on the c++ end.
+\labday{August 22, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Fixing Alpha and Lambda Proposals
+    \item 12:30 - 2: Running MCMCs
+    \item 2:30 - 5: Checking for issues/debuging
+\end{itemize}
+\experiment{Proposal Issue continued}
+Alpha and lambda are now being proposed as real values however the jumps are very large and are still being accepted. This means the std_csp is growing fast which means that too many early samples are being accepted. To resolve this issue i must trace std_csp and find a flaw in the likelihood calulcations of both PANSE and PA
+\labday{August 1, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Testing adaptive width changes
+    \item Total 2 hours working
+\end{itemize}
+\experiment{Adaptive Width Adjustment}
+When the MCMC acceptance rate is too high or two low the standard deviation for the random alpha lambda proposals are adapted.
+lowered if the rate is too low and increased if rate is too high. Since the range of values being generated was so large it made sense that
+the issue was the adaptive width was being increased frequently. I fixed that value, and checked the results. The range of CSP proposals has
+decreased however the values are not close to what they should be. The issue most likely must stem from the loglikelihood calculation per gene.
+I will have to redo the math for both the PA and PANSE model and test to see if I can fix this issue for a fixed width for proposals.
+\labday{September 5, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:30 - 11:30: Double Checking Math behind Likelihood calulcation
+    \item Total 2 hours
+\end{itemize}
+\experiment{Likelihood Math}
+The math according to the rfp write up is correct however there is still a major problem with the lambda prime and alpha calulations.
+To better understand the problem I will test with a small sample and print every proposed value and trace the pattern.
+\labday{September 6, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Running MCMC with fixed alpha and lambda values
+    \item 11 - 1: Checking code for likelihood calulcations
+    \item Total: 2 Hours in lab
+\end{itemize}
+\experiment{Likelihood Calculations}
+I fixed the alpha and lambda values to check for other errors in the code.
+The phi values are not on the order they should be this makes me think there is another issue with the PANSE Model that needs to be addressed.
+To fix this issue I have added print statements throughout the MCMC model to keep track of the expected value and find where it deviates.
 \end{document}
