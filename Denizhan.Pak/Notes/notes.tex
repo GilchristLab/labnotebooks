@@ -883,4 +883,14 @@ To fix this issue I have added print statements throughout the MCMC model to kee
     \item 10 - 1: Reading through code for phi calculations, to find inconsistency with PANSE and PA calulcations of the phi values.
     \item total 3 hours spent learning
 \end{itemize}
+\labday{September 11, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12: Continued reading
+    \item 12 - 12:30: Testing phi proposals
+\end{itemize}
+\experiment{Phi Proposal}
+The current values being calulcated for phi even with real csp parameters is orders of magnitude above the
+expected values. The cause of this is some underlying inconsistence that causes the loglikelihood values
+to grow as a result of iteration over the entire gene rather than the codon list.
 \end{document}
