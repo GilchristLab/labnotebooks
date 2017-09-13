@@ -15,6 +15,7 @@ Wnotes.pdf
 *.log
 *.out
 *.toc
+*.pdf
 
 # R stuff
 .Rhistory
