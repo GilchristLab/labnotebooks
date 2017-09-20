@@ -926,4 +926,16 @@ I will need to use and assign the variable to fix this issue because it is curre
 \experiment{ROC Sphi Implementation}
 I have been comparing this to the PA implementation but the stucture is completely different.
 I will need to discuss with Cedric on how to port the ROC implementation over.
+\labday{September 20, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Fixing phi proposals
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{Phi Proposals}
+I believe the issue is in the acceptance of the proposed phi values.
+To address this I was looking through the ROC and PA code. There is a
+problem in the likelihood calulcation involving a miscount of RFPs cause by summation over a codon rather than by postion. By fixing this I will see
+if the loglikelihood becomes a more accurrate calulcaiton and could potenatially fix the phi proposal issue
 \end{document}
+
