@@ -935,7 +935,16 @@ I will need to discuss with Cedric on how to port the ROC implementation over.
 \experiment{Phi Proposals}
 I believe the issue is in the acceptance of the proposed phi values.
 To address this I was looking through the ROC and PA code. There is a
-problem in the likelihood calulcation involving a miscount of RFPs cause by summation over a codon rather than by postion. By fixing this I will see
-if the loglikelihood becomes a more accurrate calulcaiton and could potenatially fix the phi proposal issue
+problem in the likelihood calulcation involving a miscount of RFPs cause by summation over a codon rather than by postion. By fixing this I will see if the loglikelihood becomes a more accurrate calulcaiton and could potenatially fix the phi proposal issue
+\labday{September 21, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 11:30: Reading through PA and PANSE code for phi sampling and proposals
+    \item 11:30 - 12:00: Fixing PANSE implementation for sampling
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{PANSE Sampling}
+I looked into how to fix the issue from yesterday and started by making the new data structure that is necessary,
+and lookinh through the code to find how to implement it.
 \end{document}
 
