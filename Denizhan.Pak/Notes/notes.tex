@@ -846,7 +846,7 @@ Alpha and lambda are being proposed at values that are not NaN. This means there
 \end{itemize}
 \experiment{Proposal Issue continued}
 Alpha and lambda are now being proposed as real values however the jumps are very large and are still being accepted. This means the std_csp is growing fast which means that too many early samples are being accepted. To resolve this issue i must trace std_csp and find a flaw in the likelihood calulcations of both PANSE and PA
-\labday{August 1, 2017 Notes}
+\labday{September 1, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 11 - 1: Testing adaptive width changes
@@ -878,12 +878,12 @@ To better understand the problem I will test with a small sample and print every
 I fixed the alpha and lambda values to check for other errors in the code.
 The phi values are not on the order they should be this makes me think there is another issue with the PANSE Model that needs to be addressed.
 To fix this issue I have added print statements throughout the MCMC model to keep track of the expected value and find where it deviates.
-\labday{September 6, 2017 Notes}
+\labday{September 7, 2017 Notes}
 \begin{itemize}
     \item 10 - 1: Reading through code for phi calculations, to find inconsistency with PANSE and PA calulcations of the phi values.
     \item total 3 hours spent learning
 \end{itemize}
-\labday{September 11, 2017 Notes}
+\labday{September 8, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 11 - 12: Continued reading
@@ -899,4 +899,35 @@ to grow as a result of iteration over the entire gene rather than the codon list
     \item 10 - 11: Reading Hollis' notes on the phi proposals
     \item 11 - 12: Helping Zach setup Rstudio, R and prerequisite libraries
 \end{itemize}
+<<<<<<< HEAD
  \end{document}
+=======
+\labday{September 13, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:30 - 1: Reading code for phi value proposals
+    \item Total: 1.5 hours working
+\end{itemize}
+\experiment{Phi Value Proposals}
+There currrently is a variable meant to scale proposed phi values, seeing as the scaling seems to be the issue,
+I will need to use and assign the variable to fix this issue because it is currently set and remains as 0. 
+\labday{September 15, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 11:30: Helping Zach set-up MCMC model
+    \item 11:30 - 12: Talking to Dr. Gilchrist about phi proposal calulcation
+    \item 12 - 1: Looking through ROC Model for phi proposals
+    \item Total: 2 hours in lab 1.5 working
+\end{itemize}
+\labday{September 18, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Reading ROC implementation of sphi
+    \item 12:30: Helping Zach understand the data used for model
+    \item Total: 2 hours in lab
+\end{itemize}
+\experiment{ROC Sphi Implementation}
+I have been comparing this to the PA implementation but the stucture is completely different.
+I will need to discuss with Cedric on how to port the ROC implementation over.
+\end{document}
+>>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835

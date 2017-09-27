@@ -170,6 +170,70 @@ Need to move on!
   \item Need to be sure this change is added to every relevant location. 
 \end{itemize}
 
+\labday{September 22, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Working on the TODO list. Attempting to do error checking on the
+\textit{initializeParameterObject} R function.  
+  \item Having unexpected issue where the size of the genome does not equal the
+initial.expression.values vector
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item The size of the genome (4625) is not even close to the size of the
+initial.expression.values file (61)
+  \item The file being edited is \textit{parameterObject.R} in the R directory
+in the RibModelFramework
+\end{itemize}
+
+\labday{September 25, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Found the issue with the discrepancy between the size of the genome
+file and the initial.expression.values file. The wrong input file is being used
+for this. 
+  \item Codon-specific translation rates were being used (one for each code,
+except for stop codons apparnetly) for a total of 61, instead of the
+translation rates for each gene. Could this be causing other issues??
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item The RFPPhiValues.csv file seems to be experimental phi values. Is that
+what should be used for initial.expression.values??
+\end{itemize}
+
+\labday{September 26, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Not able to confirm the correct phi file to use. Continued looking at
+the \texit{parameterObject.R} file to attempt to better understand it.  
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item N/A
+\end{itemize}
+
+\labday{September 27, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Confirmed the phi file, double checked the error checking, and pushed
+the update. 
+  \item Helped Denizhan with debugging MCMCAlgorithm.cpp. Set timers before
+three primary function calls to see where the majory of time is being spent.  
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Used clock() from std to determine the time it takes. Can also use
+functions from ctime to do timing if necessary
+\end{itemize}
+
+
+
+
+
+
+
+
 \labday{Month day, 2017 Notes}
 \experiment{Summary}
 \begin{itemize}
