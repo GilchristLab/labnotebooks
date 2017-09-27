@@ -961,5 +961,14 @@ and lookinh through the code to find how to implement it.
 \experiment{Testing Scripts}
 Found a potential problem in how parameter object is initilized after discussing with Zach. Will need to rewrite test.R and
 initialize paramter object differently using different phi data.
+\labday{September 27, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Profiling MCMC runs
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{Profiling}
+400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms 
+at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for the PANSE model.
 \end{document}
 
