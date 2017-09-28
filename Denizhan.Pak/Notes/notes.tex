@@ -973,6 +973,13 @@ initialize paramter object differently using different phi data.
 \experiment{Profiling}
 400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms 
 at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for the PANSE model.
+\labday{September 28, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12: Running profiles on PANSE Model
+    \item 12 - 12:30: Adjusting Likelihood calulcations
+\end{itemize}
+The prfiling is intermittently cut short by loglikelyhood going to NaN I think this is a result of an issue with ribosome count
 \end{document}
 <<<<<<< HEAD
 >>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835
