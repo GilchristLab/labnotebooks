@@ -17,6 +17,10 @@ class Codon:
         self.rfpcount = int(rfp)
         self.positions = []
 
+if len(sys.argv) != 2:
+    print "usage python AddPosition.py rfp_file"
+    exit()
+
 with open(sys.argv[1]) as fdata:
     genes = dict()
     codons = set()

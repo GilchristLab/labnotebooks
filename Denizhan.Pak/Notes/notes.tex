@@ -929,5 +929,53 @@ I will need to use and assign the variable to fix this issue because it is curre
 \experiment{ROC Sphi Implementation}
 I have been comparing this to the PA implementation but the stucture is completely different.
 I will need to discuss with Cedric on how to port the ROC implementation over.
+\labday{September 20, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Fixing phi proposals
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{Phi Proposals}
+I believe the issue is in the acceptance of the proposed phi values.
+To address this I was looking through the ROC and PA code. There is a
+problem in the likelihood calulcation involving a miscount of RFPs cause by summation over a codon rather than by postion. By fixing this I will see if the loglikelihood becomes a more accurrate calulcaiton and could potenatially fix the phi proposal issue
+\labday{September 21, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 11:30: Reading through PA and PANSE code for phi sampling and proposals
+    \item 11:30 - 12:00: Fixing PANSE implementation for sampling
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{PANSE Sampling}
+I looked into how to fix the issue from yesterday and started by making the new data structure that is necessary,
+and lookinh through the code to find how to implement it.
+\labday{September 22, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:20 - 12:20: Implement a new PANSE initialization function to maintain poisiton based rfp data
+    \item Total 1 hour in lab
+\end{itemize}
+\labday{September 25, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11:30 - 12:00: Writing process PANSE function
+    \item 12:00 - 1: Editing testing scripts
+\end{itemize}
+\experiment{Testing Scripts}
+Found a potential problem in how parameter object is initilized after discussing with Zach. Will need to rewrite test.R and
+initialize paramter object differently using different phi data.
+\labday{September 27, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Profiling MCMC runs
+    \item Total 2 hours in lab
+\end{itemize}
+\experiment{Profiling}
+400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms 
+at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for the PANSE model.
 \end{document}
+<<<<<<< HEAD
 >>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835
+=======
+
+>>>>>>> c90cf090d6b89ba77823bab659da92bc19ff80b2
