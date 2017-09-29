@@ -1,0 +1,259 @@
+\documentclass[12pt,hyperref]{labbook}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage[]{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{csquotes}
+\usepackage{xspace}
+\usepackage[normalem]{ulem} % For strikeout text
+\usepackage{pdfpages} % allows inclusion of PDF files
+\usepackage{underscore} %allows for underscores in txt
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% For verbatim quotes
+\lstnewenvironment{verbquote}[1][]
+  {\lstset{columns=fullflexible,
+           basicstyle=\ttfamily,
+           xleftmargin=2em,
+           xrightmargin=2em,
+           breaklines,
+           breakindent=0pt,
+           #1}}% \begin{verbquote}[..]
+  {}% \end{verbquote}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%%%%%%%%%%%%%%% BEGIN LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\DeltaEta}{\ensuremath{\Delta\eta}\xspace}
+\newcommand{\DeltaM}{\ensuremath{\Delta M}\xspace}
+\newcommand{\sep}{\discretionary{}{}{}} % Used to help with text separation, hboxes.
+
+%%%%%%%%%%%%%%% END LOCAL COMMANDS %%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% BEGIN LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+%suppress pagebreaks between days
+\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+\makeatother 
+
+%%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
+
+
+\title{Notes for Undergraduate Research Work}
+\author{Zachary Trzil}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\labday{General}
+
+\experiment{Purpose}
+
+\experiment{Terminology}
+
+\begin{itemize} 
+	\item Codon Usage Bias (CUB): The variation between codons which are synonomous (code for the same amino acid) in a genome.
+	\item Monte Carlo Markov Chain (MCMC): A technique used to create sets of data that is pseudorandomly distributed based on a given distribution. Utilizes random walks on a markov chain to generate random data for a Monte Carlo method.
+	\item Mutation Bias: The variation between codon sequences caused by genetic mutations.
+	\item Nonsense Error: An error in protein synthesis, when a stop codon is found prematurely, and the resulting protein is not what was initially expected.
+	\item Pausing Time Model: A biological model to acquire information about protein translation. A freeze frame in which translation is stopped and the ribosome remains still. Locations of ribosomes can be analyzed. Ribosomes will spend more time on parts of mRNA that is less efficient to code and based on probabillity we can calculate which sets of codons are more innefficient based on the frequency of ribosomes that are attached to them.
+    \item Grouping: Refers to the list of possible amino acids
+\end{itemize}
+
+\experiment{The Code Base}
+
+\subsubsection{Models:}
+The following is a list of the different types of MCMC models in this lab for the purpose of producing data that is reflective of CUB in a given genome or set of genomes. The models can be used to calculate the effects of synonymous substitutions on protein translation costs, gene expression levels and the strength of selection on CUB.
+\begin{itemize}
+	\item ROC: The Ribosome Overhead Cost model, it is the basic model for achieving the goal stated above. (described in Gilchrist et al. 2015).
+	\item RFP: The Ribosome Footprinting model, is based on the ROC model however it is concerned with the position of ribosome using a Pausing Time model.
+	\item PANSE: The Pausing and Nonsense Error model, this model accounts for nonsense errors by accoutning for the probabliity a codon is not reached due to nonsense errors in its random sampling it is an extension of the RFP model.
+	\item FONSE: 
+\end{itemize}
+
+\labday{September 13, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+	\item Installed Rstudio and dependencies, Built and installed code base.
+	\item Configured the test script, and attempted to run the model;
+        input files were in the wrong format.
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Why the incorrect format? Do different models take different formats?
+How much can this vary?
+\end{itemize}
+
+ 
+\labday{September 15, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+	\item Got python scripts to correct the file format. Ran the model;
+got errors..Not sure why this is happening as the same files work for Denizhan.
+Will explore the code and input file more.
+	\item Ignore pdf file, begin determining what the format of the
+labbook should be and what is expected, other introductory odds and ends.
+  \item Continued Searching code for issues with running the model
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Running the PA model in the test script
+  \item Denizhan helped fix the issue with output and restart directories
+  \item Issue is still occuring. Could this be architecture related?
+\end{itemize}
+
+\labday{September 17, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Continued to try to figure out where the error is coming from
+  \begin{enumerate}
+    \item The function that is printing the error message is 'processPA' in
+SequenceSummary.cpp; \textit{processPA} appears to be called by
+\textit{readRFPData} in Genome.cpp
+  \end{enumerate}
+  \item Printing shows that the error is coming from reading a codon of size
+two. These values are correct letters; input file has no errors in codons...
+  \item The codonID passed to \textit{indexToCodon} is 64, which is not valid.
+This is set by indexing into row[1] where row = table[i].
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item See how table is built and individual values are set
+  \item If it is not obvious why this is happening, run on a different machine.
+Need to move on! 
+\end{itemize}
+
+\labday{September 20, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Found the issue: The program expects a comma delinitated .csv file with
+        NO spaces. Spaces cause misaligned reads. 
+  \item Updated Genome.cpp in two places where the csv file is read in.
+        Now, after the line is pulled from the csv file, all whitespace is
+        removed prior to setting values. 
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Can this change be made more efficient? 
+  \item Need to be sure this change is added to every relevant location. 
+\end{itemize}
+
+\labday{September 22, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Working on the TODO list. Attempting to do error checking on the
+\textit{initializeParameterObject} R function.  
+  \item Having unexpected issue where the size of the genome does not equal the
+initial.expression.values vector
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item The size of the genome (4625) is not even close to the size of the
+initial.expression.values file (61)
+  \item The file being edited is \textit{parameterObject.R} in the R directory
+in the RibModelFramework
+\end{itemize}
+
+\labday{September 25, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Found the issue with the discrepancy between the size of the genome
+file and the initial.expression.values file. The wrong input file is being used
+for this. 
+  \item Codon-specific translation rates were being used (one for each code,
+except for stop codons apparnetly) for a total of 61, instead of the
+translation rates for each gene. Could this be causing other issues??
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item The RFPPhiValues.csv file seems to be experimental phi values. Is that
+what should be used for initial.expression.values??
+\end{itemize}
+
+\labday{September 26, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Not able to confirm the correct phi file to use. Continued looking at
+the \texit{parameterObject.R} file to attempt to better understand it.  
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item N/A
+\end{itemize}
+
+\labday{September 27, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item Confirmed the phi file, double checked the error checking, and pushed
+the update. 
+  \item Helped Denizhan with debugging MCMCAlgorithm.cpp. Set timers before
+three primary function calls to see where the majory of time is being spent.  
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Used clock() from std to determine the time it takes. Can also use
+functions from ctime to do timing if necessary
+\end{itemize}
+
+\labday{September 28, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item More error checking in the initializeParameterObject file
+  \item Inquired about restart files 
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item Need to figure out the exact format of restart files. 
+  \item Error checking file existance in initializeParameterObject, should the
+'testthat' library be included and used, or should I just error check without
+it?
+\end{itemize}
+
+
+
+
+
+\labday{Month day, 2017 Notes}
+\experiment{Summary}
+\begin{itemize}
+  \item This is a template
+\end{itemize}
+\experiment{NOTES TO SELF}
+\begin{itemize}
+  \item This is a template
+\end{itemize}
+
+
+ \end{document}
