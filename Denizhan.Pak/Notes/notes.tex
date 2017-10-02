@@ -988,6 +988,17 @@ The profiling is intermittently cut short by loglikelyhood going to NaN I think 
 \end{itemize}
 THe profiling is much quicker than expected, now that the ribosome count issue is fixed the phi values are now more consistent and not orders
 away from expected values except there is still an unresolved issue.
+\labday{October 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12:30: Running PANSE Model
+    \item 12:30 - 1: Talking with Dr. Gilchrist and reading on MCMC simulations
+\end{itemize}
+\experiment{PANSE RUNS}
+The MCMC with PANSE is woking as long as CSP are given not estimated. Phi is still smaller than it should be.
+\experiment{Discussion with Dr. Gilchrist}
+We resolved that I should address primarily the issue with PA first and fix CSP calulcations. To this I should run model with shorter iterations
+to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates and proposals to see the numbers acting as they should.
 \end{document}
 <<<<<<< HEAD
 >>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835
