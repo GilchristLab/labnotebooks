@@ -999,6 +999,26 @@ The MCMC with PANSE is woking as long as CSP are given not estimated. Phi is sti
 \experiment{Discussion with Dr. Gilchrist}
 We resolved that I should address primarily the issue with PA first and fix CSP calulcations. To this I should run model with shorter iterations
 to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates and proposals to see the numbers acting as they should.
+\labday{October 10, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10-12: Debugging csp proposal in PANSE
+    \item Total: 2 Hours in lab
+\end{itemize}
+\experiment{Debugging}
+After adding error checking output and looking at traces twice, it seems the model is not rejecting any of the possile csp values.
+This explains the problem because by accepting all values the search space is expanding quickly and therefore becomes unstable. 
+The way a csp value is accepted or rejected is when it is compared to a random number from an exponential distribution. There are 2
+possible causes to our problem:
+\begin{itemize}
+    \item The likelihood being generated is much higher than it should be,
+    \item The random number being selected for the comparison is centered at too small a value
+    \item A combination of both problems.
+\end{itemize}
+To address this issue I need to calulcate the mean of the distribution for the random number
+and compare expected likelihood values with the results of the calulcations made by the model.
+Some inconcistency should appear in either of these approaches and reveal why our CSP values
+are not being accepted properly.
 \end{document}
 <<<<<<< HEAD
 >>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835
