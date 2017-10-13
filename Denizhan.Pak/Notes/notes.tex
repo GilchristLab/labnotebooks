@@ -1019,6 +1019,19 @@ To address this issue I need to calulcate the mean of the distribution for the r
 and compare expected likelihood values with the results of the calulcations made by the model.
 Some inconcistency should appear in either of these approaches and reveal why our CSP values
 are not being accepted properly.
+\labday{October 13, 2017 Notes}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Debugging CSP proposals
+    \item Total: 2 hours in lab
+\end{itemize}
+\begin{Debugging}
+    I tried to adjust and play around with the exponential distribution which is being compared
+    however although the acceptance ratio was lower and the range of csp values was smaller, we 
+    still had the issue of a wide range of values, so this means the likelihood is returning 
+    higher values than it should. To address this I will keep the lower acceptance ratio so I can
+    see a trace and then I will use that to examine the trend of likelihood values to see why 
+    they are higher than they should be.
 \end{document}
 <<<<<<< HEAD
 >>>>>>> 1ef0fab30b95076d354a856e363a881c1c35d835
