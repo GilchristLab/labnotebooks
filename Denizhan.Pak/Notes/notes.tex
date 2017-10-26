@@ -1030,5 +1030,27 @@ are not being accepted properly.
     higher values than it should. To address this I will keep the lower acceptance ratio so I can
     see a trace and then I will use that to examine the trend of likelihood values to see why 
     they are higher than they should be.
-
+\labday{October 18, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Debugging CSP proposals
+    \item Total: 2 hours in lab
+\end{itemize}
+\labday{October 19, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 12: Debugging CSP proposals
+    \item Total: 2 hours in lab
+\end{itemize}
+\labday{October 26, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:30 - 5:30: Comparing CSP proposal in ROC and PA
+    \item 2 Hours in lab
+\end{itemize}
+\experiment{Comparing CSP Proposals}
+    The ROC model correctly proposes codon specific parameters. The problem therefore must be in the PAMode itself. 
+    The problem seems to be that the "calculateLogLikelihoodPerCodonPerGene" function is not working properly. To fix
+    this I need to figure why it is not working properly. To do this I will compare the results of this function to expected
+    results for given alpha and lambda prime values. This may give me insight into the problem.
 \end{document}
