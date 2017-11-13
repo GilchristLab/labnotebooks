@@ -1053,4 +1053,17 @@ are not being accepted properly.
     The problem seems to be that the "calculateLogLikelihoodPerCodonPerGene" function is not working properly. To fix
     this I need to figure why it is not working properly. To do this I will compare the results of this function to expected
     results for given alpha and lambda prime values. This may give me insight into the problem.
+\labday{November 13, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:30 - 4:30: Editing scripts for data cleaning
+    \item Total: 1 hour in lab working
+\end{itemize}
+\experiment{Script Adjustment}
+    Since the issue of CSP proposal is rooted in the conditional loglikelihood calulcation done during each proposal, I decided to graph the calulcations based on the real data. The real data was missing various genes. I worked on and edited the script to address this issue. The next steps involve:
+    \begin{enumerate}
+        \item Running the model on real data with real values, to calculate the real likelihood.
+        \item Running the model with both real phi and CSP values seperately.
+        \item Developing a seperate script to do the calculations simply based on the real values to find out if the issue is with implementation.
+    \end{itemize}
 \end{document}

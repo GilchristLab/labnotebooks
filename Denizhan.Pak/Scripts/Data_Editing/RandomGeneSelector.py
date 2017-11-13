@@ -42,7 +42,7 @@ if len(sys.argv) > 3:
     else:
         numPositions = -1
 else:
-    numeGenes = -1
+    numGenes = -1
     numPositions = -1
 
 #Total Codons and Genes
