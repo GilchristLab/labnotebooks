@@ -995,8 +995,9 @@ away from expected values except there is still an unresolved issue.
 \experiment{PANSE RUNS}
 The MCMC with PANSE is woking as long as CSP are given not estimated. Phi is still smaller than it should be.
 \experiment{Discussion with Dr. Gilchrist}
-We resolved that I should address primarily the issue with PA first and fix CSP calulcations. To this I should run model with shorter iterations
-to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates and proposals to see the numbers acting as they should.
+We resolved that I should address primarily the issue with PA first and fix CSP calulcations. To do this I should run model with shorter
+iterations to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates 
+and proposals to see the numbers acting as they should.
 \labday{October 10, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1084,4 +1085,17 @@ There seems to be a crash when initializing the genome. I am currently unsure of
 My discussion with Dr. Gilchrist provided clarification. To create a simulated Genome I need to implement the
 necessary functions in the PANSE model. I will additional test both models with varying parameters. To simulate the wait
 time for errors. I can utilize the same value for all codons at first then specify to specific codons.
+\labday{November 27, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:30 - 4: Running Model on simulated data
+    \item 4:30 - 4:45: Discussion with Dr. Gilchrist
+    \item 4:45 - 5:30: Adjusting datasets
+    \item Total: 2 hours in lab
+\end{itemize}
+While running simulations I ran into the issue of the CSP values moving in directions they should not,
+even though they were initialized at truth. After discussing this with Dr. Gilchrist, we concluded the 
+issue might be that I am using too small of a RFP sampled simulated dataset. To Address this I worked on 
+a script to increase the number of footprints found which should have the effect of grounding the model
+closer towards tue values.
 \end{document}
