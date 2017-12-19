@@ -1118,5 +1118,16 @@ will allow for quicker and hopefully more accurrate convergence towards true val
     \item 2 - 4: Finding bottlenecks in benchmarks
     \item Total 2 hours
 \end{itemize}
-Currently there is a speed and efficiency problem, I am benchmarking and adding output to determine what the source of this infeciancy is.
+Currently there is a speed and efficiency problem, I am benchmarking and adding output to determine what the source of this inefficiancy is.
+\labday{December 19, 2017}
+\begin{itemize}
+    \item 12 - 1: Running PA and PANSE Models
+    \item 1 - 2: Discussion with Dr. Gilchrist
+    \item Looking through PA code
+    \item Total: 3 hours in lab
+\end{itemize}
+After running the model I have found that a possible cause for the unexpected values of the codon specific parameters
+is due to the fact that when a codon specific paramter is proposed, the phi value is selected from the getSynthesisCateory, function
+however this is inconsistent with its usage in the ROC model. Phi and Lambda are being assigned the same value. This issue might
+be the cause of the incorrect proposals.
 \end{document}
