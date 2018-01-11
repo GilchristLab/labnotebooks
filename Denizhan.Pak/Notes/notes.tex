@@ -1127,7 +1127,15 @@ Currently there is a speed and efficiency problem, I am benchmarking and adding 
     \item Total: 3 hours in lab
 \end{itemize}
 After running the model I have found that a possible cause for the unexpected values of the codon specific parameters
-is due to the fact that when a codon specific paramter is proposed, the phi value is selected from the getSynthesisCateory, function
+is due to the fact that when a codon specific paramter is proposed, the phi value is selected from the getSynthesisCategory, function
 however this is inconsistent with its usage in the ROC model. Phi and Lambda are being assigned the same value. This issue might
 be the cause of the incorrect proposals.
 \end{document}
+\labday{January 11, 2017}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item Tracing variables through code structure
+    \item Total 1 hour in lab
+\end{itemize}
+DelM and DelEta are defined in mixtureDefinition.h this means that the phi value is the one being assigned inccorectly. To fix this 
+I will add an additional variable to the mixture definition and adjust the inherited function in PAParameter.
