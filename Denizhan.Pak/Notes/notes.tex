@@ -1169,3 +1169,18 @@ Tracing parameters in PA and PANSE models for comparison.
     \item 9:30 - 11:30: Adding random number generation, proposed likelihood, and accepted ratio trace
     \item Total 2 hours in lab
 \end{itemize}
+\labday{February 9, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 12: Attempted to find source of segmentation fault in travis Build
+    \item 2:15 - 3: Downloading dependencies for automated testing
+    \item 3 - 4: Looking for source of segmentation fault
+    \item Total 2 hours 45 minutes in lab
+\end{itemize}
+The segmentation fault is occuring when the traces of the random number generator and the loglikelhood are stored.
+Those indexes are only accessed when the model estimates CSPs. I am currently running the Model without CSP estimation on 
+Gauley to confirm this problem. Once the segmentation fault is handled, then I may look at the traces to determine the trends
+causing the model to propose the incorrect values. Additionally in one of the gauley model runs I noticed an issue with the 
+estimated synthesis rate. It seems that the estimated synthesis rate devaites towards 0 away from from truth near 0.1. This could
+be caused by a number of factors. Once I find the likelihood traces I can determine if the error is in the probability calculation
+or if there is another issue.
