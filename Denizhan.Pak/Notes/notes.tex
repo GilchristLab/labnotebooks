@@ -1202,3 +1202,19 @@ printed. I have attempted to fix this problem and am currently running another m
 The results of the trace show that the loglikelihood returned from the estmated codon-specific parameters is orders of
 magnitude above what it should be. The loglikelihood oscillates between the orders of positive and negative 2000, slowly converging
 towards 0.
+\labday{February 15, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 9:15 - 9:45: Examining code for calculation of acceptance ratio.
+    \item 9:45 - 10:30: Discussion with Dr. Gilchrist
+    \item 10:30 - 11:15: Adding additional trace variables
+\end{itemize}
+The trace shows that our initial True Values are much less probable than the proposed parameters. Dr. Gilchrist sugested Tracing the following:
+Acceptance Ratio
+Random Number Generated
+Current State Log Probability
+Proposed State Log Probability
+Proposed Values
+Once this are traced compare which ones are accepted and which ones are not. Once this has been donw we may be able to see a trend
+in which direction the MCMC model is going. One method he suggested is lowering the initial proposal width value to find if the jumps
+being made are too lare.
