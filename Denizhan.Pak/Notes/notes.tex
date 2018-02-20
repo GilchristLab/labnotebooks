@@ -62,7 +62,7 @@
 \makeatletter
 %suppress pagebreaks between days
 \patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
-\makeatother 
+\makeatother
 
 %%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
 
@@ -83,7 +83,7 @@
 
 \experiment{Terminology}
 
-\begin{itemize} 
+\begin{itemize}
 	\item Codon Usage Bias (CUB): The variation between codons which are synonomous (code for the same amino acid) in a genome.
 	\item Monte Carlo Markov Chain (MCMC): A technique used to create sets of data that is pseudorandomly distributed based on a given distribution. Utilizes random walks on a markov chain to generate random data for a Monte Carlo method.
 	\item Mutation Bias: The variation between codon sequences caused by genetic mutations.
@@ -100,7 +100,7 @@ The following is a list of the different types of MCMC models in this lab for th
 	\item ROC: The Ribosome Overhead Cost model, it is the basic model for achieving the goal stated above. (described in Gilchrist et al. 2015).
 	\item RFP: The Ribosome Footprinting model, is based on the ROC model however it is concerned with the position of ribosome using a Pausing Time model.
 	\item PANSE: The Pausing and Nonsense Error model, this model accounts for nonsense errors by accoutning for the probabliity a codon is not reached due to nonsense errors in its random sampling it is an extension of the RFP model.
-	\item FONSE: 
+	\item FONSE:
 \end{itemize}
 
 \labday{May 16, 2017 Notes}
@@ -284,7 +284,7 @@ I have begun developing the testing application. Under Dr. Gilchrist sugestion I
     \item Total: 4 Hours spent in Lab working.
 \experiment{Benchmark Upper Incomplete Gamma}
 As discussed earlier worked on benchmarking my implementation of the Gamma Function. From the list above I have completed steps 2 and 3. After editing the code changing the number f iterations and adding a special case calculation the continued fraction is seeming to be as accurrate as the GSL implmenetation. The log files for the accurrcacy tests can be found in the Log\_files directory.
-I have more benchmarking to do although preliminarily the implementation seems to be fast enough, I will edit the testing function that has been developed to be multithreaded to allow for timing comparisons between both implementations. Depending on the results of this testing I will work on optimizing my implementation for increased speed efficiency. 
+I have more benchmarking to do although preliminarily the implementation seems to be fast enough, I will edit the testing function that has been developed to be multithreaded to allow for timing comparisons between both implementations. Depending on the results of this testing I will work on optimizing my implementation for increased speed efficiency.
 For the accurracy testing I used random number generation with the value for the $a$ being evenly distributed between $1 \land -1$. This is based on observations in the pdf of RFP that the $a$ value will be $1 - \alpha$ and from known $\alpha$ value observations it is between $0 \land 2$ meaning the resulting $a$ will be between $1 \land -1$. The value for $x$ is more arbitrary. It is set to a randomly distributed double between $0 \land 11$ this is because depending on $a$ most values for $x > 10$ will result in a return of $0$. I will test a working MCMC to understand a better value for $x$. Additionall I have provided a further reding on accurracy of a continued fraction in the further reading section.
 \end{itemize}
 
@@ -379,7 +379,7 @@ To get a better understanding of the use of the newly written functions I worked
 \experiment{Testing PA Mode}
 Tested PA model to better understand interaction between layers of the complete MCMC
 \experiment{Rewrite implementation}
-The implementations from the previous day showed errors and prevented merging. I rewrote the functions and checked their compilation and tested them. Further accurracy testing is still required and will be done. However the working functions have been merged. 
+The implementations from the previous day showed errors and prevented merging. I rewrote the functions and checked their compilation and tested them. Further accurracy testing is still required and will be done. However the working functions have been merged.
 \labday{June 14, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -484,7 +484,7 @@ The method readRFP in Gene.cpp is showing errors, there is a vector which is goi
     \item Total: 4 hours spent in lab 3 hours working, 1 hour reading
 \end{itemize}
 \experiment{Debugging ReadRF}
-After continuing my investigation I found that the problem is somewhere in the setPASequence function inside the Gene class. I read into the implementation of the clas and explored its functions, the error is in the stoing of the string named "seq" which stores the gene sequence, there is an unbounded memory access problem, that will still need to be explored. 
+After continuing my investigation I found that the problem is somewhere in the setPASequence function inside the Gene class. I read into the implementation of the clas and explored its functions, the error is in the stoing of the string named "seq" which stores the gene sequence, there is an unbounded memory access problem, that will still need to be explored.
 \labday{June 30, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -497,7 +497,7 @@ The problem was with input file, TODO Note: Add error checking when reading thro
 \experiment{Help Hollis}
 There was a problem with simulated and regular genome comparison regarding the size of the array of the genomic data, after looking through code with Hollis found that issue was caused by vector being cleared during a processing of the sequence summary.
 \experiment{Genome Comparison}
-While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector. 
+While testing two genomes are checked to be equal however there is a problem because in the PA model position is not an issue and as a result the way genome is stored does not account for the positioning which when checking for equality causes inconsistency in testing. After talking to Hollis I have started working on an alternative way of comparing genome objects that does not account for position most likely using the nCodons vector.
 \labday{July 6, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -567,7 +567,7 @@ Will fit the PANSE model to the PopPAData, and benchmark based on the run times.
     \item Total: 6 hours in lab, 2 hours working, 4 hours learning
 \end{itemize}
 \experiment{Gene Data Script}
-Wrote a python script that can be used to approximate ribosomal footprinting probability for any given Codon. Although, this script will not be used till PANSE model has been fitted and will need further editing. 
+Wrote a python script that can be used to approximate ribosomal footprinting probability for any given Codon. Although, this script will not be used till PANSE model has been fitted and will need further editing.
 \experiment{MCMC Model Interfacing}
 Learned that the MCMC takes a model object and simply acquires required paramters tests parameters to match them to LogLikelihood for codon per gene, which over itertion reaches same distribution as data set.
 \experiment{Started Fitting PANSE Model to Pop Data}
@@ -697,7 +697,7 @@ Due to their use in likelihood calulcation and in the simulate genome function a
     \item Total: 3.5 Hours in lab, 0.5 hours learning 3 hours working
 \end{itemize}
 \experiment{Last MCMC Run}
-Parameter values and codon translation rates seem accurrate but phi values are very small. Might be cause by the issue of scaling as discussed by Dr.Gilchrist, added output to the MCMC run to determine if this is the problem. 
+Parameter values and codon translation rates seem accurrate but phi values are very small. Might be cause by the issue of scaling as discussed by Dr.Gilchrist, added output to the MCMC run to determine if this is the problem.
 \experiment{Phi2Psi}
 Functions are working however for efficiency, I have started adjust the parameter set to maintain phi and psi information this requires changing much of the parameter code and adding more getter and setter functions. Once this has been done the phi2psi functions will be much simpler to use.
 \experiment{Editing PANSE Functions}
@@ -711,7 +711,7 @@ In addition to adding for the phi2psi translations also adjusted output so as to
     \item Total: 6 hours spent in lab 2, hour learning, 4 hours working
 \end{itemize}
 \experiment{MCMC Logs}
-There seems to be an issue with the log posterior values, this is probably caused by the dataset because log posteriors were working in he last mcmc runs. 
+There seems to be an issue with the log posterior values, this is probably caused by the dataset because log posteriors were working in he last mcmc runs.
 \experiment{Implementing nonsense error parameter}
 Since the NSE parameter will be estimated by the MCMC it needs to be implementedas a hyper parameter. To do this I have looking at all functions that call hyper paramters and listing them out for the purpose of adding the NSE calulcations to them. I have decided to store the values as a vector of vectors of doubles, going from the mixture to the gene, to the actualy nonsense error wait times.
 \experiment{Adjusting Data Script}
@@ -738,7 +738,7 @@ I have now added all necessary functions for estimating NSE wait times. I will n
     \item Total 8 hours in lab 3 hours learning, 5 hours working
 \end{itemize}
 \experiment{MCMC Runs}
-To test code and make sure model is working I ran MCMCs on my computer because Gauley R must be updated, although the values were consistent there a trend to 0 for codon specific parameter calculations. Tested the C++ end to find source of problem. 
+To test code and make sure model is working I ran MCMCs on my computer because Gauley R must be updated, although the values were consistent there a trend to 0 for codon specific parameter calculations. Tested the C++ end to find source of problem.
 \experiment{Normal vs Log Normal Distribution}
 A Log normal distribution is assymetric and a normal distribution is not. This causes a issue because there is a high weight on 0 in the lo normal distribution which is used for Codon Specific Parameter (CSP) calulcation. After discussing with Cedric it seems an offset is needed when proposing alpha and lambda values the same way it is for phi values. This would allow us the mcmc to diversify its proposals which seems to be the issue.
 \labday{August 8, 2017 Notes}
@@ -751,7 +751,7 @@ A Log normal distribution is assymetric and a normal distribution is not. This c
 \end{itemize}
 \experiment{NAN Issue}
 After adjusting csp values it still seems there is a problem lambda goes to infinity and alpha goes to 0 very quickly. This causes a nan value at evolutation of logLikelihood.
-To investigate the problem I ran many MCMCs with a variety of outputs to find that the offset fix has not worked to solve the issue. However, the problem is non deterministic and seems randomly generated so the issue is likely in the proposals. 
+To investigate the problem I ran many MCMCs with a variety of outputs to find that the offset fix has not worked to solve the issue. However, the problem is non deterministic and seems randomly generated so the issue is likely in the proposals.
 Potentially this could be the issue PA was having as well. I need to look into the MCMC and find how the parameters are proposed and why they are going to their respective values.
 \labday{August 9, 2017 Notes}
 \experiment{Time Breakdown}
@@ -908,7 +908,7 @@ to grow as a result of iteration over the entire gene rather than the codon list
 \end{itemize}
 \experiment{Phi Value Proposals}
 There currrently is a variable meant to scale proposed phi values, seeing as the scaling seems to be the issue,
-I will need to use and assign the variable to fix this issue because it is currently set and remains as 0. 
+I will need to use and assign the variable to fix this issue because it is currently set and remains as 0.
 \labday{September 15, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -969,7 +969,7 @@ initialize paramter object differently using different phi data.
     \item Total 2 hours in lab
 \end{itemize}
 \experiment{Profiling}
-400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms 
+400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms
 at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for the PANSE model.
 \labday{September 28, 2017 Notes}
 \experiment{Time Breakdown}
@@ -996,7 +996,7 @@ away from expected values except there is still an unresolved issue.
 The MCMC with PANSE is woking as long as CSP are given not estimated. Phi is still smaller than it should be.
 \experiment{Discussion with Dr. Gilchrist}
 We resolved that I should address primarily the issue with PA first and fix CSP calulcations. To do this I should run model with shorter
-iterations to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates 
+iterations to see if I can get reasonable traces before they diverge to infinity. Additionally I will add output notes to acceptance rates
 and proposals to see the numbers acting as they should.
 \labday{October 10, 2017 Notes}
 \experiment{Time Breakdown}
@@ -1006,7 +1006,7 @@ and proposals to see the numbers acting as they should.
 \end{itemize}
 \experiment{Debugging}
 After adding error checking output and looking at traces twice, it seems the model is not rejecting any of the possile csp values.
-This explains the problem because by accepting all values the search space is expanding quickly and therefore becomes unstable. 
+This explains the problem because by accepting all values the search space is expanding quickly and therefore becomes unstable.
 The way a csp value is accepted or rejected is when it is compared to a random number from an exponential distribution. There are 2
 possible causes to our problem:
 \begin{itemize}
@@ -1026,10 +1026,10 @@ are not being accepted properly.
 \end{itemize}
 \experiment{Debugging}
     I tried to adjust and play around with the exponential distribution which is being compared
-    however although the acceptance ratio was lower and the range of csp values was smaller, we 
-    still had the issue of a wide range of values, so this means the likelihood is returning 
+    however although the acceptance ratio was lower and the range of csp values was smaller, we
+    still had the issue of a wide range of values, so this means the likelihood is returning
     higher values than it should. To address this I will keep the lower acceptance ratio so I can
-    see a trace and then I will use that to examine the trend of likelihood values to see why 
+    see a trace and then I will use that to examine the trend of likelihood values to see why
     they are higher than they should be.
 \labday{October 18, 2017}
 \experiment{Time Breakdown}
@@ -1050,7 +1050,7 @@ are not being accepted properly.
     \item 2 Hours in lab
 \end{itemize}
 \experiment{Comparing CSP Proposals}
-    The ROC model correctly proposes codon specific parameters. The problem therefore must be in the PAMode itself. 
+    The ROC model correctly proposes codon specific parameters. The problem therefore must be in the PAMode itself.
     The problem seems to be that the "calculateLogLikelihoodPerCodonPerGene" function is not working properly. To fix
     this I need to figure why it is not working properly. To do this I will compare the results of this function to expected
     results for given alpha and lambda prime values. This may give me insight into the problem.
@@ -1094,8 +1094,8 @@ time for errors. I can utilize the same value for all codons at first then speci
     \item Total: 2 hours in lab
 \end{itemize}
 While running simulations I ran into the issue of the CSP values moving in directions they should not,
-even though they were initialized at truth. After discussing this with Dr. Gilchrist, we concluded the 
-issue might be that I am using too small of a RFP sampled simulated dataset. To Address this I worked on 
+even though they were initialized at truth. After discussing this with Dr. Gilchrist, we concluded the
+issue might be that I am using too small of a RFP sampled simulated dataset. To Address this I worked on
 a script to increase the number of footprints found which should have the effect of grounding the model
 closer towards tue values.
 \labday{December 11, 2017}
@@ -1137,7 +1137,7 @@ be the cause of the incorrect proposals.
     \item Tracing variables through code structure
     \item Total 1 hour in lab
 \end{itemize}
-DelM and DelEta are defined in mixtureDefinition.h this means that the phi value is the one being assigned inccorectly. To fix this 
+DelM and DelEta are defined in mixtureDefinition.h this means that the phi value is the one being assigned inccorectly. To fix this
 I will add an additional variable to the mixture definition and adjust the inherited function in PAParameter.
 \labday{January 16, 2017}
 \experiment{Time Breakdown}
@@ -1178,9 +1178,9 @@ Tracing parameters in PA and PANSE models for comparison.
     \item Total 2 hours 45 minutes in lab
 \end{itemize}
 The segmentation fault is occuring when the traces of the random number generator and the loglikelhood are stored.
-Those indexes are only accessed when the model estimates CSPs. I am currently running the Model without CSP estimation on 
+Those indexes are only accessed when the model estimates CSPs. I am currently running the Model without CSP estimation on
 Gauley to confirm this problem. Once the segmentation fault is handled, then I may look at the traces to determine the trends
-causing the model to propose the incorrect values. Additionally in one of the gauley model runs I noticed an issue with the 
+causing the model to propose the incorrect values. Additionally in one of the gauley model runs I noticed an issue with the
 estimated synthesis rate. It seems that the estimated synthesis rate devaites towards 0 away from from truth near 0.1. This could
 be caused by a number of factors. Once I find the likelihood traces I can determine if the error is in the probability calculation
 or if there is another issue.
@@ -1190,7 +1190,7 @@ or if there is another issue.
     \item 10 - 11: Fix segmentation fault
     \item 3:20 - 4:20: Run Traces
 \end{itemize}
-There was a problem with the first runs of the trace because it seems that there is an issue with when the statement is being 
+There was a problem with the first runs of the trace because it seems that there is an issue with when the statement is being
 printed. I have attempted to fix this problem and am currently running another model on Gauley with hope of recieving a conclusive trace.
 \labday{February 14, 2018}
 \experiment{Time Breakdown}
@@ -1217,4 +1217,12 @@ Proposed State Log Probability
 Proposed Values
 Once this are traced compare which ones are accepted and which ones are not. Once this has been donw we may be able to see a trend
 in which direction the MCMC model is going. One method he suggested is lowering the initial proposal width value to find if the jumps
-being made are too lare.
+being made are too large.
+\labday{February 20, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:30 - 4:15: Adding additional traces to trace object
+    \item 4:15 - 4:30: Discussing code structure with Cedric
+    \item 4:30 - 5:30: Adding additional trace vectors
+    \item Total: 2 hours in lab
+\end{itemize}
