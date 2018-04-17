@@ -1362,3 +1362,11 @@ it is not scaled by Y/Z to become lambda prime. To fix this I need to do the fol
 \begin{itemize}
     \item 2:20 - 4:20: Adding fixing $\lambda, \lambda'$ issue.
 \end{itemize}
+\labday{April 17, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 3:30 - 5:30: Implementing expected $Z$ function
+\end{itemize}
+There are some issues with this implementation. We will need to add an additional vector to parameter to keep track of $\lambda$ seperate
+from $\lambda'$. Additionally indexing for vector "currentSynthesisRateLevel" is undocumented so I will need to confirm it is indexed as
+similar vectors are.
