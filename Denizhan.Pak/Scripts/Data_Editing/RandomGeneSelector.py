@@ -3,25 +3,20 @@ import csv
 import random
 
 class Gene:
-    def __init__(self, name, mean, median, ci25, ci975):
+    def __init__(self, name, phi):
         self.id = name
         self.codons = []
-        self.positions = []
-        self.mean = mean
-        self.median = median
-        self.ci_25 = ci25
-        self.ci_975 = ci975
+        self.phi = phi
 
-class Position:
-    def __init__(self, numpos, cod, gen, rfp):
-        self.pos = numpos
-        self.codon = cod
-        self.gene = gen
-        self.rfpcount = rfp
+class Codon:
+    def __init__(self, rfp_count, num_codons, codon):
+        self.rfp_count = rfp_count
+        self.num_codons = num_codons
+        self.codon = codon
 
 #Usage
 if len(sys.argv) < 3:
-    print "Usage: python RandomGeneSelector.py csv_rfp_data csv_phi_values [NumGenes] [NumPositions]"
+    print "Usage: python RandomGeneSelector.py csv_rfp_data csv_phi_values [NumGenes]"
     exit(0)
 
 #Open Arguments
@@ -37,70 +32,64 @@ phisReader = csv.reader(phis, delimiter = ",")
 #Check for optional arguments
 if len(sys.argv) > 3:
     numGenes = int(sys.argv[3])
-    if len(sys.argv) > 4:
-        numPositions = int(sys.argv[4])
-    else:
-        numPositions = -1
 else:
     numGenes = -1
-    numPositions = -1
 
 #Total Codons and Genes
 genes_phi = set()
 genes_rfp = set()
-gs = dict()
+genes_by_name = dict()
 
-#Adds Genes with phi values to phi_set
+#Adds Genes from phi file to phi_set
 for row in phisReader:
-    if row[0] not in genes_phi:
-        g = Gene(row[0], row[1], row[2], row[3], row[4])
-        genes_phi.add(row[0])
-        gs[row[0]] = g
+    name = row[0]
+    phi = row[1]
+    if name not in genes_phi:
+        g = Gene(name, phi)
+        genes_phi.add(name)
+        genes_by_name[name] = g
 
-#Add to rfp set if set phi set defined
+#Add genes to rfp file set if corresponding phi exists
 for row in dataReader:
-    if row[0] in genes_phi:
-        g = gs[row[0]]
-        genes_rfp.add(row[0])
-        g.positions.append(Position(row[1], row[2], row[0],row[3]))
+    name = row[0]
+    if name in genes_phi:
+        g = genes_by_name[name]
+
+        rfp_count = row[1]
+        codon_count = row[2]
+        codon_name = row[3]
+
+        genes_rfp.add(name)
+        g.codons.append(Codon(rfp_count, codon_count, codon_name))
 
 data.close()
 phis.close()
 
 #Use all genes if no optional arguments
 if numGenes == -1 or numGenes >= len(genes_rfp):
-    numGenes = len(genes_rfp) - 1
+    numGenes = len(genes_rfp)
 
 #Randomly Sample Genes
-genes = random.sample(genes_rfp, numGenes)
+gene_names = random.sample(genes_rfp, numGenes)
 
 #New File names
-if numPositions is -1: poses = "all"
-else: poses = str(numPositions)
-if numGenes is -1: gees = "all"
-else: gees = str(numGenes)
-rfpfile = "rfp_file_" + poses + "positions_" + gees + "genes.csv"
-phifile = "phi_file_" + poses + "positions_" + gees + "genes.csv"
+rfpfile = "simulated_rfp_file_" + str(numGenes) + "_genes.csv"
+phifile = "simulated_phi_file_" + str(numGenes) + "_genes.csv"
 
 #Write RFP file
 with open(rfpfile, "wb") as output:
     output.write(datatitle)
     rfpwriter = csv.writer(output,delimiter=",")
-    for gene in genes:
-        i = 0
-        g = gs[gene]
-        for pos in g.positions:
-            if i == numPositions:
-                break
-            rfpwriter.writerow([gene, pos.pos, pos.codon, pos.rfpcount])
-            i += 1
+    for gene_name in gene_names:
+        gene = genes_by_name[gene_name]
+        for codon in gene.codons:
+            rfpwriter.writerow([gene_name, codon.rfp_count, codon.num_codons, codon.codon])
 
 #Write Phi file
 with open(phifile, "wb") as output:
     output.write(phistitle)
     phiwriter = csv.writer(output,delimiter=",")
-    i = 1
-    for gene in genes:
-        g = gs[gene]
-        phiwriter.writerow([gene, g.mean, g.median, g.ci_25, g.ci_975])
+    for gene_name in gene_names:
+        gene = genes_by_name[gene_name]
+        phiwriter.writerow([gene_name, gene.phi])
 
