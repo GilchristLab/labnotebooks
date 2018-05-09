@@ -16,12 +16,12 @@ class Codon:
 
 #Usage
 if len(sys.argv) < 3:
-    print "Usage: python RandomGeneSelector.py csv_rfp_data csv_phi_values [NumGenes]"
+    print ("Usage: python RandomGeneSelector.py csv_rfp_data csv_phi_values [NumGenes]")
     exit(0)
 
 #Open Arguments
-data = open(sys.argv[1], 'rb')
-phis = open(sys.argv[2], 'rb')
+data = open(sys.argv[1], 'r')
+phis = open(sys.argv[2], 'r')
 
 #Turn files in csvs
 datatitle = data.readline()
@@ -77,7 +77,7 @@ rfpfile = "simulated_rfp_file_" + str(numGenes) + "_genes.csv"
 phifile = "simulated_phi_file_" + str(numGenes) + "_genes.csv"
 
 #Write RFP file
-with open(rfpfile, "wb") as output:
+with open(rfpfile, "w") as output:
     output.write(datatitle)
     rfpwriter = csv.writer(output,delimiter=",")
     for gene_name in gene_names:
@@ -86,7 +86,7 @@ with open(rfpfile, "wb") as output:
             rfpwriter.writerow([gene_name, codon.rfp_count, codon.num_codons, codon.codon])
 
 #Write Phi file
-with open(phifile, "wb") as output:
+with open(phifile, "w") as output:
     output.write(phistitle)
     phiwriter = csv.writer(output,delimiter=",")
     for gene_name in gene_names:
