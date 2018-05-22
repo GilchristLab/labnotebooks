@@ -1408,3 +1408,36 @@ ported into R. I rewrote and ported it.
     \item 11 - 4: Running model with new data and working on documentation
     \item 4 - 5: Looking at model behavior
 \end{itemize}
+\labday{May 14, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 11: Collected data from a variety of sources to compare and find source of estimation problem.
+    \item 12 - 4: Ran model on multiple data sets and noted behavior.
+\end{itemize}
+\labday{May 15, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 4: Decided to simulate a new dataset to see if behavior is different between the current and older model because the older model 
+    proposed parameters more accurately. To see what the difference is between the older model and the new one I am simulating datasets with    
+    specific parameter sets and documenting behavior. However, there seems to be a problem with the simulating code.
+\end{itemize}
+\labday{May 16, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 4:30: I worked on and debugged the simulator code which was not working because of an implementation bug that ignored footprints 
+    when there was only one mixture.
+\end{itemize}
+\labday{May 17, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item  10 - 2: Ran simulator and models on simulated data set.
+\end{itemize}
+\labday{May 22, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 2: Looked through outputs of model run on simulated data. The problems persist. This implied the issue is not that the true
+        values don't match the data.
+    \item 2:30 - 5: After discussing with Dr. Gilchrist and looking through old notes, I found a dataset where the model is accurately able to
+        calculate the parametric values using the old code. I will need to test with the new code to confirm. If this works I will add code 
+        such that the model will scale parameters if they are too small. This will allow us to apply the working code to real data.
+\end{itemize}
