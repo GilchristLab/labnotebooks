@@ -61,7 +61,7 @@
 \usepackage{etoolbox}
 \makeatletter
 %suppress pagebreaks between days
-\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
+%\patchcmd{\addchap}{\if@openright\cleardoublepage\else\clearpage\fi}{\par}{}{}
 \makeatother
 
 %%%%%%%%%%%% END LOCAL CUSTOMIZATIONS %%%%%%%%%%%%%%%%%
@@ -352,7 +352,7 @@ Problem still persists with not working Genome class implementation. Looked to t
     \item Total: 7 hours in lab 6 Hours spent working, 1 hours spent learning
 \end{itemize}
 \experiment{Reading PA Code}
-Tried to deciphr the relationship and generalizations from PA to PANSE. Talked with Dr Gilchrist about understanding that relationship.
+Tried to deciphr the relationship and generalizations from PA to PANSE\. Talked with Dr Gilchrist about understanding that relationship\.
 \experiment{Running Tests with PA Model}
 PA model is finally working again. I wanted to develop a better intuition of the workings of the library and as such ran multiple runs for the PA Model.
 \experiment{Reworking Heirarchy}
@@ -367,7 +367,8 @@ Based on understanding of implementation and talking to Dr. Gilchrist, Cedric an
 \experiment{Implementing Write-up}
 Using the pseudo code I had written and using simplifications of implementation I completed the implementation of the required functions into the PANSE Model. These implementation do require further documentation and clean up that reflects lab standards.
 \experiment{Working with Pop Data}
-To get a better understanding of the use of the newly written functions I worked with a csv file of the Pop et Al. data using python to fit it to different models o better understand the values that will be used by the PANSE Model.
+To get a better understanding of the use of the newly written functions I worked with a csv file of the Pop et Al\. 
+data using python to fit it to different models o better understand the values that will be used by the PANSE Model.
 \labday{June 13, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -853,10 +854,11 @@ Alpha and lambda are now being proposed as real values however the jumps are ver
     \item Total 2 hours working
 \end{itemize}
 \experiment{Adaptive Width Adjustment}
-When the MCMC acceptance rate is too high or two low the standard deviation for the random alpha lambda proposals are adapted.
+When the MCMC acceptance rate is too high or two low the standard deviation for the random alpha lambda proposals are adapted\.
 lowered if the rate is too low and increased if rate is too high. Since the range of values being generated was so large it made sense that
 the issue was the adaptive width was being increased frequently. I fixed that value, and checked the results. The range of CSP proposals has
-decreased however the values are not close to what they should be. The issue most likely must stem from the loglikelihood calculation per gene.
+decreased however the values are not close to what they should be. The issue most likely must stem from the loglikelihood calculation 
+per gene.
 I will have to redo the math for both the PA and PANSE model and test to see if I can fix this issue for a fixed width for proposals.
 \labday{September 5, 2017 Notes}
 \experiment{Time Breakdown}
@@ -969,8 +971,9 @@ initialize paramter object differently using different phi data.
     \item Total 2 hours in lab
 \end{itemize}
 \experiment{Profiling}
-400 Genes being simulated for the CSP and phi values took 24 minutes for PA. We added time stamps to the MCMC algorithms
-at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for the PANSE model.
+400 Genes being simulated for the CSP and phi values took 24 minutes for PA\. We added time stamps to the MCMC algorithms
+at specific statements so that I could run MCMCs in parallel to one another and find the bottlenecks which will be more obvious in runs for 
+the PANSE model.
 \labday{September 28, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1061,12 +1064,15 @@ are not being accepted properly.
     \item Total: 1 hour in lab working
 \end{itemize}
 \experiment{Script Adjustment}
-    Since the issue of CSP proposal is rooted in the conditional loglikelihood calulcation done during each proposal, I decided to graph the calulcations based on the real data. The real data was missing various genes. I worked on and edited the script to address this issue. The next steps involve:
-    \begin{enumerate}
-        \item Running the model on real data with real values, to calculate the real likelihood.
-        \item Running the model with both real phi and CSP values seperately.
-        \item Developing a seperate script to do the calculations simply based on the real values to find out if the issue is with implementation.
-    \end{itemize}
+    Since the issue of CSP proposal is rooted in the conditional loglikelihood calulcation done during each proposal, I decided to graph 
+    the calulcations based on the real data. The real data was missing various genes. I worked on and edited the script to address this 
+    issue. The next steps involve:
+\begin{itemize}
+    \item Running the model on real data with real values, to calculate the real likelihood.
+    \item Running the model with both real phi and CSP values seperately.
+    \item Developing a seperate script to do the calculations simply based on the real values to find out if the issue is with 
+        implementation.
+\end{itemize}
 \labday{November 15, 2017}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1074,7 +1080,8 @@ are not being accepted properly.
     \item Total: 1 hour in lab
 \end{itemize}
 \experiment{Running Model}
-There seems to be a crash when initializing the genome. I am currently unsure of what is causing this. I believe it has to do with a recent version update of the model. I will need to fix this before I can progress on debugging paramter proposals.
+There seems to be a crash when initializing the genome. I am currently unsure of what is causing this. I believe it has to do with a recent 
+version update of the model. I will need to fix this before I can progress on debugging paramter proposals.
 \labday{November 16, 2017}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1194,7 +1201,7 @@ There was a problem with the first runs of the trace because it seems that there
 printed. I have attempted to fix this problem and am currently running another model on Gauley with hope of recieving a conclusive trace.
 \labday{February 14, 2018}
 \experiment{Time Breakdown}
-\begin{Itemize}
+\begin{itemize}
     \item 10 - 10:30: Running traces for CSP estimates
     \item 10:30 - 11: Installing dependencies for automated testing
     \item 11 - 12: Analyzing trace for issues in proposals.
@@ -1412,7 +1419,7 @@ ported into R. I rewrote and ported it.
 \experiment{Time Breakdown}
 \begin{itemize}
     \item 10 - 11: Collected data from a variety of sources to compare and find source of estimation problem.
-    \item 12 - 4: Ran model on multiple data sets and noted behavior.
+    \item 11 - 4: Ran model on multiple data sets and noted behavior.
 \end{itemize}
 \labday{May 15, 2018}
 \experiment{Time Breakdown}
@@ -1430,7 +1437,7 @@ ported into R. I rewrote and ported it.
 \labday{May 17, 2018}
 \experiment{Time Breakdown}
 \begin{itemize}
-    \item  10 - 2: Ran simulator and models on simulated data set.
+    \item  10 - 4: Ran simulator and models on simulated data set.
 \end{itemize}
 \labday{May 22, 2018}
 \experiment{Time Breakdown}
@@ -1440,4 +1447,23 @@ ported into R. I rewrote and ported it.
     \item 2:30 - 5: After discussing with Dr. Gilchrist and looking through old notes, I found a dataset where the model is accurately able to
         calculate the parametric values using the old code. I will need to test with the new code to confirm. If this works I will add code 
         such that the model will scale parameters if they are too small. This will allow us to apply the working code to real data.
+\end{itemize}
+\labday{May 23, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 1:30: Running older model with older data to confirm that old code works with older data and running new code with same data.
+    \item 2 - 3:30: Looking at notes about older data and looking at results from model.
+\end{itemize}
+\labday{May 24, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 5: Running simulations with a variety of scaling parameters meant to replicate success of older model.
+\end{itemize}
+Discussion with Dr. Gilchrist has given me some more direction. The next step is to graph the effects of our scaling parameter in terms of 
+number of footprints. After I will check the extent to which the old model is different from the new to decide whether to try and integrate 
+old PA model or to reimplement the proper functions. 
+\labday{May 25, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 1 - 5: Exploring simulation code to create a graph of the effects of scaling parameters within the distributions.
 \end{itemize}
