@@ -352,7 +352,7 @@ Problem still persists with not working Genome class implementation. Looked to t
     \item Total: 7 hours in lab 6 Hours spent working, 1 hours spent learning
 \end{itemize}
 \experiment{Reading PA Code}
-Tried to deciphr the relationship and generalizations from PA to PANSE\. Talked with Dr Gilchrist about understanding that relationship\.
+Tried to decipher the relationship and generalizations from PA to PANSE\. Talked with Dr Gilchrist about understanding that relationship.
 \experiment{Running Tests with PA Model}
 PA model is finally working again. I wanted to develop a better intuition of the workings of the library and as such ran multiple runs for the PA Model.
 \experiment{Reworking Heirarchy}
@@ -367,7 +367,7 @@ Based on understanding of implementation and talking to Dr. Gilchrist, Cedric an
 \experiment{Implementing Write-up}
 Using the pseudo code I had written and using simplifications of implementation I completed the implementation of the required functions into the PANSE Model. These implementation do require further documentation and clean up that reflects lab standards.
 \experiment{Working with Pop Data}
-To get a better understanding of the use of the newly written functions I worked with a csv file of the Pop et Al\. 
+To get a better understanding of the use of the newly written functions I worked with a csv file of the Pop et Al. 
 data using python to fit it to different models o better understand the values that will be used by the PANSE Model.
 \labday{June 13, 2017 Notes}
 \experiment{Time Breakdown}
@@ -1137,7 +1137,6 @@ After running the model I have found that a possible cause for the unexpected va
 is due to the fact that when a codon specific paramter is proposed, the phi value is selected from the getSynthesisCategory, function
 however this is inconsistent with its usage in the ROC model. Phi and Lambda are being assigned the same value. This issue might
 be the cause of the incorrect proposals.
-\end{document}
 \labday{January 11, 2017}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1467,3 +1466,24 @@ old PA model or to reimplement the proper functions.
 \begin{itemize}
     \item 1 - 5: Exploring simulation code to create a graph of the effects of scaling parameters within the distributions.
 \end{itemize}
+\labday{July 6, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+ \item 10:30 - 3:00: Needed to correct mistakes affecting compilation from my last push. 
+ \item 3:00 - 3:30: Read through Hollis' notes on the original PA Model while running the code to test framework.
+ \item 3:30 - 4:30: Making a simulated data set for ROC model to unit test new implementation of loglikelihood calculation.
+ \item Total: 6 hours in lab.
+\end{itemize}
+\experiment{Compilation and Testing Errors}
+When writing new code make sure to keep consistency between R and C++ ends. Also add pre-processing to remove debug code from R-side.
+I have fixed the code I had put in for debugging the alpha and lambda proposals in the PA model. I then tested the new framework.
+\experiment{Insight from Notes}
+I found two versions of when the model was proposing values correctly. The notes contain the data used and the dates which I
+can use to compare the previous versions of the code with the current version. Once this comparison is complete I can reimplement
+the working model and test it. Once I confirm the model works I will switch back to the PANSE model and confirm that works as well.
+When both models are running I can then work on implementation and efficieny.
+\experiment{Results of Framework Test}
+All units pass the test except for loglikelihood values being put out by ROC model. The implementation was changed to better fit the
+description of the model from the original 2015 paper. To confirm that this implementation works I need to create a simulated genome
+and test it. Once that is confirmed I can adjust the unit testing script as needed.
+\end{document}
