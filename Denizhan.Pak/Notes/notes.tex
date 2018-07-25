@@ -1500,6 +1500,56 @@ Worked from home reading through Hollis notes on previous PA versions 4 hours
 \begin{itemize}
  \item 11 - 5: Testing new likelihood calculation in ROC model.
 \end{itemize}
-
-
+To do this I wrote a few new scripts to create simulated 
+genomes which can be analyzed by the ROC model. There is also a bug preventing caluclation.
+I also discussed with Cedric about the underlying calculations done
+by the MCMC for this model to get a better understanding of it.
+\labday{July 12, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 1: Fixed ROC bug
+    \item 1 - 2: Further tested ROC model
+    \item 2 - 5: Looked for second bug in ROC model code. 
+\end{itemize}
+\labday{July 17, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 4: Tested and final Debug of ROC model.
+\end{itemize}
+Corrected and fixed the testing code to reflect the new calculation function.
+\labday{July 18, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 2: Compared the code of the two models. Both are practically in terms of calculation.
+    \item 2 - 5: Looking through notes trying to find which dataset was used for model to work.
+\end{itemize}
+\labday{July 19, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 11 - 5: Testing individual functions to make sure values are as expected.
+\end{itemize}
+\labday{July 20, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 10 - 3: Reading and graphing model description to understand the meaning of CSP variables growing and shrinking.
+\end{itemize}
+\labday{July 23}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 5: Ran stored and graphed propoesed variables over time.
+\end{itemize}
+\labday{July 24}
+\begin{itemize}
+        \item 11 - 3: Talked to Cedrick about and read about the assymetry in the Metropolis-Hastings Algorithm.
+\end{itemize}
+\labday{July 25}
+\begin{itemize}
+ \item 1:30 - 3: Graphing the PDF of the CSP proposals and looking at CSP code.
+ \item 3 - 4: Reading PA Model desciption for meaning of non-stablizing $\alpha$ and $\lambda'$ values.
+ \item 4 - 5: Discussion with Cedric and Dr. Gilchrist on potential solutions.
+ \item 5 - 5:30: Reading and implemnting adjustment for reverse jump probability in multivariate Log Normal Distribution.
+\end{itemize}
+From here I have to run the model with this new change while also keeping the width non-adaptive. There is a potential problem
+in that I may not have adjusted the assymetry correctly for a multivariate distribution. If the problem persists I will address
+this concern.
 \end{document}
