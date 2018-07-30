@@ -1539,10 +1539,12 @@ Corrected and fixed the testing code to reflect the new calculation function.
     \item 12 - 5: Ran stored and graphed propoesed variables over time.
 \end{itemize}
 \labday{July 24}
+\experiment{Time Breakdown}
 \begin{itemize}
         \item 11 - 3: Talked to Cedrick about and read about the assymetry in the Metropolis-Hastings Algorithm.
 \end{itemize}
 \labday{July 25}
+\experiment{Time Breakdown}
 \begin{itemize}
  \item 1:30 - 3: Graphing the PDF of the CSP proposals and looking at CSP code.
  \item 3 - 4: Reading PA Model desciption for meaning of non-stablizing $\alpha$ and $\lambda'$ values.
@@ -1553,6 +1555,7 @@ From here I have to run the model with this new change while also keeping the wi
 in that I may not have adjusted the assymetry correctly for a multivariate distribution. If the problem persists I will address
 this concern.
 \labday{July 27}
+\experiment{Time Breakdown}
 \begin{itemize}
     \item 12 - 1: Creating simulated data to test new proposal implementation.
     \item 1 - 3: Running MCMC model and tracing LogLikelihood ratio for new implementation. 
@@ -1568,5 +1571,16 @@ is more than likely the result of a low adaptive width.
     \item Compare results from Gauley run to previous runs.
     \item Test model again with adaptive on for CSP values.
 \end{itemize}
-Also I must tell Dr. Gilchrist in past version incline is vertical then stagnant.
+\labday{July 30}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 1: Checking output of the Gauley Runs
+    \item 1 - 3: Running on local machine with adaptive width
+    \item 3 - 3:30: Discussing with about the consequence of nan proposals in the MCMC
+    \item 3:30 - 4: Confirming simulated data is simulated correctly
+    \item 4 - 5: Testing model without initialization
+\end{itemize}
+There seems to be a problem when the model is unitialized. The loglikelihood value seems to go to nan very quickly.
+This could be that the current initizialization is inconsistent with the loglikelihood caluculation or the problem could
+be deeper. To investigate I will run an initialized model and keep track of the loglikelihood behavior.
 \end{document}
