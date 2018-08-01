@@ -1583,4 +1583,17 @@ is more than likely the result of a low adaptive width.
 There seems to be a problem when the model is unitialized. The loglikelihood value seems to go to nan very quickly.
 This could be that the current initizialization is inconsistent with the loglikelihood caluculation or the problem could
 be deeper. To investigate I will run an initialized model and keep track of the loglikelihood behavior.
+\labday{August 1}
+\experiment{Time Breakdown}
+\begin{itemize}
+ \item 11 - 1: Running initialized model
+ \item 12 - 2: Investigating nan issue
+ \item 2 - 5: Fixing simulation code
+\end{itemize}
+The problem seems to be that the model is not caluculating log likelihood correctly for simulated or regular data.
+Further investigation revealed there were issues with how simulated data was produced this was fixed. However there is an 
+additional problem with how the RFP counts are stored. Everytime RFP counts are accessed the values drop to 0. This explains
+and nan loglikelhood. To fix this I seperated the simulated RFP from the actual RFP however the problem still persists. It 
+seems that when the setRFPValue function is called although the vector is initialized it is not saved in the gene. I will need to
+investigate why this is the case further.
 \end{document}

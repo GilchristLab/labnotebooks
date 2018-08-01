@@ -1,0 +1,8 @@
+PA
+    - Get CSP proposals to work
+    - Test by making sure that real values are met when estimated and proposed
+    - Make Sure Model is Functioning Corectly
+PANSE
+    - Make Working simulation
+    - Combine with CSP
+    - Get Nonesense error rate proposals working
