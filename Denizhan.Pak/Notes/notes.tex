@@ -1596,4 +1596,15 @@ additional problem with how the RFP counts are stored. Everytime RFP counts are 
 and nan loglikelhood. To fix this I seperated the simulated RFP from the actual RFP however the problem still persists. It 
 seems that when the setRFPValue function is called although the vector is initialized it is not saved in the gene. I will need to
 investigate why this is the case further.
+\labday{August 2}
+\experiment{Time Breakdown}
+\begin{itemize}
+ \item 11 - 1: Testing the way simulated Genes are stored
+ \item 2 - 3: Adding positional information to code for reading and writing simulations
+ \item 3 - 4: Testing new implemntations
+\end{itemize}
+Much of the simulation code is PA specific. A lot of the issues seem to stem from the fact that positional data is thrown
+away as soon as it is read in. This in turn also affects computation and could be te cause of likelihood calulcations 
+somtimes going to nan. To fix I have started adjusting the code. The next step is to confirm that once stored the rfp count of 
+a simulated gene does not drop to 0.
 \end{document}
