@@ -1631,5 +1631,36 @@ proposals for PA model.
 \end{itemize}
 I will check results of Gauley Run tommorrow. Additionally I will have to rewrite the implemntation of PANSE grouping likilihood
 calculations. I will need to calculate for each proposal for each position.
+\labday{August 9}
+\begin{itemize}
+ \item 11 - 1: Compared and re-ran model on Gauley
+\end{itemize}
 
+\labday{August 13}
+\experiment{PANSE Hyper Parameters}
+Today the plan is to make a list of all necessary hyper parameters for the PANSE model and implement
+them analogous to the stdDevSynthesisRate hyper paramater in the PA Model. Additionally we must append to PANSE Parameter a fixed 
+variable $v_{g,i}$ which will be constant for each codon. It will thus not be estimated but must be approximated initially
+\begin{itemize}
+ \item $U = Z/Y$: This hyper parameter is the normalization factor such that $\lambda * U = \lambda'$
+\end{itemize}
+\experiment{PANSE Codon Specific Parameters}
+Here there a few issues that must be recognized. Firstly it needs to be noted unlike PA, PANSE must calculate these codons positionally
+rather than as a grouped cluster. This has a few drawbacks.
+\begin{itemize}
+ \item Delta needs to be recalculated across the entire gene every time a new CSP is proposed. This is because delta is dependent
+ upon these CSPs and poisitional information across the gene. One way to address this might be to propose all CSPs as a vector
+ using a covariance term.
+ \item Positional information about gathered RFP data must be kept rather than deleted which it currently is.
+\end{itemize}
+Optimizations for this problem are possible. Including the proposal system noted above and simplified calculations based on specific
+parameter values.
+\experiment{Time Breakdown}
+\begin{itemize}
+ \item 12 - 1: Reading and studying hyper parameter code in MCMC and PA Model
+ \item 1 - 2: Taking notes on parametrization needed for PANSE Model
+ \item 2 - 4: Adjusting documentation of PANSE Model
+ \item 4 - 6: Implemented and testing position based CSP proposals
+\end{itemize}
+Tests are continuing and will continue until tomorrow
 \end{document}
