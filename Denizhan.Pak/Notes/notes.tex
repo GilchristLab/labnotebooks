@@ -1663,4 +1663,53 @@ parameter values.
  \item 4 - 6: Implemented and testing position based CSP proposals
 \end{itemize}
 Tests are continuing and will continue until tomorrow
+\labday{August 14, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+ \item 11 - 12: Examining log files from PA and PANSE runs
+ \item 12 - 2: Rewriting how simulated data is written in Genome
+ \item 2 - 2:30: Discussion with Dr. Gilchrist
+ \item 2:30 - 5: Rewriting how PA stores a simulated Genome
+\end{itemize}
+With Dr. Gilchrist we discussed next steps. My future work can be divided into following sections:
+\begin{itemize}
+ \item Improving Statistical Understanding of PA Model
+ \item Finishing Implementation of PANSE (Includes working with PA model)
+ \item Developing a Statistical Understanding of PANSE Model
+ \item Optimization of Both Models
+\end{itemize}
+\experiment{Testing PA Model}
+\begin{itemize}
+ \item Running the model at different starting points (including using random walk functionality) to observe for convergence.
+ \item Looking a graphs and covariation data between parameters in the model
+ \item Analyze confidence intervals for parameter proposals
+ \item Looking across posteriors of variables across multiple runs (or within different segments of the same run)
+ \item Benchmarking with real data sets.
+ \item P.S. There is an issue with graphing the model when run with Rscript which is necessary for running the model on Gauley
+ to do the above more efficiently this problem must be fixed.
+\end{itemize}
+\experiment{Finishing Implementation of PANSE}
+\begin{itemize}
+ \item I need to implement the $\sigma$ (NSE) caluclation functions
+ \item I need to implement $U = Z/Y$ as a hyperparamater
+ \item I need to reimplement the simulate rfp Data Function on both PA and PANSE to accomadate for changes to Gene object
+ \item I need to add a baseline of $v_{g,i}$ values probably from Gilchrist and Shaw.
+\end{itemize}
+\experiment{Testing PANSE}
+\begin{itemize}
+ \item Running model with NSE = 0
+ \item Running model with NSE very small (order of magnitude will be determined empirically)
+ \item Applying same kind of analysis above with PA to PANSE model
+\end{itemize}
+\experiment{Optimizing Models}
+\begin{itemize}
+ \item Time benchmark and find computational bottlenecks in each model
+ \item Look at core usage in each model and determine possible parallization in models or lack there of.
+ \item Potentially implement covariance analysis into parameter proposals
+ \item Look for optimal starting values for proposed parameters
+ \item Find potential expected value calculations for certains of magnitude of different parameters.
+\end{itemize}
+I am still working on correcting the simulate RFP data function in the PA model and this needs to be finished ASAP. 
+Once that is done I will need to fix the issue in the script preventing Rscrip from working which will allow me to 
+do more runs on Gauley.
 \end{document}
