@@ -1,0 +1,189 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{float} %provides [H] for floats
+\usepackage{datetime} %provides \currenttime command
+\usepackage{xspace}
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage[comma,authoryear]{natbib}
+\usepackage[doublespacing]{setspace}
+\usepackage{makeidx}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref} %usage: \href{http://...}{link representation}
+\usepackage{ulem}
+
+\newcommand{\elongWaitTime}{\ensuremath{w}\xspace}
+\newcommand{\wc}{\ensuremath{\elongWaitTime^c}\xspace}
+\newcommand{\wi}{\ensuremath{\elongWaitTime_i}\xspace}
+\newcommand{\wj}{\ensuremath{\elongWaitTime_j}\xspace}
+\newcommand{\wk}{\ensuremath{\elongWaitTime_k}\xspace}
+\newcommand{\wgi}{\ensuremath{\elongWaitTime_{g,i}}\xspace}
+\newcommand{\wgj}{\ensuremath{\elongWaitTime_{g,j}}\xspace}
+\newcommand{\wgc}{\ensuremath{\wc_{g}}\xspace}
+\newcommand{\WaitTerm}{\ensuremath{w}\xspace} %realization of random variate
+\newcommand{\Wc}{\ensuremath{\WaitTerm^c}\xspace}
+\newcommand{\Wgi}{\ensuremath{\WaitTerm_{g,i}}\xspace}
+\newcommand{\Wgj}{\ensuremath{\WaitTerm_{g,j}}\xspace}
+\newcommand{\Wgc}{\ensuremath{\Wc_{g}}\xspace}
+
+\newcommand{\alphai}{\ensuremath{{\alpha_i}}\xspace}
+\newcommand{\alphaj}{\ensuremath{{\alpha_j}}\xspace}
+\newcommand{\alphak}{\ensuremath{{\alpha_k}}\xspace}
+\newcommand{\alphac}{\ensuremath{{\alpha_c}}\xspace}
+\newcommand{\alphacgprime}{\ensuremath{{\alpha_{c,g}^\prime}}\xspace}
+\newcommand{\alphacvec}{\ensuremath{{\vec{\alpha}_c}}\xspace}
+\newcommand{\lambdac}{\ensuremath{{\lambda_c}}\xspace}
+\newcommand{\lambdacprime}{\ensuremath{{\lambda_c^\prime}}\xspace}
+\newcommand{\lambdacprimevec}{\ensuremath{{\vec{\lambda}_c^\prime}}\xspace}
+\newcommand{\lambdai}{\ensuremath{{\lambda_i}}\xspace}
+\newcommand{\lambdaiprime}{\ensuremath{{\lambda_i^\prime}}\xspace}
+\newcommand{\lambdaiprimevec}{\ensuremath{{\vec{\lambda}_i^\prime}}\xspace}
+\newcommand{\lambdaj}{\ensuremath{{\lambda_j}}\xspace}
+\newcommand{\lambdak}{\ensuremath{{\lambda_k}}\xspace}
+\newcommand{\lambdajprime}{\ensuremath{{\lambda_j^\prime}}\xspace}
+\newcommand{\lambdajprimevec}{\ensuremath{{\vec{\lambda}_j^\prime}}\xspace}
+
+
+
+%Nonsense error terms
+\newcommand{\nseWaitTime}{\ensuremath{v}\xspace}
+\newcommand{\vc}{\ensuremath{\nseWaitTime^c}\xspace}
+\newcommand{\vgi}{\ensuremath{\nseWaitTime_{g,i}}\xspace}
+\newcommand{\vgj}{\ensuremath{\nseWaitTime_{g,j}}\xspace}
+\newcommand{\vgc}{\ensuremath{\vc_{g}}\xspace}
+\newcommand{\vi}{\ensuremath{\nseWaitTime_{i}}\xspace}
+\newcommand{\vj}{\ensuremath{\nseWaitTime_{j}}\xspace}
+\newcommand{\vk}{\ensuremath{\nseWaitTime_{k}}\xspace}
+\newcommand{\betac}{\ensuremath{{\beta_c}}\xspace}
+\newcommand{\muc}{\ensuremath{{\mu_c}}\xspace}
+\newcommand{\sigmag}{\ensuremath{\sigma_{g}}\xspace}
+\newcommand{\sigmagi}{\ensuremath{\sigma_{g}(i)}\xspace}
+\newcommand{\sigmagng}{\ensuremath{\sigma_{g}(\ng)}\xspace}
+\newcommand{\sigmagn}{\sigmagng}
+\newcommand{\Esigmagi}{\ensuremath{E\left[\sigma_{g}(i)\right]}\xspace}
+\newcommand{\Esigmai}{\ensuremath{E\left[\sigma(i)\right]}\xspace}
+\newcommand{\Esigmagimone}{\ensuremath{E\left[\sigma_{g}(i-1)\right]}\xspace}
+
+\newcommand{\pgi}{\ensuremath{{p_{g,i}}}\xspace}
+\newcommand{\Pgi}{\ensuremath{{P_{g,i}}}\xspace}
+\newcommand{\Pgj}{\ensuremath{{P_{g,j}}}\xspace}
+\newcommand{\Pgc}{\ensuremath{{P_{g}^c}}\xspace}
+\newcommand{\ngc}{\ensuremath{{n_{g}^c}}\xspace}
+\renewcommand{\ng}{\ensuremath{{n_{g}}}\xspace}
+\newcommand{\ns}{\ensuremath{{n_s}}\xspace}
+\newcommand{\mg}{\ensuremath{{m_g}}\xspace}
+\newcommand{\Mg}{\ensuremath{{M_g}}\xspace}
+\newcommand{\iotag}{\ensuremath{{\iota_g}}\xspace}
+\newcommand{\phig}{\ensuremath{{\phi_g}}\xspace}
+\newcommand{\iotae}{\ensuremath{{\iota_g^e}}\xspace}
+%\newcommand{\lambdagi}{\ensuremath{{\lambda_{g,i}}}\xspace}
+%\newcommand{\lambdagc}{\ensuremath{{\lambda_{g}^c}}\xspace}
+\newcommand{\kappag}{\ensuremath{{\kappa_{g}}}\xspace}
+\newcommand{\Ztheta}{\ensuremath{{Z}}\xspace}
+\newcommand{\mRNAg}{mRNA$_g$\xspace}
+\newcommand{\Yg}{\ensuremath{{Y_{g}}}\xspace}
+\newcommand{\Ytotal}{\ensuremath{{Y}}\xspace}
+\newcommand{\Ygi}{\ensuremath{{Y_{g,i}}}\xspace}
+\newcommand{\Ygc}{\ensuremath{{Y_{g}^c}}\xspace}
+\newcommand{\Kg}{\ensuremath{{K_{g}}}\xspace}
+%\newcommand{\qcg}{\ensuremath{{q_{c,g}}}\xspace}
+\newcommand{\Lik}{\ensuremath{\text{L}}\xspace}
+\newcommand{\setG}{\ensuremath{\mathbb{G}}\xspace}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}\xspace}
+\newcommand{\Var}{\ensuremath{\text{Var}}\xspace}
+%\newcommand{\}{\ensuremath{\}\xspace}
+%\newcommand{\}{\ensuremath{\}\xspace}
+
+\newcommand{\mgvec}{\ensuremath{{\Vec{\mg}}}\xspace}
+\newcommand{\Ygcvec}{\ensuremath{{\Vec{\Ygc}}}\xspace}
+\newcommand{\kappagvec}{\ensuremath{{\Vec{\kappag}}}\xspace}
+\newcommand{\ngcvec}{\ensuremath{{\Vec{\ngc}}}\xspace}
+\newcommand{\iotavec}{\ensuremath{{\Vec{\iotag}}}\xspace}
+
+\makeindex
+\begin{document}
+
+\section{AnaCoDa Framework}
+AnaCoDa is a statistical framework which relies on a Monte Carlo Markov Chain (MCMC) to estimate parameter values for protein translation.
+The framework as it stands has 3 component models. The ROC model, the FONSE model, and the PA(NSE) model. Each of the models inherits the same base
+functionality however each has a colection of internal parameters uniquely suited for the specifications of the model.\\
+The framework is usable in R however for increased efficiency the backend is written in C++ and is made accessible using the RCPP library which provides cross-language 
+functionality.
+\subsection{MCMC}
+    A Monte Carlo Markov Chain is a proposal mechanism. In simple terms the chain produces potential values for parameters, the fitness of the proposed values is calculated by some function and compared to the current value of the parameters. If the new parameters are a better match (or with some probability, to avoid local optimums, regardless of if they are better) replace the current values of the paramters. This method has many mathematical implications and complexities refer to Dr. Gilchrist or the literature for a deeper analysis.\\
+The following is a description of the implementation of this process in the framework. The code can be found in the MCMCAlgorithm.cpp source file.
+\begin{enumerate}
+\item In R the user will load an MCMC object (initializeMCMCObject). The arguments in order:
+\begin{enumerate}
+\item samples: The number of proposals the user will get from the MCMC. For PA and PANSE a few thousand should suffice.
+\item thinning: The number of proposals the MCMC will generate between samples so as to not give the user samples of similar parameters too frequently. Since the total number of STEPS the MCMC will run is samples $\times$ thining this will affect runtime. Through looking at graphs at autocorrelation the optimal value seems to be between 7-12.
+\item adaptive.width: The number of STEPS before the range of the proposal distribution is expanded or shrunk. Trial and error will help determine a value. By default it 100 $\times$ thining.
+\item est.experession: Boolean whether or not expression rate or phi in the code should be estimated.
+\item est.csp: Boolean whether or not codon specific parameter set should be estimated
+\item est.hyper: Boolean whether or not hyper parameters should be estimated.
+\end{enumerate}
+\item The MCMC is then run using (runMCMC). The parameters in order:
+\begin{enumerate}
+\item mcmc: The mcmc object after it was initialized.
+\item genome: The genome object after it was initialized.
+\item model: The model object after it is initialized.
+\item ncores: The number of threads to run algorithm. The number of genes is distributed across the cores.
+\item divergence.iterations: The number of times the MCMC will accept any proposal before starting the algorithm. Calls C++ MCMCAlgorithm method (varyInitialConditions) This allows the user to randomize the initial conditions. For randomization 10 or so should suffice.
+\end{enumerate}
+\item After this the user will not interact with the framework until the final results are produced. On the C++ side the (run) method will be called on the MCMC object. The (run) method breaks down as follows:
+\begin{enumerate}
+\item Produce output which contains the user set preferences.
+\item Initiate MCMC loop
+\item Estimate Codon Specific Parameter.
+\item Accept or reject Codon Specific Parameter
+\item Estimate Hyper Parameter
+\item Accept or reject Hyper Parameter
+\item Estimate Phi Parameter
+\item Accept or reject Phi Parameter
+\item If adaptive.width is reached increase proposal range.
+\item Repeat until number of steps is reached
+\end{enumerate}
+Estimate Parameter: This is model specific and is independent of the MCMC object. However, this will return a number which is positive if the proposal is better than the current value and negative otherwise.\\
+Accept or Reject: This will compare the number returned to a random negative number. If the proposal is a better fit it will always be accepted. If the proposal is worse it might be accepted with some probability.
+\end{enumerate} 
+
+
+\subsection{PA(NSE) Model}
+The PA model is a mathematical model of protein translation which can be used to predict model parameters from ribosome footprinting data. The PANSE model is an extension of the PA model except that it accounts for nonsense errors as well as the other parameters. Inside the AnaCoDa framework PA and PANSE are seperate pairs of parameter and model objects.\\
+They can be initialized on the R end as follows:
+\begin{enumerate}
+\item Initialize a parameter object using (initializeParameterObject). The arguments for this are as follows:
+\begin{itemize}
+\item genome: An initialized genome object
+\item sphi\_init: An initial standard deviation for proposing phi.
+\item numMixtures: Number of mixture catgeories (can be thought of as seperate parameter sets)
+\item geneAssignment: A list of which genes are assigned to which mixtures
+\item initial.expression.values: Initial estimates for Phi
+\item model: Model name "PANSE" or "PA"
+\item split.serine: Whether the Serine AA should be considered two seperate AAs. Default True
+\item mixture.definition: How parameters should be split across mixtures.
+\end{itemize}
+\item After the parameter object is generated Codon Specific Parameter values can be initialized if estimates are known (initMutationSelectionCategories).
+\item The model object can be intialized with (initializeModelObject). This simply takes the parameter object, the model name, and the number of rfp columns in the data set.
+\end{enumerate}
+
+
+\subsubsection{Output and Trace}
+
+
+\section{Resolved Issues}
+\subsection{Parameters converging at 0}
+This problem was occurring initially in both the PA and PANSE frameworks. The proposed value for a parameter specifically $\lambda'$ would drop to 0. It would stay at this value even with an extremly large propodal width.
+The solution was the addition of a reverse jump probability term. In essence the kind of MCMC we use normally requires a symmetric distrubtion for proposing parameters. However, the framework as it stands proposes parameters from a lognormal distribution which is asymmetric. This can be solved using an adjustment term added to the loglikelihood calculation.
+
+\subsection{Infinite LogLikelhood}
+This problem occurred when the estimated parameters would return an infinite fit. This made it impossible to compare proposals and caused the model to stay constant or accept every proposal and climb indefinitely (depending on whether the returned likelihood was positive or negative).\\
+The first time this occurred the solution was to simply track parameter values as the model ran. One of the parameters was not being updated along with the rest which in turn caused the model to accept parameters it would not accept normally and the repition of this behavior caused the probabilities to climb to infinity. This was fixed with a reimplementation of parameter storage. 
+
+\subsection{Identifiability of Z} 
+Z is a unique model parameter in the PA and PANSE models. In the PA model the Z parameter only appears in the definition of $\lambda'$. As such it is implicitly proposed and calculated when $\lambda'$ is proposed. However, in the PANSE model it appears in the definition of two parameters. This in turn causes a potential identifiability issue where Z must be explictly proposed however the contribution to the fitness function from Z is obscured by the contribution of other parameters which have Z in their definition. To resolve this issue we created a simulated data set with different Z values and tested whether they converged to their true values from varying initial conditions. The model seemed to be able to correctly estimate both Z and the NSE rate which implies that the Z value is identifiable however what necessary conditions could invalidate this are unknown.
+
+\subsection{Issues with Visualization on Gauley}
+There are mutiple versions of R on Gauley. The Hmisc package is used to visualize output for functions like autocorrelation or parameter plotting. This package can only be accessed by making sure to use the most recent version of R on Gauley. If the problem persists one solution is to copy over the trace file from a model ran on Gauley and plot locally.
+
+\end{document}
+

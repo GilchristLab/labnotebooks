@@ -380,7 +380,9 @@ data using python to fit it to different models o better understand the values t
 \experiment{Testing PA Mode}
 Tested PA model to better understand interaction between layers of the complete MCMC
 \experiment{Rewrite implementation}
-The implementations from the previous day showed errors and prevented merging. I rewrote the functions and checked their compilation and tested them. Further accurracy testing is still required and will be done. However the working functions have been merged.
+The implementations from the previous day showed errors and prevented merging. I rewrote the functions and checked their 
+compilation and tested them. Further accurracy testing is still required and will be done. However the working functions 
+have been merged.
 \labday{June 14, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -411,10 +413,15 @@ Read through documentation of PA and PANSE Models, questions about the differenc
     \item Total: 4 Hours in lab 1 hour learning 3 hours working
 \end{itemize}
 \experiment{Research Optimization}
-While trying to understand the underlying implementation of the Model's interaction with the Genome object better, I started to comb through code related to the genome object. I then ended up looking at the code for the CodonTable object. There were a long series of if else statements, remembering a conversation I had earlier with Hollis on this topic, I did some reseach on efficiency, finding that switch statements can be optimized more easily by a compiler than if else statements, if the
+While trying to understand the underlying implementation of the Model's interaction with the Genome object better, I started 
+to comb through code related to the genome object. I then ended up looking at the code for the CodonTable object. There were 
+a long series of if else statements, remembering a conversation I had earlier with Hollis on this topic, I did some reseach 
+on efficiency, finding that switch statements can be optimized more easily by a compiler than if else statements, if the
 cases are at regular short intervals as they can be stored as jump tables.
 \experiment{CodonTable Optimization}
-I changed the implementation from layered if else statements to switch statements, I then worked on debugging he new implementation and testing it. I have committed and pushed the changes to my local repository before merging because further testing using actually genomic information is stll needed.
+I changed the implementation from layered if else statements to switch statements, I then worked on debugging he new 
+implementation and testing it. I have committed and pushed the changes to my local repository before merging because 
+further testing using actually genomic information is stll needed.
 \labday{June 21, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -444,7 +451,8 @@ I ran multiple test to acquire different data sets, found some unoptimized secti
 \experiment{Genome Optmizing}
 Fixed excess loops, eliminated extra comparisons and tested code. Room for further optimization exists.
 \experiment{Exploring R Side}
-Compiled and tested R end of simulating genome to compare to C++ side as suggested by Hollis, came across errors that will require further investigation
+Compiled and tested R end of simulating genome to compare to C++ side as suggested by Hollis, came across errors 
+that will require further investigation
 \labday{June 26, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -464,9 +472,12 @@ While debugging R end of simulate genome PA ran into compiltion problems, needs 
     \item Total: 4 hours in lab 2 hours working, 2 hours learning
 \end{itemize}
 \experiment{Cmake and Rcpp Compilation}
-When a an R package is built the zip maintains the original files, which is then compiled during installation to create a shared object file, which is stored locally for reference by R. There was a problem with this object file, the problem seemed to stem from Cmake incorrectly compiling according to a version copatabillity issue, which I have not discovered yet.
+When a an R package is built the zip maintains the original files, which is then compiled during installation to create a 
+shared object file, which is stored locally for reference by R. There was a problem with this object file, the problem 
+seemed to stem from Cmake incorrectly compiling according to a version copatabillity issue, which I have not discovered yet.
 \experiment{Fixing Compilation}
-To get back to testing I removed the Cmake related files in the RibModel and deleted cached information maintained by R about using Cmake, once compiled with g++ the package started to work again
+To get back to testing I removed the Cmake related files in the RibModel and deleted cached information maintained by R about 
+using Cmake, once compiled with g++ the package started to work again
 \labday{June 28, 2017 Notes}
 \experiment{Time Breakdown}
 \begin{itemize}
@@ -1728,5 +1739,45 @@ Here I ran into a segmentation fault issue which needs to be explored and fixed.
  \item 6 - 7:30: Debugging errors in AnaCoda Package.
 \end{itemize}
 Ran into a problem Cedric might know how to fix where the Shared Object of the packae cannot be found.
-
+\labday{August 21, 2018}
+\experiment{Time Breakdown}
+\begin{itemize}
+    \item 12 - 3:30
+    \item 4 - 5:30
+\end{itemize}
+\labday{August 23}
+9 - 11
+\labday{August 27, 2018}
+3:30 - 6
+Worked on getting a working simulation for PA and debugging Windows build and setting up eclipse
+\labday{August 28, 2018}
+9 - 11: Confirmed issue with Cedric's Framework library. Also working on script to select sample of genes
+\labday{September 5, 2018}
+3:30 - 5:30
+fixed git issues and corrected merge conflicts also handled dependency issues on Gauley and reran models
+\labday{September 7, 2018}
+Revisted Gauley runs talked to Doc Gilchrist about run progress.
+4-6
+\labday{September 10, 2018}
+4:45 - 6: Set up git account system and tested R packaging
+\labday{September 12, 2018}
+4 - 6: Fixed bugs and checked notes and trying to fix inf error CSP proposal in cedric file
+\labday{October 1}
+4 - 6: Worked with Cedric on CRAN Debug
+ Found that the error is not that the rfp count column is reinitialized
+\labday{October 10}
+4 - 6: Worked with Cedric on CRAN Debug
+	started to test parameter values as generated by the PANSE model
+\labday{October 12}
+3:30 - 5:30
+	Running PANSE Models
+	debugging 32 bit architecture issue
+	studying taylor series representation of sigma function
+\labday {October 15}
+3:30 - 6
+	Running PA model
+	debbugging 32 bit architecture
+	debugging PA model
+\labday{October 17, 2018}
+4 - 6:30
 \end{document}

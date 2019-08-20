@@ -27,7 +27,7 @@ phis = open(sys.argv[2], 'r')
 datatitle = data.readline()
 phistitle = phis.readline()
 dataReader = csv.reader(data, delimiter = ",")
-phisReader = csv.reader(phis, delimiter = " ")
+phisReader = csv.reader(phis, delimiter = ",")
 
 #Check for optional arguments
 if len(sys.argv) > 3:
